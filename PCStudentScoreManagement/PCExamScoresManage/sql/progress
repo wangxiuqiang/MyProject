@@ -1,0 +1,6 @@
+首先创建一个框架,将目录文件都创建好(css js images java  类包   spring文件夹  mapper文件夹
+jsp文件夹 sql文件夹 )
+配置web.xml  spring的配置文件   db.properties log4j.properties等配置文件
+
+写登录  配置Shiro  用Shiro进行登录检测
+同时完善配置文件
