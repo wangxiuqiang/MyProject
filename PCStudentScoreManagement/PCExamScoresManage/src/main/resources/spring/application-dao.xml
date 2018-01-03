@@ -26,14 +26,14 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="mapperLocations" value="classpath:cn/pc/exam/mapper/*.xml"/>
     </bean>
 
 
     <!--自动扫描mapper创建代理对象并注册到spring容器-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value=""/>
+        <property name="basePackage" value="cn.pc.exam.dao"/>
     </bean>
 
 </beans>

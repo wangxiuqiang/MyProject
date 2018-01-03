@@ -34,7 +34,7 @@ Cexamtime varchar(20) NOT NULL
 创建班级表
 create table  grade  (
 Gid varchar(10) primary key,
-Gname varchar(20) NOT NULL ,
+Gname varchar(20) NOT NULL
 );
 
 创建考试报名表
