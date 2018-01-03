@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-${t}
+${teacher1.tid}
 cehgngong
 </body>
 </html>

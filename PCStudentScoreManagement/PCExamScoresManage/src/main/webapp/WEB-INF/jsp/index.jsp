@@ -18,5 +18,11 @@
        <form:password path="apassword" />
        <input type="submit" value="确认" />
    </form:form>
+
+    <%--<form:form commandName="teacher" method="post" action="${pageContext.request.contextPath}/success">--%>
+        <%--<form:input path="tid" />--%>
+        <%--<form:password path="tpassword" />--%>
+        <%--<input type="submit" value="确认" />--%>
+        <%--</form:form>--%>
 </body>
 </html>

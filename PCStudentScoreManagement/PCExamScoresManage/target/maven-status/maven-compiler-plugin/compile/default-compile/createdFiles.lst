@@ -1,5 +1,6 @@
 cn/pc/exam/service/LoginSelectService.class
 cn/pc/exam/dao/LoginSelect.class
 cn/pc/exam/pojo/Admin.class
+cn/pc/exam/pojo/Teacher.class
 cn/pc/exam/service/Impl/LoginSelectServiceImpl.class
 cn/pc/exam/controller/loginController.class

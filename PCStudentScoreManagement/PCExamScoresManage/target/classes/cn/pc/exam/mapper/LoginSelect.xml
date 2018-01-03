@@ -4,4 +4,8 @@
     <select id="queryAdmin" parameterType="String"  resultType="cn.pc.exam.pojo.Admin">
         select * from admin where aname = #{value};
     </select>
+
+    <select id="queryTeacher" parameterType="String"  resultType="cn.pc.exam.pojo.Teacher">
+        select * from teacher where Tid = #{id};
+    </select>
 </mapper>
