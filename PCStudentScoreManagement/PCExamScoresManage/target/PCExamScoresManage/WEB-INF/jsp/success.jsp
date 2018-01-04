@@ -12,7 +12,15 @@
     <title>Title</title>
 </head>
 <body>
-${teacher1.tid}
-cehgngong
+<%--测试页面--%>
+<%--${teacher.tid}--%>
+<%--${admin.aname}--%>
+<%--${admin1}--%>
+<%--${teacher1}--%>
+${admin.aname}
+${admin1}
+${teacher1}
+${loginPo.selectWhoIn}
+成功登录
 </body>
 </html>

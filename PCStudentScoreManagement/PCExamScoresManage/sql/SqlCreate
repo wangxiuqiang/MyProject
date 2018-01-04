@@ -37,6 +37,12 @@ Gid varchar(10) primary key,
 Gname varchar(20) NOT NULL
 );
 
+insert into grade(Gid, Gname ) values("1501","软件1501");
+insert into grade(Gid, Gname ) values("1502","软件1502");
+insert into grade(Gid, Gname ) values("1503","软件1503");
+insert into grade(Gid, Gname ) values("1504","软件1504");
+insert into grade(Gid, Gname ) values("1505","软件1505");
+
 创建考试报名表
 create table exam (
 Eid varchar(10) primary key ,
@@ -55,6 +61,11 @@ foreign key (SGid) references grade(Gid) ,
 foreign key (SEid) references exam(Eid)
 );
 
+insert  into student (Sid, Sname,SGid,SEid)  values ("150101","赵丽颖","1501", null);
+insert  into student (Sid, Sname,SGid,SEid)  values ("150201","戚薇","1502", null);
+insert  into student (Sid, Sname,SGid,SEid)  values ("150301","杨颖","1503", null);
+insert  into student (Sid, Sname,SGid,SEid)  values ("150401","黄渤","1504", null);
+insert  into student (Sid, Sname,SGid,SEid)  values ("150501","孙红雷","1505", null);
 
 
 创建教师授课表
