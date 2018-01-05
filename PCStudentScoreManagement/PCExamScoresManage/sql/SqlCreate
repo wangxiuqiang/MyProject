@@ -55,6 +55,7 @@ Eexamtime varchar(20) NOT NULL
 create table student (
 Sid varchar(15) primary key,
 Sname varchar(10) ,
+Spassword varchar(50) ,
 SGid varchar(10) ,
 SEid varchar(10),
 foreign key (SGid) references grade(Gid) ,

@@ -1,25 +1,20 @@
 package cn.pc.exam.controller;
 
 
+import cn.pc.exam.md5.Md5Salt;
 import cn.pc.exam.pojo.Admin;
 import cn.pc.exam.pojo.LoginPo;
 import cn.pc.exam.pojo.Student;
 import cn.pc.exam.pojo.Teacher;
-import cn.pc.exam.service.Impl.LoginSelectServiceImpl;
 import cn.pc.exam.service.LoginSelectService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Controller
+//@RequestMapping("/login") //正式使用的时候打开
 public class loginController {
 
     @Autowired
@@ -34,9 +29,9 @@ public class loginController {
      * @return
      */
     @RequestMapping(value = "/")
-    public String login(LoginPo loginPo, Model model) {
+    public String loginIndex(LoginPo loginPo, Model model) {
         model.addAttribute("loginPo",loginPo);
-        return "index";
+        return "/login/index";
     }
 
     /**
@@ -46,10 +41,10 @@ public class loginController {
      * @return
      * @throws Exception
      */
-//    @RequestMapping(value = "/login ")
+//    @RequestMapping(value = "/index ")
 //     public String login(LoginPo loginPo, Model model) {
 //        model.addAttribute("loginPo",loginPo);
-//        return "index";
+//        return "/login/index";
 //}
 
     /**
@@ -63,41 +58,42 @@ public class loginController {
      * 在比较数据库查出来的内容是否为空,并且是否和传过来的内容相符,并执行相应的代码块
      */
     @RequestMapping(value = "/success")
-    public String success(LoginPo loginPo, Model model)  throws  Exception{
+    public String loginSuccess(LoginPo loginPo, Model model)  throws  Exception{
 
-
+        String password = Md5Salt.md5(loginPo.getPassword());
           System.out.println(loginPo.getSelectWhoIn());
 //          return "success";
         if(loginPo.getSelectWhoIn().equals("admin")) {
             Admin admin= loginSelectService.queryAdminIDAndPassWd(loginPo.getId());
-            if(admin != null  && loginPo.getId().equals(admin.getAname()) && loginPo.getPassword().equals(admin.getApassword())) {
+
+            if(admin != null  && loginPo.getId().equals(admin.getAname()) && password.equals(admin.getApassword())) {
                 model.addAttribute("admin1","this an admin");
                 model.addAttribute("loginPo" ,loginPo);
                 model.addAttribute("admin",admin);
-                return "success";
+                return "/admin/AdminSelect";
             }else {
                 model.addAttribute("no", "no");
-                return "index";
+                return "/login/index";
             }
         }else if(loginPo.getSelectWhoIn().equals("teacher") ){
             Teacher teacher= loginSelectService.queryTeacher(loginPo.getId());
-            if(teacher != null && loginPo.getId().equals(teacher.getTid()) && loginPo.getPassword().equals(teacher.getTpassword())) {
+            if(teacher != null && loginPo.getId().equals(teacher.getTid()) && password.equals(teacher.getTpassword())) {
                 model.addAttribute("teacher1","this is teacher");
                 model.addAttribute("teacher",teacher);
-                return "success";
+                return "/login/success";
             }else {
                 model.addAttribute("no", "no");
-                return "index";
+                return "/login/index";
             }
         }else {
             Student student = loginSelectService.queryStudent(loginPo.getId());
-            if(student != null && loginPo.getId().equals(student.getSid()) && loginPo.getPassword().equals(student.getSid())) {
+            if(student != null && loginPo.getId().equals(student.getSid()) && password.equals(student.getSpassword())) {
                 model.addAttribute("student1","this is student");
                 model.addAttribute("student",student);
-                return "success";
+                return "/login/success";
             }else {
                 model.addAttribute("no", "no");
-                return "index";
+                return "/login/index";
             }
         }
     }

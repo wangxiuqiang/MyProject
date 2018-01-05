@@ -2,5 +2,7 @@
 jsp文件夹 sql文件夹 )
 配置web.xml  spring的配置文件   db.properties log4j.properties等配置文件
 
-写登录  配置Shiro  用Shiro进行登录检测
+写登录  配置Shiro  用Shiro进行登录检测  ( Shiro 配置失败 )
 同时完善配置文件
+
+写管理员功能

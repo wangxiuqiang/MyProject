@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.pc.exam.dao.AdminManager">
+    <!--  精确查找老师和学生的全部信息-->
+   <select id="queryTeacher" resultType="cn.pc.exam.pojoExtends.TeacherExtend" parameterType="String">
+         SELECT * FROM teacher WHERE Tid = #{value};
+   </select>
+    <select id="queryStudent" resultType="cn.pc.exam.pojoExtends.StudentExtend" parameterType="String">
+         SELECT * FROM student WHERE Sid = #{value};
+    </select>
+
+
+</mapper>

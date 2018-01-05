@@ -1,6 +1,6 @@
-package cn.pc.exam.pojo;
+package cn.pc.exam.pojoExtends;
 
-public class Student {
+public class StudentExtend {
     private String Sid;
     private String Sname;
     private String SGid;
