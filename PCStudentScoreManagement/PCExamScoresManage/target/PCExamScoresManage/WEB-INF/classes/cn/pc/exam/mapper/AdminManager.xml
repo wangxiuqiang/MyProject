@@ -9,5 +9,10 @@
          SELECT * FROM student WHERE Sid = #{value};
     </select>
 
-
+    <select id="queryAllStudent" resultType="cn.pc.exam.pojoExtends.StudentExtend">
+         SELECT * FROM student;
+    </select>
+    <select id="queryAllTeacher" resultType="cn.pc.exam.pojoExtends.TeacherExtend">
+        SELECT * FROM teacher;
+    </select>
 </mapper>

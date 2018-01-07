@@ -7,7 +7,10 @@ import cn.pc.exam.service.Impl.AdminManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,4 +33,24 @@ public class AdminController {
         }
         return "/admin/AdminSelect";
     }
+   @RequestMapping(value ="/selectAll/{flag}")
+    public String selectAll(Model model , @PathVariable int flag) throws  Exception{
+        if(flag == 1){
+            List<TeacherExtend> listTeacher = adminManagerService.queryAllTeacher();
+            if(listTeacher != null) {
+                model.addAttribute("listTeacher",listTeacher );
+                return "/admin/AdminSelect";
+            }else {
+                return null;
+            }
+        }else {
+            List<StudentExtend> listStudent = adminManagerService.queryAllStudent();
+            if(listStudent != null){
+                model.addAttribute("listStudent",listStudent);
+                return "/admin/AdminSelect";
+            }else{
+                return null;
+            }
+        }
+   }
 }

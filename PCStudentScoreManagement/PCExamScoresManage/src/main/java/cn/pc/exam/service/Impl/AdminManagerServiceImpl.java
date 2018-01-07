@@ -6,6 +6,9 @@ import cn.pc.exam.pojoExtends.TeacherExtend;
 import cn.pc.exam.service.AdminManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 //当一个接口有多个继承类的时候,用这个Service里面的参数来当做特定类的对象名   使用类名来定义对象的时候
 @Service
 public class AdminManagerServiceImpl implements AdminManagerService {
@@ -36,6 +39,29 @@ public class AdminManagerServiceImpl implements AdminManagerService {
             return null;
         }else {
             return studentExtend;
+        }
+    }
+
+    /**
+     * 查询全部的老师或者学生的信息,返回list泛型的数组 ,函数没有参数
+     * @return
+     * @throws Exception
+     */
+    public List<StudentExtend> queryAllStudent() throws Exception{
+        List<StudentExtend> list = adminManager.queryAllStudent();
+        if(list != null) {
+            return list;
+        }else {
+            return null;
+        }
+    }
+
+    public List<TeacherExtend> queryAllTeacher() throws Exception{
+        List<TeacherExtend> list = adminManager.queryAllTeacher();
+        if(list != null) {
+            return list;
+        }else {
+            return null;
         }
     }
 }
