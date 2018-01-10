@@ -15,6 +15,17 @@
 <body>
 ${loginPo.id}
 ${loginPo.password}
+<div>
+    <table>
+        <tr>
+            <td>查询</td>
+            <td>添加</td>
+            <td>修改</td>
+            <td><a href="${pageContext.request.contextPath}/admin/deleteIndex">删除</a></td>
+        </tr>
+    </table>
+</div>
+<div>
     <form action="${pageContext.request.contextPath}/admin/select" method="post" >
      <table>
          <tr>
@@ -24,20 +35,37 @@ ${loginPo.password}
 
      </table>
     </form>
+</div>
+<div>
 <form action="${pageContext.request.contextPath}/admin/selectAll/1">
     <input type="submit" value="查询全部教师"/>
 </form>
 <form action="${pageContext.request.contextPath}/admin/selectAll/2">
     <input type="submit" value="查询全部学生"/>
 </form>
+</div>
+<c:if test="${show == 1}">
+<div>
     <table>
+        <tr>
+            <td>编号</td>
+            <td>姓名</td></tr>
         <tr>
             <td>${teacher.tid} &nbsp;${student.sid}</td>
             <td>${teacher.tname}&nbsp;${student.sname}</td>
         </tr>
     </table>
+</div>
+</c:if>
+<c:if test="${flag == 1}" >
+<table>
+    <tr>
+        <td>编号</td>
+        <td>姓名</td>
+        <td>密码</td>
+    </tr>
 <c:forEach items="${listTeacher}" var="Teacher">
-    <table>
+
         <tr>
             <td>
                 ${Teacher.tname}
@@ -49,11 +77,21 @@ ${loginPo.password}
                     ${Teacher.tpassword}
             </td>
         </tr>
-    </table>
 </c:forEach>
-
+</table>
+</c:if>
+<c:if test="${flag == 2}" >
+    <div>
+<table>
+    <tr>
+        <td>姓名</td>
+        <td>编号</td>
+        <td>考试编号</td>
+        <td>班级编号</td>
+        <td>密码</td>
+    </tr>
 <c:forEach items="${listStudent}" var="Student">
-    <table>
+
         <tr>
             <td>
                     ${Student.sname}
@@ -71,7 +109,10 @@ ${loginPo.password}
                     ${Student.spassword}
             </td>
         </tr>
-    </table>
+
 </c:forEach>
+</table>
+    </div>
+</c:if>
 </body>
 </html>

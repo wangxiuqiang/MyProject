@@ -55,7 +55,6 @@ public class AdminManagerServiceImpl implements AdminManagerService {
             return null;
         }
     }
-
     public List<TeacherExtend> queryAllTeacher() throws Exception{
         List<TeacherExtend> list = adminManager.queryAllTeacher();
         if(list != null) {
@@ -63,5 +62,27 @@ public class AdminManagerServiceImpl implements AdminManagerService {
         }else {
             return null;
         }
+    }
+
+    /**
+     * 删除一个学生的信息
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public int delectStudentOne(String id) throws Exception{
+        int delete = adminManager.delectStudentOne(id);
+        return delete;
+    }
+
+    /**
+     * 删除一个老师的信息
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public int delectTeacherOne(String id) throws Exception{
+        int delete = adminManager.delectTeacherOne(id);
+        return delete;
     }
 }

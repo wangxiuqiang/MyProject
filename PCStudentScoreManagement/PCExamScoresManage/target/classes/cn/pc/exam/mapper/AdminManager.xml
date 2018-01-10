@@ -15,4 +15,12 @@
     <select id="queryAllTeacher" resultType="cn.pc.exam.pojoExtends.TeacherExtend">
         SELECT * FROM teacher;
     </select>
+
+
+    <delete id="delectStudentOne" parameterType="String">
+        DELETE from student WHERE Sid = #{value};
+    </delete>
+    <delete id="delectTeacherOne" parameterType="String">
+        DELETE from teacher WHERE Sid = #{value};
+    </delete>
 </mapper>
