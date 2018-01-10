@@ -85,4 +85,21 @@ public class AdminManagerServiceImpl implements AdminManagerService {
         int delete = adminManager.delectTeacherOne(id);
         return delete;
     }
+
+    /**
+     * 根据学生的班级编号查出学生的信息
+     * @param Gid  要查询的学生的班级编号
+     * @return
+     * @throws Exception
+     */
+    public StudentExtend queryStudentForGrade(String Gid) throws Exception{
+       StudentExtend student = adminManager.queryStudentForGrade(Gid);
+      if(student != null){
+          return student;
+      }else{
+          return null;
+      }
+
+    }
+
 }

@@ -16,6 +16,9 @@
         SELECT * FROM teacher;
     </select>
 
+    <select id="queryStudentForGrade" parameterType="String" resultType="cn.pc.exam.pojoExtends.StudentExtend">
+        SELECT * FROM student WHERE SGid = #{value};
+    </select>
 
     <delete id="delectStudentOne" parameterType="String">
         DELETE from student WHERE Sid = #{value};

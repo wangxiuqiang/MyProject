@@ -72,10 +72,31 @@ public class AdminController {
             }
         }
    }
-    @RequestMapping(value = "/deleteIndex")
+
+    /**
+     * 用来通过班级查询学生的信息
+     * @param flag 从页面获取flag  表明这是学生的查询,并将其返回 指定固定的内容在页面显示
+     * @param model 将内容传到页面上
+     * @param Gid 参数从页面获取(通过数据绑定) , 表示班级的编号,作为函数参数,进行查询
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectStudentForGrade/{flag}")
+    public String selectStudentForGrade(@PathVariable int flag,Model model,String Gid) throws Exception{
+      StudentExtend student = adminManagerService.queryStudentForGrade(Gid);
+      model.addAttribute("flag",flag);
+      if(student != null) {
+          model.addAttribute("studentGrade",student);
+          return "/admin/AdminSelect";
+      }else{
+          return null;
+      }
+    }
+
     /**
      * 用来跳转到删除界面
      */
+    @RequestMapping(value = "/deleteIndex")
     public String deleteIndex(){
        return "/admin/AdminDelete";
     }
@@ -132,6 +153,12 @@ public class AdminController {
           return null;
       }
     }
+
+    /**
+     * 使对数据库的增删改操作都进行内部重定向到页面,因此多写一个函数来将重定向的页面导入
+     * 防止刷新多次执行问题
+     * @return
+     */
     @RequestMapping("/deleteSuccessRedirect")
     public String deleteSuccessRedirect(){
        return "/admin/AdminDeleteSuccess";
