@@ -1,6 +1,8 @@
 package cn.pc.exam.service.Impl;
 
 import cn.pc.exam.dao.AdminManager;
+import cn.pc.exam.pojo.Student;
+import cn.pc.exam.pojo.Teacher;
 import cn.pc.exam.pojoExtends.StudentExtend;
 import cn.pc.exam.pojoExtends.TeacherExtend;
 import cn.pc.exam.service.AdminManagerService;
@@ -99,7 +101,27 @@ public class AdminManagerServiceImpl implements AdminManagerService {
       }else{
           return null;
       }
+    }
 
+    public int insertStudent(Student student) throws Exception{
+        int count = 0;
+        count = adminManager.InsertStudent(student);
+        if(count != 0 ){
+            return count;
+        }else{
+            return 0;
+        }
+
+    }
+
+    public int insertTeacher(Teacher teacher) throws Exception{
+        int count = 0;
+        count = adminManager.InsertTeacher(teacher);
+        if(count != 0 ){
+            return count;
+        }else{
+            return 0;
+        }
     }
 
 }

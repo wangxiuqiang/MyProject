@@ -1,6 +1,8 @@
 package cn.pc.exam.dao;
 
 
+import cn.pc.exam.pojo.Student;
+import cn.pc.exam.pojo.Teacher;
 import cn.pc.exam.pojoExtends.StudentExtend;
 import cn.pc.exam.pojoExtends.TeacherExtend;
 
@@ -14,5 +16,7 @@ public interface AdminManager {
     public StudentExtend queryStudentForGrade(String Gid) throws Exception;
     public int delectStudentOne(String id) throws Exception;
     public int delectTeacherOne(String id) throws Exception;
+    public int InsertTeacher(Teacher teacher) throws Exception;
+    public int InsertStudent(Student student) throws Exception;
 
 }

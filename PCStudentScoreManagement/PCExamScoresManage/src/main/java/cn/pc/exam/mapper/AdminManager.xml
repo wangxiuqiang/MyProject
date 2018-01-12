@@ -24,6 +24,13 @@
         DELETE from student WHERE Sid = #{value};
     </delete>
     <delete id="delectTeacherOne" parameterType="String">
-        DELETE from teacher WHERE Sid = #{value};
+        DELETE from teacher WHERE Tid = #{value};
     </delete>
+
+    <insert id="InsertStudent" parameterType="cn.pc.exam.pojo.Student">
+        INSERT INTO student(Sid,Sname,SGid,Spassword,SEid) VALUES(#{Sid},#{Sname},#{SGid},#{Spassword},#{SEid})
+    </insert>
+    <insert id="InsertTeacher" parameterType="cn.pc.exam.pojo.Teacher">
+        INSERT INTO teacher(Tid,Tname,Tpassword) VALUES (#{Tid},#{Tname},#{Tpassword});
+    </insert>
 </mapper>

@@ -1,5 +1,7 @@
 package cn.pc.exam.service;
 
+import cn.pc.exam.pojo.Student;
+import cn.pc.exam.pojo.Teacher;
 import cn.pc.exam.pojoExtends.StudentExtend;
 import cn.pc.exam.pojoExtends.TeacherExtend;
 
@@ -18,5 +20,9 @@ public interface AdminManagerService {
 
     public int delectStudentOne(String id) throws Exception;
     public int delectTeacherOne(String id) throws Exception;
+
+    public int insertStudent(Student student) throws Exception;
+    public int insertTeacher(Teacher teacher) throws Exception;
+
 
 }

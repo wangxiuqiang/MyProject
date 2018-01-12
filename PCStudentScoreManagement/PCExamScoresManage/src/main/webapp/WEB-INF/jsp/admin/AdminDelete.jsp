@@ -15,6 +15,17 @@
 
 </head>
 <body>
+<%--这个div用来显示增删改查的链接--%>
+<div>
+    <table>
+        <tr>
+            <td><a href="${pageContext.request.contextPath}/admin/select">查询</a></td>
+            <td><a href="${pageContext.request.contextPath}/admin/insert">添加</a></td>
+            <td>修改</td>
+            <td><a href="${pageContext.request.contextPath}/admin/deleteIndex">删除</a></td>
+        </tr>
+    </table>
+</div>
  <div>
      <form  name="headForm" action="${pageContext.request.contextPath}/admin/delete/0" method="post">
          <input type="radio" name="whoSelect" value="teacher"/>教师
@@ -41,7 +52,7 @@
                  <td>
                          ${Teacher.tpassword}
                  </td>
-                 <td><a href="">删除</a></td>
+                 <td><a href="${pageContext.request.contextPath}/admin/deleteSuccess/1/${Teacher.tid}">删除</a></td>
              </tr>
          </c:forEach>
      </table>

@@ -61,7 +61,7 @@ public class loginController {
     public String loginSuccess(LoginPo loginPo, Model model)  throws  Exception{
 
         String password = Md5Salt.md5(loginPo.getPassword());
-          System.out.println(loginPo.getSelectWhoIn());
+
 //          return "success";
         if(loginPo.getSelectWhoIn().equals("admin")) {
             Admin admin= loginSelectService.queryAdminIDAndPassWd(loginPo.getId());

@@ -1,6 +1,8 @@
 package cn.pc.exam.controller;
 
 import cn.pc.exam.pojo.LoginPo;
+import cn.pc.exam.pojo.Student;
+import cn.pc.exam.pojo.Teacher;
 import cn.pc.exam.pojoExtends.StudentExtend;
 import cn.pc.exam.pojoExtends.TeacherExtend;
 import cn.pc.exam.service.Impl.AdminManagerServiceImpl;
@@ -162,5 +164,75 @@ public class AdminController {
     @RequestMapping("/deleteSuccessRedirect")
     public String deleteSuccessRedirect(){
        return "/admin/AdminDeleteSuccess";
+    }
+
+    /**
+     * 第一次访问insert页面时,或者从主页面访问insert页面时调用的函数
+     * @return
+     */
+    @RequestMapping("/insert")
+    public String insert(){
+        return "/admin/AdminInsert";
+    }
+
+    /**
+     *  who用来返回给页面,提示页面用来显示那一部分内容
+     * @param model
+     * @param insertWho  用来接收页面上传来的参数进行判断
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/insertInput")
+    public String insertInput(Model model, String insertWho) throws Exception{
+        int who = 0;
+        if(insertWho.equals("teacher")){
+           who = 1;
+        }else{
+            who = 2;
+        }
+        model.addAttribute("who",who);
+        return "/admin/AdminInsert";
+    }
+
+    /**
+     *  count 用确定函数执行是否成功
+     * @param model
+     * @param who 页面传到函数,说明写入的是哪种类型,来确定调用的函数类型
+     * @param teacher
+     * @param student
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/insertSuccessOrFaliure/{who}")
+    public String insertSuccessOrFaliure(Model model,@PathVariable int who
+            , Teacher teacher , Student student) throws Exception{
+        int count;
+        /**
+         * 用来将没写入的外键赋值,防止页面传过来的值不是外键需要的值(空或其他表存在的值)
+         * 赋值为空,表示需要为空
+         * 尝试过将页面中input的value设置为"null"和"" ,都不能写入,并出现错误
+         */
+        if(student.getSEid().equals("")){
+            student.setSEid(null);
+        }
+        if(student.getSGid().equals("")){
+            student.setSGid(null);
+        }
+    //    System.out.println(student.getSEid());
+        if(who == 2) {
+             count = adminManagerService.insertStudent(student);
+
+        }else {
+             count = adminManagerService.insertTeacher(teacher);
+        }
+        //确保输入一个完成还能继续输入第二个
+        model.addAttribute("who",who);
+        if(count != 0){
+            model.addAttribute("result","success");
+        }else{
+            model.addAttribute("result","shibai");
+
+        }
+        return "/admin/AdminInsert";
     }
 }

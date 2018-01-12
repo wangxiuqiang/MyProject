@@ -5,7 +5,7 @@ public class Student {
     private String Sname;
     private String SGid;
     private String SEid;
-
+    private String Spassword;
     public String getSpassword() {
         return Spassword;
     }
@@ -14,7 +14,7 @@ public class Student {
         Spassword = spassword;
     }
 
-    private String Spassword;
+
 
     public String getSid() {
         return Sid;
