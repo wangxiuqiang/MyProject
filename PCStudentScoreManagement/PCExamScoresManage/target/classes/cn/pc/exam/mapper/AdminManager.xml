@@ -20,11 +20,23 @@
         SELECT * FROM student WHERE SGid = #{value};
     </select>
 
-    <delete id="delectStudentOne" parameterType="String">
+    <delete id="deleteStudentOne" parameterType="String">
         DELETE from student WHERE Sid = #{value};
     </delete>
-    <delete id="delectTeacherOne" parameterType="String">
+    <delete id="deleteTeacherOne" parameterType="String">
         DELETE from teacher WHERE Tid = #{value};
+    </delete>
+    <delete id="deleteSomeStudent">
+        DELETE FROM student WHERE Sid IN
+         <foreach collection="array" item="sid" open="(" close=")" separator=",">
+          #{sid}
+         </foreach>
+    </delete>
+    <delete id="deleteSomeTeacher" >
+        DELETE FROM teacher WHERE Tid IN
+        <foreach collection="array" item="tid" open="(" close=")" separator=",">
+            #{sid}
+        </foreach>
     </delete>
 
     <insert id="InsertStudent" parameterType="cn.pc.exam.pojo.Student">

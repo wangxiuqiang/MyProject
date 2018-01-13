@@ -20,6 +20,8 @@ public interface AdminManagerService {
 
     public int delectStudentOne(String id) throws Exception;
     public int delectTeacherOne(String id) throws Exception;
+    public int deleteSomeStudent(String[] deleteSome) throws Exception;
+    public int deleteSomeTeacher(String[] deleteSome) throws Exception;
 
     public int insertStudent(Student student) throws Exception;
     public int insertTeacher(Teacher teacher) throws Exception;

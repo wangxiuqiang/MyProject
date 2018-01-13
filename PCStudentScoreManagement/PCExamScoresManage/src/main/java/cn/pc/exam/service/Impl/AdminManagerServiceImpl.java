@@ -65,6 +65,20 @@ public class AdminManagerServiceImpl implements AdminManagerService {
             return null;
         }
     }
+    /**
+     * 根据学生的班级编号查出学生的信息
+     * @param Gid  要查询的学生的班级编号
+     * @return
+     * @throws Exception
+     */
+    public StudentExtend queryStudentForGrade(String Gid) throws Exception{
+        StudentExtend student = adminManager.queryStudentForGrade(Gid);
+        if(student != null){
+            return student;
+        }else{
+            return null;
+        }
+    }
 
     /**
      * 删除一个学生的信息
@@ -73,7 +87,7 @@ public class AdminManagerServiceImpl implements AdminManagerService {
      * @throws Exception
      */
     public int delectStudentOne(String id) throws Exception{
-        int delete = adminManager.delectStudentOne(id);
+        int delete = adminManager.deleteStudentOne(id);
         return delete;
     }
 
@@ -84,25 +98,32 @@ public class AdminManagerServiceImpl implements AdminManagerService {
      * @throws Exception
      */
     public int delectTeacherOne(String id) throws Exception{
-        int delete = adminManager.delectTeacherOne(id);
+        int delete = adminManager.deleteTeacherOne(id);
         return delete;
     }
 
     /**
-     * 根据学生的班级编号查出学生的信息
-     * @param Gid  要查询的学生的班级编号
+     * 删除部分教师和学生的信息,返回int类型来确定语句执行成功
+     * @param deleteSome
      * @return
      * @throws Exception
      */
-    public StudentExtend queryStudentForGrade(String Gid) throws Exception{
-       StudentExtend student = adminManager.queryStudentForGrade(Gid);
-      if(student != null){
-          return student;
-      }else{
-          return null;
-      }
+    public int deleteSomeStudent(String[] deleteSome) throws Exception{
+        int deleteSomeStudent = adminManager.deleteSomeStudent(deleteSome);
+        return deleteSomeStudent;
+    }
+    public int deleteSomeTeacher(String[] deleteSome) throws Exception{
+        int deleteSomeTeacher = adminManager.deleteSomeTeacher(deleteSome);
+        return deleteSomeTeacher;
     }
 
+
+    /**
+     *   录入老师和学生的信息
+     * @param
+     * @return
+     * @throws Exception
+     */
     public int insertStudent(Student student) throws Exception{
         int count = 0;
         count = adminManager.InsertStudent(student);
@@ -113,7 +134,6 @@ public class AdminManagerServiceImpl implements AdminManagerService {
         }
 
     }
-
     public int insertTeacher(Teacher teacher) throws Exception{
         int count = 0;
         count = adminManager.InsertTeacher(teacher);

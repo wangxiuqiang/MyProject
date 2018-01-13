@@ -100,7 +100,7 @@ public class AdminController {
     }
 
     /**
-     * 用来跳转到删除界面
+     * 用来跳转到删除界面 ,进行选择. 删除的第一步,
      */
     @RequestMapping(value = "/deleteIndex")
     public String deleteIndex(){
@@ -108,9 +108,11 @@ public class AdminController {
     }
 
     /**
-     * flag  用来表示是查询老师还是学生
+     * flag  用来表示是查询老师还是学生 ,用来显示要删除的内容的,删除的前一步,先显示
+     * 里面调用了该类的selectAll函数,用来显示所有的老师或学生, 因为selectAll已经进行过model
+     * 所以  只调用就可以啦
      * @param model
-     * @param whoSelect  用来将页面radio的值传过来,对flag进行赋值的测试
+     * @param whoSelect  用来将页面radio的值传过来,对flag进行赋值的测试  ,
      * @return
      * @throws Exception
      */
@@ -134,15 +136,15 @@ public class AdminController {
    }
 
     /**
-     *
+     *  单个的删除, 点击删除之后 ,该函数将其删除,重定向到另一url
      * @param flag 用来获取删除老师还是学生,并将flag传递到删除成功界面,以便返回到删除页面的时候会出现删除后的信息
      * @param id 用来传递要删除的信息的  编号
      * @param redirect  将flag重定义到删除成功页面的参数
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/deleteSuccess/{flag}/{id}")
-    public String deleteSuccess(@PathVariable int flag,  @PathVariable String id,
+    @RequestMapping(value = "/deleteOneSuccess/{flag}/{id}")
+    public String deleteOneSuccess(@PathVariable int flag,  @PathVariable String id,
                                 RedirectAttributes redirect) throws  Exception{
        int delete = 0;
 
@@ -160,7 +162,25 @@ public class AdminController {
       }
     }
 
+    @RequestMapping(value = "/deleteAllSuccess/{flag}")
+    public String deleteAllSuccess(@PathVariable int flag,RedirectAttributes redirect , String[] deleteSome
+    ) throws Exception{
+
+        int count = 0;
+        redirect.addFlashAttribute("flag",flag);
+        if(flag == 1){
+           count = adminManagerService.deleteSomeTeacher(deleteSome);
+        }else{
+           count = adminManagerService.deleteSomeStudent(deleteSome);
+        }
+       if(count != 0 ){
+            return "redirect:/admin/deleteIndex";
+       }else{
+           return null;
+       }
+    }
     /**
+     *
      * 使对数据库的增删改操作都进行内部重定向到页面,因此多写一个函数来将重定向的页面导入
      * 防止刷新多次执行问题
      * @return
@@ -198,18 +218,20 @@ public class AdminController {
         return "/admin/AdminInsert";
     }
 
-    /**
+    /**failure
      *  count 用确定函数执行是否成功
      * @param model
      * @param who 页面传到函数,说明写入的是哪种类型,来确定调用的函数类型
      * @param teacher
      * @param student
-     * @return
+     * @return  重新定向到insert的url ,传过去的值依旧生效, 因为是同一个页面
      * @throws Exception
      */
     @RequestMapping(value = "/insertSuccessOrFaliure/{who}")
     public String insertSuccessOrFaliure(Model model, @PathVariable int who
-            ,@Validated Teacher teacher ,BindingResult bindingResultT , @Validated Student student, BindingResult bindingResultS) throws Exception{
+            ,@Validated Teacher teacher ,BindingResult bindingResultT
+            , @Validated Student student, BindingResult bindingResultS
+    , RedirectAttributes redirect) throws Exception{
         int count;
         /**
          * 用来将没写入的外键赋值,防止页面传过来的值不是外键需要的值(空或其他表存在的值)
@@ -222,9 +244,6 @@ public class AdminController {
         if(student.getSGid().equals("")){
             student.setSGid(null);
         }
-
-
-
     //    //转换为MD5编码  System.out.println(student.getSEid());
         if(who == 2) {
             if(bindingResultS.hasErrors()){
@@ -250,13 +269,13 @@ public class AdminController {
              count = adminManagerService.insertTeacher(teacher);
         }
         //确保输入一个完成还能继续输入第二个
-        model.addAttribute("who",who);
+        redirect.addFlashAttribute("who",who);
         if(count != 0){
-            model.addAttribute("result","success");
+           redirect.addFlashAttribute("result","success");
         }else{
-            model.addAttribute("result","shibai");
+            redirect.addFlashAttribute("result","shibai");
 
         }
-        return "/admin/AdminInsert";
+        return "redirect:/admin/insert";
     }
 }

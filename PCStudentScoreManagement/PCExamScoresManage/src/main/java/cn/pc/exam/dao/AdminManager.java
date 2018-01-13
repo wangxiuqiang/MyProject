@@ -14,9 +14,10 @@ public interface AdminManager {
     public List<StudentExtend> queryAllStudent() throws Exception;
     public List<TeacherExtend> queryAllTeacher() throws Exception;
     public StudentExtend queryStudentForGrade(String Gid) throws Exception;
-    public int delectStudentOne(String id) throws Exception;
-    public int delectTeacherOne(String id) throws Exception;
+    public int deleteStudentOne(String id) throws Exception;
+    public int deleteTeacherOne(String id) throws Exception;
     public int InsertTeacher(Teacher teacher) throws Exception;
     public int InsertStudent(Student student) throws Exception;
-
+    public int deleteSomeStudent(String[] deleteSome) throws Exception;
+    public int deleteSomeTeacher(String[] deleteSome) throws Exception;
 }

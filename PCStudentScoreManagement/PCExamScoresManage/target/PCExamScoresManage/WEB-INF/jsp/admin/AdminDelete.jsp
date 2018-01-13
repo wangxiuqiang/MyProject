@@ -34,6 +34,7 @@
      </form>
  </div>
  <c:if test="${flag == 1}" >
+     <form action="${pageContext.request.contextPath}/admin/deleteAllSuccess/1" method="post">
      <table>
          <tr>
              <td>编号</td>
@@ -44,6 +45,9 @@
 
              <tr>
                  <td>
+                     <input type="checkbox" name="deleteSome" value="${Teacher.tid}" />
+                 </td>
+                 <td>
                          ${Teacher.tname}
                  </td>
                  <td>
@@ -52,13 +56,21 @@
                  <td>
                          ${Teacher.tpassword}
                  </td>
-                 <td><a href="${pageContext.request.contextPath}/admin/deleteSuccess/1/${Teacher.tid}">删除</a></td>
+                 <td><a href="${pageContext.request.contextPath}/admin/deleteOneSuccess/1/${Teacher.tid}">删除</a></td>
              </tr>
          </c:forEach>
+         <tr>
+             <td>
+                 <input type="submit" value="部分删除">
+             </td>
+         </tr>
      </table>
+     </form>
  </c:if>
  <c:if test="${flag == 2}" >
+
      <div>
+         <form action="${pageContext.request.contextPath}/admin/deleteAllSuccess/2" method="post">
          <table>
              <tr>
                  <td>姓名</td>
@@ -68,8 +80,10 @@
                  <td>密码</td>
              </tr>
              <c:forEach items="${listStudent}" var="Student">
-
                  <tr>
+                     <td>
+                         <input type="checkbox" name="deleteSome" value="${Student.sid}" />
+                     </td>
                      <td>
                              ${Student.sname}
                      </td>
@@ -85,11 +99,17 @@
                      <td>
                              ${Student.spassword}
                      </td>
-                     <td><a href="${pageContext.request.contextPath}/admin/deleteSuccess/2/${Student.sid}">删除</a></td>
+                     <td><a href="${pageContext.request.contextPath}/admin/deleteOneSuccess/2/${Student.sid}">删除</a></td>
                  </tr>
 
-             </c:forEach>
+         </c:forEach>
+             <tr>
+                 <td>
+                     <input type="submit" value="部分删除"/>
+                 </td>
+             </tr>
          </table>
+     </form>
      </div>
  </c:if>
 </body>
