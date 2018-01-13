@@ -1,11 +1,19 @@
 package cn.pc.exam.pojo;
 
+import javax.validation.constraints.Size;
+
 public class Student {
+    @Size(min = 1,max = 15,message = "{}")
     private String Sid;
+
     private String Sname;
+
     private String SGid;
+
     private String SEid;
+
     private String Spassword;
+
     public String getSpassword() {
         return Spassword;
     }

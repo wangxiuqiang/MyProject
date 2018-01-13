@@ -19,10 +19,10 @@ ${result}
              <table>
                  <tr>
                      <td>
-                         <input type="radio" name="insertWho" value="teacher"/>教师
+                         <input type="radio" name="insertWho" value="teacher" <c:if test="${who == 1}">checked="true"</c:if> />教师
                      </td>
                      <td>
-                         <input type="radio" name="insertWho" value="student"/>学生
+                         <input type="radio" name="insertWho" value="student" <c:if test="${who == 1}">checked="true"</c:if> />学生
                      </td>
                      <td>
                          <input type="submit" value="确认"/>

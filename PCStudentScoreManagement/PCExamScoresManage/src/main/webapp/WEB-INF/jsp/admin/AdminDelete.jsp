@@ -28,8 +28,8 @@
 </div>
  <div>
      <form  name="headForm" action="${pageContext.request.contextPath}/admin/delete/0" method="post">
-         <input type="radio" name="whoSelect" value="teacher"/>教师
-         <input type="radio" name="whoSelect" value="student"/>学生
+         <input type="radio" name="whoSelect" value="teacher" <c:if test="${flag == 1}">checked="true"</c:if>  />教师
+         <input type="radio" name="whoSelect" value="student" <c:if test="${flag == 2}">checked="true"</c:if>   />学生
          <input type="submit" value="确认"/>
      </form>
  </div>
