@@ -10,6 +10,7 @@ http://www.springframework.org/schema/context/spring-context.xsd
   http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+
     <!--配置校验器-->
 
     <bean id="validation" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -24,7 +25,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
                 <value>classpath:validation/validationMessage</value>
             </list>
         </property>
-        <property name="fileEncodings" value="utf-8" />
+        <property name="defaultEncoding" value="utf-8" />
         <!--资源文件120读取一次-->
         <property name="cacheSeconds" value="120"/>
     </bean>

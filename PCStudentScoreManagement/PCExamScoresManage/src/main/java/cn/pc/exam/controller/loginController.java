@@ -34,6 +34,12 @@ public class loginController {
         return "/login/index";
     }
 
+    @RequestMapping(value = "/login")
+    public String login(LoginPo loginPo, Model model) {
+        model.addAttribute("loginPo",loginPo);
+        return "/login/index";
+    }
+
     /**
      * 和上面一样,用来将项目部署到tomcat后自己输入网址查看
      * @param loginPo

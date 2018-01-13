@@ -14,15 +14,22 @@
 </head>
 <body>
 ${result}
+
+<c:if test="${errors != null}">
+    <c:forEach items="${errors}" var="error">
+        ${error.defaultMessage}
+    </c:forEach>
+</c:if>
+
      <div>
          <form action="${pageContext.request.contextPath}/admin/insertInput" method="post">
              <table>
                  <tr>
                      <td>
-                         <input type="radio" name="insertWho" value="teacher"/>教师
+                         <input type="radio" name="insertWho" value="teacher" <c:if test="${who == 1}">checked="true"</c:if> />教师
                      </td>
                      <td>
-                         <input type="radio" name="insertWho" value="student"/>学生
+                         <input type="radio" name="insertWho" value="student" <c:if test="${who == 2}">checked="true"</c:if> />学生
                      </td>
                      <td>
                          <input type="submit" value="确认"/>

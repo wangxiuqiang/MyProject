@@ -1,9 +1,16 @@
 package cn.pc.exam.pojo;
 
+import javax.validation.constraints.Size;
+
 public class Teacher {
 
+    @Size(min = 1,max = 8,message = "{teacher.id.length.error}")
     private String Tid;
+
+    @Size(min = 1,max = 20,message = "{teacher.name.length.error}")
     private String Tname;
+
+    @Size(min = 5,max = 8,message = "{teacher.password.length.error}")
     private String Tpassword;
 
     public String getTid() {

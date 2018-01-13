@@ -1,5 +1,6 @@
 package cn.pc.exam.controller;
 
+import cn.pc.exam.md5.Md5Salt;
 import cn.pc.exam.pojo.LoginPo;
 import cn.pc.exam.pojo.Student;
 import cn.pc.exam.pojo.Teacher;
@@ -9,6 +10,9 @@ import cn.pc.exam.service.Impl.AdminManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -204,8 +208,8 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping(value = "/insertSuccessOrFaliure/{who}")
-    public String insertSuccessOrFaliure(Model model,@PathVariable int who
-            , Teacher teacher , Student student) throws Exception{
+    public String insertSuccessOrFaliure(Model model, @PathVariable int who
+            ,@Validated Teacher teacher ,BindingResult bindingResultT , @Validated Student student, BindingResult bindingResultS) throws Exception{
         int count;
         /**
          * 用来将没写入的外键赋值,防止页面传过来的值不是外键需要的值(空或其他表存在的值)
@@ -218,11 +222,31 @@ public class AdminController {
         if(student.getSGid().equals("")){
             student.setSGid(null);
         }
-    //    System.out.println(student.getSEid());
+
+
+
+    //    //转换为MD5编码  System.out.println(student.getSEid());
         if(who == 2) {
+            if(bindingResultS.hasErrors()){
+                List<ObjectError> errors = bindingResultS.getAllErrors();
+                for(ObjectError objectError:errors){
+                    System.out.println(objectError.getDefaultMessage());
+                }
+                model.addAttribute("errors",errors);
+                return "/admin/AdminInsert";
+            }
+            //转换为MD5编码
+            student.setSpassword(Md5Salt.md5(student.getSpassword()));
              count = adminManagerService.insertStudent(student);
 
         }else {
+            if(bindingResultT.hasErrors()){
+                List<ObjectError> errors = bindingResultT.getAllErrors();
+                model.addAttribute("errors",errors);
+                return "/admin/AdminInsert";
+            }
+            //转换为MD5编码
+            teacher.setTpassword(Md5Salt.md5(teacher.getTpassword()));
              count = adminManagerService.insertTeacher(teacher);
         }
         //确保输入一个完成还能继续输入第二个
