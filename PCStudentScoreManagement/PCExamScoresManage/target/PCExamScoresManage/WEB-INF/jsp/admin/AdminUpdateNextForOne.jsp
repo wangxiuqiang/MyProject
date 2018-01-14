@@ -13,6 +13,10 @@
     <title>修改信息</title>
 </head>
 <body>
+<%--
+    可以修改编号, 不能修改密码,密码只读为了确保密码的长度在5-8之间满足校验器,
+    所以密码的value值赋为12345
+--%>
 <c:if test="${errors != null}">
     <c:forEach items="${errors}" var="error">
         ${error.defaultMessage}
@@ -24,7 +28,7 @@ ${updateSuccess}
         <form action="${pageContext.request.contextPath}/admin/updateSuccess/1" method="post">
             <table>
                 <tr>
-                    <td>教师编号:<input type="text" name="Tid" value="${teacher.tid}" placeholder="请输入编号" readonly ></td></tr>
+                    <td>教师编号:<input type="text" name="Tid" value="${teacher.tid}" placeholder="请输入编号"  ></td></tr>
                 <tr>
                     <td>教师姓名:<input type="text" name="Tname" value="${teacher.tname}" placeholder="请输入姓名"></td></tr>
                 <tr>

@@ -12,7 +12,8 @@
 <html>
 <head>
     <title>删除信息</title>
-
+    <script type="text/javascript" src="/js/deleteAllAndNoSelect.js">
+    </script>
 </head>
 <body>
 <%--这个div用来显示增删改查的链接--%>
@@ -61,6 +62,12 @@
          </c:forEach>
          <tr>
              <td>
+                 <input type="button" value="全选" onclick="allSelect()" />
+                 <input type="button" value="取消全选" onclick="noSelect()" />
+             </td>
+         </tr>
+         <tr>
+             <td>
                  <input type="submit" value="部分删除">
              </td>
          </tr>
@@ -103,6 +110,12 @@
                  </tr>
 
          </c:forEach>
+             <tr>
+                 <td>
+                     <input type="button" value="全选" onclick="allSelect()" />
+                     <input type="button" value="取消全选" onclick="noSelect()" />
+                 </td>
+             </tr>
              <tr>
                  <td>
                      <input type="submit" value="部分删除"/>
