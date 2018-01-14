@@ -26,5 +26,6 @@ public interface AdminManagerService {
     public int insertStudent(Student student) throws Exception;
     public int insertTeacher(Teacher teacher) throws Exception;
 
-
+    public int updateTeacherOne(Teacher teacher)throws Exception;
+    public int updateStudentOne(Student student) throws Exception;
 }

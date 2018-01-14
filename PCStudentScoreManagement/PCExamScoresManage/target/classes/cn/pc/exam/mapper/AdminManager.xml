@@ -45,4 +45,11 @@
     <insert id="InsertTeacher" parameterType="cn.pc.exam.pojo.Teacher">
         INSERT INTO teacher(Tid,Tname,Tpassword) VALUES (#{Tid},#{Tname},#{Tpassword});
     </insert>
+
+    <update id="updateTeacherOne" parameterType="cn.pc.exam.pojo.Teacher">
+         UPDATE teacher SET  Tid = #{Tid} , Tname = #{Tname} WHERE Tid = #{beforeTid};
+    </update>
+    <update id="updateStudentOne" parameterType="cn.pc.exam.pojo.Student">
+        UPDATE student SET Sid= #{Sid}, Sname = #{Sname} , SGid = #{SGid},SEid = #{SEid} WHERE Sid = #{beforeSid};
+    </update>
 </mapper>

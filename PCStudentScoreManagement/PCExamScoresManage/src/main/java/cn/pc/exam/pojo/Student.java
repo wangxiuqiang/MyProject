@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Student {
+    private static String beforeSid;
     @Size(min = 1,max = 15,message = "{student.id.length.error}")
     private String Sid;
 
@@ -16,6 +17,14 @@ public class Student {
 
     @Size(min = 5,max = 8,message = "{student.password.length.error}")
     private String Spassword;
+
+    public static String getBeforeSid() {
+        return beforeSid;
+    }
+
+    public static void setBeforeSid(String beforeSid) {
+        Student.beforeSid = beforeSid;
+    }
 
     public String getSpassword() {
         return Spassword;

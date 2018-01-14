@@ -21,7 +21,7 @@ ${loginPo.password}
         <tr>
             <td><a href="${pageContext.request.contextPath}/admin/select">查询</a></td>
             <td><a href="${pageContext.request.contextPath}/admin/insert">添加</a></td>
-            <td>修改</td>
+            <td><a href="${pageContext.request.contextPath}/admin/update">修改</a></td>
             <td><a href="${pageContext.request.contextPath}/admin/deleteIndex">删除</a></td>
         </tr>
     </table>

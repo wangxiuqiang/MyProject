@@ -144,4 +144,20 @@ public class AdminManagerServiceImpl implements AdminManagerService {
         }
     }
 
+    /**
+     * 用来更新教师和学生的信息
+     * @param teacher
+     * @return
+     * @throws Exception
+     */
+    public int updateTeacherOne(Teacher teacher) throws Exception {
+        adminManager.updateTeacherOne(teacher);
+        return 0;
+    }
+
+    public int updateStudentOne(Student student) throws Exception {
+        adminManager.updateStudentOne(student);
+        return 0;
+    }
+
 }

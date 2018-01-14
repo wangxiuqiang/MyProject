@@ -3,6 +3,15 @@ package cn.pc.exam.pojo;
 import javax.validation.constraints.Size;
 
 public class Teacher {
+  private  static String beforeTid;
+
+    public static String getBeforeTid() {
+        return beforeTid;
+    }
+
+    public static void setBeforeTid(String beforeTid) {
+        Teacher.beforeTid = beforeTid;
+    }
 
     @Size(min = 1,max = 8,message = "{teacher.id.length.error}")
     private String Tid;

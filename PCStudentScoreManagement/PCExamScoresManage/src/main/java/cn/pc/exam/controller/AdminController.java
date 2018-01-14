@@ -260,15 +260,15 @@ public class AdminController {
 
         }else {
             if(bindingResultT.hasErrors()){
-                List<ObjectError> errors = bindingResultT.getAllErrors();
-                model.addAttribute("errors",errors);
+                List<ObjectError> error = bindingResultT.getAllErrors();
+                model.addAttribute("errors",error);
                 return "/admin/AdminInsert";
             }
             //转换为MD5编码
             teacher.setTpassword(Md5Salt.md5(teacher.getTpassword()));
              count = adminManagerService.insertTeacher(teacher);
         }
-        //确保输入一个完成还能继续输入第二个
+        //将who传过去 确保输入一个完成还能继续输入第二个
         redirect.addFlashAttribute("who",who);
         if(count != 0){
            redirect.addFlashAttribute("result","success");
@@ -277,5 +277,132 @@ public class AdminController {
 
         }
         return "redirect:/admin/insert";
+    }
+
+    /**
+     * 刚开始进入的修改页面
+     * @return
+     */
+    @RequestMapping(value = "/update")
+    public String update() {
+        return "/admin/AdminUpdate";
+    }
+
+    /**
+     *
+     * @param model
+     * @param Gid   用来接收页面传过来的值,在按班级查询的时候接收
+     * @param flag 用来判断是老师还是学生
+     * @param part   用来判断那一部分的执行,2 表示执行的全部的查询, 包括老师学生,
+     *               用flag判断老师还是学生 1 或2 调用本类的selectAll方法
+     *               part中3 表示的是按班级查询雪神的部分,调用本类的selectStudentForGrade方法
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updateForType/{flag}/{part}")
+    public String updateForType(Model model,String Gid
+    ,@PathVariable int flag, @PathVariable int part
+    ) throws Exception{
+           if(part == 2){
+              selectAll(model,flag);
+          }else{
+              selectStudentForGrade(flag,model,Gid);
+          }
+          return "/admin/AdminUpdate";
+    }
+
+    /**
+     *   进行更改的页面,一个个进行改,将查出来的内容进行显示,方便完成更改
+     * @param model
+     * @param id   表示更改的用户的id
+     * @param flag  表示更改的是老师还是学生
+     *              通过flag和id一起来确定要改哪一个表中的数据 从而获取出这个数据信息
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updateOne/{id}/{flag}")
+    public String updateOne(Model model,@PathVariable String id,@PathVariable int flag )throws Exception{
+        model.addAttribute("flag",flag);
+        if(flag  == 1){
+            TeacherExtend teacher = adminManagerService.queryTeacherForOne(id);
+            model.addAttribute("teacher",teacher);
+            //将查出来的id先保存一份,以便改的时候,如果改id,可以用这个作为条件
+            Teacher.setBeforeTid(teacher.getTid());
+            return "/admin/AdminUpdateNextForOne";
+        }else{
+            StudentExtend student = adminManagerService.queryStudentForOne(id);
+            //将查出来的id先保存一份,以便改的时候,如果改id,可以用这个作为条件
+            Student.setBeforeSid(student.getSid());
+            model.addAttribute("student",student);
+            return "/admin/AdminUpdateNextForOne";
+        }
+    }
+
+    /**
+     * 进行修改,点击提交后执行的函数,将信息写会数据库
+     * @param teacher   将teacher的内容写回数据库
+     * @param bindingResultT  校验器使用的错误收集参数
+     * @param student 将student的内容写回数据库
+     * @param bindingResultS  校验器使用的错误收集参数
+     * @param model
+     * @param flag  用来判断是将哪个类往哪个数据表中写,如将student类写回student数据表
+     * @param redirect 重定向用到的,将需要显示在下一个页面的值,传到下一个页面
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updateSuccess/{flag}")
+    public String updateSuccess(@Validated Teacher teacher , BindingResult bindingResultT,
+    @Validated Student student,BindingResult bindingResultS,Model model
+    ,@PathVariable int flag,RedirectAttributes redirect) throws Exception{
+        /**
+         * 用来将没写入的外键赋值,防止页面传过来的值不是外键需要的值(空或其他表存在的值)
+         * 赋值为空,表示需要为空
+         * 尝试过将页面中input的value设置为"null"和"" ,都不能写入,并出现错误
+         */
+        if(student.getSEid().equals("")){
+            student.setSEid(null);
+        }
+        if(student.getSGid().equals("")){
+            student.setSGid(null);
+        }
+        //转换为MD5编码  System.out.println(student.getSEid());
+        if(flag == 2) {
+            if(bindingResultS.hasErrors()){
+                List<ObjectError> errors = bindingResultS.getAllErrors();
+//                for(ObjectError objectError:errors){
+//                    System.out.println(objectError.getDefaultMessage());
+//                }
+                model.addAttribute("errors",errors);
+                return "/admin/AdminUpdateNextForOne";
+            }
+//            //转换为MD5编码
+//            student.setSpassword(Md5Salt.md5(student.getSpassword()));
+              adminManagerService.updateStudentOne(student);
+              redirect.addFlashAttribute("student",student);
+        }else {
+            if(bindingResultT.hasErrors()){
+                List<ObjectError> errors = bindingResultT.getAllErrors();
+                model.addAttribute("errors",errors);
+                return "/admin/AdminUpdateNextForOne";
+            }
+//            //转换为MD5编码
+//            teacher.setTpassword(Md5Salt.md5(teacher.getTpassword()));
+              adminManagerService.updateTeacherOne(teacher);
+              redirect.addFlashAttribute("teacher",teacher);
+        }
+
+        redirect.addFlashAttribute("updateSuccess","更改成功,如下");
+        redirect.addFlashAttribute("flag",flag);
+        return "redirect:/admin/updateSuccessNext";
+    }
+
+    /**
+     * 用来在实现了修改之后,需要跳到的页面,以此来查看修改后的结果
+     * @return
+     */
+    @RequestMapping("/updateSuccessNext")
+    public String updateSuccessNext() {
+        return "/admin/AdminUpdateNextForOne";
     }
 }
