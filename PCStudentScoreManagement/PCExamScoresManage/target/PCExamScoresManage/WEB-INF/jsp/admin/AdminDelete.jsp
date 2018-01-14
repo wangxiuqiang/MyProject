@@ -13,7 +13,6 @@
 <head>
     <title>删除信息</title>
     <script type="text/javascript" src="/js/deleteAllAndNoSelect.js">
-
     </script>
 </head>
 <body>

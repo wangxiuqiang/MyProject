@@ -30,6 +30,8 @@ Cid varchar(10) primary key ,
 Cname varchar(20) NOT NULL ,
 Cexamtime varchar(20) NOT NULL
 );
+insert into course (Cid,Cname,Cexamtime) values("01" , "数据库系统" ,"2017-12-15");;
+insert into course (Cid,Cname,Cexamtime) values("02","软件工程" , "2017-12-16");
 
 创建班级表
 create table  grade  (
@@ -44,7 +46,7 @@ insert into grade(Gid, Gname ) values("1504","软件1504");
 insert into grade(Gid, Gname ) values("1505","软件1505");
 
 创建考试报名表
-create table exam (
+create table exam(
 Eid varchar(10) primary key ,
 Ename varchar(20) NOT NULL ,
 Echair varchar(3) NOT NULL ,
@@ -79,6 +81,9 @@ foreign key (courseId) references course(Cid) on delete cascade,
 foreign key (GradeId) references grade(Gid)
 );
 
+insert into tc(teacherId,courseId , GradeId) values("10001","01","1501");
+insert into tc(teacherId,courseId , GradeId) values("10001","01","1503");
+insert into tc(teacherId,courseId , GradeId) values("10002","02","1502");
 创建成绩表
 create table mark (
 Mid varchar(20) ,

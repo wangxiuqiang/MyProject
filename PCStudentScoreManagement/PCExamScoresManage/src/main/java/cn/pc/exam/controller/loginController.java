@@ -86,7 +86,7 @@ public class loginController {
             if(teacher != null && loginPo.getId().equals(teacher.getTid()) && password.equals(teacher.getTpassword())) {
                 model.addAttribute("teacher1","this is teacher");
                 model.addAttribute("teacher",teacher);
-                return "/login/success";
+                return "/teacher/TeacherIndex";
             }else {
                 model.addAttribute("no", "no");
                 return "/login/index";

@@ -4,6 +4,18 @@ public class TeacherExtend {
     private String Tid;
     private String Tname;
     private String Tpassword;
+    private String newPassword;
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+
+
 
     public String getTid() {
         return Tid;
