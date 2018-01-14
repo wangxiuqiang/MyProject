@@ -84,7 +84,7 @@ foreign key (GradeId) references grade(Gid)
 insert into tc(teacherId,courseId , GradeId) values("10001","01","1501");
 insert into tc(teacherId,courseId , GradeId) values("10001","01","1503");
 insert into tc(teacherId,courseId , GradeId) values("10002","02","1502");
-创建成绩表
+创建成绩表   学生编号,课程编号 成绩
 create table mark (
 Mid varchar(20) ,
 MCId varchar(10) ,

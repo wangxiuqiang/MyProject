@@ -4,7 +4,7 @@ public class TeacherExtend {
     private String Tid;
     private String Tname;
     private String Tpassword;
-    private String newPassword;
+    private String newPassword; //自己改密码的时候的,确认密码
 
     public String getNewPassword() {
         return newPassword;
