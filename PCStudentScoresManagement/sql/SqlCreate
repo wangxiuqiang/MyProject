@@ -1,0 +1,88 @@
+创建数据库
+create database examScoreManager;
+进入数据库
+use examScoreManager;
+
+创建管理员表
+create table admin (
+Aname  char(20) primary key ,
+Apassword char(20) NOT NULL
+);
+
+insert into admin(Aname,Apassword) values('00001' , '00001');
+insert into admin(Aname,Apassword) values('00002' , '00002');
+
+创建教师表
+create table teacher (
+Tid varchar(15) primary key ,
+Tname varchar(10)  NOT NULL ,
+Tpassword varchar(20) NOT NULL
+);
+insert into teacher(Tid,Tname,Tpassword) values('10001','张翰','10001');
+insert into teacher(Tid,Tname,Tpassword) values('10002','张艺兴','10002');
+insert into teacher(Tid,Tname,Tpassword) values('10003','刘涛','10003');
+insert into teacher(Tid,Tname,Tpassword) values('10004','张柏芝','10004');
+insert into teacher(Tid,Tname,Tpassword) values('10005','刘德华','10005');
+
+创建课程表
+create table course (
+Cid varchar(10) primary key ,
+Cname varchar(20) NOT NULL ,
+Cexamtime varchar(20) NOT NULL
+);
+
+创建班级表
+create table  grade  (
+Gid varchar(10) primary key,
+Gname varchar(20) NOT NULL
+);
+
+insert into grade(Gid, Gname ) values("1501","软件1501");
+insert into grade(Gid, Gname ) values("1502","软件1502");
+insert into grade(Gid, Gname ) values("1503","软件1503");
+insert into grade(Gid, Gname ) values("1504","软件1504");
+insert into grade(Gid, Gname ) values("1505","软件1505");
+
+创建考试报名表
+create table exam (
+Eid varchar(10) primary key ,
+Ename varchar(20) NOT NULL ,
+Echair varchar(3) NOT NULL ,
+Eexamtime varchar(20) NOT NULL
+);
+
+创建学生表
+create table student (
+Sid varchar(15) primary key,
+Sname varchar(10) ,
+Spassword varchar(50) ,
+SGid varchar(10) ,
+SEid varchar(10),
+foreign key (SGid) references grade(Gid) ,
+foreign key (SEid) references exam(Eid)
+);
+
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150101","赵丽颖","1501", null,"150101");
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150201","戚薇","1502", null,"150102");
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150301","杨颖","1503", null,"150103");
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150401","黄渤","1504", null,"150104");
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150501","孙红雷","1505", null,"150105");
+
+
+创建教师授课表
+create table tc (
+teacherId varchar(15) ,
+courseId varchar(10) ,
+GradeId varchar(10) ,
+Foreign key (teacherId) references teacher(Tid) on update cascade,
+foreign key (courseId) references course(Cid) on delete cascade,
+foreign key (GradeId) references grade(Gid)
+);
+
+创建成绩表
+create table mark (
+Mid varchar(20) ,
+MCId varchar(10) ,
+Mscore float ,
+primary key (Mid ,MCId)
+);

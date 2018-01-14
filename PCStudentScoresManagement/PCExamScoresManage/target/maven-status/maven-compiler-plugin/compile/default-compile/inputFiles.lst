@@ -1,0 +1,15 @@
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/service/Impl/LoginSelectServiceImpl.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/dao/LoginSelect.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/controller/loginController.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/pojo/LoginPo.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/service/LoginSelectService.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/controller/AdminController.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/md5/Md5Salt.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/service/AdminManagerService.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/pojoExtends/StudentExtend.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/pojoExtends/TeacherExtend.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/pojo/Admin.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/pojo/Student.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/pojo/Teacher.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/service/Impl/AdminManagerServiceImpl.java
+/home/wxq/IdeaProjects/PCExamScoresManage/src/main/java/cn/pc/exam/dao/AdminManager.java
