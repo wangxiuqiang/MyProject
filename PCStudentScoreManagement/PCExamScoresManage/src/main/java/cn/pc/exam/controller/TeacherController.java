@@ -68,4 +68,9 @@ public class TeacherController {
     *      tc查出来给下面查course和grade  ,然后返回这两个list,将其输出,达到可以通过班级或学科进行,成绩的录入
     *      尝试实现根据这两者进行成绩录入
     */
+    @RequestMapping(value = "/insertScores/{Tid}")
+    public String insertScores(Model model ,@PathVariable String Tid) throws Exception{
+        teacherManagerService.selectTcAndCourse(Tid);
+        return "/teacher/TeacherIndex";
+    }
 }

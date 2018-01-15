@@ -4,4 +4,14 @@
    <update id="updatePassword" parameterType="cn.pc.exam.pojoExtends.TeacherExtend">
         UPDATE teacher SET Tpassword = #{Tpassword} WHERE Tid = #{Tid};
    </update>
+
+    <select id="selectTcWhereTid" parameterType="String" resultType="cn.pc.exam.pojo.Tc">
+        select * FROM tc WHERE teacherId = #{value};
+    </select>
+    <select id="selectCourse" resultType="cn.pc.exam.pojo.Course">
+        SELECT DISTINCT * from course WHERE Cid IN
+        <foreach item="Cid" collection="array" open="(" close=")" separator=",">
+            #{Cid}
+        </foreach>
+    </select>
 </mapper>

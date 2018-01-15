@@ -1,10 +1,34 @@
 package cn.pc.exam.pojoExtends;
 
+import cn.pc.exam.pojo.Course;
+import cn.pc.exam.pojo.Tc;
+
+import java.util.List;
+
 public class TeacherExtend {
     private String Tid;
     private String Tname;
     private String Tpassword;
     private String newPassword; //自己改密码的时候的,确认密码
+    //定义 list来接收查出来的list
+    private List<Tc>  tcList ;
+    private List<Course> courseList;
+
+    public List<Tc> getTcList() {
+        return tcList;
+    }
+
+    public void setTcList(List<Tc> tcList) {
+        this.tcList = tcList;
+    }
+
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
+    }
 
     public String getNewPassword() {
         return newPassword;

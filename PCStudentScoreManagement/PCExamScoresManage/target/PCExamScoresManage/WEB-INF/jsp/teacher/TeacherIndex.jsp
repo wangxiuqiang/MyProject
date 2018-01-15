@@ -15,7 +15,7 @@
 <body>
 ${teacher}
 <a href="${pageContext.request.contextPath}/teacher/updatePassword/${teacher.tid}">修改密码</a>
-<a href="">录入成绩</a>
+<a href="${pageContext.request.contextPath}/teacher/insertScores/${teacher.tid}">录入成绩</a>
 <c:if test="${flag.equals('update')}">
     <div>
         <form action="${pageContext.request.contextPath}/teacher/updatePasswordSuccess/${teacherEx.tid}">
