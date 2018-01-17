@@ -1,29 +1,71 @@
 package cn.pc.exam.service.Impl;
 import cn.pc.exam.dao.TeacherManager;
 import cn.pc.exam.md5.Md5Salt;
+import cn.pc.exam.pojo.Course;
+import cn.pc.exam.pojo.Grade;
+import cn.pc.exam.pojo.Student;
 import cn.pc.exam.pojoExtends.TeacherExtend;
 import cn.pc.exam.service.TeacherManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeacherManagerServiceImpl implements TeacherManagerService {
     @Autowired
     TeacherManager teacherManager;
+    //查询课程和班级编号使用的 教师扩展类
+    private TeacherExtend teacherExtend ;
+    //查询课程和班级使用的,用来存放查询出来的班级编号或者课程编号
+    private String array[] = new String[100];
 
-    public void selectTcAndCourse(String Tid) throws Exception {
-        TeacherExtend teacherExtend = new TeacherExtend();
+    /**
+     *   通过老师的id查出来教授的班级的编号
+     * @param Tid
+     * @return
+     * @throws Exception
+     */
+    public List<Grade> selectTcAndGrade(String Tid) throws Exception {
+        for (int i = 0;i < teacherExtend.getTcList().size(); i++){
+            array[i] = teacherExtend.getTcList().get(i).getGradeId();
+        }
+        teacherExtend.setGradeList(teacherManager.selectGrade(array));
+        return teacherExtend.getGradeList();
+    }
+
+    /**
+     *   通过老师的编号查出 教授的课程编号
+     * @param Tid
+     * @return
+     * @throws Exception
+     */
+    public List<Course> selectTcAndCourse(String Tid) throws Exception {
+        teacherExtend = new TeacherExtend();
         teacherExtend.setTcList(teacherManager.selectTcWhereTid(Tid));
-        String array[] = new String[10];
+
         for (int i = 0;i < teacherExtend.getTcList().size(); i++){
             array[i] = teacherExtend.getTcList().get(i).getCourseId();
         }
 
         teacherExtend.setCourseList(teacherManager.selectCourse(array));
+//        for(int i = 0 ;i < teacherExtend.getCourseList().size(); i++) {
+//            System.out.println(teacherExtend.getCourseList().get(i).getCid());
+//            System.out.println(teacherExtend.getCourseList().get(i).getCname());
+//        }
+        return teacherExtend.getCourseList();
+    }
 
-        System.out.println(teacherExtend.getCourseList().get(0).getCid());
-        System.out.println(teacherExtend.getCourseList().get(0).getCname());
+    /**
+     * 通过课程和班级号查学生
+     * @param Cid
+     * @param Gid
+     * @return
+     * @throws Exception
+     */
+    public List<Student> selectStudent(String Cid, String Gid) throws Exception {
 
+        return teacherManager.selectStudentForCidGid(Cid,Gid);
     }
 
     /**

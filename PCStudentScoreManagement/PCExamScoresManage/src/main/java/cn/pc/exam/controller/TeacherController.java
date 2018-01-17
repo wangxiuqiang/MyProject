@@ -1,5 +1,7 @@
 package cn.pc.exam.controller;
 
+import cn.pc.exam.pojo.Course;
+import cn.pc.exam.pojo.Grade;
 import cn.pc.exam.pojoExtends.TeacherExtend;
 import cn.pc.exam.service.Impl.AdminManagerServiceImpl;
 import cn.pc.exam.service.Impl.TeacherManagerServiceImpl;
@@ -8,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.lang.annotation.Target;
+import java.util.List;
 
 @Controller
 @RequestMapping("/teacher")
@@ -70,7 +75,20 @@ public class TeacherController {
     */
     @RequestMapping(value = "/insertScores/{Tid}")
     public String insertScores(Model model ,@PathVariable String Tid) throws Exception{
-        teacherManagerService.selectTcAndCourse(Tid);
-        return "/teacher/TeacherIndex";
+      List<Course> courseList =  teacherManagerService.selectTcAndCourse(Tid);
+      List<Grade> gradeList = teacherManagerService.selectTcAndGrade(Tid);
+      model.addAttribute("grade",gradeList);
+      model.addAttribute("course",courseList);
+      model.addAttribute("Tid",Tid);
+        return "/teacher/TeacherWriteScore";
+    }
+
+    @RequestMapping(value = "/selectStudent/{Tid}")
+    public String selectStudent(@PathVariable String Tid, Model model, String Gid,String Cid) throws Exception{
+        insertScores(model,Tid);
+        model.addAttribute("studentList",teacherManagerService.selectStudent(Cid,Gid));
+        model.addAttribute("gid",Gid);
+        model.addAttribute("cid",Cid);
+        return "/teacher/TeacherWriteScore";
     }
 }

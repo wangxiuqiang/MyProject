@@ -91,3 +91,12 @@ MCId varchar(10) ,
 Mscore float ,
 primary key (Mid ,MCId)
 );
+
+创建学生选课表
+create table sc (
+Sid varchar(15) NOT NULL,
+Cid varchar(5) NOT NULL
+);
+
+insert into sc (Sid,Cid) values("150101" , "01");
+insert into sc (Sid,Cid) values("150101" , "02");

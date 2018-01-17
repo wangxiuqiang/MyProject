@@ -14,4 +14,27 @@
             #{Cid}
         </foreach>
     </select>
+
+    <select id="selectGrade" resultType="cn.pc.exam.pojo.Grade">
+        SELECT DISTINCT * from grade WHERE Gid IN
+        <foreach collection="array" item="Gid" open="(" close=")" separator=",">
+            #{Gid}
+        </foreach>
+    </select>
+
+    <!--通过对sc表的Cid和学生表的班级判断是不够的,
+    还需要加上sc表和student表这两个表的Sid是否相同
+    -->
+    <select id="selectStudentForCidGid" resultType="cn.pc.exam.pojo.Student">
+        SELECT s.Sid,s.Sname FROM student s,sc c
+        <where>
+            <if test="arg0 != ''">
+                AND c.Cid = #{arg0}
+            </if>
+            <if test="arg1 != ''">
+                AND s.SGid = #{arg1}
+            </if>
+            AND s.Sid = c.Sid
+        </where>
+    </select>
 </mapper>

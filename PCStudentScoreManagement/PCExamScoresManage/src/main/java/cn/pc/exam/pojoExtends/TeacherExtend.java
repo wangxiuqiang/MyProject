@@ -1,6 +1,7 @@
 package cn.pc.exam.pojoExtends;
 
 import cn.pc.exam.pojo.Course;
+import cn.pc.exam.pojo.Grade;
 import cn.pc.exam.pojo.Tc;
 
 import java.util.List;
@@ -13,6 +14,15 @@ public class TeacherExtend {
     //定义 list来接收查出来的list
     private List<Tc>  tcList ;
     private List<Course> courseList;
+    private List<Grade> gradeList;
+
+    public List<Grade> getGradeList() {
+        return gradeList;
+    }
+
+    public void setGradeList(List<Grade> gradeList) {
+        this.gradeList = gradeList;
+    }
 
     public List<Tc> getTcList() {
         return tcList;
