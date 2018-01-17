@@ -86,8 +86,14 @@
 
 <div>
     <table>
+        <c:if test="${studentList != null}">
+        <tr align="center">
+            <td width="100px">学号</td>
+            <td width="100px">姓名</td>
+        </tr>
+        </c:if>
         <c:forEach items="${studentList}" var="student">
-            <tr>
+            <tr align="center">
                 <td>${student.sid}</td>
                 <td>${student.sname}</td>
                 <td></td>

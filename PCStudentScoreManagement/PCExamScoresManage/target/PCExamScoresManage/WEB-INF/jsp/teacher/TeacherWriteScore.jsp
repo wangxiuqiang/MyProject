@@ -86,6 +86,10 @@
 
 <div>
     <table>
+        <tr align="center">
+            <td width="100px">学号</td>
+            <td width="100px">姓名</td>
+        </tr>
         <c:forEach items="${studentList}" var="student">
             <tr>
                 <td>${student.sid}</td>
