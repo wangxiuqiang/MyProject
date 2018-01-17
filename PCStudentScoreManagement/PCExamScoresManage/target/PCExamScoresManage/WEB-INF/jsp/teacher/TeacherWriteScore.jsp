@@ -86,15 +86,22 @@
 
 <div>
     <table>
+        <c:if test="${studentList != null}">
         <tr align="center">
-            <td width="100px">学号</td>
-            <td width="100px">姓名</td>
+            <td width="50px">学号</td>
+            <td width="50px">姓名</td>
+            <td width="50px">课程</td>
+            <td width="50px">班级</td>
+            <td width="50px">成绩</td>
         </tr>
+        </c:if>
         <c:forEach items="${studentList}" var="student">
-            <tr>
+            <tr align="center">
                 <td>${student.sid}</td>
                 <td>${student.sname}</td>
-                <td></td>
+                <td>${student.course.cname}</td>
+                <td>${student.grade.gname}</td>
+                <td>${student.mark.mscore}</td>
             </tr>
 
         </c:forEach>

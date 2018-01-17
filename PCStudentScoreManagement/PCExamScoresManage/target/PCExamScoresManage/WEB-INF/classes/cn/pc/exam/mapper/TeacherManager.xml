@@ -25,8 +25,21 @@
     <!--通过对sc表的Cid和学生表的班级判断是不够的,
     还需要加上sc表和student表这两个表的Sid是否相同
     -->
-    <select id="selectStudentForCidGid" resultType="cn.pc.exam.pojo.Student">
-        SELECT s.Sid,s.Sname FROM student s,sc c
+    <resultMap id="selectFromThreeTable" type="cn.pc.exam.pojoExtends.StudentExtend">
+        <id column="Sid" property="Sid" />
+        <result column="Sname" property="Sname"/>
+        <association property="course" javaType="cn.pc.exam.pojo.Course">
+            <result column="Cname" property="Cname" />
+        </association>
+        <association property="mark" javaType="cn.pc.exam.pojo.Mark">
+            <result column="Mscore" property="Mscore"/>
+        </association>
+        <association property="grade" javaType="cn.pc.exam.pojo.Grade">
+            <result property="Gname" column="Gname"/>
+        </association>
+    </resultMap>
+    <select id="selectStudentForCidGid" resultMap="selectFromThreeTable">
+        SELECT s.Sid,s.Sname,cu.Cname,g.Gname,m.Mscore FROM student s,sc c,mark m,course cu,grade g
         <where>
             <if test="arg0 != ''">
                 AND c.Cid = #{arg0}
@@ -35,6 +48,10 @@
                 AND s.SGid = #{arg1}
             </if>
             AND s.Sid = c.Sid
+            AND cu.Cid = c.Cid
+            AND c.Cid = m.MCId
+            AND s.Sid = m.Mid
+            AND g.Gid = #{arg1}
         </where>
     </select>
 </mapper>

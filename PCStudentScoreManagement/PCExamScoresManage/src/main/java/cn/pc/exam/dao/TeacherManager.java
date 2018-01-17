@@ -18,5 +18,5 @@ public interface TeacherManager {
     //通过Tc中的GradeId找班级信息
     public List<Grade> selectGrade(String[] array) throws Exception;
     //通过Cid和Gid查询学生
-    public List<Student> selectStudentForCidGid(String Cid,String Gid) throws Exception;
+    public List<StudentExtend> selectStudentForCidGid(String Cid,String Gid) throws Exception;
 }

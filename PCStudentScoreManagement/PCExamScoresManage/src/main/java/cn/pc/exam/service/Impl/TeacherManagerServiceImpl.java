@@ -4,6 +4,7 @@ import cn.pc.exam.md5.Md5Salt;
 import cn.pc.exam.pojo.Course;
 import cn.pc.exam.pojo.Grade;
 import cn.pc.exam.pojo.Student;
+import cn.pc.exam.pojoExtends.StudentExtend;
 import cn.pc.exam.pojoExtends.TeacherExtend;
 import cn.pc.exam.service.TeacherManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class TeacherManagerServiceImpl implements TeacherManagerService {
      * @return
      * @throws Exception
      */
-    public List<Student> selectStudent(String Cid, String Gid) throws Exception {
+    public List<StudentExtend> selectStudent(String Cid, String Gid) throws Exception {
 
         return teacherManager.selectStudentForCidGid(Cid,Gid);
     }
