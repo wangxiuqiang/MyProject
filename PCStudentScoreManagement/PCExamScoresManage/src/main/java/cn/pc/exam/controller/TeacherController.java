@@ -73,6 +73,14 @@ public class TeacherController {
     *      tc查出来给下面查course和grade  ,然后返回这两个list,将其输出,达到可以通过班级或学科进行,成绩的录入
     *      尝试实现根据这两者进行成绩录入
     */
+
+    /**
+     *  通过老师的id查出来老师教授的班级和课程的List泛型,输出在下拉菜单中
+     * @param model
+     * @param Tid
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/insertScores/{Tid}")
     public String insertScores(Model model ,@PathVariable String Tid) throws Exception{
       List<Course> courseList =  teacherManagerService.selectTcAndCourse(Tid);
@@ -83,6 +91,17 @@ public class TeacherController {
         return "/teacher/TeacherWriteScore";
     }
 
+    /**
+     *
+     * @param Tid   根据老师的id 调用上面的函数查出老师教授的课程和班级
+     *
+     * @param model
+     * @param Gid
+     * @param Cid cid和gid表示从页面传过来的课程和班级编号,通过这两个值
+     *            查询某个班选择了该课程的同学
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/selectStudent/{Tid}")
     public String selectStudent(@PathVariable String Tid,
                                 Model model, String Gid,String Cid) throws Exception{
@@ -92,6 +111,20 @@ public class TeacherController {
         model.addAttribute("cid",Cid);
         return "/teacher/TeacherWriteScore";
     }
+
+    /**
+     *
+     * @param model
+     * @param Tid
+     * @param Sid
+     * @param cid
+     * @param gid
+     * @param score  这五个值都由页面的url传过来,表示老师编号,学生,课程和班级
+     *               编号,调用上面的函数用tid,cid,gid查出来课程和班级的LIst用于下拉菜单
+     *               用sid ,cid作为条件将score作为值更新到学生的分数表
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/writeSuccess/{Tid}/{Sid}/{cid}/{gid}")
     public String writeSuccess(Model model,@PathVariable String Tid
     ,@PathVariable String Sid , @PathVariable String cid
