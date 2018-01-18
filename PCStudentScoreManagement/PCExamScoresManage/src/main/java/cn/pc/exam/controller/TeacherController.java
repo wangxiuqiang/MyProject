@@ -84,11 +84,26 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/selectStudent/{Tid}")
-    public String selectStudent(@PathVariable String Tid, Model model, String Gid,String Cid) throws Exception{
+    public String selectStudent(@PathVariable String Tid,
+                                Model model, String Gid,String Cid) throws Exception{
         insertScores(model,Tid);
         model.addAttribute("studentList",teacherManagerService.selectStudent(Cid,Gid));
         model.addAttribute("gid",Gid);
         model.addAttribute("cid",Cid);
         return "/teacher/TeacherWriteScore";
+    }
+    @RequestMapping(value = "/writeSuccess/{Tid}/{Sid}/{cid}/{gid}")
+    public String writeSuccess(Model model,@PathVariable String Tid
+    ,@PathVariable String Sid , @PathVariable String cid
+            , @PathVariable String gid,String score) throws Exception{
+        float s = 0;
+        if(score != ""){
+            s = Float.parseFloat(score);
+        }else{
+            s = 0;
+        }
+        teacherManagerService.insertScore(s,Sid,cid);
+        selectStudent(Tid,model,gid,cid);
+        return "teacher/TeacherWriteScore";
     }
 }

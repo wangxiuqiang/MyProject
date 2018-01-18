@@ -54,4 +54,8 @@
             AND g.Gid = #{arg1}
         </where>
     </select>
+
+    <update id="insertScore" >
+     UPDATE   mark SET Mscore = #{arg0} WHERE Mid = #{arg1} AND MCId = #{arg2};
+    </update>
 </mapper>

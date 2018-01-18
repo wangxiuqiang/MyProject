@@ -57,6 +57,7 @@ public class TeacherManagerServiceImpl implements TeacherManagerService {
         return teacherExtend.getCourseList();
     }
 
+
     /**
      * 通过课程和班级号查学生
      * @param Cid
@@ -80,4 +81,18 @@ public class TeacherManagerServiceImpl implements TeacherManagerService {
         teacherManager.updatePassword(teacherExtend);
         return 0;
     }
+
+    /**
+     * 录入学生的成绩 , 将成绩放在mark表中,
+     * 所以需要使用学号和课程号进行条件判断
+     * @param score 单精度成绩
+     * @param Sid 学号
+     * @param Cid 课程号
+     * @return
+     * @throws Exception
+     */
+    public int insertScore(float score, String Sid, String Cid) throws Exception {
+        return teacherManager.insertScore(score,Sid,Cid);
+    }
+
 }

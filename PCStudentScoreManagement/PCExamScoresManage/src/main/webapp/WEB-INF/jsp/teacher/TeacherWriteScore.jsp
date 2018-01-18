@@ -93,6 +93,7 @@
             <td width="50px">课程</td>
             <td width="50px">班级</td>
             <td width="50px">成绩</td>
+            <td>状态</td>
         </tr>
         </c:if>
         <c:forEach items="${studentList}" var="student">
@@ -101,7 +102,10 @@
                 <td>${student.sname}</td>
                 <td>${student.course.cname}</td>
                 <td>${student.grade.gname}</td>
-                <td>${student.mark.mscore}</td>
+                <form  method="post" action="${pageContext.request.contextPath}/teacher/writeSuccess/${Tid}/${student.sid}/${cid}/${gid}">
+                <td><input type="text" name="score" value="${student.mark.mscore}"/></td>
+                <td><input type="submit" value="修改"></td>
+                </form>
             </tr>
 
         </c:forEach>

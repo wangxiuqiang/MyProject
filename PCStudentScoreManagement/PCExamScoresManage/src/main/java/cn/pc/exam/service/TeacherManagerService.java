@@ -15,5 +15,5 @@ public interface TeacherManagerService {
     public List<Course> selectTcAndCourse(String Tid) throws Exception;
     public List<Grade> selectTcAndGrade(String Tid) throws Exception;
     public List<StudentExtend> selectStudent(String Cid, String Gid)throws Exception;
-
+    public int insertScore(float score,String Sid,String Cid) throws Exception;
 }

@@ -2,7 +2,7 @@ package cn.pc.exam.pojo;
 
 public class Mark {
     private String Mid;//学生学号
-    private String MCid;//课程号
+    private String MCId;//课程号
     private String Mscore;//成绩
 
     public String getMid() {
@@ -13,12 +13,12 @@ public class Mark {
         Mid = mid;
     }
 
-    public String getMCid() {
-        return MCid;
+    public String getMCId() {
+        return MCId;
     }
 
-    public void setMCid(String MCid) {
-        this.MCid = MCid;
+    public void setMCId(String MCId) {
+        this.MCId = MCId;
     }
 
     public String getMscore() {
