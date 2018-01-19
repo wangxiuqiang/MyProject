@@ -20,5 +20,7 @@ public interface TeacherManager {
     //通过Cid和Gid查询学生
     public List<StudentExtend> selectStudentForCidGid(String Cid,String Gid) throws Exception;
 
+    public List<StudentExtend> selectNoPassStudent(String Cid) throws Exception;
     public int insertScore(float score,String Sid,String Cid) throws Exception;
+
 }

@@ -95,4 +95,8 @@ public class TeacherManagerServiceImpl implements TeacherManagerService {
         return teacherManager.insertScore(score,Sid,Cid);
     }
 
+    public List<StudentExtend> selectNoPassStudent(String  Cid) throws Exception {
+        return teacherManager.selectNoPassStudent(Cid);
+    }
+
 }

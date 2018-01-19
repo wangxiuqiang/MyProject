@@ -88,12 +88,12 @@ public class TeacherController {
       model.addAttribute("grade",gradeList);
       model.addAttribute("course",courseList);
       model.addAttribute("Tid",Tid);
-        return "/teacher/TeacherWriteScore";
+      return "/teacher/TeacherWriteScore";
     }
 
     /**
      *
-     * @param Tid   根据老师的id 调用上面的函数查出老师教授的课程和班级
+     * @param Tid   根据老师的id 调用上面insertScores的函数查出老师教授的课程和班级
      *
      * @param model
      * @param Gid
@@ -138,5 +138,20 @@ public class TeacherController {
         teacherManagerService.insertScore(s,Sid,cid);
         selectStudent(Tid,model,gid,cid);
         return "teacher/TeacherWriteScore";
+    }
+
+    @RequestMapping("/noPassSelect/{Tid}")
+    public String noPassSelect(Model model, @PathVariable String Tid) throws Exception{
+        insertScores(model,Tid);
+        model.addAttribute("Tid",Tid);
+        return "/teacher/TeacherSelectNoPass";
+    }
+
+    @RequestMapping("/noPassSelectResult/{Tid}")
+    public String noPassSelectResult(@PathVariable String Tid, Model model,String Cid) throws  Exception{
+        insertScores(model,Tid);
+        model.addAttribute("studentNoPass" ,teacherManagerService.selectNoPassStudent(Cid));
+        return "/teacher/TeacherSelectNoPass";
+
     }
 }

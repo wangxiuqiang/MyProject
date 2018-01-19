@@ -56,6 +56,24 @@
     </select>
 
     <update id="insertScore" >
-     UPDATE   mark SET Mscore = #{arg0} WHERE Mid = #{arg1} AND MCId = #{arg2};
+     UPDATE  mark SET Mscore = #{arg0} WHERE Mid = #{arg1} AND MCId = #{arg2};
     </update>
+
+    <resultMap id="noPassStudent" type="cn.pc.exam.pojoExtends.StudentExtend" >
+        <id column="Sid" property="Sid" />
+        <result column="Sname" property="Sname"/>
+        <result column="SGid" property="SGid"/>
+        <association property="mark" javaType="cn.pc.exam.pojo.Mark">
+            <result column="Mscore" property="Mscore"/>
+        </association>
+        <association property="course" javaType="cn.pc.exam.pojo.Course">
+            <result column="Cname" property="Cname"/>
+        </association>
+    </resultMap>
+    <select id="selectNoPassStudent" parameterType="String" resultMap="noPassStudent">
+        SELECT s.Sid,s.Sname,s.SGid,c.Cname,m.Mscore FROM student s,course c,mark m
+        <where>
+            c.Cid = #{value} AND m.MCId = c.Cid AND 60 >= m.Mscore AND s.Sid = m.Mid ;
+        </where>
+    </select>
 </mapper>
