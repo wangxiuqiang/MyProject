@@ -25,6 +25,8 @@ public class AdminController {
     @Autowired
     AdminManagerServiceImpl adminManagerService;
 
+
+
     /**
      * 根据输入的id查询需要的教师或学生的信息
      * @param model

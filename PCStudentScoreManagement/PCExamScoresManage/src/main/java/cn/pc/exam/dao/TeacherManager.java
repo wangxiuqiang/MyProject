@@ -6,6 +6,7 @@ import cn.pc.exam.pojo.Student;
 import cn.pc.exam.pojo.Tc;
 import cn.pc.exam.pojoExtends.StudentExtend;
 import cn.pc.exam.pojoExtends.TeacherExtend;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,5 +23,4 @@ public interface TeacherManager {
 
     public List<StudentExtend> selectNoPassStudent(String Cid) throws Exception;
     public int insertScore(float score,String Sid,String Cid) throws Exception;
-
 }

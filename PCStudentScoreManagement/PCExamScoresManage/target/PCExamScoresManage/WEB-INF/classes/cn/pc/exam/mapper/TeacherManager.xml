@@ -76,4 +76,7 @@
             c.Cid = #{value} AND m.MCId = c.Cid AND 60 >= m.Mscore AND s.Sid = m.Mid ;
         </where>
     </select>
+
+
+
 </mapper>

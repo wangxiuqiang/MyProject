@@ -88,6 +88,7 @@
     <table>
         <c:if test="${studentList != null}">
         <tr align="center">
+            <td>状态</td>
             <td width="50px">学号</td>
             <td width="50px">姓名</td>
             <td width="50px">课程</td>
@@ -97,17 +98,25 @@
         </tr>
         </c:if>
         <c:forEach items="${studentList}" var="student">
-            <tr align="center">
+            <form  method="post" action="${pageContext.request.contextPath}/teacher/writeSuccessSome/${Tid}/${cid}/${gid}">
+            <tr>
+                <td>
+                    <input type="checkbox" value="${student.sid}" name="array"/>
+                </td>
                 <td>${student.sid}</td>
                 <td>${student.sname}</td>
                 <td>${student.course.cname}</td>
                 <td>${student.grade.gname}</td>
-                <form  method="post" action="${pageContext.request.contextPath}/teacher/writeSuccess/${Tid}/${student.sid}/${cid}/${gid}">
                 <td><input type="text" name="score" value="${student.mark.mscore}"/></td>
-                <td><input type="submit" value="修改"></td>
-                </form>
-            </tr>
+                <td><a href="${pageContext.request.contextPath}/teacher/writeSuccess/${Tid}/${student.sid}/${cid}/${gid}">修改</a></td>
 
+             </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="部分修改" />
+                    </td>
+                </tr>
+            </form>
         </c:forEach>
     </table>
 </div>

@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.lang.annotation.Target;
 import java.util.List;
 
 @Controller
@@ -130,16 +129,38 @@ public class TeacherController {
     ,@PathVariable String Sid , @PathVariable String cid
             , @PathVariable String gid,String score) throws Exception{
         float s = 0;
+        float[] sorces;
         if(score != ""){
             s = Float.parseFloat(score);
         }else{
             s = 0;
         }
         teacherManagerService.insertScore(s,Sid,cid);
+        //重新选择出来修改后页面显示出来
         selectStudent(Tid,model,gid,cid);
         return "teacher/TeacherWriteScore";
     }
 
+    @RequestMapping("/writeSuccessSome/{Tid}/{cid}/{gid}")
+    public String writeSuccessSome(Model model,@PathVariable String Tid
+            ,@PathVariable String cid
+            , @PathVariable String gid,String[] array , String[] score) throws Exception{
+        float[] s = {0};
+        for (int i = 0; i < score.length; i++){
+            s[i] = Float.parseFloat(score[i]);
+            teacherManagerService.insertScore(s[i],array[i],cid);
+        }
+        selectStudent(Tid,model,gid,cid);
+        return "/teacher/TeacherWriteScore";
+    }
+
+    /**
+     * 查询前的页面选择
+     * @param model
+     * @param Tid
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/noPassSelect/{Tid}")
     public String noPassSelect(Model model, @PathVariable String Tid) throws Exception{
         insertScores(model,Tid);
@@ -147,6 +168,14 @@ public class TeacherController {
         return "/teacher/TeacherSelectNoPass";
     }
 
+    /**
+     * 不合格的查询
+     * @param Tid
+     * @param model
+     * @param Cid
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/noPassSelectResult/{Tid}")
     public String noPassSelectResult(@PathVariable String Tid, Model model,String Cid) throws  Exception{
         insertScores(model,Tid);
@@ -154,4 +183,6 @@ public class TeacherController {
         return "/teacher/TeacherSelectNoPass";
 
     }
+
+
 }
