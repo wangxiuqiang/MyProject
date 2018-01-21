@@ -12,6 +12,8 @@
 <html>
 <head>
     <title>录入成绩</title>
+
+
 </head>
 <body>
 <h4>请选择班级和课程:</h4>
@@ -88,13 +90,13 @@
     <table>
         <c:if test="${studentList != null}">
         <tr align="center">
-            <td>状态</td>
+            <td width="20px">状态</td>
             <td width="50px">学号</td>
             <td width="50px">姓名</td>
             <td width="50px">课程</td>
             <td width="50px">班级</td>
             <td width="50px">成绩</td>
-            <td>状态</td>
+            <td>是否修改</td>
         </tr>
         </c:if>
         <c:forEach items="${studentList}" var="student">
@@ -108,8 +110,10 @@
                 <td>${student.course.cname}</td>
                 <td>${student.grade.gname}</td>
                 <td><input type="text" name="score" value="${student.mark.mscore}"/></td>
-                <td><a href="${pageContext.request.contextPath}/teacher/writeSuccess/${Tid}/${student.sid}/${cid}/${gid}">修改</a></td>
+                <td>
 
+                </td>
+                
              </tr>
                 <tr>
                     <td>

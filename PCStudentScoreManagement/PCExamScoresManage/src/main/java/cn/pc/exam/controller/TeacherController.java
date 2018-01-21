@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -118,29 +119,41 @@ public class TeacherController {
      * @param Sid
      * @param cid
      * @param gid
-     * @param score  这五个值都由页面的url传过来,表示老师编号,学生,课程和班级
+     * @param score
+     * 这五个值都由页面的url传过来,表示老师编号,学生,课程和班级
      *               编号,调用上面的函数用tid,cid,gid查出来课程和班级的LIst用于下拉菜单
      *               用sid ,cid作为条件将score作为值更新到学生的分数表
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/writeSuccess/{Tid}/{Sid}/{cid}/{gid}")
-    public String writeSuccess(Model model,@PathVariable String Tid
-    ,@PathVariable String Sid , @PathVariable String cid
-            , @PathVariable String gid,String score) throws Exception{
+    public String writeSuccess(Model model, @PathVariable String Tid
+    , @PathVariable String Sid , @PathVariable String cid
+            , @PathVariable String gid, String score) throws Exception{
         float s = 0;
-        float[] sorces;
         if(score != ""){
             s = Float.parseFloat(score);
         }else{
             s = 0;
         }
+
         teacherManagerService.insertScore(s,Sid,cid);
         //重新选择出来修改后页面显示出来
         selectStudent(Tid,model,gid,cid);
         return "teacher/TeacherWriteScore";
     }
 
+    /**
+     *    通过复选框进行多个的修改,使用for循环
+     * @param model
+     * @param Tid
+     * @param cid
+     * @param gid
+     * @param array
+     * @param score
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/writeSuccessSome/{Tid}/{cid}/{gid}")
     public String writeSuccessSome(Model model,@PathVariable String Tid
             ,@PathVariable String cid
@@ -181,7 +194,6 @@ public class TeacherController {
         insertScores(model,Tid);
         model.addAttribute("studentNoPass" ,teacherManagerService.selectNoPassStudent(Cid));
         return "/teacher/TeacherSelectNoPass";
-
     }
 
 

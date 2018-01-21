@@ -56,9 +56,13 @@
     </select>
 
     <update id="insertScore" >
-     UPDATE  mark SET Mscore = #{arg0} WHERE Mid = #{arg1} AND MCId = #{arg2};
+     UPDATE  mark SET Mid= #{arg1},MCId = #{arg2},Mscore = #{arg0} WHERE Mid = #{arg1} AND MCId = #{arg2};
     </update>
 
+    <!--先查出来谁选修了这门课,如果选修了,但是在成绩表中没有成绩,那么就是缺考-->
+    <select id="selectWhoSelectCourse" resultType="String" parameterType="String">
+        SELECT DISTINCT * FROM sc WHERE Cid = #{arg0}
+    </select>
     <resultMap id="noPassStudent" type="cn.pc.exam.pojoExtends.StudentExtend" >
         <id column="Sid" property="Sid" />
         <result column="Sname" property="Sname"/>
@@ -73,7 +77,11 @@
     <select id="selectNoPassStudent" parameterType="String" resultMap="noPassStudent">
         SELECT s.Sid,s.Sname,s.SGid,c.Cname,m.Mscore FROM student s,course c,mark m
         <where>
-            c.Cid = #{value} AND m.MCId = c.Cid AND 60 >= m.Mscore AND s.Sid = m.Mid ;
+            c.Cid = #{arg0} AND m.MCId = c.Cid AND 60 >= m.Mscore AND s.Sid = m.Mid
+            <!--OR m.Mid NOT IN-->
+            <!--<foreach collection="s" separator="," close=")" open="(" item="Id">-->
+            <!--#{Id}-->
+            <!--</foreach>-->
         </where>
     </select>
 

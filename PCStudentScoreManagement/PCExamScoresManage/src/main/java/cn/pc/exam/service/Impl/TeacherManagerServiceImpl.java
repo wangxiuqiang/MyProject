@@ -96,7 +96,11 @@ public class TeacherManagerServiceImpl implements TeacherManagerService {
     }
 
     public List<StudentExtend> selectNoPassStudent(String  Cid) throws Exception {
-        return teacherManager.selectNoPassStudent(Cid);
+        String[] s= teacherManager.selectWhoSelectCourse(Cid);
+        for(int i = 0; i < s.length; i++){
+            System.out.println(s[i]);
+        }
+        return teacherManager.selectNoPassStudent(Cid,s);
     }
 
 }
