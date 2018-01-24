@@ -109,12 +109,10 @@
                 <td>${student.sname}</td>
                 <td>${student.course.cname}</td>
                 <td>${student.grade.gname}</td>
-                <form action="${pageContext.request.contextPath}/teacher/writeSuccess/${Tid}/${student.sid}/${cid}/${gid}" method="post">
                 <td><input type="text" name="score" value="${student.mark.mscore}"/></td>
                 <td>
-                    <input type="submit" value="修改"/>
+
                 </td>
-                </form>
              </tr>
                 <tr>
                     <td>

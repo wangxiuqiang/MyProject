@@ -95,12 +95,30 @@ public class TeacherManagerServiceImpl implements TeacherManagerService {
         return teacherManager.insertScore(score,Sid,Cid);
     }
 
+    /**
+     * 查询出成绩不足60的人
+     * @param Cid
+     * @return
+     * @throws Exception
+     */
     public List<StudentExtend> selectNoPassStudent(String  Cid) throws Exception {
-        String[] s= teacherManager.selectWhoSelectCourse(Cid);
+
+        //查出成绩不足60分的人来
+        return teacherManager.selectNoPassStudent(Cid);
+    }
+
+    /**
+     * 查询出选课但是没考试的同学,先通过在sc表但没有在成绩表里有成绩,查询出谁没有参加考试
+     * 然后查出他的信息
+     * @param Cid
+     * @return
+     * @throws Exception
+     */
+    public List<StudentExtend> selectNoJoinExam(String  Cid) throws Exception {
+        String[] s = teacherManager.selectNoPassStudentId(Cid);
         for(int i = 0; i < s.length; i++){
             System.out.println(s[i]);
         }
-        return teacherManager.selectNoPassStudent(Cid,s);
+        return teacherManager.selectNoJoinExam(Cid,s);
     }
-
 }

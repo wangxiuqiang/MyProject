@@ -59,10 +59,7 @@
      UPDATE  mark SET Mid= #{arg1},MCId = #{arg2},Mscore = #{arg0} WHERE Mid = #{arg1} AND MCId = #{arg2};
     </update>
 
-    <!--先查出来谁选修了这门课,如果选修了,但是在成绩表中没有成绩,那么就是缺考-->
-    <select id="selectWhoSelectCourse" resultType="String" parameterType="String">
-        SELECT DISTINCT * FROM sc WHERE Cid = #{arg0}
-    </select>
+
     <resultMap id="noPassStudent" type="cn.pc.exam.pojoExtends.StudentExtend" >
         <id column="Sid" property="Sid" />
         <result column="Sname" property="Sname"/>
@@ -78,13 +75,19 @@
         SELECT s.Sid,s.Sname,s.SGid,c.Cname,m.Mscore FROM student s,course c,mark m
         <where>
             c.Cid = #{arg0} AND m.MCId = c.Cid AND 60 >= m.Mscore AND s.Sid = m.Mid
-            <!--OR m.Mid NOT IN-->
-            <!--<foreach collection="s" separator="," close=")" open="(" item="Id">-->
-            <!--#{Id}-->
-            <!--</foreach>-->
         </where>
     </select>
 
-
-
+    <select id="selectNoPassStudentId" resultType="String">
+        SELECT c.Sid FROM sc c WHERE NOT EXISTS (SELECT * FROM mark m WHERE m.Mid = c.Sid);
+    </select>
+    <select id="selectNoJoinExam" resultType="cn.pc.exam.pojoExtends.StudentExtend">
+        SELECT s.Sid,s.Sname,s.SGid,c.Cname FROM student s,course c
+        <where>
+            c.Cid = #{arg0}  AND s.Sid IN
+            <foreach collection="s" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
 </mapper>

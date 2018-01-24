@@ -191,8 +191,10 @@ public class TeacherController {
      */
     @RequestMapping("/noPassSelectResult/{Tid}")
     public String noPassSelectResult(@PathVariable String Tid, Model model,String Cid) throws  Exception{
+       //通过老师的id查出来老师教授的班级和课程的List泛型,输出在下拉菜单中
         insertScores(model,Tid);
         model.addAttribute("studentNoPass" ,teacherManagerService.selectNoPassStudent(Cid));
+        model.addAttribute("studentNoJoin",teacherManagerService.selectNoJoinExam(Cid));
         return "/teacher/TeacherSelectNoPass";
     }
 

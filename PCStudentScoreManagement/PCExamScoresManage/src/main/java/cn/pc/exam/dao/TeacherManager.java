@@ -21,7 +21,8 @@ public interface TeacherManager {
     //通过Cid和Gid查询学生
     public List<StudentExtend> selectStudentForCidGid(String Cid,String Gid) throws Exception;
 
-    public List<StudentExtend> selectNoPassStudent(String Cid,@Param(value = "s") String[] s) throws Exception;
+    public List<StudentExtend> selectNoPassStudent(String Cid) throws Exception;
+    public String[] selectNoPassStudentId(String cid)throws Exception;
+    public List<StudentExtend> selectNoJoinExam(String Cid,@Param(value = "s") String[] s) throws Exception;
     public int insertScore(float score,String Sid,String Cid) throws Exception;
-    public String[] selectWhoSelectCourse(String Cid) throws Exception;
 }

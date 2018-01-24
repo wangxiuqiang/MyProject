@@ -47,6 +47,15 @@
             <td>${student.mark.mscore}</td>
         </tr>
     </c:forEach>
+    <c:forEach items="${studentNoJoin}" var="noJoin">
+        <tr>
+            <td>${noJoin.sid}</td>
+            <td>${noJoin.sname}</td>
+            <td>${noJoin.SGid}</td>
+            <td>${noJoin.course.cname}</td>
+            <td>缺考</td>
+        </tr>
+    </c:forEach>
 </table>
 </c:if>
 </body>
