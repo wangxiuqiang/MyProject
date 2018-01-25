@@ -34,6 +34,6 @@ public class LoginSelectServiceImpl implements LoginSelectService {
     }
     public Student queryStudent(String id) throws Exception {
         Student student = loginSelect.queryStudent(id);
-       return  null;
+       return  student;
     }
 }

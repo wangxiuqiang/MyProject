@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.pc.exam.dao.TeacherManager">
+<mapper namespace="cn.pc.exam.dao.StudentManager">
+    <update id="updatePassword" >
+        UPDATE  student SET Spassword = #{arg0} WHERE Sid = #{arg1};
+    </update>
+    <select id="selectStudent" parameterType="String" resultType="cn.pc.exam.pojoExtends.StudentExtend">
+        SELECT Sname,Sid,Spassword FROM student WHERE Sid = #{value};
+    </select>
 </mapper>

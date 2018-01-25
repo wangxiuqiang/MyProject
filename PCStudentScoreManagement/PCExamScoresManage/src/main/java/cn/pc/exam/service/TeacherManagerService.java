@@ -18,4 +18,5 @@ public interface TeacherManagerService {
     public int insertScore(float score,String Sid,String Cid) throws Exception;
     public List<StudentExtend> selectNoPassStudent(String Cid) throws Exception;
     public List<StudentExtend> selectNoJoinExam(String  Cid) throws Exception;
+
 }

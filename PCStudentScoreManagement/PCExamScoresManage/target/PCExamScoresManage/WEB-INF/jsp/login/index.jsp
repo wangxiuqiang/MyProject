@@ -13,6 +13,7 @@
     <title>请登录</title>
 </head>
 <body>
+${no}
    <form method="post" action="${pageContext.request.contextPath}/success">
        <table >
            <tr>
