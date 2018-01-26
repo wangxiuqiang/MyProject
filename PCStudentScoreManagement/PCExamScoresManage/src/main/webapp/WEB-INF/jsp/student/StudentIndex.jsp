@@ -16,7 +16,7 @@
       <table>
           <tr>
               <td><a href="${pageContext.request.contextPath}/student/beforeUpdatePassword/${loginPo.id}">密码修改</a></td>
-              <td><a href="">成绩查询</a></td>
+              <td><a href="${pageContext.request.contextPath}/student/selectScore/${loginPo.id}">成绩查询</a></td>
               <td><a href="">考试报名</a></td>
           </tr>
       </table>

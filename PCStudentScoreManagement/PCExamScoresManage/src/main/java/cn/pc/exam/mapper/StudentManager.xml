@@ -7,4 +7,12 @@
     <select id="selectStudent" parameterType="String" resultType="cn.pc.exam.pojoExtends.StudentExtend">
         SELECT Sname,Sid,Spassword FROM student WHERE Sid = #{value};
     </select>
+
+    <select id="selectCourses" resultType="cn.pc.exam.pojo.Course">
+        SELECT c.Cid,c.Cname FROM sc s,course c WHERE s.Sid=#{arg0}
+        AND c.Cid = s.Cid;
+    </select>
+    <select id="selectScore" resultType="java.lang.Float">
+        SELECT Mscore FROM mark WHERE Mid=#{arg1} AND MCId = #{arg0}
+    </select>
 </mapper>

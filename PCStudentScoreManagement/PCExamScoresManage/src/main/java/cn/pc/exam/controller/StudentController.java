@@ -52,4 +52,40 @@ public class StudentController {
             return "/student/StudentUpdatePassword" ;
         }
     }
+
+    /**
+     *   将课程信息查出来以供选择,查询出成绩的前一个页面
+     * @param model
+     * @param Sid
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectScore/{Sid}")
+    public String selectScore(Model model,@PathVariable String Sid) throws Exception{
+        model.addAttribute("Sid",Sid);
+        model.addAttribute("courseList",studentManagerService.selectCourses(Sid));
+        return "/student/StudentSelectScore";
+    }
+
+    /**
+     * 查询出学生的成绩,使用Cid和Sid两个参数
+     * @param model
+     * @param Cid
+     * @param Sid
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectScoreSuccess/{Sid}")
+    public String selectScoreSuccess(Model model,String Cid,@PathVariable String Sid) throws Exception{
+        //cid用来将select中的值确定为上面页面选择好的值,不会从头显示
+       //控制select标签中选中的置顶
+        model.addAttribute("cid",Cid);
+       // System.out.println(Cid);
+        //显示课程使用
+        model.addAttribute("courseList",studentManagerService.selectCourses(Sid));
+       //成绩查出来
+        model.addAttribute("score",studentManagerService.selectScore(Cid,Sid));
+        return "/student/StudentSelectScore";
+    }
+
 }
