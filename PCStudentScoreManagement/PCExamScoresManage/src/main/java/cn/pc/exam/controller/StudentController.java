@@ -72,7 +72,7 @@ public class StudentController {
      * @param model
      * @param Cid
      * @param Sid
-     * @return
+     * @return  返回视图名
      * @throws Exception
      */
     @RequestMapping(value = "/selectScoreSuccess/{Sid}")
