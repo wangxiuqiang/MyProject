@@ -9,20 +9,20 @@ Aname  char(20) primary key ,
 Apassword char(20) NOT NULL
 );
 
-insert into admin(Aname,Apassword) values('00001' , '00001');
-insert into admin(Aname,Apassword) values('00002' , '00002');
+insert into admin(Aname,Apassword) values('00001' , '0ac2fc02b64168e6faada2077187630f');
+insert into admin(Aname,Apassword) values('00002' , '8ae2e6f8e1a3b6c79c32f4c478d9a3ea');
 
 创建教师表
 create table teacher (
 Tid varchar(15) primary key ,
 Tname varchar(10)  NOT NULL ,
-Tpassword varchar(20) NOT NULL
+Tpassword varchar(50) NOT NULL
 );
-insert into teacher(Tid,Tname,Tpassword) values('10001','张翰','10001');
-insert into teacher(Tid,Tname,Tpassword) values('10002','张艺兴','10002');
-insert into teacher(Tid,Tname,Tpassword) values('10003','刘涛','10003');
-insert into teacher(Tid,Tname,Tpassword) values('10004','张柏芝','10004');
-insert into teacher(Tid,Tname,Tpassword) values('10005','刘德华','10005');
+insert into teacher(Tid,Tname,Tpassword) values('10001','张翰','33f443d7e99001ad85c574d4a7444af8');
+insert into teacher(Tid,Tname,Tpassword) values('10002','张艺兴','e73104e5e54fe09a7d12e0e4450d38ee');
+insert into teacher(Tid,Tname,Tpassword) values('10003','刘涛','1fc6830f50fa357e5f50c4fd1cf19611');
+insert into teacher(Tid,Tname,Tpassword) values('10004','张柏芝','4ecf02a092aa6c2a5f7734f62a58b148');
+insert into teacher(Tid,Tname,Tpassword) values('10005','刘德华','cc6594d2b57681a36db89a46cb22b743');
 
 创建课程表
 create table course (
@@ -64,11 +64,11 @@ foreign key (SGid) references grade(Gid) ,
 foreign key (SEid) references exam(Eid)
 );
 
-insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150101","赵丽颖","1501", null,"150101");
-insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150201","戚薇","1502", null,"150102");
-insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150301","杨颖","1503", null,"150103");
-insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150401","黄渤","1504", null,"150104");
-insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150501","孙红雷","1505", null,"150105");
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150101","赵丽颖","1501", null,"8df36fe0b828bb638863e5334084e410");
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150201","戚薇","1502", null,"f48b5e12a421c08f153a4a37596d4efe");
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150301","杨颖","1503", null,"4a2bbffd804fd601792eca182aab4d2d");
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150401","黄渤","1504", null,"3a8dead93b3189447d6d1824b2b8c8fc");
+insert  into student (Sid, Sname,SGid,SEid,Spassword)  values ("150501","孙红雷","1505", null,"f15f9860cdff400fe416b7078cfff744");
 
 
 创建教师授课表

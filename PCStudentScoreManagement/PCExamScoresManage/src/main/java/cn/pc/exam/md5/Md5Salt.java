@@ -15,7 +15,7 @@ public class Md5Salt {
         return new Md5Hash(str,"521").toString();
     }
 
-//    public static void main(String[] args) {
-//        System.out.println(md5("150101"));
-//    }
+    public static void main(String[] args) {
+      System.out.println(md5("150501"));
+     }
 }
