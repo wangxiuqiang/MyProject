@@ -114,3 +114,4 @@ window.onload = function () {
     turnPicture.onmouseover = stop; //当鼠标移动到 父盒子上就停止自动
     play();
 }
+

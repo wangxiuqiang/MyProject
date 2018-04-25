@@ -5,6 +5,11 @@
     <title>跆风跆拳道首页</title>
     <link rel="stylesheet" href="../css/index.css">
     <script src="../js/index.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function searchJs() {
+            alert("我只是一个图标，点我没用");
+        }
+    </script>
 </head>
 <body>
     <div class="background"></div>
@@ -15,14 +20,25 @@
          <ul>
              <li><a href="#">首页</a></li>
              <li><a href="#">新闻中心</a></li>
-             <li><a href="#">品势教学</a></li>
+             <li ><a href="#">品势教学</a>
+                 <div class="videoTeaching">
+                     <ul>
+                         <li><a href="#">低腰带品势</a></li>
+                         <hr/>
+                         <li><a href="#">高级品势</a></li>
+                         <hr/>
+                         <li><a href="#">跆拳道舞</a></li>
+                     </ul>
+                 </div>
+             </li>
              <li><a href="#">精彩图集</a></li>
              <li><a href="#">联系我们</a></li>
          </ul>
         <form action="#">
             <input type="text" placeholder="请输入关键字搜索">
-            <span></span>
+            <a id="search" onclick=searchJs() href=""><span></span></a>
         </form>
+
     </div>
     <div id="turnPicture">
         <div id="turn" style="left: -800px;">
@@ -77,27 +93,38 @@
     <div class="Image">
         <span><a href="#">精彩图片</a></span>
         <div class="ImageDiv">
-
+            <ul>
+                <li><a href="#"><img src="../images/smallShow/14-01(IMG_4782).jpg" alt=""></a></li>
+                <li><a href="#"><img src="../images/smallShow/14-02(IMG_4762).jpg" alt=""></a></li>
+                <li><a href="#"><img src="../images/smallShow/14-03(IMG_4776).jpg" alt=""></a></li>
+                <li><a href="#"><img src="../images/smallShow/14-04(IMG_4772).jpg" alt=""></a></li>
+                <li><a href="#"><img src="../images/smallShow/14-05(IMG_4845).jpg" alt=""></a></li>
+                <li><a href="#"><img src="../images/smallShow/14-01(IMG_4782).jpg" alt=""></a></li>
+                <li><a href="#"><img src="../images/smallShow/14-02(IMG_4762).jpg" alt=""></a></li>
+                <li><a href="#"><img src="../images/smallShow/14-03(IMG_4776).jpg" alt=""></a></li>
+                <li><a href="#"><img src="../images/smallShow/14-04(IMG_4772).jpg" alt=""></a></li>
+                <li><a href="#"><img src="../images/smallShow/14-05(IMG_4845).jpg" alt=""></a></li>
+            </ul>
         </div>
     </div>
 
     <div class="Video">
         <span><a href="#">有趣视频</a></span>
         <div class="VideoDiv1">
-
+            <img src="../video/VideoImages/index/1.png" alt="">
         </div>
         <div class="VideoDiv2">
-
+            <img src="../video/VideoImages/index/2.png" alt="">
         </div>
         <div class="VideoDiv3">
-
+            <img src="../video/VideoImages/index/3.png" alt="">
         </div>
         <div class="VideoDiv4">
-
+            <img src="../video/VideoImages/index/4.png" alt="">
         </div>
     </div>
     <div class="foot">
-
+        <img src="../images/foot/foot.jpg" alt="版权声明">
     </div>
 </body>
 </html>

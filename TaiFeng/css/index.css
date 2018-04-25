@@ -27,12 +27,13 @@ li {
 /* 背景*/
 .background {
     width: 100%;
-    height: 600px;
+    height: 400px;
     position: fixed;
     z-index: -500;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     top: 0;
     left: 0;
+    background-color: rgba(73, 154, 234, 0.26);
 }
 /* 标志*/
 .logo {
@@ -65,7 +66,7 @@ li {
     padding-left: 26px;
     font-size: 20px;
     line-height: 30px;
-    font-family: 华文楷体;
+    font-family: 楷体;
 }
 .nav input {
     margin-left: 35px;
@@ -85,6 +86,26 @@ li {
     top: 6px;
     font-size: 20px;
 }
+
+.nav ul li:nth-child(3):hover .videoTeaching{
+   display: block;
+}
+
+/*导航栏的子菜单*/
+.videoTeaching {
+    width: 105px;
+    height: 92px;
+    position: absolute;
+    top: 30px;
+    left: 197px;
+    z-index: 3;
+    display: none;
+    background-color: rgba(255,255,255,0.7);
+}
+.videoTeaching ul li{
+    padding: 0;
+}
+
 /* 轮播图*/
 #turnPicture {
     position: relative;
@@ -93,7 +114,7 @@ li {
     margin-left: -25%;
     width: 800px;
     height: 300px;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     overflow: hidden;
 }
 
@@ -193,7 +214,15 @@ li {
     left: 0;
     width: 176px;
     height: 45px;
-    border: 1px solid teal;
+    /*border: 1px solid teal;*/
+    transition: all 0.1s ease-in 0s;
+}
+/* 对三个盒子使用 过渡和2d动画*/
+.introduce:hover ,
+.history:hover,
+.knowledge:hover {
+    transform: translate(-2px,-2px);
+    box-shadow: 5px 5px 2px rgba(0,0,0,0.2);
 }
 
 .introduce span {
@@ -212,13 +241,14 @@ li {
 }
 /* 发展史*/
 .history {
+    transition: all 0.1s ease-in 0s;
     background: rgba(0,0,0,0.2);
     position: absolute;
     top: 70px;
     left: 0;
     width: 176px;
     height: 45px;
-    border: 1px solid teal;
+    /*border: 1px solid teal;*/
 }
 
 .history span {
@@ -238,13 +268,14 @@ li {
 }
 /*知识*/
 .knowledge {
+    transition: all 0.1s ease-in 0s;
     background: rgba(0,0,0,0.2);
     position: absolute;
     top: 140px;
     left: 0;
     width: 176px;
     height: 45px;
-    border: 1px solid teal;
+    /*border: 1px solid teal;*/
 }
 
 .knowledge span {
@@ -300,16 +331,41 @@ li {
     top: 861px;
     left: 50%;
     margin-left: -25%;
-    border: 1px solid gold;
+    /*border: 1px solid gold;*/
+}
+
+/*设置图片的格式*/
+.ImageDiv ul {
+    width: 200%;
+    list-style: none;
+    animation: moving 10s linear infinite;
+}
+
+/*定义一个动画*/
+@keyframes moving {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(-800px);
+    }
+}
+
+.ImageDiv:hover ul {
+    animation-play-state: paused; /*鼠标放在上面的时候暂停移动*/
+}
+.ImageDiv ul li{
+    float: left;
 }
 
 .ImageDiv {
     position: absolute;
     top: 55px;
     left: 0;
-    border: 1px solid crimson;
+    /*border: 1px solid crimson;*/
     width: 800px;
     height: 200px;
+    overflow: hidden;/*因为里面的ul的宽度是自己的两倍，，所以超出的要隐藏*/
 }
 
 .Image span {
@@ -331,7 +387,7 @@ li {
     top: 1140px;
     left: 50%;
     margin-left: -25%;
-    border: 1px solid gold;
+    /*border: 1px solid gold;*/
 }
 
 .Video span {
@@ -383,5 +439,6 @@ li {
     top: 1410px;
     left: 50%;
     margin-left: -25%;
-    border: 1px solid purple;
+    /*border: 1px solid purple;*/
+    background-color: rgba(125, 128, 132, 0.68);;
 }
