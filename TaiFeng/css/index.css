@@ -1,9 +1,9 @@
 * {
-    padding: 0;
-    margin: 0;
-    outline: 0;
-    /* 将 所有元素的 内外边距变为0 ， 将 lunkuoxianoutline取消*/
-}
+     padding: 0;
+     margin: 0;
+     outline: 0;
+     /* 将 所有元素的 内外边距变为0 ， 将 lunkuoxianoutline取消*/
+ }
 
 @font-face {
     font-family: 'icomoon';
@@ -88,7 +88,7 @@ li {
 }
 
 .nav ul li:nth-child(3):hover .videoTeaching{
-   display: block;
+    display: block;
 }
 
 /*导航栏的子菜单*/
@@ -237,7 +237,7 @@ li {
 }
 
 .introduce span:last-child {
-    font-family: 楷体;
+    font-family: "\6977\4F53";
 }
 /* 发展史*/
 .history {
@@ -289,7 +289,7 @@ li {
 }
 
 .knowledge span:last-child {
-    font-family: 楷体;
+    font-family: "\6977\4F53";
 }
 
 
@@ -308,14 +308,14 @@ li {
     position: absolute;
     top: 8px;
     font-size: 20px;
-    font-family: 华文楷体;
+    font-family: "\6977\4F53";
 }
 .news span:nth-child(2) {
     padding-left: 20px;
     position: absolute;
     top: 28px;
     font-size: 20px;
-    font-family: 华文楷体;
+    font-family: "\6977\4F53";
 }
 
 .newsIn {
@@ -376,7 +376,7 @@ li {
 }
 .Image span a {
     font-size: 26px;
-    font-family: 华文楷体;
+    font-family: "\6977\4F53";
     text-decoration: black;
 }
 
@@ -398,7 +398,7 @@ li {
 }
 .Video span a {
     font-size: 26px;
-    font-family: 华文楷体;
+    font-family: "\6977\4F53";
     text-decoration: black;
 }
 
