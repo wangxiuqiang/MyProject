@@ -1,0 +1,466 @@
+* {
+     padding: 0;
+     margin: 0;
+     outline: 0;
+     /* 将 所有元素的 内外边距变为0 ， 将 lunkuoxianoutline取消*/
+ }
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?7kkyc2');
+    src: url('fonts/icomoon.eot?7kkyc2#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?7kkyc2') format('truetype'),
+    url('fonts/icomoon.woff?7kkyc2') format('woff'),
+    url('fonts/icomoon.svg?7kkyc2') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+a {
+    /*消除 超链接的下划线*/
+    text-decoration: none;
+    color: black;
+}
+li {
+    /* 消除li 的 小圆点 */
+    list-style: none;
+}
+/* 背景*/
+.background {
+    width: 100%;
+    height: 400px;
+    position: fixed;
+    z-index: -500;
+    /*border: 1px solid red;*/
+    top: 0;
+    left: 0;
+    background-color: rgba(73, 154, 234, 0.26);
+}
+/* 标志*/
+.logo {
+    width: 800px;
+    height: 260px;
+    border: 1px solid orange;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    margin-left: -25%;
+}
+/*导航栏*/
+.nav {
+    background-color: red;
+    width: 800px;
+    height: 30px;
+    border: 1px solid pink;
+    position: absolute;
+    top: 260px;
+    left: 50%;
+    margin-left: -25%;
+}
+
+.nav a{
+    color: #000;
+}
+
+.nav ul li {
+    float: left;
+    padding-left: 26px;
+    font-size: 20px;
+    line-height: 30px;
+    font-family: 楷体;
+}
+.nav input {
+    margin-left: 35px;
+    border-radius:10px;
+    width: 200px;
+    height: 20px;
+    position: absolute;
+    top: 5px;
+    line-height: 30px;
+    border: 1px solid #000;
+}
+.nav span {
+
+    font-family: icomoon;
+    position: absolute;
+    left: 702px;
+    top: 6px;
+    font-size: 20px;
+}
+/*hover的时候显示隐藏的属性*/
+.nav ul li:nth-child(3):hover .videoTeaching{
+    display: block;
+}
+.nav ul li:nth-child(4):hover .picture_son{
+    display: block;
+}
+.videoTeaching li:hover a{
+    color: red;
+}
+.picture_son li:hover a{
+    color: red;
+}
+/*导航栏的子菜单*/
+.videoTeaching {
+    width: 105px;
+    height: 92px;
+    position: absolute;
+    top: 30px;
+    left: 197px;
+    z-index: 3;
+    display: none;
+    background-color: rgba(255,255,255,0.7);
+}
+.videoTeaching ul li{
+    padding: 0;
+}
+/*导航栏精彩图集的子菜单*/
+.picture_son {
+    width: 105px;
+    height: 118px;
+    position: absolute;
+    top: 30px;
+    left: 305px;
+    z-index: 3;
+    display: none;
+    background-color: rgba(255,255,255,0.7);
+}
+.picture_son  ul li{
+    padding: 0;
+}
+
+/* 轮播图*/
+#turnPicture {
+    position: relative;
+    top: 321px;
+    left: 50%;
+    margin-left: -25%;
+    width: 800px;
+    height: 300px;
+    /*border: 1px solid blue;*/
+    overflow: hidden;
+}
+
+#turn {
+    position:absolute;
+    width: 4000px;
+    height: 300px;
+    /*一定要将这个放在 他的父盒子上面，，即使用下面的代码，不然的话，width不能用*/
+    z-index: 1;
+}
+
+#turn img {
+    float: left;
+}
+/* 轮播图的下方的小圆点*/
+#buttons {
+    background-color: rgba(0,0,0,0.35);
+    z-index: 5;
+    width: 80px;
+    height: 18px;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+}
+/*在buttons的div的两边，  让长条其看起来是一个好的形状*/
+.buttons_add_left ,
+.buttons_add_right {
+    background-color: rgba(0,0,0,0.35);
+    z-index: 2;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    border-radius: 50%;
+    bottom: 20px;
+}
+.buttons_add_right {
+    left: 50%;
+    margin-left: 71px;
+}
+.buttons_add_left {
+    left: 50%;
+    margin-left: -9px;
+}
+
+#arrow-r ,
+#arrow-l {
+    width: 30px;
+    height: 50px;
+    position: absolute;
+    background-color: rgba(0,0,0,0.3);
+    top: 50%;
+    margin-top: -25px;
+    z-index: 3;
+}
+#arrow-l:hover ,
+#arrow-r:hover ,
+#turnPicture:hover #arrow-r ,
+#turnPicture:hover #arrow-l {
+    background-color: rgba(0,0,0,0.7);
+}
+
+#arrow-r {
+    right: 0;
+}
+#arrow-l {
+    left: 0;
+}
+/*轮播图小圆点的变化*/
+.alive {
+    background-color: red;
+}
+
+#buttons ul li {
+    cursor: pointer;
+    width: 13px;
+    height: 13px;
+    float: left;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.6);
+    margin-top: 1px;
+    margin-left: 9px;
+}
+/*社团介绍 外框*/
+.club {
+    width: 800px;
+    height: 200px;
+    position: absolute;
+    top: 650px;
+    left: 50%;
+    margin-left: -25%;
+}
+/*社团简介*/
+.introduce {
+    background: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 176px;
+    height: 45px;
+    /*border: 1px solid teal;*/
+    transition: all 0.1s ease-in 0s;
+}
+/* 对三个盒子使用 过渡和2d动画*/
+.introduce:hover ,
+.history:hover,
+.knowledge:hover {
+    transform: translate(-2px,-2px);
+    box-shadow: 5px 5px 2px rgba(0,0,0,0.2);
+}
+
+.introduce span {
+    line-height: 45px;
+    font-size: 20px;
+    padding-left: 20px;
+    color: #000;
+}
+
+.introduce span:first-child {
+    font-family: icomoon;
+}
+
+.introduce span:last-child {
+    font-family: "\6977\4F53";
+}
+/* 发展史*/
+.history {
+    transition: all 0.1s ease-in 0s;
+    background: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 176px;
+    height: 45px;
+    /*border: 1px solid teal;*/
+}
+
+.history span {
+    line-height: 45px;
+    font-size: 20px;
+    padding-left: 20px;
+    color: #000;
+
+}
+
+.history span:first-child {
+    font-family: icomoon;
+}
+
+.history span:last-child {
+    font-family: 楷体;
+}
+/*知识*/
+.knowledge {
+    transition: all 0.1s ease-in 0s;
+    background: rgba(0,0,0,0.2);
+    position: absolute;
+    top: 140px;
+    left: 0;
+    width: 176px;
+    height: 45px;
+    /*border: 1px solid teal;*/
+}
+
+.knowledge span {
+    line-height: 45px;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.knowledge span:first-child {
+    font-family: icomoon;
+}
+
+.knowledge span:last-child {
+    font-family: "\6977\4F53";
+}
+
+
+/*公告*/
+.news {
+    position: absolute;
+    top: 0;
+    left: 210px;
+    height: 185px;
+    width: 590px;
+    border: 1px solid purple;
+}
+
+.news span:first-child {
+    padding-left: 20px;
+    position: absolute;
+    top: 8px;
+    font-size: 20px;
+    font-family: "\6977\4F53";
+}
+.news span:nth-child(2) {
+    padding-left: 20px;
+    position: absolute;
+    top: 28px;
+    font-size: 20px;
+    font-family: "\6977\4F53";
+}
+
+.newsIn {
+    position: absolute;
+    top: 55px;
+    left: 20px;
+}
+
+.Image {
+    width: 800px;
+    height: 255px;
+    position: absolute;
+    top: 861px;
+    left: 50%;
+    margin-left: -25%;
+    /*border: 1px solid gold;*/
+}
+
+/*设置图片的格式*/
+.ImageDiv ul {
+    width: 200%;
+    list-style: none;
+    animation: moving 10s linear infinite;
+}
+
+/*定义一个动画*/
+@keyframes moving {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(-800px);
+    }
+}
+
+.ImageDiv:hover ul {
+    animation-play-state: paused; /*鼠标放在上面的时候暂停移动*/
+}
+.ImageDiv ul li{
+    float: left;
+}
+
+.ImageDiv {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    /*border: 1px solid crimson;*/
+    width: 800px;
+    height: 200px;
+    overflow: hidden;/*因为里面的ul的宽度是自己的两倍，，所以超出的要隐藏*/
+}
+
+.Image span {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    margin-left: -10%;
+}
+.Image span a {
+    font-size: 26px;
+    font-family: "\6977\4F53";
+    text-decoration: black;
+}
+
+.Video {
+    width: 800px;
+    height: 228px;
+    position: absolute;
+    top: 1140px;
+    left: 50%;
+    margin-left: -25%;
+    /*border: 1px solid gold;*/
+}
+
+.Video span {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    margin-left: -10%;
+}
+.Video span a {
+    font-size: 26px;
+    font-family: "\6977\4F53";
+    text-decoration: black;
+}
+
+.VideoDiv1 ,
+.VideoDiv2,
+.VideoDiv3 {
+    position: absolute;
+    top: 55px;
+    border: 1px solid crimson;
+    width: 170px;
+    height: 170px;
+}
+
+.VideoDiv1 {
+    left: 0;
+}
+.VideoDiv2 {
+    left: 210px;
+}
+.VideoDiv3 {
+    left: 420px;
+}
+
+
+.VideoDiv4 {
+    position: absolute;
+    top: 55px;
+    border: 1px solid crimson;
+    width: 170px;
+    height: 170px;
+    right: 0;
+}
+
+.foot {
+    width: 800px;
+    position: absolute;
+    height: 159px;
+    top: 1410px;
+    left: 50%;
+    margin-left: -25%;
+    /*border: 1px solid purple;*/
+    background-color: rgba(125, 128, 132, 0.68);;
+}
