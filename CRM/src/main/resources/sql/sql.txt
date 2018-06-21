@@ -1,0 +1,6 @@
+create database crm;
+use crm;
+create table dep(
+     depId varchar(32) primary key,
+     depName varchar(50) 
+     );

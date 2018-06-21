@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ssm.crm.dep.dao.DepMapper">
+    <select id="insertDep" parameterType="cn.ssm.crm.dep.pojo.Department">
+        insert into dep(depId,depName) value(#{depId},#{depName});
+    </select>
+    <!--查询全部尽量不要用*  ,数据库用* 会多一步查询字段  -->
+    <select id="selectAllDepartment" resultType="cn.ssm.crm.dep.pojo.Department">
+       select depId,depName from dep;
+    </select>
+</mapper>
