@@ -3,6 +3,7 @@
 /home/wxq/eclipse-workspace/CRM/src/main/java/cn/ssm/crm/dep/dao/DepMapper.java
 /home/wxq/eclipse-workspace/CRM/src/main/java/cn/ssm/crm/exception/MyIllException.java
 /home/wxq/eclipse-workspace/CRM/src/main/java/cn/ssm/crm/dep/service/impl/DepServiceImpl.java
+/home/wxq/eclipse-workspace/CRM/src/main/java/cn/ssm/crm/dep/controller/MainController.java
 /home/wxq/eclipse-workspace/CRM/src/main/java/cn/ssm/crm/utils/StringUtils.java
 /home/wxq/eclipse-workspace/CRM/src/main/java/cn/ssm/crm/dep/service/DepService.java
 /home/wxq/eclipse-workspace/CRM/src/main/java/cn/ssm/crm/utils/CodeUtils.java

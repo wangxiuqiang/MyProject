@@ -7,5 +7,6 @@ import cn.ssm.crm.dep.pojo.Department;
 public interface DepMapper {
     public void insertDep(Department department) ;
     public List<Department> selectAllDepartment();
-    
+    public void updateDep(Department department); 
+    public int deleteOneDep(String depId);
 }

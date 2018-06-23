@@ -8,4 +8,12 @@
     <select id="selectAllDepartment" resultType="cn.ssm.crm.dep.pojo.Department">
        select depId,depName from dep;
     </select>
+    
+    <update id="updateDep" parameterType="cn.ssm.crm.dep.pojo.Department">
+       update dep set depName= #{depName} where depId = #{depId}
+    </update>
+    
+    <delete id="deleteOneDep" parameterType="java.lang.String">
+       delete from dep where depId = #{depId}
+    </delete>
 </mapper>

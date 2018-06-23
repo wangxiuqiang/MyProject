@@ -9,4 +9,7 @@ public interface DepService {
 	// 查询所有的部门
 
 	public List<Department> selectAllDep();
+	
+	public void updateDep(Department department);
+	public void deleteThis(String depId);
 }

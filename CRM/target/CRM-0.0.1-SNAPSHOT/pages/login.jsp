@@ -42,7 +42,7 @@ body{
 		</tr>
 		<tr align="center">
 			<td class="login_msg" width="400">
-				<form action="${pageContext.request.contextPath}/pages/frame.jsp" method="post">
+				<form action="${pageContext.request.contextPath}/frame" method="post">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/images/title.png" width="185" height="26"/>
 					<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

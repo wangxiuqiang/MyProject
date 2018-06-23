@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 <link href="${pageContext.request.contextPath}/css/sys.css" type="text/css" rel="stylesheet" />
-
+ 
 </head>
 
 <body class="emp_body">
@@ -38,7 +38,7 @@
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>选择部门：</td>
-	    <td><select name="crmDepartment.depId">
+	    <td><select name="crmDepartment.depId" id="depid" >
 		    <option value="">----请--选--择----</option>
 		    <option value="2c9091c14c78e58b014c78e67de10001" selected="selected">java学院</option>
 		    <option value="2c9091c14c78e58b014c78e68ded0002">咨询部</option>

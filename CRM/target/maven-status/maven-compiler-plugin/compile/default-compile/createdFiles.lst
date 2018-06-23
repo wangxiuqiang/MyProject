@@ -1,3 +1,4 @@
+cn/ssm/crm/dep/controller/MainController.class
 cn/ssm/crm/dep/dao/DepMapper.class
 cn/ssm/crm/dep/service/impl/DepServiceImpl.class
 cn/ssm/crm/exception/MyIllException.class

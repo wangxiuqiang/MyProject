@@ -24,8 +24,8 @@ public class DepServiceImpl implements DepService{
 		{
 			throw MyIllException;
 		}else {
+			department.setDepId(StringUtils.createUUID());
 			depMapper.insertDep(department);
-
 		}
 	}
 	public List<Department> selectAllDep() {
@@ -33,5 +33,13 @@ public class DepServiceImpl implements DepService{
 		List<Department> listDep = depMapper.selectAllDepartment();
 	   return listDep;
 	}
-    
+	public void updateDep(Department department) {
+		depMapper.updateDep(department);
+	}
+	/**
+	 * 删除一个dep
+	 */
+    public void deleteThis(String depId) {
+    	depMapper.deleteOneDep(depId);
+    }
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -29,7 +29,7 @@
 
 			<td width="57%" align="right">
 				<%--添加部门 --%> <a
-				href="${pageContext.request.contextPath}/dep/insertDep">
+				href="${pageContext.request.contextPath}/dep/addDep">
 					<img
 					src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
 			</a>
@@ -57,7 +57,7 @@
 			<tr class="${vs%2==0?'tabtd1':'tabtd2'}">
 				<td align="center">${dep.depName}</td>
 				<td width="7%" align="center"><a
-					href="${pageContext.request.contextPath}/pages/department/addOrEditDepartment.jsp"><img
+					href="${pageContext.request.contextPath}/dep/addDep"><img
 						src="${pageContext.request.contextPath}/images/button/modify.gif"
 						class="img" /></a></td>
 		</c:forEach>
