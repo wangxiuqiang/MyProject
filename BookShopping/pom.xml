@@ -126,7 +126,19 @@
       <artifactId>aspectjweaver</artifactId>
       <version>1.9.1</version>
     </dependency>
+<!--javamailjar包-->
+    <dependency>
+      <groupId>activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.0.2</version>
+    </dependency>
 
+    <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+      <version>1.4.6</version>
+    </dependency>
     <!--json 依赖包 -->
     <!--json 转换注解包 -->
     <dependency>

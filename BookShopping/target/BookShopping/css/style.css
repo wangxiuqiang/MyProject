@@ -1,0 +1,298 @@
+.topbar{
+    height: 53px;
+    background-image: url(../images/topbar.png)
+}
+.topbar .topbar_content{
+    width: 80%;
+    height: 53px;
+    margin: 0 auto;
+}
+.topbar .topbar_content .topbar_content_left{
+    font-size: 16px;
+    color: #fff;
+    font-weight: 900;
+    line-height: 50px;
+    float: left;
+}
+.topbar .topbar_content .topbar_content_right{
+    font-size: 16px;
+    color: #fff;
+    font-weight: 900;
+    float: right;
+    line-height: 50px;
+}
+.topbar .topbar_content .topbar_content_right a{
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 900;
+}
+.topbar .topbar_content .topbar_content_right ul{
+   
+    list-style: none;
+}
+.topbar .topbar_content .topbar_content_right ul li{
+    float: left;
+    margin-left: 10px;
+}
+
+
+/*-------------------------------------*/
+.estore_content{
+    width: 1000px;
+    margin: 0 auto;
+    min-height: 1700px;
+}
+
+.estore_content .header{
+    width: 1000px;
+    background-color: #F8E49B;
+}
+.estore_content .header .header_png{
+    float: left;
+    margin-top: 10px;
+    width: 765px;
+    height: 286px;
+    background-image: url(../images/mainpic.png);
+    background-size: cover;
+}
+
+.estore_content .header .estore{
+    margin: 0 auto;
+    margin-top: 10px;
+    float: right;
+    width: 235px;
+    height: 286px;
+    background-color: #F8E49B;
+}
+
+.estore_content .header .estore button{
+    width: 100px;
+    height: 38px;
+    background-color: #ff5000 ;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+.estore_content .leftaside{
+    width: 241px;
+    min-height: 1400px;
+    background-color: #F8E49B;
+    float: left;
+}
+
+.estore_content .leftaside .category h1{
+    margin-top: 15px;
+    background-image: url(../images/titlesty.png);
+    height: 29px;
+    font-size: 18px;
+    padding: 2px 5px;
+    color: #fff;
+}
+.estore_content .leftaside .category li{
+    margin: 5px 25px;;
+    list-style: none;
+}
+.estore_content .leftaside .category li a{
+    font-size: 18px;
+    font-weight: 800;
+    color: #87520E;
+    text-decoration: none;
+    margin-left: 5px;
+}
+.estore_content .leftaside .author h1{
+    margin-top: 15px;
+    background-image: url(../images/titlesty.png);
+    height: 29px;
+    font-size: 18px;
+    padding: 2px 5px;
+    color: #fff;
+}
+.estore_content .leftaside .author .content{
+   margin-top: 20px;
+   height: 80px;
+}
+.estore_content .leftaside .author .content figure{
+    margin-left: 10px;
+    font-size: 16px;
+    color: #87520E;
+}
+.estore_content .leftaside .author .content img{
+    float: left;
+    margin-right: 5px;
+}
+.estore_content .leftaside .author .content figure p{
+    overflow: hidden;
+    width: 80px;
+    height: 20px;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
+.estore_content .leftaside .author .content a{
+    position: relative;
+    left: 90px;;
+    top: -15px;
+}
+
+.estore_content .leftaside .newbook h1{
+    margin-top: 15px;
+    background-image: url(../images/titlesty.png);
+    height: 29px;
+    font-size: 18px;
+    padding: 2px 5px;
+    color: #fff;
+}
+.estore_content .leftaside .newbook ul{
+    list-style: none;
+    margin-left: 50px;
+    color: #87520E;
+}
+.estore_content .leftaside .newbook li{
+    margin-top: 10px;
+}
+.estore_content .leftaside .newbook li a{
+    text-decoration: none;
+    font-size: 18px;
+    color: #87520E;
+}
+
+.main{
+    width: 755px;
+    height: 1200px;
+    float: right;
+}
+.estore_content .main .menubox {
+    float: left;
+}
+.estore_content .main .menubox .flash{
+    float: left;
+}
+.estore_content .main .menubox .flash embed{
+    margin: 5px 5px;
+}
+.estore_content .main .menubox .menu{
+    margin: 5px 0;
+    float: right;
+    width: 230px;
+    height: 340px;
+ 
+}
+.estore_content .main .menubox .menu ul{
+    list-style: none;
+}
+.estore_content .main .menubox .menu ul li{
+    width: 180px;
+    height: 40px;
+    border-bottom: #fff solid 1px;
+    background-color: #F8E49B;
+    padding-left: 50px;
+    line-height: 40px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #87520E;
+}
+.estore_content .main .menubox .menu ul .aa:hover{
+    background: #87520E;
+    color: #fff;
+}
+.estore_content .main .tuijian {
+    float: left;
+    width: 100%;
+}
+.tuijian_top{
+    float: left;
+    width: 100%;
+}
+.estore_content .main .tuijian h1{
+    
+    height: 35px;
+    width: 150px;
+    font-size: 18px;
+    background-image: url(../images/tit.png);
+    background-repeat: no-repeat;
+    padding-left: 15px;
+    line-height: 35px;
+}
+.estore_content .main .tuijian .tuijian_product{
+    float: left;
+}
+/*======================*/
+.estore_content .main .new{
+    margin-top: 10px;
+    float: left;
+    width: 100%;
+}
+
+.new_top{
+    float: left;
+    width: 100%;
+}
+.estore_content .main .new .new_top h1{
+    
+    height: 35px;
+    width: 150px;
+    font-size: 18px;
+    background-image: url(../images/tit.png);
+    background-repeat: no-repeat;
+    padding-left: 15px;
+    line-height: 35px;
+}
+.estore_content .main .new .new_product{
+    float: left;
+}
+
+
+#cart{width:100%;margin:20px 0;}
+#cart .maintable{width:100%;background:#f8e49b;line-height:40px;border:#f8e49b solid 1px;border-bottom:white solid 1px;border-collapse: collapse;}
+#cart .caption{background:#87520E;color:white;line-height:40px;font-size:18px;}
+#cart .btn{background:#87520E;border:none;width:25px; height:25px;cursor:pointer;color:white;}
+
+.cart_content{
+    width: 1000px;
+    margin: 0 auto;
+}
+.cart_content .header{
+    width: 1000px;
+    background-color: #F8E49B;
+}
+.cart_content .header .header_png{
+    float: left;
+    margin-top: 10px;
+    width: 765px;
+    height: 286px;
+    background-image: url(../images/mainpic.png);
+    background-size: cover;
+}
+
+.cart_content .header .estore{
+    margin: 0 auto;
+    margin-top: 10px;
+    float: right;
+    width: 235px;
+    height: 286px;
+    background-color: #F8E49B;
+}
+
+.cart_content .header .estore button{
+    width: 100px;
+    height: 38px;
+    background-color: #ff5000 ;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+
+
+
+
+/*-------------------------------*/
+.footer1{
+    color: #fff;
+     height: 53px;
+     background-image: url(../images/btmbar.png);
+     padding-top: 10px;
+ }

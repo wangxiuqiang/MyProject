@@ -23,9 +23,9 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
     <!--开启适配器 映射器 -->
     <mvc:annotation-driven />
     <!--静态资源的加载 -->
-    <!--<mvc:resources mapping="/js/**" location="/js/" />-->
-    <!--<mvc:resources mapping="/images/**" location="/images/" />-->
-    <!--<mvc:resources mapping="/css/**" location="/css/" />-->
+    <mvc:resources mapping="/js/**" location="/js/" />
+    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/css/**" location="/css/" />
     <!-- 视图解析器 -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
