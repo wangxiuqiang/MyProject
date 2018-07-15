@@ -1,0 +1,44 @@
+/*注册界面css*/
+@charset "utf-8";
+
+
+#registform{position:relative;margin:10px auto; height:500px;font-size:20px;}
+#registform table tr{line-height:55px;}
+#registform table input{width:200px;height:35px; border:solid #87520E 1px;}
+#im{vertical-align:-10px;}
+table{margin-left:250px;color: #87520e}
+
+#loginform{position:relative;margin:10px auto; height:300px;font-size:20px;}
+#loginform table tr{line-height:55px;}
+#loginform table .a{width:200px;height:35px; border:solid #87520E 1px;}
+
+
+#color{ position:relative;margin:auto;margin-top:20px;}
+#color h1{ width:170px; height:90px; border-radius:85px 85px 0 0; z-index:0;
+background:#f8e49b; position:relative;}
+#color h2{width:300px; height:150px; border-radius:150px 150px 0 0; top:-60px; left:13%; z-index:-1;
+background: #bc6f0d;position:absolute;}
+#color h3{width:400px; height:200px; border-radius:200px 200px 0 0; top:-116.5%; left:28%;; z-index:-1;
+background: #87520e;position:absolute;}
+#color h4{width:300px; height:150px; border-radius:150px 150px 0 0; top:-57px; right:12%; z-index:-1;
+background: #bc6f0d;position:absolute; z-index:-2;}
+#color h5{width:170px; height:100px; border-radius:85px 85px 0 0; top:-10.5%; right:0px;z-index:-1;
+background: #f8e49b;position:absolute;}
+#color span{width:65px; height:65px; border-radius:35px;top:-330%; left:0%; z-index:-1;
+background: #f8e49b;position:absolute;}
+#color h6{width:50px; height:50px; border-radius:25px; top:-130%; left:10%; z-index:-1;
+background:#bc6f0d;position:absolute;}
+#color blockquote{width:60px; height:60px; border-radius:30px; top:-180%;right:12%; z-index:-1;
+background: #bc6f0d;position:absolute;}
+#color font{width:40px; height:40px; border-radius:20px; top:-350%;right:0%; z-index:-1;
+background: #f8e49b;position:absolute;}
+#color div{width:100%; background:#87520E;height:4px; position:relative;}
+
+
+
+footer div{ background: url('../images/btmbar.png'); width:100%;height:30px; position:relative;}
+footer div img{margin:0 50% 0 50%; position:absolute; top:-14px;}
+
+
+
+
