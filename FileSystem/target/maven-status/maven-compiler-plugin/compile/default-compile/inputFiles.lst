@@ -1,0 +1,15 @@
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/controller/AdminLoginController.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/controller/AdminAddUserController.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/WorkPlace.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/dao/UserRegMapper.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/dao/AdminMapper.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/CheckImgServlet.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/controller/UserRegController.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/service/AdminService.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/service/serviceImpl/AdminServiceImpl.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/DateToStringUtils.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/User.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/Admin.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/serviceImpl/UserRegServiceImpl.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/MailUtils.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/UserRegService.java

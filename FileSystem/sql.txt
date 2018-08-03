@@ -1,0 +1,72 @@
+create database filesystem;
+
+use filesystem;
+
+create table user( 
+uid int primary key auto_increment,
+uname varchar(30) ,
+uemail varchar(30) ,
+upwd varchar(128) ,
+state int default 0,
+uupdatetime varchar(23) ,
+code varchar(50) NOT NULL,
+ucompany varchar(30)
+);
+
+
+create table workPlace (
+wid int primary key auto_increment,
+wname varchar(30) NOT NULL
+);
+
+ insert into workPlace(wname) values("一号楼");
+ insert into workPlace(wname) values("二号楼"); 
+
+create table admin (
+aid int primary key auto_increment ,
+aname varchar(30) NOT NULL ,
+apwd varchar(256) NOT NULL
+);
+insert into admin(aname,apwd) values("admin","admin");
+
+
+create table classify(
+cyid int primary key auto_increment,
+cyname varchar(30) NOT NULL,
+cyfather int ,
+cyaddress varchar(50) 
+);
+
+create table getFile(
+gfid int primary key auto_increment,
+gfname varchar(50) NOT NULL,
+gfidea text,
+gfloader text,
+gfcompany varchar(50),
+gfresult varchar(20),
+gfclassifyid int ,
+gfclassifyname varchar(100),
+gfaddress varchar(50) ,
+gfdatetime timestamp,
+gfnumber int not null,
+gfcountuse int default 1,
+foreign key(gfclassifyid) references classify(cyid)
+);
+
+create table companyFile (
+cfid int primary key auto_increment,
+cfname varchar(50) ,
+cfdate timestamp ,
+cfaccept varchar(30),
+cfeditor varchar(50),
+cfsend varchar(20) ,
+cflevel varchar(15),
+cfloader text,
+cfnumber int,
+cffontid varchar(32),
+cflanguage varchar(30),
+cfaddress varchar(100),
+cfclassifyid int ,
+cfclassifyname varchar(100),
+foreign key(cfclassifyid) references classify(cyid)
+);

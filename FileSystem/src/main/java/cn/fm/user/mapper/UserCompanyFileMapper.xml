@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fm.user.dao.UserCompanyFileMapper">
+
+    <sql id="Base_Columns_List">
+        cfid,cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
+        cfsend,cflevel,cffontid,cfnumber,cflanguage ,cfloader
+    </sql>
+
+    <insert id="insertCompanyFile" parameterType="cn.fm.pojo.CompanyFile" >
+        insert into companyFile(cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
+        cfsend,cflevel,cffontid,cfnumber,cflanguage) values(#{cfname},
+        #{cfclassifyid} ,#{cfclassifyname},#{cfaddress},#{cfdate},#{cfeditor},#{cfaccept},
+        #{cfsend},#{cflevel},#{cffontid},#{cfnumber},#{cflanguage});
+    </insert>
+
+    <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
+        select cyid,cyname,cyfather,cyaddress from classify;
+    </select>
+
+    <select id="selectCompanyFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile where cfname like concat(concat('%',#{value}), '%')
+    </select>
+
+
+    <select id="selectCompanyFileByClassifyId" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile where cfclassifyid = #{value}
+    </select>
+
+
+    <select id="selectCompanyFileByDateTime" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile where cfdate like concat(concat('%',#{value}), '%')
+    </select>
+
+    <select id="selectCompanyFileByNumber" parameterType="java.lang.Integer" resultType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile where cfnumber = #{value}
+    </select>
+
+    <select id="selectCompanyFileByLanguage" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile where cflanguage = #{value}
+    </select>
+    <!--
+
+
+   -->
+    <select id="selectAllCompanyFile" resultType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile ;
+    </select>
+
+    <!--修改文件信息-->
+    <update id="updateCompanyFileById" parameterType="cn.fm.pojo.CompanyFile">
+        update companyFile SET
+        <if test="cfname != null">
+            cfname = #{cfname} ,
+        </if>
+        <if test="cfdate != null" >
+            cfdate = #{cfdate} ,
+        </if>
+        <if test="cfeditor != null" >
+            cfeditor = #{cfeditor} ,
+        </if>
+        <if test="cfaccept != null" >
+            cfaccept = #{cfaccept} ,
+        </if>
+        <if test="cfsend != null" >
+            cfsend = #{cfsend},
+        </if>
+        <if test="cflevel != null" >
+            cflevel = #{cflevel},
+        </if>
+        <if test="cfloader != null" >
+            cfloader = #{cfloader},
+        </if>
+        <if test="cfnumber != 0" >
+            cfnumber = #{cfnumber},
+        </if>
+        <if test="cffontid != null">
+            cffontid = #{cffontid},
+        </if>
+        <if test="cflanguage != null">
+            cflanguage = #{cflanguage},
+        </if>
+        <if test="cfclassifyid != 0" >
+            cfclassifyid = #{cfclassifyid},
+        </if>
+        <if test="cfclassifyname != null">
+            cfclassifyname = #{classifyname} ,
+        </if>
+        <if test="cfaddress != null">
+            cfaddress = #{cfaddress}
+        </if>
+        where cfid  = #{cfid}
+    </update>
+
+    <!--删除文件信息-->
+    <delete id="deleteCompanyFileById" parameterType="int">
+        delete from companyFile where cfid = #{cfid};
+    </delete>
+</mapper>
