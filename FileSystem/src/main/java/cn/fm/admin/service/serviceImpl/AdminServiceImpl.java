@@ -63,5 +63,39 @@ public class AdminServiceImpl implements AdminService{
         return adminMapper.selectEmailIfExist(uemail);
     }
 
+    /**
+     * 查询所有的用户
+     * @return
+     * @throws Exception
+     */
+    public List<User> findAllWorker() throws Exception{
+        return adminMapper.findAllWorker();
+    }
 
+    /**
+     * 查找指定的用户,根据id
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public User findWorkerById(int id) throws Exception{
+        return adminMapper.findWorkerById(id);
+    }
+
+    /**
+     * 删除一个用户 根据id
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public int deleteWorkerById(int id) throws Exception{
+        return adminMapper.deleteWorkerById(id);
+    }
+
+    /**
+     * 根据id进行修改用户信息
+     */
+    public int updateWorkerById(User user) throws Exception{
+        return adminMapper.updateWorkerById(user);
+    }
 }

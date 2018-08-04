@@ -6,6 +6,10 @@ package cn.fm.utils;
 public class StatusUtils {
 
     /**
+     * 传过来的是null 空值
+     */
+    public static final int IS_NULL = 11;
+    /**
      * 成功注册
      */
     public static final int SUCCESS_REG = 1;

@@ -79,4 +79,9 @@ public interface UserCompanyFileMapper {
          */
         public int deleteCompanyFileById(int cfid) throws Exception;
 
+        /**
+         * 多项组合查询
+         */
+        public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile) throws Exception;
+
 }

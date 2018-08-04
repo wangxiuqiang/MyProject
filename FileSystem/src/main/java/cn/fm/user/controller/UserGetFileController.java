@@ -24,6 +24,7 @@ public class UserGetFileController {
     @RequestMapping(value = "/infoSubGetFile")
     @ResponseBody
     public String infoSub( GetFile getFile) throws Exception {
+
        if(userGetFileService.insertGetFile(getFile) != 0) {
            return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
        }
@@ -36,9 +37,16 @@ public class UserGetFileController {
     @RequestMapping(value = "/findTypeGetFiles")
     @ResponseBody
     public String findTypeFiles(GetFile getFile) throws Exception {
-          System.out.println(getFile);
+        System.out.println(getFile);
+        if(getFile.getGfnumber() != 0 || getFile.getGfdatetime() != null || getFile.getGfcompany() != null
+                || getFile.getGfclassifyid() != 0 || getFile.getGfname() != null) {
+            return JSON.toJSONString(userGetFileService.findTypeFiles(getFile));
+        }else{
+            return JSON.toJSONString(StatusUtils.IS_NULL);
+        }
 
-        return JSON.toJSONString(userGetFileService.findTypeFiles(getFile));
+
+
     }
 
     /**
@@ -57,6 +65,9 @@ public class UserGetFileController {
     @RequestMapping(value = "/updateSubGetFile")
     @ResponseBody
     public String updateSubGetFile(GetFile getFile) throws Exception {
+        if(getFile == null) {
+            return JSON.toJSONString(StatusUtils.IS_NULL);
+        }
         if(userGetFileService.updateGetFileById(getFile) != 0) {
             return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
         }else {
@@ -69,6 +80,9 @@ public class UserGetFileController {
     @RequestMapping(value = "/delGetFile")
     @ResponseBody
     public String delGetFile(int gfid) throws Exception {
+        if(gfid == 0) {
+            return JSON.toJSONString(StatusUtils.IS_NULL);
+        }
         if(userGetFileService.deleteGetFileById(gfid) != 0) {
             return JSON.toJSONString(StatusUtils.SUCCESS_DEL);
         }else {

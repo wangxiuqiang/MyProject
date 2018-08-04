@@ -21,4 +21,20 @@
     <select id="selectEmailIfExist" parameterType="java.lang.String" resultType="java.lang.String">
         select uemail from user where uemail = #{uemail};
     </select>
+
+    <select id="findAllWorker" resultType="cn.fm.pojo.User">
+        select uid,uname,ucompany,uupdatetime,uemail,state from user;
+    </select>
+
+    <select id="findWorkerById" resultType="cn.fm.pojo.User">
+        select uid,uname,ucompany,uupdatetime,uemail,state from user where uid = #{id};
+    </select>
+
+    <delete id="deleteWorkerById" >
+        DELETE FROM user where uid = #{id}
+    </delete>
+    <update id="updateWorkerById" parameterType="cn.fm.pojo.User">
+        update user set uname = #{uname} ,ucompany = #{ucompany},state = #{state},uemail = #{uemail} WHERE
+        uid = #{uid};
+    </update>
 </mapper>

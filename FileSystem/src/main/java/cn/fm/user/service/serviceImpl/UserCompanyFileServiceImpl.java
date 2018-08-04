@@ -137,20 +137,29 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
             cfe.setCompanyFiles(selectCompanyFileByNumber(companyFile.getCfnumber()));
 
-        }else {
+        }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
+                && companyFile.getCfdate() == null && companyFile.getCfnumber() == 0){
             cfe = null;
+        }else {
+            cfe.setCompanyFiles(selectCompanyFileByTwoOrMore(companyFile));
         }
-
         if(cfe != null) {
             cfe.setState(StatusUtils.SUCCESS_FIND);
-        }else {
-            cfe.setState(StatusUtils.FAILURE_FIND);
+            /**
+             * 设置 查询了多少条数据
+             */
+
+            cfe.setCount(cfe.getCompanyFiles().size());
         }
-        /**
-         * 设置 查询了多少条数据
-         */
-        cfe.setCount(cfe.getCompanyFiles().size());
+
         return cfe;
+    }
+
+    /**
+     * 多项组合查询
+     */
+    public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile) throws Exception{
+        return userCompanyFileMapper.selectCompanyFileByTwoOrMore(companyFile);
     }
 
     @Override

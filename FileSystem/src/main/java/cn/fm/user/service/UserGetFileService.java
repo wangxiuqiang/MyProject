@@ -87,5 +87,11 @@ public interface UserGetFileService {
      * @throws Exception
      */
     public int deleteGetFileById(int id) throws Exception;
+    /**
+     * 通过两个或以上进行查询
+     * @param getFile
+     * @return
+     */
+    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile);
 
 }

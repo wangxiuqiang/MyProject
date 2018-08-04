@@ -107,7 +107,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 
 
     /**
-     * 总的调配 chaao  ,如果 传过来的值是 json'使用转化后 int的是不是默认为0 ,  String的默认是不是null
+     * 总的调配   ,如果 传过来的值是 json'使用转化后 int的是不是默认为0 ,  String的默认是不是null
      * @param getFile
      * @return
      * @throws Exception
@@ -141,19 +141,21 @@ public class UserGetFileServiceImpl implements UserGetFileService{
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() != 0){
             getFileExtends.setGetFiles(selectGetFileByNumber(getFile.getGfnumber()));
 
-
-
-        }else {
+        }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
+                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0){
             getFileExtends = null;
+        }else {
+            //多项查询
+            getFileExtends.setGetFiles(selectGetFileByTwoAndMore(getFile));
         }
 
+        System.out.println(getFileExtends);
         if(getFileExtends != null ) {
             getFileExtends.setState(StatusUtils.SUCCESS_FIND);
-        }else {
-            getFileExtends.setState(StatusUtils.FAILURE_FIND);
+            getFileExtends.setCount(getFileExtends.getGetFiles().size());
         }
 
-        getFileExtends.setCount(getFileExtends.getGetFiles().size());
+
         return getFileExtends;
 
 
@@ -195,7 +197,14 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     public List<GetFile> selectAllGetFile() throws Exception {
         return userGetFileMapper.selectAllGetFile();
     }
-
+    /**
+     * 通过两个或以上进行查询
+     * @param getFile
+     * @return
+     */
+    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile){
+        return userGetFileMapper.selectGetFileByTwoAndMore(getFile);
+    }
 
     /**
      * 根据id更新 文件

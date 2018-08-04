@@ -82,4 +82,11 @@ public interface UserGetFileMapper {
      */
     public int deleteGetFileById(int id) throws Exception;
 
+    /**
+     * 通过两个或以上进行查询
+     * @param getFile
+     * @return
+     */
+    public List<GetFile> selectGetFileByTwoAndMore(@Param(value = "getFile") GetFile getFile);
+
 }

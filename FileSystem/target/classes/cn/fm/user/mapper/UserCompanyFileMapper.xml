@@ -60,4 +60,56 @@
         <include refid="Base_Columns_List" />
         from companyFile ;
     </select>
+
+    <!--修改文件信息-->
+    <update id="updateCompanyFileById" parameterType="cn.fm.pojo.CompanyFile">
+        update companyFile
+        <set>
+        <if test="cfname != null">
+            cfname = #{cfname} ,
+        </if>
+        <if test="cfdate != null" >
+            cfdate = #{cfdate} ,
+        </if>
+        <if test="cfeditor != null" >
+            cfeditor = #{cfeditor} ,
+        </if>
+        <if test="cfaccept != null" >
+            cfaccept = #{cfaccept} ,
+        </if>
+        <if test="cfsend != null" >
+            cfsend = #{cfsend},
+        </if>
+        <if test="cflevel != null" >
+            cflevel = #{cflevel},
+        </if>
+        <if test="cfloader != null" >
+            cfloader = #{cfloader},
+        </if>
+        <if test="cfnumber != 0" >
+            cfnumber = #{cfnumber},
+        </if>
+        <if test="cffontid != null">
+            cffontid = #{cffontid},
+        </if>
+        <if test="cflanguage != null">
+            cflanguage = #{cflanguage},
+        </if>
+        <if test="cfclassifyid != 0" >
+            cfclassifyid = #{cfclassifyid},
+        </if>
+        <if test="cfclassifyname != null">
+            cfclassifyname = #{classifyname} ,
+        </if>
+        <if test="cfaddress != null">
+            cfaddress = #{cfaddress}
+        </if>
+        </set>
+        where cfid  = #{cfid}
+    </update>
+
+    <!--删除文件信息-->
+    <delete id="deleteCompanyFileById" parameterType="int">
+        delete from companyFile where cfid = #{cfid};
+    </delete>
 </mapper>

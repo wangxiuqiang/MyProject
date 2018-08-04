@@ -31,6 +31,11 @@ public interface UserCompanyFileService {
     public Classify selectClassify(int classifyid) throws Exception;
 
     /**
+     * 多项组合查询
+     */
+    public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile) throws Exception;
+
+    /**
      * 单独用名字来做模糊查询
      * @param cfname
      * @return

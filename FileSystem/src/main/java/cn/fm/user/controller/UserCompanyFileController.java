@@ -39,7 +39,12 @@ public class UserCompanyFileController {
     @RequestMapping(value = "/findTypeCompanyFiles")
     @ResponseBody
     public String findTypeCompanyFiles(CompanyFile companyFile) throws Exception {
-        return JSON.toJSONString(userCompanyFileService.findTypeFiles(companyFile));
+        if(companyFile.getCfname() != null || companyFile.getCfclassifyid() != 0 || companyFile.getCflanguage() != null
+                || companyFile.getCfdate() != null || companyFile.getCfnumber() != 0) {
+            return JSON.toJSONString(userCompanyFileService.findTypeFiles(companyFile));
+
+        }
+        return JSON.toJSONString(StatusUtils.IS_NULL);
     }
 
     /**
@@ -51,6 +56,7 @@ public class UserCompanyFileController {
     @RequestMapping(value = "/infoSubCompanyFile")
     @ResponseBody
     public String infoSubCompanyFile(CompanyFile companyFile) throws Exception {
+
         if(userCompanyFileService.insertCompanyFile(companyFile) != 0 ) {
             return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
         }else {
@@ -64,6 +70,7 @@ public class UserCompanyFileController {
     @RequestMapping(value = "/updateSubCompanyFile")
     @ResponseBody
     public String updateSubGetFile(CompanyFile companyFile) throws Exception {
+
         if(userCompanyFileService.updateCompanyFileById(companyFile) != 0) {
             return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
         }else {
@@ -76,6 +83,9 @@ public class UserCompanyFileController {
     @RequestMapping(value = "/delCompanyFile")
     @ResponseBody
     public String delGetFile(int cfid) throws Exception {
+        if(cfid == 0) {
+            return JSON.toJSONString(StatusUtils.IS_NULL);
+        }
         if(userCompanyFileService.deleteCompanyFileById(cfid) != 0) {
             return JSON.toJSONString(StatusUtils.SUCCESS_DEL);
         }else {

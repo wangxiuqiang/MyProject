@@ -63,7 +63,8 @@
 
     <!--修改文件信息-->
     <update id="updateCompanyFileById" parameterType="cn.fm.pojo.CompanyFile">
-        update companyFile SET
+        update companyFile
+        <set>
         <if test="cfname != null">
             cfname = #{cfname} ,
         </if>
@@ -103,6 +104,7 @@
         <if test="cfaddress != null">
             cfaddress = #{cfaddress}
         </if>
+        </set>
         where cfid  = #{cfid}
     </update>
 

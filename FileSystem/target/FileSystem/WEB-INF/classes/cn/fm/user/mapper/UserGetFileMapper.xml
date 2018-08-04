@@ -30,7 +30,7 @@
          from getFile where gfcompany = #{value}
      </select>
 
-    <select id="selectGetFileByClassifyId" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
+    <select id="selectGetFileByClassifyId" parameterType="java.lang.Integer" resultType="cn.fm.pojo.GetFile">
         select
          <include refid="Base_Columns_List" />
         from getFile where gfclassifyid = #{value}
@@ -48,13 +48,79 @@
         <include refid="Base_Columns_List" />
         from getFile where gfnumber = #{value}
     </select>
+
+    <!--多项查询-->
+    <select id="selectGetFileByTwoAndMore" parameterType="cn.fm.pojo.GetFile" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List" />
+        from getFile
+        <where>   gfclassifyid gfnumber gfdatetime gfcompany
+            <if test="gfname != null">
+                gfname = #{gfname}
+            </if>
+            <if test="gfclassifyid != 0">
+                and gfclassifyid = #{gfclassifyid}
+            </if>
+            <if test="gfnumber != 0">
+                and gfnumber = #{gfnumber}
+            </if>
+            <if test="gfcompany != null">
+                and gfcompany = #{gfcompany}
+            </if>
+            <if test="gfdatetime != null">
+                and gfdatetime = #{gfdatetime}
+            </if>
+        </where>
+
+
+    </select>
    <!--
 
-      加count(*) 显示查询结果的数量
+
   -->
     <select id="selectAllGetFile" resultType="cn.fm.pojo.GetFile">
          select
          <include refid="Base_Columns_List" />
         from getFile;
     </select>
+
+    <!--更新 -->
+    <update id="" parameterType="cn.fm.pojo.GetFile">
+       update getFile
+        <set>
+       <if test="gfname != null" >
+           gfname = #{gfname} ,
+       </if>
+        <if test="gfidea != null" >
+            gfidea = #{gfidea} ,
+        </if>
+        <if test="gfloader != null" >
+            gfloader = #{gfloader},
+        </if>
+        <if test="gfcompany != null" >
+            gfcompany = #{gfcompany},
+        </if>
+        <if test="gfresult != null" >
+            gfresult = #{gfresult},
+        </if>
+        <if test="gfclassifyname != null" >
+            gfclassifyname = #{gfclassifyname},
+        </if>
+        <if test="gfaddress != null" >
+            gfaddress = #{gfaddress},
+        </if>
+
+        <if test="gfdatetime != null" >
+            gfdatetime = #{gfdatetime},
+        </if>
+        <if test="gfnumber != 0" >
+            gfnumber = #{gfnumber}
+        </if>
+        </set>
+       where gfid = #{gfid}
+    </update>
+
+    <delete id="deleteGetFileById" parameterType="int">
+        delete from getFile where gfid = #{id}
+    </delete>
 </mapper>
