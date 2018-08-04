@@ -96,8 +96,8 @@ public class AdminController {
      */
     @RequestMapping(value = "/findWorker")
     @ResponseBody
-    public String findWorker() throws Exception{
-        return JSON.toJSONString(adminService.findAllWorker());
+    public String findWorker(int uid) throws Exception{
+        return JSON.toJSONString(adminService.findWorkerById(uid));
     }
 
     /**

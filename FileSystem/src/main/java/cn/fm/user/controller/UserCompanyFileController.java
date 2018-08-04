@@ -30,7 +30,7 @@ public class UserCompanyFileController {
    }
 
      /**
-     * 对文件进行单项的查询
+     * 对文件进行单项的查询 多项
      * @param companyFile
      * @return
      * @throws Exception
