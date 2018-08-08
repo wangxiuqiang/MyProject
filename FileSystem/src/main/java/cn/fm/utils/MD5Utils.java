@@ -1,6 +1,7 @@
 package cn.fm.utils;
 
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -25,6 +26,11 @@ public class MD5Utils {
 //    public static void main(String[] args) throws Exception {
 //       MD5Utils md5Utils = new MD5Utils();
 //       md5Utils.getSalt();
+//       System.out.println(md5("123"));
+
+//        SimpleHash simpleHash = new SimpleHash("md5","123","filename",1);
+//        System.out.println(simpleHash.toString());
+//        System.out.println(simpleHash.toHex());
 //    }
 
     public static String md5(String str) throws  Exception{

@@ -228,6 +228,7 @@
       <artifactId>shiro-ehcache</artifactId>
       <version>${shiro.version}</version>
     </dependency>
+
     <!--jsp支持 -->
     <dependency>
       <groupId>org.glassfish.web</groupId>

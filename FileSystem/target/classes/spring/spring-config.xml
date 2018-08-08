@@ -32,4 +32,24 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
+
+
+    <!--不需要进行上传,只是用来获取这个文件的路径-->
+    <!--设置文件上传,和上传的路径-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="2097152"/>
+        <!--<property name="uploadTempDir" ref="filePath"/>-->
+        <!--<property name="maxInMemorySize" value="0"/>-->
+    </bean>
+
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 生命周期管理器-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- 开启Shiro注解 -->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>-->
+    <aop:config proxy-target-class="true"></aop:config>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 </beans>

@@ -86,4 +86,6 @@ public interface UserCompanyFileService {
      *根据id删除单行数据
      */
     public int deleteCompanyFileById(int cfid) throws Exception;
+
+
 }
