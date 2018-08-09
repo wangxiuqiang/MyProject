@@ -1,5 +1,7 @@
 package cn.fm.utils;
 
+import cn.fm.pojo.Admin;
+import cn.fm.pojo.User;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
@@ -31,6 +33,14 @@ public class MD5Utils {
 //        SimpleHash simpleHash = new SimpleHash("md5","123","filename",1);
 //        System.out.println(simpleHash.toString());
 //        System.out.println(simpleHash.toHex());
+//        Admin  admin = new Admin();
+//        admin.setAname("123");
+//        admin.setApwd("123");
+//        User user = new User();
+//        user.setUpwd("456");
+//        user.setUname("456");
+//        PassWordHelper p = new PassWordHelper();
+//        p.SHA256(new Admin(),user);
 //    }
 
     public static String md5(String str) throws  Exception{
