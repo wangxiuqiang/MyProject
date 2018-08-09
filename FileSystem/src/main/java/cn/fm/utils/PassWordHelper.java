@@ -10,9 +10,9 @@ import java.util.Properties;
 
 public class PassWordHelper {
 
-    private static String algorithmName = "SHA-256";
-    private static String  salt ;
-    private static int hasIterations = 3;
+    private  String algorithmName = "SHA-256";
+    private  String  salt ;
+    private  int hasIterations = 3;
     /**
      * 用来获取配置文件中的数据,
      * 首先通过输入流 将文件读取,使用properties来加载输入流,从中获取信息
@@ -34,19 +34,28 @@ public class PassWordHelper {
 
 
 
-    public  String SHA256(Admin admin,User user) throws Exception{
-        System.out.println(admin.getApwd());
-        if(admin.getApwd() != null) {
-            salt = admin.getAname() + getSalt();
-            System.out.println(salt);
-            SimpleHash simpleHash = new SimpleHash(algorithmName,admin.getApwd(),salt,hasIterations);
-            System.out.println(simpleHash.toHex());
-            return simpleHash.toHex();
-        }else if(user.getUpwd() != null){
-            salt = user.getUname() + getSalt();
-            System.out.println(salt);
-            SimpleHash simpleHash = new SimpleHash(algorithmName,user.getUpwd(),salt,hasIterations);
-            System.out.println(simpleHash.toHex());
+
+    public  String SHA256(String upwd) throws Exception{
+//        System.out.println(admin.getApwd());
+//        if(admin.getApwd() != null) {
+//            salt = admin.getAname() + getSalt();
+//            System.out.println(salt);
+//            SimpleHash simpleHash = new SimpleHash(algorithmName,admin.getApwd(),salt,hasIterations);
+//            System.out.println(simpleHash.toHex());
+//            return simpleHash.toHex();
+//        }else if(user.getUpwd() != null){
+//            salt = user.getUname() + getSalt();
+//            System.out.println(salt);
+//            SimpleHash simpleHash = new SimpleHash(algorithmName,user.getUpwd(),salt,hasIterations);
+//            System.out.println(simpleHash.toHex());
+//            return simpleHash.toHex();
+//        }else {
+//            return null;
+//        }
+        salt = getSalt();
+        if (upwd != null) {
+            SimpleHash simpleHash = new SimpleHash(algorithmName,upwd,salt,hasIterations);
+//            System.out.println(simpleHash.toHex());
             return simpleHash.toHex();
         }else {
             return null;

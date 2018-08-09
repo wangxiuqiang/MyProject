@@ -1,20 +1,29 @@
 package cn.fm.admin.service;
 
-import cn.fm.pojo.Admin;
-import cn.fm.pojo.User;
-import cn.fm.pojo.WorkPlace;
+import cn.fm.pojo.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Set;
 
 public interface AdminService {
-    /***
-     * 查找admin 用来进行登录
-     * @param admin
-     * @return
-     * @throws Exception
-     */
-    public Admin selectAdmin(Admin admin) throws Exception;
+//    /***
+//     * 查找admin 用来进行登录
+//     * @param admin
+//     * @return
+//     * @throws Exception
+//     */
+//    public Admin selectAdmin(Admin admin) throws Exception;
+//    /**
+//     *  录入一个管理员
+//     */
+//    public int addAdmin(Admin admin) throws Exception;
 
+    /**
+     * 用于登录
+     */
+
+    public User findUserByEmail(String uemail) throws Exception;
     /**
      * 插入一个用户
      */
@@ -57,4 +66,63 @@ public interface AdminService {
      * 根据id进行修改用户信息
      */
     public int updateWorkerById(User user) throws Exception;
+
+    /**
+     * 查找全部角色,用来在添加用户的时候设置角色
+     * @return
+     * @throws Exception
+     */
+    public List<Role> selectAllRoles() throws Exception;
+
+    /**
+     * 查找全部的权限,在添加用户的时候设置
+     * @return
+     * @throws Exception
+     */
+    public List<Permission> selectAllPermissions() throws Exception;
+    /**
+     * 根据uid ,在关联表中查出角色id
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public int selectRid(int uid) throws Exception;
+
+    /**
+     * 根据rid查找角色的名称
+     * @param rid
+     * @return
+     * @throws Exception
+     */
+    public Set<String> selectRoles(int rid) throws Exception;
+
+    /**
+     * 根据角色id在关联表里查出相应的权限id
+     * @param rid
+     * @return
+     * @throws Exception
+     */
+    public int[] selectPids(int rid) throws Exception;
+
+    /**
+     * 根据权限id的数组查找权限
+     * @param list
+     * @return
+     * @throws Exception
+     */
+    public Set<String> selectPermissions(int[] list) throws Exception;
+    /**
+     * 将上面的几个函数整合一下查出一个全的来
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public Set<String> findPermissions(int uid) throws Exception;
+    /**
+     * 将上面的几个函数整合一下查出一个全的来Role
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public Set<String> findRoles(int uid) throws Exception;
 }

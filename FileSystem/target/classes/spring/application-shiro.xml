@@ -15,8 +15,8 @@
     </bean>
     <!--配置密码验证的规则-->
     <bean id="credentialsMather" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-        <property name="hashAlgorithmName" value="MD5"/>
-        <property name="hashIterations" value="1"/>
+        <property name="hashAlgorithmName" value="SHA-256"/>
+        <property name="hashIterations" value="2"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
     </bean>
     <!-- 安全管理器 -->

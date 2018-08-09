@@ -4,10 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fm.admin.dao.AdminMapper">
     <!--查询超级管理员用于登录-->
-    <select id="selectAdmin" resultType="cn.fm.pojo.Admin" parameterType="cn.fm.pojo.Admin">
-        select aname ,apwd from admin where aname = #{aname} and apwd = #{apwd};
-    </select>
+    <!--<select id="selectAdmin" resultType="cn.fm.pojo.Admin" parameterType="String">-->
+        <!--select aname ,apwd from admin where aname = #{aname};-->
+    <!--</select>-->
 
+    <!--<insert id="addAdmin" parameterType="cn.fm.pojo.Admin" >-->
+        <!--insert into admin(aname,apwd) VALUES (#{aname},#{apwd})-->
+    <!--</insert>-->
+
+
+    <select id="findUserByEmail" parameterType="String" >
+        select uid,uemail,upwd from user where uemail = #{uemail}
+    </select>
     <insert id="addUser" parameterType="cn.fm.pojo.User">
         insert into user(uname,ucompany,uemail,uupdatetime,code )
         values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code});
@@ -37,4 +45,37 @@
         update user set uname = #{uname} ,ucompany = #{ucompany},state = #{state},uemail = #{uemail} WHERE
         uid = #{uid};
     </update>
+
+    <!--查找全部的权限-->
+    <select id="selectAllPermissions" >
+        SELECT pid,pname,pdescribe from permission;
+    </select>
+    <!--查找全部的角色-->
+    <select id="selectAllRole" >
+        SELECT rid,rname,rdescribe from role;
+    </select>
+
+
+
+    <!--从关联表中根据Uid查Rid-->
+    <select id="selectRid" parameterType="int">
+        select rid from user_role where uid = #{uid}
+    </select>
+
+    <!--根据rid 查找相应的角色名称-->
+    <select id="selectRoles" parameterType="int">
+        select rname FROM role where rid = #{rid}
+    </select>
+<!--从关联表中根据Rid查出来Pid , 用于权限名的查询-->
+    <select id="selectPids" parameterType="int" resultType="int">
+        select pid from role_permission where rid = #{rid}
+    </select>
+
+    <!--根据角色查找权限的名称,用来验证-->
+    <select id="selectPermissions" parameterType="int" resultType="String">
+        select pname from permission where pid IN
+        <foreach collection="pids" item="item" close=")" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

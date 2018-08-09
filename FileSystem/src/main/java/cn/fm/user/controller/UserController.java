@@ -1,5 +1,7 @@
 package cn.fm.user.controller;
-
+/**
+ * 用户设置密码和 数据库备份
+ */
 
 import cn.fm.user.service.UserRegService;
 import cn.fm.utils.MysqlBackupUtils;

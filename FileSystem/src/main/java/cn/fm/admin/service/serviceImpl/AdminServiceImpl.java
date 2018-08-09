@@ -2,15 +2,15 @@ package cn.fm.admin.service.serviceImpl;
 
 import cn.fm.admin.service.AdminService;
 import cn.fm.admin.dao.AdminMapper;
-import cn.fm.pojo.Admin;
-import cn.fm.pojo.User;
-import cn.fm.pojo.WorkPlace;
+import cn.fm.pojo.*;
 import cn.fm.utils.MD5Utils;
 import cn.fm.utils.MailUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -19,15 +19,25 @@ public class AdminServiceImpl implements AdminService{
     @Autowired
     AdminMapper adminMapper;
 
-    /***
-     * 查找admin用来进行登录
-     * @param admin
-     * @return
-     * @throws Exception
-     */
+//    /***
+//     * 查找admin用来进行登录
+//     * @param admin
+//     * @return
+//     * @throws Exception
+//     */
+//    @Override
+//    public Admin selectAdmin(Admin admin) throws Exception {
+//        return adminMapper.selectAdmin(admin.getAname());
+//    }
+
+//    @Override
+//    public int addAdmin(Admin admin) throws Exception {
+//        return adminMapper.addAdmin(admin);
+//    }
+
     @Override
-    public Admin selectAdmin(Admin admin) throws Exception {
-        return adminMapper.selectAdmin(admin);
+    public User findUserByEmail(String uemail) throws Exception {
+        return adminMapper.findUserByEmail(uemail);
     }
 
     /**
@@ -38,7 +48,6 @@ public class AdminServiceImpl implements AdminService{
     public int addUser(User user) throws Exception {
         user.setCode(UUID.randomUUID().toString());
         String pwd = user.getUpwd();
-
         MailUtils.sendMail(user.getCode(),user.getUemail());
         return adminMapper.addUser(user);
     }
@@ -97,5 +106,81 @@ public class AdminServiceImpl implements AdminService{
      */
     public int updateWorkerById(User user) throws Exception{
         return adminMapper.updateWorkerById(user);
+    }
+
+    /**
+     * 查找全部角色,用来在添加用户的时候设置角色
+     * @return
+     * @throws Exception
+     */
+    public List<Role> selectAllRoles() throws Exception{
+        return adminMapper.selectAllRoles();
+    }
+
+    /**
+     * 查找全部的权限,在添加用户的时候设置
+     * @return
+     * @throws Exception
+     */
+    public List<Permission> selectAllPermissions() throws Exception{
+        return adminMapper.selectAllPermissions();
+    }
+    /**
+     * 根据uid ,在关联表中查出角色id
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public int selectRid(int uid) throws Exception{
+        return adminMapper.selectRid(uid);
+    }
+
+    /**
+     * 根据rid查找角色的名称
+     * @param rid
+     * @return
+     * @throws Exception
+     */
+    public Set<String> selectRoles(int rid) throws Exception {
+        return adminMapper.selectRoles(rid);
+    }
+
+    /**
+     * 根据角色id在关联表里查出相应的权限id
+     * @param rid
+     * @return
+     * @throws Exception
+     */
+    public int[] selectPids(int rid) throws Exception{
+        return adminMapper.selectPids(rid);
+    }
+
+    /**
+     * 根据权限id的数组查找权限
+     * @param list
+     * @return
+     * @throws Exception
+     */
+    public Set<String> selectPermissions( int[] list) throws Exception {
+        return adminMapper.selectPermissions(list);
+    }
+
+    /**
+     * 将上面的几个函数整合一下查出一个全的来
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public Set<String> findPermissions(int uid) throws Exception {
+         return selectPermissions(selectPids(selectRid(uid)));
+    }
+    /**
+     * 将上面的几个函数整合一下查出一个全的来Role
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public Set<String> findRoles(int uid) throws Exception {
+        return selectRoles(selectRid(uid));
     }
 }

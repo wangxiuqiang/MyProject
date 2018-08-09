@@ -1,6 +1,7 @@
 package cn.fm.admin.controller;
 
 import cn.fm.admin.service.AdminService;
+import cn.fm.pojo.Admin;
 import cn.fm.pojo.User;
 import cn.fm.pojo.WorkPlace;
 import cn.fm.utils.DateToStringUtils;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
+/**
+ * 管理员用于对用户的增删改查操作
+ */
 @Controller
 @RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8")
 public class AdminController {
@@ -33,6 +37,7 @@ public class AdminController {
 //    }
 
     /**
+     * 录入用户的信息
      * 接受前端的数据,进行数据的写入
      * @param user
      * @return
@@ -47,8 +52,16 @@ public class AdminController {
         }else {
             return JSON.toJSONString(StatusUtils.FAILURE_REG);
         }
-
     }
+//    @RequestMapping(value = "/regAdmin")
+//    @ResponseBody
+//    public String regAdmin(@RequestBody Admin admin) throws Exception {
+//        if(adminService.addAdmin(admin) != 0) {
+//            return JSON.toJSONString(StatusUtils.SUCCESS_REG);
+//        }else {
+//            return JSON.toJSONString(StatusUtils.FAILURE_REG);
+//        }
+//    }
 
     /**
      * 查找相应的单位
@@ -129,5 +142,26 @@ public class AdminController {
         }
     }
 
+    /**
+     * 返回全部的权限
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectAllPermissions")
+    @ResponseBody
+    public String selectAllPermissions() throws Exception {
+        return JSON.toJSONString(adminService.selectAllPermissions());
+    }
+
+    /**
+     * 返回全部的角色
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectAllRoles")
+    @ResponseBody
+    public String selectAllRoles() throws Exception {
+        return JSON.toJSONString(adminService.selectAllRoles());
+    }
 
 }

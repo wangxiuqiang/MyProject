@@ -10,7 +10,8 @@ upwd varchar(128) ,
 state int default 0,
 uupdatetime varchar(23) ,
 code varchar(50) NOT NULL,
-ucompany varchar(30)
+ucompany varchar(30),
+state int
 );
 
 
@@ -21,13 +22,6 @@ wname varchar(30) NOT NULL
 
  insert into workPlace(wname) values("一号楼");
  insert into workPlace(wname) values("二号楼"); 
-
-create table admin (
-aid int primary key auto_increment ,
-aname varchar(30) NOT NULL ,
-apwd varchar(256) NOT NULL
-);
-insert into admin(aname,apwd) values("admin","admin");
 
 
 create table classify(
@@ -70,3 +64,69 @@ cfclassifyid int ,
 cfclassifyname varchar(100),
 foreign key(cfclassifyid) references classify(cyid)
 );
+
+
+create table role(
+rid int primary key auto_increment,
+rname varchar(30) ,
+rdescribe varchar(100)
+);
+
+insert into role(rname,rdescribe) values("admin","超级用户的角色");
+insert into role(rname,rdescribe) values("user","普通用户的角色");
+
+create table permission(
+pid int primary key auto_increment,
+pname varchar(30),
+pdescribe varchar(100)
+);
+
+insert into permission(pname,pdescribe) values("companyFile:select","对单位制发文件的查询权限");
+insert into permission(pname,pdescribe) values("companyFile:update","对单位制发文件的更新权限");
+insert into permission(pname,pdescribe) values("companyFile:delete","对单位制发文件的删除权限");
+insert into permission(pname,pdescribe) values("companyFile:insert","对单位制发文件的录入权限");
+insert into permission(pname,pdescribe) values("getFile:select","对收到文件的查询权限");
+insert into permission(pname,pdescribe) values("getFile:update","对收到文件的修改权限");
+insert into permission(pname,pdescribe) values("getFile:delete","对收到文件的删除权限");
+insert into permission(pname,pdescribe) values("getFile:insert","对收到文件的录入权限");
+insert into permission(pname,pdescribe) values("user:insert","对用户的录入权限");
+insert into permission(pname,pdescribe) values("user:delete","对用户的删除权限");
+insert into permission(pname,pdescribe) values("user:update","对用户的更新权限");
+insert into permission(pname,pdescribe) values("user:select","对用户的查询权限");
+
+
+create table user_roles (
+uid int ,
+rid int ,
+primary key(uid,rid)
+);
+
+insert into role_permission(rid,pid) values(1,1);
+
+create table role_permission (
+rid int,
+pid int,
+primary key(rid,pid)
+);
+
+insert into role_permission(rid,pid) values(1,1);
+insert into role_permission(rid,pid) values(1,2);
+insert into role_permission(rid,pid) values(1,3);
+insert into role_permission(rid,pid) values(1,4);
+insert into role_permission(rid,pid) values(1,5);
+insert into role_permission(rid,pid) values(1,6);
+insert into role_permission(rid,pid) values(1,7);
+insert into role_permission(rid,pid) values(1,8);
+insert into role_permission(rid,pid) values(1,9);
+insert into role_permission(rid,pid) values(1,10);
+insert into role_permission(rid,pid) values(1,11);
+insert into role_permission(rid,pid) values(1,12);
+
+insert into role_permission(rid,pid) values(2,1);
+insert into role_permission(rid,pid) values(2,2);
+insert into role_permission(rid,pid) values(2,3);
+insert into role_permission(rid,pid) values(2,4);
+insert into role_permission(rid,pid) values(2,5);
+insert into role_permission(rid,pid) values(2,6);
+insert into role_permission(rid,pid) values(2,7);
+insert into role_permission(rid,pid) values(2,8);

@@ -4,10 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fm.admin.dao.AdminMapper">
     <!--查询超级管理员用于登录-->
-    <select id="selectAdmin" resultType="cn.fm.pojo.Admin" parameterType="cn.fm.pojo.Admin">
-        select aname ,apwd from admin where aname = #{aname} and apwd = #{apwd};
-    </select>
+    <!--<select id="selectAdmin" resultType="cn.fm.pojo.Admin" parameterType="String">-->
+        <!--select aname ,apwd from admin where aname = #{aname};-->
+    <!--</select>-->
 
+    <!--<insert id="addAdmin" parameterType="cn.fm.pojo.Admin" >-->
+        <!--insert into admin(aname,apwd) VALUES (#{aname},#{apwd})-->
+    <!--</insert>-->
+
+
+    <select id="findUserByEmail" parameterType="String" >
+        select uemail,upwd from user where uemail = #{uemail}
+    </select>
     <insert id="addUser" parameterType="cn.fm.pojo.User">
         insert into user(uname,ucompany,uemail,uupdatetime,code )
         values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code});
