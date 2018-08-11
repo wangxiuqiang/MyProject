@@ -125,6 +125,11 @@ public class AdminServiceImpl implements AdminService{
     public List<Permission> selectAllPermissions() throws Exception{
         return adminMapper.selectAllPermissions();
     }
+
+    /**
+     * 根据用户查角色和权限,写到shiro里面
+     */
+
     /**
      * 根据uid ,在关联表中查出角色id
      * @param uid

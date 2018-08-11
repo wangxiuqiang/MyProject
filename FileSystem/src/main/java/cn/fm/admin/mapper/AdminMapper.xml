@@ -51,7 +51,7 @@
         SELECT pid,pname,pdescribe from permission;
     </select>
     <!--查找全部的角色-->
-    <select id="selectAllRole" >
+    <select id="selectAllRoles" >
         SELECT rid,rname,rdescribe from role;
     </select>
 
