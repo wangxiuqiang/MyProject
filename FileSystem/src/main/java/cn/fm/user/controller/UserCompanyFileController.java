@@ -5,10 +5,14 @@ import cn.fm.user.service.UserCompanyFileService;
 import cn.fm.user.service.serviceImpl.UserCompanyFileServiceImpl;
 import cn.fm.utils.StatusUtils;
 import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/worker",produces = "application/json;charset=utf8")
@@ -22,7 +26,7 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-
+    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
    @RequestMapping(value = "/findCompanyFiles")
    @ResponseBody
     public String findCompanyFiles() throws Exception {
@@ -35,10 +39,10 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-
+     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/findTypeCompanyFiles")
     @ResponseBody
-    public String findTypeCompanyFiles(CompanyFile companyFile) throws Exception {
+    public String findTypeCompanyFiles(@RequestBody CompanyFile companyFile) throws Exception {
         if(companyFile.getCfname() != null || companyFile.getCfclassifyid() != 0 || companyFile.getCflanguage() != null
                 || companyFile.getCfdate() != null || companyFile.getCfnumber() != 0) {
             return JSON.toJSONString(userCompanyFileService.findTypeFiles(companyFile));
@@ -53,9 +57,10 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
+    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/infoSubCompanyFile")
     @ResponseBody
-    public String infoSubCompanyFile(CompanyFile companyFile) throws Exception {
+    public String infoSubCompanyFile(@RequestBody CompanyFile companyFile) throws Exception {
 
         if(userCompanyFileService.insertCompanyFile(companyFile) != 0 ) {
             return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
@@ -67,9 +72,10 @@ public class UserCompanyFileController {
     /**
      * 根据id更新  文件
      */
+    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/updateSubCompanyFile")
     @ResponseBody
-    public String updateSubGetFile(CompanyFile companyFile) throws Exception {
+    public String updateSubGetFile(@RequestBody CompanyFile companyFile) throws Exception {
 
         if(userCompanyFileService.updateCompanyFileById(companyFile) != 0) {
             return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
@@ -80,9 +86,10 @@ public class UserCompanyFileController {
     /**
      * 根据id删除单条记录
      */
+    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delCompanyFile")
     @ResponseBody
-    public String delGetFile(int cfid) throws Exception {
+    public String delGetFile(@RequestBody int cfid) throws Exception {
         if(cfid == 0) {
             return JSON.toJSONString(StatusUtils.IS_NULL);
         }
@@ -92,4 +99,21 @@ public class UserCompanyFileController {
             return JSON.toJSONString(StatusUtils.FAILURE_DEL);
         }
     }
+
+    /**
+     * 用来捕捉 是不是没有登录或者没有权限
+     * @return
+     */
+
+    @ExceptionHandler({UnauthenticatedException.class})
+    @ResponseBody
+    public String no_sujectLogin() {
+        return JSON.toJSONString(StatusUtils.FAILURE_LOGIN);
+    }
+    @ExceptionHandler({UnauthorizedException.class})
+    @ResponseBody
+    public String nohave_role_permission() {
+        return JSON.toJSONString(StatusUtils.NO_ROLE_PERMISSION);
+    }
+
 }

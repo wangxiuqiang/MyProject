@@ -47,4 +47,10 @@ public class StatusUtils {
     public static final int SUCCESS_DEL = 9;
 
     public static final int FAILURE_DEL = 10;
+
+    /**
+     * 没有相关权限
+     */
+    public static final int NO_ROLE_PERMISSION = -1;
+
 }

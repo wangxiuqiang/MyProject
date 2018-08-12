@@ -42,7 +42,7 @@ public class MailUtils {
         message.setSubject("请激活");
 //设置文件正文
       //  String content = "<a href='http://localhost:8080/user/activecode?code="+code+"'>点击激活</a>";
-        String content = "<a href='http://39.106.191.144:8087/FileSystem/user/activecode?code="+code+"'>点击激活</a>";
+        String content = "<a href='http://39.106.191.144:8087/user/activecode?code="+code+"'>点击激活</a>";
         message.setContent(content,"text/html;charset=UTF-8");
         Transport.send(message);
     }

@@ -9,6 +9,15 @@ public class User {
     private int state;
     private String uemail;
     private String code;
+    private int ifAdmin;
+
+    public int getIfAdmin() {
+        return ifAdmin;
+    }
+
+    public void setIfAdmin(int ifAdmin) {
+        this.ifAdmin = ifAdmin;
+    }
 
     public int getUid() {
         return uid;

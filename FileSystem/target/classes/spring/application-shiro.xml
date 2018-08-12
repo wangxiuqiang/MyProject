@@ -30,14 +30,13 @@
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
         <property name="securityManager" ref="securityManager"/>
         <!-- 身份认证失败，则跳转到登录页面的配置 ,默认是/login.jsp-->
-        <property name="loginUrl" value="/loginBefore"/>
+        <property name="loginUrl" value="/loginFailure"/>
         <!-- 权限认证失败，则跳转到指定页面 -->
-        <property name="unauthorizedUrl" value="/login"/>
+        <property name="unauthorizedUrl" value="/authcFailure"/>
         <!-- Shiro连接约束配置,即过滤链的定义 -->
         <property name="filterChainDefinitions">
             <value>
                 /login=anon
-                /success=authc
             </value>
         </property>
     </bean>

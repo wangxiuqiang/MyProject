@@ -1,6 +1,6 @@
 package cn.fm.utils;
 
-import cn.fm.pojo.Admin;
+
 import cn.fm.pojo.User;
 import org.apache.shiro.crypto.hash.SimpleHash;
 

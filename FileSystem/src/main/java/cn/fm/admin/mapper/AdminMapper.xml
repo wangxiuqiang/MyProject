@@ -17,10 +17,13 @@
         select uid,uemail,upwd from user where uemail = #{uemail}
     </select>
     <insert id="addUser" parameterType="cn.fm.pojo.User">
-        insert into user(uname,ucompany,uemail,uupdatetime,code )
-        values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code});
+        insert into user(uname,ucompany,uemail,uupdatetime,code,ifAdmin )
+        values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code},#{ifAdmin});
     </insert>
-
+    <!-- 更新的时候写权限到数据库-->
+    <insert id="insertUser_Role" parameterType="int" >
+         insert into user_roles(uid,pid) VALUES(#{uid},#{pid})
+    </insert>
     <!--查找工作的单位-->
     <select id="selectWorkPlace" resultType="cn.fm.pojo.WorkPlace">
         select wid ,wname from workPlace;
@@ -78,4 +81,5 @@
             #{item}
         </foreach>
     </select>
+
 </mapper>

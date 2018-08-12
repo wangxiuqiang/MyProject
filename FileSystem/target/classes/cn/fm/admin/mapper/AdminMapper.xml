@@ -14,13 +14,16 @@
 
 
     <select id="findUserByEmail" parameterType="String" >
-        select uemail,upwd from user where uemail = #{uemail}
+        select uid,uemail,upwd from user where uemail = #{uemail}
     </select>
     <insert id="addUser" parameterType="cn.fm.pojo.User">
-        insert into user(uname,ucompany,uemail,uupdatetime,code )
-        values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code});
+        insert into user(uname,ucompany,uemail,uupdatetime,code,ifAdmin )
+        values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code},#{ifAdmin});
     </insert>
-
+    <!-- 更新的时候写权限到数据库-->
+    <insert id="insertUser_Role" parameterType="int" >
+         insert into user_roles(uid,pid) VALUES(#{uid},#{pid})
+    </insert>
     <!--查找工作的单位-->
     <select id="selectWorkPlace" resultType="cn.fm.pojo.WorkPlace">
         select wid ,wname from workPlace;
@@ -45,4 +48,38 @@
         update user set uname = #{uname} ,ucompany = #{ucompany},state = #{state},uemail = #{uemail} WHERE
         uid = #{uid};
     </update>
+
+    <!--查找全部的权限-->
+    <select id="selectAllPermissions" >
+        SELECT pid,pname,pdescribe from permission;
+    </select>
+    <!--查找全部的角色-->
+    <select id="selectAllRoles" >
+        SELECT rid,rname,rdescribe from role;
+    </select>
+
+
+
+    <!--从关联表中根据Uid查Rid-->
+    <select id="selectRid" parameterType="int">
+        select rid from user_role where uid = #{uid}
+    </select>
+
+    <!--根据rid 查找相应的角色名称-->
+    <select id="selectRoles" parameterType="int">
+        select rname FROM role where rid = #{rid}
+    </select>
+<!--从关联表中根据Rid查出来Pid , 用于权限名的查询-->
+    <select id="selectPids" parameterType="int" resultType="int">
+        select pid from role_permission where rid = #{rid}
+    </select>
+
+    <!--根据角色查找权限的名称,用来验证-->
+    <select id="selectPermissions" parameterType="int" resultType="String">
+        select pname from permission where pid IN
+        <foreach collection="pids" item="item" close=")" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
 </mapper>

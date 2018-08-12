@@ -2,7 +2,6 @@ package cn.fm.Realm;
 
 import cn.fm.admin.dao.AdminMapper;
 import cn.fm.admin.service.AdminService;
-import cn.fm.pojo.Admin;
 import cn.fm.pojo.User;
 import cn.fm.utils.PassWordHelper;
 import org.apache.shiro.authc.*;
