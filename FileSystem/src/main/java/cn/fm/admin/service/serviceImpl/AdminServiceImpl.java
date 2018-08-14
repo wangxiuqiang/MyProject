@@ -5,6 +5,7 @@ import cn.fm.admin.dao.AdminMapper;
 import cn.fm.pojo.*;
 import cn.fm.utils.MD5Utils;
 import cn.fm.utils.MailUtils;
+import cn.fm.vo.UserExtend;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,11 +46,11 @@ public class AdminServiceImpl implements AdminService{
      * @return
      */
     @Override
-    public int addUser(User user) throws Exception {
+    public int addUser(UserExtend user) throws Exception {
         user.setCode(UUID.randomUUID().toString());
-        String pwd = user.getUpwd();
         MailUtils.sendMail(user.getCode(),user.getUemail());
-        return adminMapper.addUser(user);
+
+        return adminMapper.addUser(user) + adminMapper.addUser_Role(user.getUid(),user.getRid());
     }
 
     /**

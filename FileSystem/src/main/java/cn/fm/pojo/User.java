@@ -1,7 +1,10 @@
 package cn.fm.pojo;
 
+import javax.validation.constraints.NotNull;
+
 public class User {
     private int  uid;
+
     private String uname;
     private String upwd;
     private String ucompany;
@@ -10,7 +13,6 @@ public class User {
     private String uemail;
     private String code;
     private int ifAdmin;
-
     public int getIfAdmin() {
         return ifAdmin;
     }

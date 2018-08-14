@@ -1,20 +1,31 @@
 package cn.fm.pojo;
 
+import javax.validation.constraints.NotNull;
+
 public class CompanyFile {
 
+
     private int cfid;
+    @NotNull(message = "{companyfile.name.isnull}")
     private String cfname;
     private String cfdate;
+    @NotNull(message = "{companyfile.accept.isnull}")
     private String cfaccept;
+    @NotNull(message = "{companyfile.editor.isnull}")
     private String cfeditor;
+    @NotNull(message = "{companyfile.send.isnull}")
     private String cfsend;
+    @NotNull(message = "{companyfile.level.isnull}")
     private String cflevel;
     private String cfloader;
+    @NotNull(message = "{companyfile.number.isnull}")
     private int cfnumber;
     private String cffontid;
+    @NotNull(message = "{companyfile.language.isnull}")
     private String cflanguage;
     private String cfaddress;
     private int cfclassifyid;
+    @NotNull(message = "{companyfile.classifyname.isnull}")
     private String cfclassifyname;
 
     public int getCfid() {

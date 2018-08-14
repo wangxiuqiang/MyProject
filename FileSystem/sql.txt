@@ -130,3 +130,13 @@ insert into role_permission(rid,pid) values(2,5);
 insert into role_permission(rid,pid) values(2,6);
 insert into role_permission(rid,pid) values(2,7);
 insert into role_permission(rid,pid) values(2,8);
+
+
+create table borrow (
+uid int ,
+fileid int,
+filetype int not null,
+borrowtime timestamp ,
+backtime timestamp null,
+primary key(uid,fileid)
+);

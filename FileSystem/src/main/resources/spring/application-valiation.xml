@@ -23,16 +23,20 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
     </bean>
 
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!--文件编码方式-->
+        <property name="fileEncodings" value="utf-8" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <!--对资源文件内容缓存时间单位是秒，120秒后重新加载-->
+        <property name="cacheSeconds" value="120" />
         <property name="basenames">
             <list>
-                <value>classpath:validation/test</value>
+                <value>classpath:validation/addUser</value>
+                <value>classpath:validation/insertCompanyFile</value>
+                <value>classpath:validation/insertGetFile</value>
                 <!--这里不加.properties后缀是因为上面property中的name是basenames-->
             </list>
         </property>
-        <!--文件编码方式-->
-        <property name="fileEncodings" value="utf-8" />
-        <!--对资源文件内容缓存时间单位是秒，120秒后重新加载-->
-        <property name="cacheSeconds" value="30" />
+
     </bean>
 
 </beans>

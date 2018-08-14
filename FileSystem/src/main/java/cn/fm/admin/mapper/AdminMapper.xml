@@ -16,10 +16,14 @@
     <select id="findUserByEmail" parameterType="String" >
         select uid,uemail,upwd from user where uemail = #{uemail}
     </select>
-    <insert id="addUser" parameterType="cn.fm.pojo.User">
+    <insert id="addUser" parameterType="cn.fm.vo.UserExtend">
         insert into user(uname,ucompany,uemail,uupdatetime,code,ifAdmin )
         values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code},#{ifAdmin});
     </insert>
+    <!--插入用户和角色的关联-->
+    <select id="addUser_Role" parameterType="int">
+        insert into user_roles(uid,rid) value(#{uid},#{rid})
+    </select>
     <!-- 更新的时候写权限到数据库-->
     <insert id="insertUser_Role" parameterType="int" >
          insert into user_roles(uid,pid) VALUES(#{uid},#{pid})

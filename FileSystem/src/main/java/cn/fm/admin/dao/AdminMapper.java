@@ -1,6 +1,7 @@
 package cn.fm.admin.dao;
 
 import cn.fm.pojo.*;
+import cn.fm.vo.UserExtend;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,12 +28,16 @@ public interface AdminMapper {
      * 写入一个用户
      */
 
-    public int addUser(User user) throws Exception;
+    public int addUser(UserExtend user) throws Exception;
 
     /**
      * 查找全部的工作单位
      */
     public List<WorkPlace> selectWorkPlace() throws Exception;
+    /**
+     * 插入用户和角色的关联
+     */
+    public int addUser_Role(int uid,int rid) throws Exception;
 
     /**
      * 指定用户的时候判断用户是不是存在,根据email

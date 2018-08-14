@@ -1,6 +1,7 @@
 package cn.fm.admin.service;
 
 import cn.fm.pojo.*;
+import cn.fm.vo.UserExtend;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -27,7 +28,8 @@ public interface AdminService {
     /**
      * 插入一个用户
      */
-    public int addUser(User user) throws Exception;
+    public int addUser(UserExtend user) throws Exception;
+
 
     /**
      * 查找全部的工作单位

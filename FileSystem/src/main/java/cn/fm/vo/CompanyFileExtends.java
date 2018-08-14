@@ -11,6 +11,7 @@ public class CompanyFileExtends {
      */
     private int state;
     private int count;
+
     private List<CompanyFile> companyFiles;
 
     public List<CompanyFile> getCompanyFiles() {

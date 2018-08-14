@@ -5,12 +5,16 @@ import cn.fm.pojo.User;
 import cn.fm.pojo.WorkPlace;
 import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.StatusUtils;
+import cn.fm.vo.UserExtend;
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -19,7 +23,7 @@ import java.util.*;
  * 管理员用于对用户的增删改查操作
  */
 @Controller
-@RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8" ,method = RequestMethod.POST)
+@RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8")
 public class AdminController {
     /**
      * 引入service接口的实现类
@@ -42,11 +46,15 @@ public class AdminController {
      * @param user
      * @return
      */
-    @RequiresRoles("admin")
+//    @RequiresRoles("admin")
     @RequestMapping(value = "/regSub")
     @ResponseBody
-    public String addUser(@RequestBody User user,@RequestBody int rid) throws Exception{
+    public String addUser(@Validated UserExtend user , BindingResult bindingResult) throws Exception{
 
+        if(bindingResult.hasErrors()) {
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            return JSON.toJSONString(allErrors);
+        }
         user.setUupdatetime(DateToStringUtils.dataTostring());
         if(adminService.addUser(user) != 0 ){
             return JSON.toJSONString(StatusUtils.SUCCESS_REG);

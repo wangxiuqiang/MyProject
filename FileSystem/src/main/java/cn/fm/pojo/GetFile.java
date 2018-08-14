@@ -1,17 +1,23 @@
 package cn.fm.pojo;
 
+import javax.validation.constraints.NotNull;
+
 public class GetFile {
 
     private int gfid;
+    @NotNull(message = "{getfile.name.isnull}")
     private String gfname;
     private String gfidea;
     private String gfloader;
+    @NotNull(message = "{getfile.company.isnull}")
     private String gfcompany;
     private String gfresult;
     private int gfclassifyid;
+    @NotNull(message = "{getfile.classifyname.isnull}")
     private String gfclassifyname;
     private String gfaddress;
     private String gfdatetime;
+    @NotNull(message = "{getfile.number.isnull}")
     private int gfnumber;
 
     @Override
