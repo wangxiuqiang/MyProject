@@ -48,9 +48,11 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public int addUser(UserExtend user) throws Exception {
         user.setCode(UUID.randomUUID().toString());
-        MailUtils.sendMail(user.getCode(),user.getUemail());
-
-        return adminMapper.addUser(user) + adminMapper.addUser_Role(user.getUid(),user.getRid());
+//        MailUtils.sendMail(user.getCode(),user.getUemail());
+       int uid = adminMapper.addUser(user);
+       System.out.println(uid);
+       System.out.println(user.getUid());
+       return adminMapper.addUser_Role(user.getUid(),user.getRid()) ;
     }
 
     /**

@@ -76,7 +76,13 @@ public interface UserCompanyFileService {
      * 查询全部的单位制发文件文件信息
      */
     public List<CompanyFile> selectAllCompanyFile() throws  Exception;
-
+    /**
+     * 根据id找文件
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    public CompanyFile selectCompanyFileById(int cfid) throws Exception;
     /**
      * 更改数据
      */

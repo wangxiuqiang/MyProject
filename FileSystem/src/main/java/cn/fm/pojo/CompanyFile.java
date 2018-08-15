@@ -4,6 +4,14 @@ import javax.validation.constraints.NotNull;
 
 public class CompanyFile {
 
+    /**
+     * 用来区分两种文件 type = 1
+     */
+    private int type;
+    /**
+     * 是不是借出  ,1 没有借出, 2 借出
+     */
+    private int isborrow;
 
     private int cfid;
     @NotNull(message = "{companyfile.name.isnull}")
@@ -28,6 +36,22 @@ public class CompanyFile {
     @NotNull(message = "{companyfile.classifyname.isnull}")
     private String cfclassifyname;
 
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getIsborrow() {
+        return isborrow;
+    }
+
+    public void setIsborrow(int isborrow) {
+        this.isborrow = isborrow;
+    }
     public int getCfid() {
         return cfid;
     }

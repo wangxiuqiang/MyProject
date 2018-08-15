@@ -24,7 +24,7 @@ public class MD5Utils {
        return properties.getProperty("salt");
     }
 
-//    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 //       MD5Utils md5Utils = new MD5Utils();
 //       md5Utils.getSalt();
 //       System.out.println(md5("123"));
@@ -40,7 +40,10 @@ public class MD5Utils {
 //        user.setUname("456");
 //        PassWordHelper p = new PassWordHelper();
 //        p.SHA256(new Admin(),user);
-//    }
+
+        PassWordHelper passWordHelper = new PassWordHelper();
+        passWordHelper.SHA256("123");
+    }
 
     public static String md5(String str) throws  Exception{
         MD5Utils md5Utils = new MD5Utils();

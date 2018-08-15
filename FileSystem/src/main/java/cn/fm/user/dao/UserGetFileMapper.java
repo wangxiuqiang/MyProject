@@ -25,6 +25,13 @@ public interface UserGetFileMapper {
     public Classify selectClassify(int classifyid) throws Exception;
 
     /**
+     * 根据id找文件
+     * @param gfid
+     * @return
+     * @throws Exception
+     */
+    public GetFile selectGetFileById(int gfid) throws Exception;
+    /**
      * 单独用名字来做模糊查询
      * @param gfname
      * @return
@@ -87,6 +94,6 @@ public interface UserGetFileMapper {
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore(@Param(value = "getFile") GetFile getFile);
+    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile);
 
 }

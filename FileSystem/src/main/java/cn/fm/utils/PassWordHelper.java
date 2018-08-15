@@ -55,7 +55,7 @@ public class PassWordHelper {
         salt = getSalt();
         if (upwd != null) {
             SimpleHash simpleHash = new SimpleHash(algorithmName,upwd,salt,hasIterations);
-//            System.out.println(simpleHash.toHex());
+            System.out.println(simpleHash.toHex());
             return simpleHash.toHex();
         }else {
             return null;

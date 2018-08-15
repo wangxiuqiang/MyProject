@@ -13,17 +13,20 @@
     <!--</insert>-->
 
 
-    <select id="findUserByEmail" parameterType="String" >
-        select uid,uemail,upwd from user where uemail = #{uemail}
+    <select id="findUserByEmail" parameterType="String" resultType="cn.fm.pojo.User">
+        select uid,uemail,upwd,state from user where uemail = #{uemail}
     </select>
-    <insert id="addUser" parameterType="cn.fm.vo.UserExtend">
+    <insert id="addUser" parameterType="cn.fm.vo.UserExtend"  >
         insert into user(uname,ucompany,uemail,uupdatetime,code,ifAdmin )
-        values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code},#{ifAdmin});
+        values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code},#{ifAdmin})
+        <selectKey keyProperty="uid" resultType="java.lang.Integer" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
     </insert>
     <!--插入用户和角色的关联-->
-    <select id="addUser_Role" parameterType="int">
-        insert into user_roles(uid,rid) value(#{uid},#{rid})
-    </select>
+    <insert id="addUser_Role" parameterType="int">
+        insert into user_roles(uid,rid) values(#{uid},#{rid})
+    </insert>
     <!-- 更新的时候写权限到数据库-->
     <insert id="insertUser_Role" parameterType="int" >
          insert into user_roles(uid,pid) VALUES(#{uid},#{pid})
@@ -38,27 +41,44 @@
     </select>
 
     <select id="findAllWorker" resultType="cn.fm.pojo.User">
-        select uid,uname,ucompany,uupdatetime,uemail,state from user;
+        select uid,uname,ucompany,uupdatetime,uemail,state,ifAdmin from user;
     </select>
 
     <select id="findWorkerById" resultType="cn.fm.pojo.User">
-        select uid,uname,ucompany,uupdatetime,uemail,state from user where uid = #{id};
+        select uid,uname,ucompany,uupdatetime,uemail,state,ifAdmin from user where uid = #{id};
     </select>
 
     <delete id="deleteWorkerById" >
         DELETE FROM user where uid = #{id}
     </delete>
     <update id="updateWorkerById" parameterType="cn.fm.pojo.User">
-        update user set uname = #{uname} ,ucompany = #{ucompany},state = #{state},uemail = #{uemail} WHERE
-        uid = #{uid};
+        update user
+        <set>
+            <if test="uname != null">
+                uname = #{uname} ,
+            </if>
+            <if test="ucompany != null">
+                ucompany = #{ucompany},
+            </if>
+            <if test="state != 0">
+                state = #{state},
+            </if>
+            <if test="uemail != null">
+                uemail = #{uemail},
+            </if>
+            <if test="upwd != null">
+                upwd = #{upwd}
+            </if>
+        </set>
+       WHERE uid = #{uid};
     </update>
 
     <!--查找全部的权限-->
-    <select id="selectAllPermissions" >
+    <select id="selectAllPermissions" resultType="cn.fm.pojo.Permission">
         SELECT pid,pname,pdescribe from permission;
     </select>
     <!--查找全部的角色-->
-    <select id="selectAllRoles" >
+    <select id="selectAllRoles" resultType="cn.fm.pojo.Role" >
         SELECT rid,rname,rdescribe from role;
     </select>
 

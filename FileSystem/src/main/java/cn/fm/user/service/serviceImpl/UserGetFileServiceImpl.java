@@ -51,8 +51,9 @@ public class UserGetFileServiceImpl implements UserGetFileService{
         StringBuffer address = new StringBuffer();
         StringBuffer classifyname = new StringBuffer();
         int id = getFile.getGfclassifyid();
+        System.out.println(id);
         while( id != 0) {
-            Classify classify = selectClassify(id);
+            Classify classify = this.selectClassify(id);
             /**
              * 最上层的分类的父分类id为0
              */
@@ -68,6 +69,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
             }
         }
 
+        System.out.println(address);
+        System.out.println(classifyname);
         /**
          * 因为取分类名是从后取的,,所以应该把address和classifyname ,反过来
          */
@@ -85,9 +88,10 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 
         String classifynameTime =  classifyname.toString();  //临时变量
         String[] splits2 = classifynameTime.split("-");
-        classifyname.delete(0,address.length());
+        classifyname.delete(0,classifyname.length());
         for( int i = splits2.length - 1; i >= 0; i--)  {
             if(i != 0) {
+
                 classifyname.append(splits2[i] + "-");
             }else {
                 classifyname.append(splits2[i]);
@@ -97,6 +101,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
         getFile.setGfaddress(address.toString());
         getFile.setGfclassifyname(classifyname.toString());
 
+        System.out.println(getFile.getGfaddress());
+        System.out.println(getFile.getGfclassifyname());
 
         return userGetFileMapper.insertGetFile(getFile);
     }
@@ -150,13 +156,16 @@ public class UserGetFileServiceImpl implements UserGetFileService{
         }
 
         System.out.println(getFileExtends);
-        if(getFileExtends != null ) {
+        if(getFileExtends != null  && getFileExtends.getGetFiles().size() > 0) {
             getFileExtends.setState(StatusUtils.SUCCESS_FIND);
             getFileExtends.setCount(getFileExtends.getGetFiles().size());
+            return getFileExtends;
+        }else {
+            return null;
         }
 
 
-        return getFileExtends;
+
 
 
 
@@ -186,7 +195,16 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     public List<GetFile> selectGetFileByNumber(int num) throws Exception {
         return userGetFileMapper.selectGetFileByNumber(num);
     }
-
+    /**
+     * 根据id找文件
+     * @param gfid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public GetFile selectGetFileById(int gfid) throws Exception{
+        return userGetFileMapper.selectGetFileById(gfid);
+    }
 
     /**
      * 查找全部的收文信息

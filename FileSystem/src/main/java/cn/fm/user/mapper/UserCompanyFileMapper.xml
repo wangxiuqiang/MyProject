@@ -6,7 +6,7 @@
 
     <sql id="Base_Columns_List">
         cfid,cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
-        cfsend,cflevel,cffontid,cfnumber,cflanguage ,cfloader
+        cfsend,cflevel,cffontid,cfnumber,cflanguage ,cfloader,type,isborrow
     </sql>
 
     <insert id="insertCompanyFile" parameterType="cn.fm.pojo.CompanyFile" >
@@ -17,7 +17,13 @@
     </insert>
 
     <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
-        select cyid,cyname,cyfather,cyaddress from classify;
+        select cyid,cyname,cyfather,cyaddress from classify where cyid =#{value};
+    </select>
+
+    <select id="selectCompanyFileById" parameterType="int" resultType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile where cfid = #{cfid}
     </select>
 
     <select id="selectCompanyFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
@@ -107,6 +113,29 @@
         </set>
         where cfid  = #{cfid}
     </update>
+
+    <select id="selectCompanyFileByTwoOrMore" resultType="cn.fm.pojo.CompanyFile" parameterType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile
+        <where>  cfnumber,cflanguage cfname,cfclassifyid cfdate
+            <if test="cfnumber != null">
+                cfnumber=#{cfnumber}
+            </if>
+            <if test="cflanguage != null" >
+              and  cflanguage = #{cflanguage}
+            </if>
+            <if test="cfname != null">
+                AND  cfname concat(concat('%',#{value}), '%')
+            </if>
+            <if test="cfclassifyid != 0" >
+               AND cfclassifyid = #{classifyid}
+            </if>
+            <if test="cfdate != null">
+                AND cfdate like concat(concat('%',#{cfdate}), '%')
+            </if>
+        </where>
+    </select>
 
     <!--删除文件信息-->
     <delete id="deleteCompanyFileById" parameterType="int">

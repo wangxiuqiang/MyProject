@@ -70,7 +70,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
         String classifynameTime =  classifyname.toString();  //临时变量
         String[] splits2 = classifynameTime.split("-");
-        classifyname.delete(0,address.length());
+        classifyname.delete(0,classifyname.length());
         for( int i = splits2.length - 1; i >= 0; i--)  {
             if(i != 0) {
                 classifyname.append(splits2[i] + "-");
@@ -160,6 +160,17 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      */
     public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile) throws Exception{
         return userCompanyFileMapper.selectCompanyFileByTwoOrMore(companyFile);
+    }
+
+    /**
+     * 根据id找文件
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public CompanyFile selectCompanyFileById(int cfid) throws Exception{
+        return userCompanyFileMapper.selectCompanyFileById(cfid);
     }
 
     @Override

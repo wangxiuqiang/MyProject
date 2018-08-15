@@ -52,6 +52,9 @@ public class MyRealm extends AuthorizingRealm {
         if( user == null) {
             throw new UnknownAccountException();
         }
+        if(user.getState() == 0) {
+            throw new LockedAccountException();
+        }
         PassWordHelper pwh = new PassWordHelper();
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUemail(),
                 user.getUpwd(),

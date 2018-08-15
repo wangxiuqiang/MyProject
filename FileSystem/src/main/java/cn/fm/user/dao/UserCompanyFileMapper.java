@@ -27,6 +27,13 @@ public interface UserCompanyFileMapper {
         public Classify selectClassify(int classifyid) throws Exception;
 
         /**
+         * 根据id找文件
+         * @param cfid
+         * @return
+         * @throws Exception
+         */
+        public CompanyFile selectCompanyFileById(int cfid) throws Exception;
+        /**
          * 单独用名字来做模糊查询
          * @param cfname
          * @return

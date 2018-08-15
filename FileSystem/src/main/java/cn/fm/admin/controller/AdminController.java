@@ -4,11 +4,13 @@ import cn.fm.admin.service.AdminService;
 import cn.fm.pojo.User;
 import cn.fm.pojo.WorkPlace;
 import cn.fm.utils.DateToStringUtils;
+import cn.fm.utils.PassWordHelper;
 import cn.fm.utils.StatusUtils;
 import cn.fm.vo.UserExtend;
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ import java.util.*;
  * 管理员用于对用户的增删改查操作
  */
 @Controller
+//@RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8" ,method = RequestMethod.POST)
 @RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8")
 public class AdminController {
     /**
@@ -55,6 +58,9 @@ public class AdminController {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             return JSON.toJSONString(allErrors);
         }
+
+
+        System.out.println(user.getUcompany());
         user.setUupdatetime(DateToStringUtils.dataTostring());
         if(adminService.addUser(user) != 0 ){
             return JSON.toJSONString(StatusUtils.SUCCESS_REG);
@@ -77,7 +83,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = "admin")
+//    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/selectWorkPlace")
     @ResponseBody
     public String selectWorkPlace() throws Exception{
@@ -92,15 +98,15 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = "admin")
+//    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/selectEmail")
     @ResponseBody
-    public String selectEmail(@RequestBody String uemail) throws Exception {
+    public String selectEmail( String uemail) throws Exception {
         String result = adminService.selectEmailIfExist(uemail);
          if(result != null ) {
-             return JSON.toJSONString("1");
+             return JSON.toJSONString(StatusUtils.SUCCESS_FIND);
          }else  {
-             return JSON.toJSONString("0");
+             return JSON.toJSONString(StatusUtils.FAILURE_FIND);
          }
 
     }
@@ -110,7 +116,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = "admin")
+//    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/findWorkers")
     @ResponseBody
     public String findWorkers() throws Exception{
@@ -119,20 +125,20 @@ public class AdminController {
     /**
      * 根据id查找用户信息
      */
-    @RequiresRoles(value = "admin")
+//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
     @RequestMapping(value = "/findWorker")
     @ResponseBody
-    public String findWorker(@RequestBody int uid) throws Exception{
+    public String findWorker( int uid) throws Exception{
         return JSON.toJSONString(adminService.findWorkerById(uid));
     }
 
     /**
      * 删除信息,,根据工作人员id
      */
-    @RequiresRoles(value = "admin")
+//    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/delWorker")
     @ResponseBody
-    public String delWorker(@RequestBody int uid) throws Exception{
+    public String delWorker( int uid) throws Exception{
         if(adminService.deleteWorkerById(uid) != 0) {
             return JSON.toJSONString(StatusUtils.SUCCESS_DEL);
         }else {
@@ -146,10 +152,14 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = "admin")
+//    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updateWorker")
     @ResponseBody
-    public String updateWorker(@RequestBody User user) throws Exception{
+    public String updateWorker( User user) throws Exception{
+        if(user.getUpwd() != null) {
+            PassWordHelper helper = new PassWordHelper();
+            user.setUpwd(helper.SHA256(user.getUpwd()));
+        }
         if(adminService.updateWorkerById(user) != 0) {
             return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
         }else {
@@ -162,7 +172,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = "admin")
+//    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/selectAllPermissions")
     @ResponseBody
     public String selectAllPermissions() throws Exception {
@@ -174,27 +184,11 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = "admin")
+//    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/selectAllRoles")
     @ResponseBody
     public String selectAllRoles() throws Exception {
         return JSON.toJSONString(adminService.selectAllRoles());
-    }
-
-    /**
-     * 用来捕捉 是不是没有登录或者没有权限
-     * @return
-     */
-
-    @ExceptionHandler({UnauthenticatedException.class})
-    @ResponseBody
-    public String no_sujectLogin() {
-        return JSON.toJSONString(StatusUtils.FAILURE_LOGIN);
-    }
-    @ExceptionHandler({UnauthorizedException.class})
-    @ResponseBody
-    public String nohave_role_permission() {
-        return JSON.toJSONString(StatusUtils.NO_ROLE_PERMISSION);
     }
 
 }

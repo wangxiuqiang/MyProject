@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fm.user.dao.UserMapper">
+    <update id="updateUserpwd"  >
+        update user set upwd = #{arg0} ,state = 1 where code = #{arg1}
+    </update>
+    <!--根据用户的姓名 ,单位等信息,查找id-->
+    <select id="selectUserId" parameterType="cn.fm.pojo.User" resultType="java.lang.Integer">
+        select uid from user
+        <where>
+            <if test="uname != null" >
+                uname = #{uname}
+            </if>
+            <if test="ucompany != null">
+                and ucompany = #{ucompany}
+            </if>
+        </where>
+    </select>
+
+
+    <!--添加借阅信息-->
+    <insert id="insertBorrowcfInfo" parameterType="cn.fm.pojo.Borrow" >
+        insert into borrow_companyFile(uid,fileid) VALUES (#{uid},#{fileid});
+    </insert>
+
+    <!--添加借阅信息-->
+    <insert id="insertBorrowgfInfo" parameterType="cn.fm.pojo.Borrow" >
+        insert into borrow_getFile(uid,fileid) VALUES (#{uid},#{fileid});
+    </insert>
+
+    <!--设置文件已经被借出-->
+    <update id="updateCompanyFileIsBorrow" parameterType="int">
+        update companyFile set isborrow = 2 where cfid = #{cfid}
+    </update>
+
+    <!--设置文件已经归还-->
+    <update id="updateCompanyFileBack" parameterType="int">
+        update companyFile set isborrow = 1 where cfid = #{cfid}
+    </update>
+
+    <!--设置文件已经被借出-->
+    <update id="updateGetFileIsBorrow" parameterType="int">
+        update getFile set isborrow = 2 where gfid = #{gfid}
+    </update>
+
+    <!--设置文件已经归还-->
+    <update id="updateGetFileBack" parameterType="int">
+        update getFile set isborrow = 1 where gfid = #{gfid}
+    </update>
+    <!--更新归还时间-->
+    <update id="updatecfBackTime" parameterType="cn.fm.pojo.Borrow">
+        update borrow_companyFile set backtime = #{backtime} WHERE uid =#{uid} and fileid = #{fileid}
+    </update>
+    <update id="updategfBackTime" parameterType="cn.fm.pojo.Borrow">
+        update borrow_getFile set backtime = #{backtime} WHERE uid =#{uid} and fileid = #{fileid}
+    </update>
+
+
+    <!--根据用户查询借阅信息 或者查询 这一类的借阅信息-->
+    <select id="selectBorrowcfById" resultType="cn.fm.pojo.Borrow" parameterType="int">
+        select uid,fileid,borrowtime,backtime from borrow_companyFile
+        <where>
+            <if test="uid != 0" >
+                uid = #{uid}
+            </if>
+        </where>
+    </select>
+
+    <!--根据用户查询借阅信息-->
+    <select id="selectBorrowgfById" resultType="cn.fm.pojo.Borrow" parameterType="int">
+        select uid,fileid,borrowtime,backtime from borrow_getFile
+        <where>
+            <if test="uid != 0" >
+                uid = #{uid}
+            </if>
+        </where>
+    </select>
+</mapper>

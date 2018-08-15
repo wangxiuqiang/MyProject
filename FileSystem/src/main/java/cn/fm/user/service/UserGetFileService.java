@@ -45,7 +45,13 @@ public interface UserGetFileService {
      * @throws Exception
      */
     public List<GetFile> selectGetFileByCompany(String gfcompany) throws Exception;
-
+    /**
+     * 根据id找文件
+     * @param gfid
+     * @return
+     * @throws Exception
+     */
+    public GetFile selectGetFileById(int gfid) throws Exception;
     /**
      * 根据最后的一个分类的id查询,因为最后的一个分类是叶子
      * @param classifyid

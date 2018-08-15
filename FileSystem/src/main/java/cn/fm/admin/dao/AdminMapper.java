@@ -37,7 +37,7 @@ public interface AdminMapper {
     /**
      * 插入用户和角色的关联
      */
-    public int addUser_Role(int uid,int rid) throws Exception;
+    public int addUser_Role(@Param(value = "uid") int uid,@Param(value = "rid") int rid) throws Exception;
 
     /**
      * 指定用户的时候判断用户是不是存在,根据email

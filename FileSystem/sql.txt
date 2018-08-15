@@ -11,9 +11,10 @@ state int default 0,
 uupdatetime varchar(23) ,
 code varchar(50) NOT NULL,
 ucompany varchar(30),
-state int
+ifAdmin int
 );
-
+insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("123","admin","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813",1,"0","2018",1);
+insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("123","admin","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813",1,"0","2018",0);
 
 create table workPlace (
 wid int primary key auto_increment,
@@ -31,6 +32,11 @@ cyfather int ,
 cyaddress varchar(50) 
 );
 
+insert into classify(cyname,cyfather,cyaddress) values("A类",0,"一楼");
+insert into classify(cyname,cyfather,cyaddress) values("A1类",1,"101室");
+insert into classify(cyname,cyfather,cyaddress) values("A11类",2,"A柜");
+insert into classify(cyname,cyfather,cyaddress) values("A111类",3,"15箱");
+
 create table getFile(
 gfid int primary key auto_increment,
 gfname varchar(50) NOT NULL,
@@ -41,16 +47,31 @@ gfresult varchar(20),
 gfclassifyid int ,
 gfclassifyname varchar(100),
 gfaddress varchar(50) ,
-gfdatetime timestamp,
+gfdatetime varchar(30),
 gfnumber int not null,
 gfcountuse int default 1,
+type int default 2,
+isborrow int default 1,
 foreign key(gfclassifyid) references classify(cyid)
 );
+
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第一份文件","第一单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱");
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第2份文件","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第3份文件","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第4份文件","第二单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第5份文件","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第6份文件","第一单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第7份文件","第二单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第8份文件","第一单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第9份文件","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第10份文件","第一单位",4,"2015-02-15",1,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+
+
 
 create table companyFile (
 cfid int primary key auto_increment,
 cfname varchar(50) ,
-cfdate timestamp ,
+cfdate varchar(30) ,
 cfaccept varchar(30),
 cfeditor varchar(50),
 cfsend varchar(20) ,
@@ -62,9 +83,20 @@ cflanguage varchar(30),
 cfaddress varchar(100),
 cfclassifyid int ,
 cfclassifyname varchar(100),
+type int default 1,
+isborrow int default 1,
 foreign key(cfclassifyid) references classify(cyid)
 );
-
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第一份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第2份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第3份单位文件","2016-08-06","王小二","李二牛","楚留香","1",20,"16","China","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第4份单位文件","2016-07-06","王小二","李二牛","楚留香","2",20,"12","China","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第5份单位文件","2016-08-06","王小二","李二牛","楚留香","2",20,"16","China","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第6份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"12","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第7份单位文件","2016-07-06","王小二","李二牛","楚留香","2",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第8份单位文件","2016-08-06","王小二","李二牛","楚留香","1",20,"12","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第9份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第10份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
 
 create table role(
 rid int primary key auto_increment,
@@ -101,8 +133,8 @@ rid int ,
 primary key(uid,rid)
 );
 
-insert into role_permission(rid,pid) values(1,1);
-
+insert into user_roles(uid,rid) values(1,1);
+insert into user_roles(uid,rid) values(2,2);
 create table role_permission (
 rid int,
 pid int,
@@ -132,10 +164,17 @@ insert into role_permission(rid,pid) values(2,7);
 insert into role_permission(rid,pid) values(2,8);
 
 
-create table borrow (
+create table borrow_getFile (
 uid int ,
 fileid int,
-filetype int not null,
+borrowtime timestamp ,
+backtime timestamp null,
+primary key(uid,fileid)
+);
+
+create table borrow_companyFile (
+uid int ,
+fileid int,
 borrowtime timestamp ,
 backtime timestamp null,
 primary key(uid,fileid)

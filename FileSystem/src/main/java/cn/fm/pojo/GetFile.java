@@ -4,6 +4,19 @@ import javax.validation.constraints.NotNull;
 
 public class GetFile {
 
+    /**
+     * 用来区分两种文件 此文件type = 2
+     */
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     private int gfid;
     @NotNull(message = "{getfile.name.isnull}")
     private String gfname;
@@ -19,6 +32,18 @@ public class GetFile {
     private String gfdatetime;
     @NotNull(message = "{getfile.number.isnull}")
     private int gfnumber;
+    /**
+     * 是不是借出
+     */
+    private int isborrow;
+
+    public int getIsborrow() {
+        return isborrow;
+    }
+
+    public void setIsborrow(int isborrow) {
+        this.isborrow = isborrow;
+    }
 
     @Override
     public String toString() {

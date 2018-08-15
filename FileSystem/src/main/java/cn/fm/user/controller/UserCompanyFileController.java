@@ -12,7 +12,12 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/worker",produces = "application/json;charset=utf8")
@@ -26,7 +31,7 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
    @RequestMapping(value = "/findCompanyFiles")
    @ResponseBody
     public String findCompanyFiles() throws Exception {
@@ -39,11 +44,11 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/findTypeCompanyFiles")
     @ResponseBody
     public String findTypeCompanyFiles(@RequestBody CompanyFile companyFile) throws Exception {
-        if(companyFile.getCfname() != null || companyFile.getCfclassifyid() != 0 || companyFile.getCflanguage() != null
+        if( companyFile.getCfname() != null || companyFile.getCfclassifyid() != 0 || companyFile.getCflanguage() != null
                 || companyFile.getCfdate() != null || companyFile.getCfnumber() != 0) {
             return JSON.toJSONString(userCompanyFileService.findTypeFiles(companyFile));
 
@@ -52,15 +57,34 @@ public class UserCompanyFileController {
     }
 
     /**
+     * 根据id查找文件
+     */
+//    @RequestMapping(value = "/findCompanyFileById")
+    @ResponseBody
+    public String findCompanyFileById(Integer cfid) throws Exception {
+
+        if(userCompanyFileService.selectCompanyFileById(cfid) != null) {
+            return JSON.toJSONString(userCompanyFileService.selectCompanyFileById(cfid));
+        }else{
+            return JSON.toJSONString(StatusUtils.FAILURE_FIND);
+        }
+    }
+    /**
      * 插入数据
      * @param companyFile
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/infoSubCompanyFile")
     @ResponseBody
-    public String infoSubCompanyFile(@RequestBody CompanyFile companyFile) throws Exception {
+    public String infoSubCompanyFile(@RequestBody @Validated CompanyFile companyFile,
+                                     BindingResult bindingResult) throws Exception {
+        if(bindingResult.hasErrors()) {
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            return JSON.toJSONString(allErrors);
+        }
+
 
         if(userCompanyFileService.insertCompanyFile(companyFile) != 0 ) {
             return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
@@ -72,7 +96,7 @@ public class UserCompanyFileController {
     /**
      * 根据id更新  文件
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/updateSubCompanyFile")
     @ResponseBody
     public String updateSubGetFile(@RequestBody CompanyFile companyFile) throws Exception {
@@ -86,7 +110,7 @@ public class UserCompanyFileController {
     /**
      * 根据id删除单条记录
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delCompanyFile")
     @ResponseBody
     public String delGetFile(@RequestBody int cfid) throws Exception {
@@ -100,20 +124,5 @@ public class UserCompanyFileController {
         }
     }
 
-    /**
-     * 用来捕捉 是不是没有登录或者没有权限
-     * @return
-     */
-
-    @ExceptionHandler({UnauthenticatedException.class})
-    @ResponseBody
-    public String no_sujectLogin() {
-        return JSON.toJSONString(StatusUtils.FAILURE_LOGIN);
-    }
-    @ExceptionHandler({UnauthorizedException.class})
-    @ResponseBody
-    public String nohave_role_permission() {
-        return JSON.toJSONString(StatusUtils.NO_ROLE_PERMISSION);
-    }
 
 }

@@ -5,8 +5,8 @@
 <mapper namespace="cn.fm.user.dao.UserGetFileMapper">
 
     <sql id="Base_Columns_List">
-        gfid,gfname , gfidea, gfloader,
-         gfcompany, gfresult, gfclassifyname,gfaddress,gfdatetime,gfnumber
+        gfid,gfname , gfidea, gfloader,gfclassifyid
+         ,gfcompany, gfresult, gfclassifyname,gfaddress,gfdatetime,gfnumber,type,isborrow
     </sql>
 
       <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile" >
@@ -15,8 +15,14 @@
       </insert>
 
       <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
-          select cyid,cyname,cyfather,cyaddress from classify;
+          select cyid,cyname,cyfather,cyaddress from classify WHERE cyid = #{value};
       </select>
+
+    <select id="selectGetFileById" parameterType="int" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List" />
+        from getFile where gfid = #{gfid}
+    </select>
 
      <select id="selectGetFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
          select
@@ -52,14 +58,11 @@
     <!--多项查询-->
     <select id="selectGetFileByTwoAndMore" parameterType="cn.fm.pojo.GetFile" resultType="cn.fm.pojo.GetFile">
         select
-        <include refid="Base_Columns_List" />
-        from getFile
-        <where>   gfclassifyid gfnumber gfdatetime gfcompany
-            <if test="gfname != null">
-                gfname = #{gfname}
-            </if>
+        <include refid="Base_Columns_List" /> from getFile
+        <where>
+
             <if test="gfclassifyid != 0">
-                and gfclassifyid = #{gfclassifyid}
+                 gfclassifyid = #{gfclassifyid}
             </if>
             <if test="gfnumber != 0">
                 and gfnumber = #{gfnumber}
@@ -67,8 +70,12 @@
             <if test="gfcompany != null">
                 and gfcompany = #{gfcompany}
             </if>
+            <if test="gfname != null">
+                and gfname like concat(concat('%',#{gfname}), '%')
+            </if>
+
             <if test="gfdatetime != null">
-                and gfdatetime = #{gfdatetime}
+                and gfdatetime like concat(concat('%',#{gfdatetime}), '%')
             </if>
         </where>
 
@@ -85,7 +92,7 @@
     </select>
 
     <!--更新 -->
-    <update id="" parameterType="cn.fm.pojo.GetFile">
+    <update id="updateGetFileById" parameterType="cn.fm.pojo.GetFile">
        update getFile
         <set>
        <if test="gfname != null" >

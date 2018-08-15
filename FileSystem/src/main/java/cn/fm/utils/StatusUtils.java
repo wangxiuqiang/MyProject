@@ -23,7 +23,7 @@ public class StatusUtils {
      */
     public static final int SUCCESS_LOGIN = 2;
     /**
-     * 登录失败
+     * 登录失败,
      */
     public static final int FAILURE_LOGIN = 3;
     /**
@@ -52,5 +52,13 @@ public class StatusUtils {
      * 没有相关权限
      */
     public static final int NO_ROLE_PERMISSION = -1;
+/**
+ * 账号没有激活
+ */
+    public static final int LOCK_INFO = -2;
 
+    /**
+     *   记录 存在
+     */
+    public static final int EXIST_CONTENT = 12;
 }
