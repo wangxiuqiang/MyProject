@@ -58,7 +58,7 @@ public class ExceptionHandlers {
     }
 
     /**
-     * 主键存在,表示已经录入了该数据
+     * 主键存在,表示已经录入了该数据 ,,录入数据失败
      * @return
      */
     @ExceptionHandler({MySQLIntegrityConstraintViolationException.class})

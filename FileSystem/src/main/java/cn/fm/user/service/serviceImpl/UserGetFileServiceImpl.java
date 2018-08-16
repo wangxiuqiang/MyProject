@@ -43,7 +43,9 @@ public class UserGetFileServiceImpl implements UserGetFileService{
         /**
          * 设置录入时间
          */
-        getFile.setGfdatetime(DateToStringUtils.dataTostring());
+        if(getFile.getGfdatetime() == null) {
+            getFile.setGfdatetime(DateToStringUtils.dataTostring());
+        }
         /**
          * 设置变量,让变量来完成字符串的拼接
          * 记录一开始的分类id

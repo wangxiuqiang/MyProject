@@ -5,6 +5,7 @@ import cn.fm.user.service.UserCompanyFileService;
 import cn.fm.user.service.serviceImpl.UserCompanyFileServiceImpl;
 import cn.fm.utils.StatusUtils;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.Logical;
@@ -17,6 +18,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -35,7 +37,7 @@ public class UserCompanyFileController {
    @RequestMapping(value = "/findCompanyFiles")
    @ResponseBody
     public String findCompanyFiles() throws Exception {
-       return JSON.toJSONString(userCompanyFileService.selectAllCompanyFile());
+       return JSON.toJSONString(userCompanyFileService.selectAllCompanyFile(), SerializerFeature.DisableCircularReferenceDetect);
    }
 
      /**
@@ -47,26 +49,32 @@ public class UserCompanyFileController {
 //     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/findTypeCompanyFiles")
     @ResponseBody
-    public String findTypeCompanyFiles(@RequestBody CompanyFile companyFile) throws Exception {
+    public String findTypeCompanyFiles( CompanyFile companyFile) throws Exception {
         if( companyFile.getCfname() != null || companyFile.getCfclassifyid() != 0 || companyFile.getCflanguage() != null
-                || companyFile.getCfdate() != null || companyFile.getCfnumber() != 0) {
-            return JSON.toJSONString(userCompanyFileService.findTypeFiles(companyFile));
+                || companyFile.getCfdate() != null || companyFile.getCffontid() != null) {
+            return JSON.toJSONString(userCompanyFileService.findTypeFiles(companyFile), SerializerFeature.DisableCircularReferenceDetect);
 
         }
-        return JSON.toJSONString(StatusUtils.IS_NULL);
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+        return JSON.toJSONString(map);
+
     }
 
     /**
      * 根据id查找文件
      */
-//    @RequestMapping(value = "/findCompanyFileById")
+    @RequestMapping(value = "/findCompanyFileById/{cfid}")
     @ResponseBody
-    public String findCompanyFileById(Integer cfid) throws Exception {
+    public String findCompanyFileById(@PathVariable int cfid) throws Exception {
 
         if(userCompanyFileService.selectCompanyFileById(cfid) != null) {
-            return JSON.toJSONString(userCompanyFileService.selectCompanyFileById(cfid));
+            return JSON.toJSONString(userCompanyFileService.selectCompanyFileById(cfid), SerializerFeature.DisableCircularReferenceDetect);
         }else{
-            return JSON.toJSONString(StatusUtils.FAILURE_FIND);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+            return JSON.toJSONString(map);
+
         }
     }
     /**
@@ -78,7 +86,7 @@ public class UserCompanyFileController {
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/infoSubCompanyFile")
     @ResponseBody
-    public String infoSubCompanyFile(@RequestBody @Validated CompanyFile companyFile,
+    public String infoSubCompanyFile( @Validated CompanyFile companyFile,
                                      BindingResult bindingResult) throws Exception {
         if(bindingResult.hasErrors()) {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
@@ -87,9 +95,13 @@ public class UserCompanyFileController {
 
 
         if(userCompanyFileService.insertCompanyFile(companyFile) != 0 ) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
         }else {
-            return  JSON.toJSONString(StatusUtils.FAILURE_INSERT);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
         }
     }
 
@@ -99,12 +111,17 @@ public class UserCompanyFileController {
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/updateSubCompanyFile")
     @ResponseBody
-    public String updateSubGetFile(@RequestBody CompanyFile companyFile) throws Exception {
+    public String updateSubGetFile( CompanyFile companyFile) throws Exception {
 
         if(userCompanyFileService.updateCompanyFileById(companyFile) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
+
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_INSERT);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
         }
     }
     /**
@@ -113,14 +130,20 @@ public class UserCompanyFileController {
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delCompanyFile")
     @ResponseBody
-    public String delGetFile(@RequestBody int cfid) throws Exception {
+    public String delGetFile( int cfid) throws Exception {
         if(cfid == 0) {
             return JSON.toJSONString(StatusUtils.IS_NULL);
         }
         if(userCompanyFileService.deleteCompanyFileById(cfid) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_DEL);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
+            return JSON.toJSONString(map);
+
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_DEL);
+
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
+            return JSON.toJSONString(map);
         }
     }
 

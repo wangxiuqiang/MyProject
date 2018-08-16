@@ -68,7 +68,7 @@ public interface UserCompanyFileMapper {
         /**
          *根据文号查询
          */
-        public List<CompanyFile> selectCompanyFileByNumber(int num) throws Exception;
+        public List<CompanyFile> selectCompanyFileByFontid(String cffontid) throws Exception;
 
         /**
          * 查询全部的单位制发文件文件信息

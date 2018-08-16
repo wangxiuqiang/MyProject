@@ -71,6 +71,10 @@ public interface AdminMapper {
     public int deleteWorkerById(int id) throws Exception;
 
     /**
+     * 同时删掉用户和角色的关联
+     */
+    public int deleteUser_roles(int uid) throws Exception;
+    /**
      * 根据id进行修改用户信息
      */
     public int updateWorkerById(User user) throws Exception;
@@ -94,7 +98,7 @@ public interface AdminMapper {
      * @return
      * @throws Exception
      */
-    public int selectRid(int uid) throws Exception;
+    public int[] selectRid(int uid) throws Exception;
 
     /**
      * 根据rid查找角色的名称
@@ -102,7 +106,7 @@ public interface AdminMapper {
      * @return
      * @throws Exception
      */
-    public Set<String> selectRoles(int rid) throws Exception;
+    public Set<String> selectRoles(@Param(value = "rids") int[] rid) throws Exception;
 
     /**
      * 根据角色id在关联表里查出相应的权限id
@@ -110,7 +114,7 @@ public interface AdminMapper {
      * @return
      * @throws Exception
      */
-    public int[] selectPids(int rid) throws Exception;
+    public int[] selectPids( @Param(value = "rids") int[] rid) throws Exception;
 
     /**
      * 根据权限id的数组查找权限
@@ -118,5 +122,24 @@ public interface AdminMapper {
      * @return
      * @throws Exception
      */
-    public Set<String> selectPermissions(@Param(value = "list") int[] list) throws Exception;
+    public Set<String> selectPermissions(@Param(value = "pids") int[] list) throws Exception;
+
+    /**
+     * 根据uid更改用户角色关联
+     * @param uid
+     * @param rid
+     * @return
+     * @throws Exception
+     */
+    public int  updateUser_Role(int uid,int rid) throws Exception;
+
+    /**
+     * 用于前端的展示
+     * @param rid
+     * @return
+     * @throws Exception
+     */
+    public List<Role> findRoles(@Param(value = "rids") int[] rid) throws Exception;
+    public List<Permission> findPermissions(@Param(value = "pids") int[] pid) throws Exception;
+
 }

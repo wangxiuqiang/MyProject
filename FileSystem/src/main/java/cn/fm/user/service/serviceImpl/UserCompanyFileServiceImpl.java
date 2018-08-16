@@ -30,7 +30,10 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
         /**
          * 设置录入时间
          */
-        companyFile.setCfdate(DateToStringUtils.dataTostring());
+        if(companyFile.getCfdate() == null){
+            companyFile.setCfdate(DateToStringUtils.dataTostring());
+        }
+
         /**
          * 设置变量,让变量来完成字符串的拼接
          * 记录一开始的分类id
@@ -100,7 +103,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
 
     /**
-     * 总的查找
+     * 总的查找  ,这个是将查出来的list  放到一个类里,,后面用分页的时候改掉
      * @param companyFile
      * @return
      * @throws Exception
@@ -110,35 +113,35 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
         CompanyFileExtends cfe = new CompanyFileExtends();
         if(companyFile.getCfname() != null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
-                && companyFile.getCfdate() == null && companyFile.getCfnumber() == 0) {
+                && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
             cfe.setCompanyFiles(selectCompanyFileByName(companyFile.getCfname()));
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() != 0 && companyFile.getCflanguage() == null
-                && companyFile.getCfdate() == null && companyFile.getCfnumber() == 0) {
+                && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
             cfe.setCompanyFiles(selectCompanyFileByClassifyId(companyFile.getCfclassifyid()));
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() != null
-                && companyFile.getCfdate() == null && companyFile.getCfnumber() == 0) {
+                && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
             cfe.setCompanyFiles(selectCompanyFileByLanguage(companyFile.getCflanguage()));
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
-                && companyFile.getCfdate() != null && companyFile.getCfnumber() == 0) {
+                && companyFile.getCfdate() != null && companyFile.getCffontid() == null) {
 
             cfe.setCompanyFiles( selectCompanyFileByDateTime(companyFile.getCfdate()));
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
-                && companyFile.getCfdate() == null && companyFile.getCfnumber() != 0){
+                && companyFile.getCfdate() == null && companyFile.getCffontid() == null){
 
-            cfe.setCompanyFiles(selectCompanyFileByNumber(companyFile.getCfnumber()));
+            cfe.setCompanyFiles(selectCompanyFileByFontid(companyFile.getCffontid()));
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
-                && companyFile.getCfdate() == null && companyFile.getCfnumber() == 0){
+                && companyFile.getCfdate() == null && companyFile.getCffontid() == null){
             cfe = null;
         }else {
             cfe.setCompanyFiles(selectCompanyFileByTwoOrMore(companyFile));
@@ -194,8 +197,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     }
 
     @Override
-    public List<CompanyFile> selectCompanyFileByNumber(int num) throws Exception {
-        return userCompanyFileMapper.selectCompanyFileByNumber(num);
+    public List<CompanyFile> selectCompanyFileByFontid(String cffontid) throws Exception {
+        return userCompanyFileMapper.selectCompanyFileByFontid(cffontid);
     }
 
     /**

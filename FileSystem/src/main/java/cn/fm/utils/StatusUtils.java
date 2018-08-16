@@ -5,6 +5,8 @@ package cn.fm.utils;
  */
 public class StatusUtils {
 
+    public static final  String statecode = "statecode";
+
     /**
      * 传过来的是null 空值
      */

@@ -3,6 +3,7 @@ package cn.fm.admin.service.serviceImpl;
 import cn.fm.admin.service.AdminService;
 import cn.fm.admin.dao.AdminMapper;
 import cn.fm.pojo.*;
+import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.MD5Utils;
 import cn.fm.utils.MailUtils;
 import cn.fm.vo.UserExtend;
@@ -49,6 +50,8 @@ public class AdminServiceImpl implements AdminService{
     public int addUser(UserExtend user) throws Exception {
         user.setCode(UUID.randomUUID().toString());
 //        MailUtils.sendMail(user.getCode(),user.getUemail());
+
+       user.setUupdatetime(DateToStringUtils.dataTostring());
        int uid = adminMapper.addUser(user);
        System.out.println(uid);
        System.out.println(user.getUid());
@@ -81,6 +84,7 @@ public class AdminServiceImpl implements AdminService{
      * @throws Exception
      */
     public List<User> findAllWorker() throws Exception{
+
         return adminMapper.findAllWorker();
     }
 
@@ -90,10 +94,40 @@ public class AdminServiceImpl implements AdminService{
      * @return
      * @throws Exception
      */
-    public User findWorkerById(int id) throws Exception{
-        return adminMapper.findWorkerById(id);
+    @Override
+    public UserExtend findWorkerById(int id) throws Exception{
+        //先获取 这个用户的身份,然后将这个用户的权限和角色取出来,放进增强类,返回
+        int[] rids = selectRid(id);
+        int[] pids = selectPids(rids);
+        List<Role> roles = findRolesShow(rids);
+        List<Permission> permissions = findPermissionsShow(pids);
+        User user = adminMapper.findWorkerById(id);
+        UserExtend ue = setUserExtend(user);
+
+        StringBuffer stringBuffer = new StringBuffer();
+        for(Role s : roles){
+             stringBuffer.append(s.getRdescribe() + ",");
+        }
+
+        ue.setRname(stringBuffer.toString());
+        stringBuffer.delete(0,stringBuffer.length());
+        for(Permission p : permissions){
+              stringBuffer.append(p.getPdescribe() + "-");
+        }
+        ue.setPname(stringBuffer.toString());
+        return ue;
     }
 
+    public UserExtend setUserExtend(User user) throws Exception {
+        UserExtend ue = new UserExtend();
+        ue.setUid(user.getUid());
+        ue.setState(user.getState());
+        ue.setUemail(user.getUemail());
+        ue.setUname(user.getUname());
+        ue.setUupdatetime(user.getUupdatetime());
+        ue.setUcompany(user.getUcompany());
+        return ue;
+    }
     /**
      * 删除一个用户 根据id
      * @param id
@@ -101,7 +135,7 @@ public class AdminServiceImpl implements AdminService{
      * @throws Exception
      */
     public int deleteWorkerById(int id) throws Exception{
-        return adminMapper.deleteWorkerById(id);
+        return adminMapper.deleteWorkerById(id) + adminMapper.deleteUser_roles(id) ;
     }
 
     /**
@@ -109,6 +143,14 @@ public class AdminServiceImpl implements AdminService{
      */
     public int updateWorkerById(User user) throws Exception{
         return adminMapper.updateWorkerById(user);
+    }
+
+    /**
+     * 根据id更改用户角色
+     */
+    @Override
+    public int  updateUser_Role(int uid,int rid) throws Exception{
+        return updateUser_Role(uid,rid);
     }
 
     /**
@@ -139,7 +181,8 @@ public class AdminServiceImpl implements AdminService{
      * @return
      * @throws Exception
      */
-    public int selectRid(int uid) throws Exception{
+    @Override
+    public int[] selectRid(int uid) throws Exception{
         return adminMapper.selectRid(uid);
     }
 
@@ -149,17 +192,19 @@ public class AdminServiceImpl implements AdminService{
      * @return
      * @throws Exception
      */
-    public Set<String> selectRoles(int rid) throws Exception {
+    @Override
+    public Set<String> selectRoles(int[] rid) throws Exception {
         return adminMapper.selectRoles(rid);
     }
 
     /**
-     * 根据角色id在关联表里查出相应的权限id
+     * 根据角色id在关联表里查出相应的权限Pid
      * @param rid
      * @return
      * @throws Exception
      */
-    public int[] selectPids(int rid) throws Exception{
+    @Override
+    public int[] selectPids(int[] rid) throws Exception{
         return adminMapper.selectPids(rid);
     }
 
@@ -169,7 +214,8 @@ public class AdminServiceImpl implements AdminService{
      * @return
      * @throws Exception
      */
-    public Set<String> selectPermissions( int[] list) throws Exception {
+    @Override
+    public Set<String> selectPermissions(int[] list) throws Exception {
         return adminMapper.selectPermissions(list);
     }
 
@@ -179,6 +225,7 @@ public class AdminServiceImpl implements AdminService{
      * @return
      * @throws Exception
      */
+    @Override
     public Set<String> findPermissions(int uid) throws Exception {
          return selectPermissions(selectPids(selectRid(uid)));
     }
@@ -188,7 +235,22 @@ public class AdminServiceImpl implements AdminService{
      * @return
      * @throws Exception
      */
+    @Override
     public Set<String> findRoles(int uid) throws Exception {
         return selectRoles(selectRid(uid));
     }
+
+
+    /**
+     * 展示给前端的权限和角色信息
+     */
+    @Override
+    public List<Role> findRolesShow(int[] rids) throws Exception{
+        return adminMapper.findRoles(rids);
+    }
+    @Override
+    public List<Permission> findPermissionsShow(int[] pids) throws Exception{
+        return adminMapper.findPermissions(pids);
+    }
+
 }

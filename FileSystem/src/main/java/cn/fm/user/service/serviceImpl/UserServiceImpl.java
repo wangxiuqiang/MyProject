@@ -67,6 +67,10 @@ public class UserServiceImpl implements UserService {
         Borrow borrow = new Borrow();
         borrow.setUid(uid);
         borrow.setFileid(cfid);
+        if(borrow.getBorrowtime() != null) {
+            borrow.setBorrowtime(DateToStringUtils.dataTostring());
+        }
+
         return  userMapper.insertBorrowcfInfo(borrow) + userMapper.updateCompanyFileIsBorrow(cfid);
 
     }
@@ -77,6 +81,9 @@ public class UserServiceImpl implements UserService {
         Borrow borrow = new Borrow();
         borrow.setUid(uid);
         borrow.setFileid(gfid);
+        if(borrow.getBorrowtime() != null) {
+            borrow.setBorrowtime(DateToStringUtils.dataTostring());
+        }
         return userMapper.insertBorrowgfInfo(borrow) + userMapper.updateGetFileIsBorrow(gfid);
     }
 
@@ -86,13 +93,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updatecfBackTime(Borrow borrow) throws Exception{
         String time = DateToStringUtils.dataTostring();
-        borrow.setBacktime(time);
+        if(borrow.getBorrowtime() != null) {
+            borrow.setBacktime(time);
+        }
         return userMapper.updateCompanyFileBack(borrow.getFileid()) +userMapper.updatecfBackTime(borrow);
     }
     @Override
     public int updategfBackTime(Borrow borrow) throws Exception{
         String time = DateToStringUtils.dataTostring();
-        borrow.setBacktime(time);
+        if(borrow.getBorrowtime() != null) {
+            borrow.setBacktime(time);
+        }
         return userMapper.updateGetFileBack(borrow.getFileid()) +userMapper.updategfBackTime(borrow);
     }
 
@@ -105,7 +116,7 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
     @Override
-    public List<BorrowCFExtends> selectBorrowcfInfo(String uname,String ucompany) throws Exception{
+    public List<BorrowCFExtends> selectBorrowcfInfo(String uname,String ucompany ,int flag) throws Exception{
         int uid;
         User user = null;
 //        如果传过来的值为空 那么 就没必要查id,查user了,直接uid = 0,查全部的借阅信息
@@ -120,14 +131,27 @@ public class UserServiceImpl implements UserService {
         List<BorrowCFExtends> bcfes = new ArrayList<>();
         List<Borrow> borrows = userMapper.selectBorrowcfById(uid);
 
+
         System.out.println(borrows);
 //        如果查出来借阅信息没有, 表示这个用户或者还没有文件外借 就返回
         if (borrows.size() <= 0) {
             return null;
         }
 
+
+
         for(Borrow b:borrows) {
-//            根据文件id查找文件信息
+            if(flag == 1) {
+                if(b.getBacktime() != null) {
+                    continue;
+                }
+            }
+            if(flag == 2){
+                if(b.getBacktime() == null) {
+                    continue;
+                }
+            }
+//      根据文件id查找文件信息
             CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(b.getFileid());
             BorrowCFExtends borrowCFExtends = new BorrowCFExtends();
             borrowCFExtends.setBacktime(b.getBacktime());
@@ -142,8 +166,9 @@ public class UserServiceImpl implements UserService {
         }
         return bcfes;
     }
+
     @Override
-    public List<BorrowGFExtends> selectBorrowgfInfo(String uname,String ucompany) throws Exception{
+    public List<BorrowGFExtends> selectBorrowgfInfo(String uname,String ucompany,int flag) throws Exception{
         int uid;
         User user = null;
         if(uname != null && ucompany != null) {
@@ -165,6 +190,16 @@ public class UserServiceImpl implements UserService {
         }
 
         for(Borrow b:borrows) {
+            if(flag == 1) {
+                if(b.getBacktime() != null) {
+                    continue;
+                }
+            }
+            if(flag == 2){
+                if(b.getBacktime() == null) {
+                    continue;
+                }
+            }
             GetFile cf = userGetFileMapper.selectGetFileById(b.getFileid());
             BorrowGFExtends borrowGFExtends = new BorrowGFExtends();
             borrowGFExtends.setBacktime(b.getBacktime());

@@ -167,15 +167,15 @@ insert into role_permission(rid,pid) values(2,8);
 create table borrow_getFile (
 uid int ,
 fileid int,
-borrowtime timestamp ,
-backtime timestamp null,
+borrowtime varchar(30) ,
+backtime varchar(30),
 primary key(uid,fileid)
 );
 
 create table borrow_companyFile (
 uid int ,
 fileid int,
-borrowtime timestamp ,
-backtime timestamp null,
+borrowtime varchar(30)  ,
+backtime varchar(30) ,
 primary key(uid,fileid)
 );

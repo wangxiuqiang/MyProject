@@ -6,12 +6,14 @@ package cn.fm.user.controller;
 import cn.fm.pojo.Borrow;
 import cn.fm.pojo.User;
 import cn.fm.user.service.UserService;
+import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.MysqlBackupUtils;
 import cn.fm.utils.MysqlRecoverUtils;
 import cn.fm.utils.StatusUtils;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -53,9 +56,13 @@ public class UserController {
     @ResponseBody
     public String reg( String upwd, String code) throws Exception {
         if (userService.updateUserpwd(upwd, code) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_REG);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
         }
-        return JSON.toJSONString(StatusUtils.FAILURE_REG);
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+        return JSON.toJSONString(map);
     }
 
     /**
@@ -108,18 +115,30 @@ public class UserController {
     @ResponseBody
     public String insertBorrowcfInfo( String uname,  String ucompany,
                                       Integer cfid) throws Exception {
-        System.out.println("------------------" + cfid +"--------------------------");
+       // System.out.println("------------------" + cfid +"--------------------------");
 
         if(cfid == null) {
             cfid = 0;
         }
-        if(ucompany == null && uname == null) {
-            return JSON.toJSONString("请输入用户的姓名和单位");
+        if(cfid == 0) {
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
+        }
+        if(ucompany == null || uname == null   ) {
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+            return JSON.toJSONString(map);
+
         }
         if (userService.insertBorrowcfInfo(uname, ucompany, cfid) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
         } else {
-            return JSON.toJSONString(StatusUtils.FAILURE_INSERT);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
         }
     }
 
@@ -127,18 +146,27 @@ public class UserController {
     @ResponseBody
     public String insertBorrowgfInfo( String uname,  String ucompany,
                                       Integer gfid) throws Exception {
-        System.out.println("------------------" + gfid +"--------------------------");
+      //  System.out.println("------------------" + gfid +"--------------------------");
+        HashMap<String,Integer> map = new HashMap<>();
 
         if(gfid == null) {
             gfid = 0;
+
         }
-        if(ucompany == null && uname == null) {
-            return JSON.toJSONString("请输入用户的姓名和单位");
+        if(gfid == 0) {
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
+        }
+        if(ucompany == null || uname == null) {
+            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+            return JSON.toJSONString(map);
         }
         if (userService.insertBorrowgfInfo(uname, ucompany, gfid) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
         } else {
-            return JSON.toJSONString(StatusUtils.FAILURE_INSERT);
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
         }
     }
 
@@ -149,53 +177,71 @@ public class UserController {
     @RequestMapping(value = "/updatecfBackTime")
     @ResponseBody
     public String updatecfBackTime(Integer uid, Integer cfid) throws Exception {
-         Borrow borrow = new Borrow();
+        HashMap<String,Integer> map = new HashMap<>();
+
+        Borrow borrow = new Borrow();
          borrow.setFileid(cfid);
          borrow.setUid(uid);
-         if(userService.updatecfBackTime(borrow) != 0) {
-             return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
+        if(userService.updatecfBackTime(borrow) != 0) {
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
          }else {
-             return JSON.toJSONString(StatusUtils.FAILURE_INSERT);
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
          }
     }
 
     @RequestMapping(value = "/updategfBackTime")
     @ResponseBody
     public String updategfBackTime(Integer uid, Integer gfid) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
         Borrow borrow = new Borrow();
-        System.out.println(uid + "---------------------" + gfid);
+//        System.out.println(uid + "---------------------" + gfid);
         borrow.setFileid(gfid);
         borrow.setUid(uid);
         if(userService.updategfBackTime(borrow) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_INSERT);
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
         }
     }
 
     /**
      * 通过是否传参, 决定是否有id
      * 根据id或者没有id查询
+     * flag 0 表示查全部
+     * 1 查借阅中的,
+     * 2 已经归还的
      */
-    @RequestMapping(value = "/selectBorrowcfInfo")
+    @RequestMapping(value = "/selectBorrowcfInfo/{flag}")
     @ResponseBody
-    public String selectBorrowcfInfo(String uname,String ucompany) throws Exception {
-        List<BorrowCFExtends> bcfes = userService.selectBorrowcfInfo(uname,ucompany);
+    public String selectBorrowcfInfo(String uname,String ucompany,@PathVariable int flag) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        List<BorrowCFExtends> bcfes = userService.selectBorrowcfInfo(uname,ucompany,flag);
         if(bcfes != null && bcfes.size() > 0) {
-            return JSON.toJSONString(bcfes);
+            return JSON.toJSONString(bcfes,SerializerFeature.DisableCircularReferenceDetect);
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_FIND);
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+            return JSON.toJSONString(map);
         }
     }
 
-    @RequestMapping(value = "/selectBorrowgfInfo")
+    @RequestMapping(value = "/selectBorrowgfInfo/{flag}")
     @ResponseBody
-    public String selectBorrowgfInfo(String uname,String ucompany) throws Exception {
-        List<BorrowGFExtends> bgfes = userService.selectBorrowgfInfo(uname,ucompany);
+    public String selectBorrowgfInfo(String uname,String ucompany,@PathVariable int flag) throws Exception {
+        //flag = 0 查询所有的, flag = 1 查询 在借阅中的,flag = 2 归还了的
+        HashMap<String,Integer> map = new HashMap<>();
+
+        List<BorrowGFExtends> bgfes = userService.selectBorrowgfInfo(uname,ucompany ,flag);
         if(bgfes != null  && bgfes.size() > 0) {
-            return JSON.toJSONString(bgfes);
+            return JSON.toJSONString(bgfes, SerializerFeature.DisableCircularReferenceDetect);
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_FIND);
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+            return JSON.toJSONString(map);
         }
     }
+
+
 }

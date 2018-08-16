@@ -33,7 +33,7 @@
     </select>
 
 
-    <select id="selectCompanyFileByClassifyId" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
+    <select id="selectCompanyFileByClassifyId" parameterType="java.lang.Integer" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
         from companyFile where cfclassifyid = #{value}
@@ -46,10 +46,10 @@
         from companyFile where cfdate like concat(concat('%',#{value}), '%')
     </select>
 
-    <select id="selectCompanyFileByNumber" parameterType="java.lang.Integer" resultType="cn.fm.pojo.CompanyFile">
+    <select id="selectCompanyFileByFontid" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cfnumber = #{value}
+        from companyFile where cffontid = #{value}
     </select>
 
     <select id="selectCompanyFileByLanguage" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
@@ -105,7 +105,7 @@
             cfclassifyid = #{cfclassifyid},
         </if>
         <if test="cfclassifyname != null">
-            cfclassifyname = #{classifyname} ,
+            cfclassifyname = #{cfclassifyname} ,
         </if>
         <if test="cfaddress != null">
             cfaddress = #{cfaddress}
@@ -118,18 +118,18 @@
         select
         <include refid="Base_Columns_List" />
         from companyFile
-        <where>  cfnumber,cflanguage cfname,cfclassifyid cfdate
-            <if test="cfnumber != null">
-                cfnumber=#{cfnumber}
+        <where>
+            <if test="cffontid != null">
+                cffontid=#{cffontid}
             </if>
             <if test="cflanguage != null" >
               and  cflanguage = #{cflanguage}
             </if>
             <if test="cfname != null">
-                AND  cfname concat(concat('%',#{value}), '%')
+                AND  cfname like concat(concat('%',#{cfname}), '%')
             </if>
             <if test="cfclassifyid != 0" >
-               AND cfclassifyid = #{classifyid}
+               AND cfclassifyid = #{cfclassifyid}
             </if>
             <if test="cfdate != null">
                 AND cfdate like concat(concat('%',#{cfdate}), '%')

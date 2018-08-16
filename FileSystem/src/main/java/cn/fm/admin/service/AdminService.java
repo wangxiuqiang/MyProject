@@ -54,7 +54,7 @@ public interface AdminService {
      * @return
      * @throws Exception
      */
-    public User findWorkerById(int id) throws Exception;
+    public UserExtend findWorkerById(int id) throws Exception;
 
     /**
      * 删除一个用户 根据id
@@ -68,6 +68,10 @@ public interface AdminService {
      * 根据id进行修改用户信息
      */
     public int updateWorkerById(User user) throws Exception;
+/**
+ * 根据id更改用户角色
+ */
+   public int  updateUser_Role(int uid,int rid) throws Exception;
 
     /**
      * 查找全部角色,用来在添加用户的时候设置角色
@@ -88,7 +92,7 @@ public interface AdminService {
      * @return
      * @throws Exception
      */
-    public int selectRid(int uid) throws Exception;
+    public int[] selectRid(int uid) throws Exception;
 
     /**
      * 根据rid查找角色的名称
@@ -96,7 +100,7 @@ public interface AdminService {
      * @return
      * @throws Exception
      */
-    public Set<String> selectRoles(int rid) throws Exception;
+    public Set<String> selectRoles(int[] rid) throws Exception;
 
     /**
      * 根据角色id在关联表里查出相应的权限id
@@ -104,7 +108,7 @@ public interface AdminService {
      * @return
      * @throws Exception
      */
-    public int[] selectPids(int rid) throws Exception;
+    public int[] selectPids(int[] rid) throws Exception;
 
     /**
      * 根据权限id的数组查找权限
@@ -127,4 +131,11 @@ public interface AdminService {
      * @throws Exception
      */
     public Set<String> findRoles(int uid) throws Exception;
+
+    /**
+     * 展示给前端的权限和角色信息
+     */
+     public List<Role> findRolesShow(int[] rids) throws Exception;
+    public List<Permission> findPermissionsShow(int[] pids) throws Exception;
+
 }

@@ -23,6 +23,16 @@ public class UserExtend {
     @NotNull(message = "{user.roles.isnull}")
     private String rname;
 
+    private String pname;
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
     public int getUid() {
         return uid;
     }

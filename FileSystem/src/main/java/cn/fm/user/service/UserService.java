@@ -36,8 +36,8 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    public List<BorrowCFExtends> selectBorrowcfInfo(String uname,String ucompany) throws Exception;
+    public List<BorrowCFExtends> selectBorrowcfInfo(String uname,String ucompany ,int flag) throws Exception;
 
-    public List<BorrowGFExtends> selectBorrowgfInfo(String uname,String ucompany) throws Exception;
+    public List<BorrowGFExtends> selectBorrowgfInfo(String uname,String ucompany,int flag) throws Exception;
 
 }

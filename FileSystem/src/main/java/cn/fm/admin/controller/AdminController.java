@@ -8,6 +8,7 @@ import cn.fm.utils.PassWordHelper;
 import cn.fm.utils.StatusUtils;
 import cn.fm.vo.UserExtend;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.Logical;
@@ -60,12 +61,16 @@ public class AdminController {
         }
 
 
-        System.out.println(user.getUcompany());
+//        System.out.println(user.getUcompany());
         user.setUupdatetime(DateToStringUtils.dataTostring());
         if(adminService.addUser(user) != 0 ){
-            return JSON.toJSONString(StatusUtils.SUCCESS_REG);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_REG);
+            return JSON.toJSONString(map);
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_REG);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_REG);
+            return JSON.toJSONString(map);
         }
     }
 //    @RequestMapping(value = "/regAdmin")
@@ -99,14 +104,18 @@ public class AdminController {
      * @throws Exception
      */
 //    @RequiresRoles(value = "admin")
-    @RequestMapping(value = "/selectEmail")
+    @RequestMapping(value = "/selectEmail/{uemail}")
     @ResponseBody
-    public String selectEmail( String uemail) throws Exception {
+    public String selectEmail(@PathVariable String uemail) throws Exception {
         String result = adminService.selectEmailIfExist(uemail);
          if(result != null ) {
-             return JSON.toJSONString(StatusUtils.SUCCESS_FIND);
+             HashMap<String,Integer> map = new HashMap<>();
+             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_FIND);
+             return JSON.toJSONString(map);
          }else  {
-             return JSON.toJSONString(StatusUtils.FAILURE_FIND);
+             HashMap<String,Integer> map = new HashMap<>();
+             map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+             return JSON.toJSONString(map);
          }
 
     }
@@ -120,29 +129,52 @@ public class AdminController {
     @RequestMapping(value = "/findWorkers")
     @ResponseBody
     public String findWorkers() throws Exception{
-        return JSON.toJSONString(adminService.findAllWorker());
+
+        if(adminService.findAllWorker().size() > 0)
+        {
+            return JSON.toJSONString(adminService.findAllWorker());
+        }else {
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+            return JSON.toJSONString(map);
+        }
     }
     /**
      * 根据id查找用户信息
      */
 //    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
-    @RequestMapping(value = "/findWorker")
+    @RequestMapping(value = "/findWorker/{uid}")
     @ResponseBody
-    public String findWorker( int uid) throws Exception{
-        return JSON.toJSONString(adminService.findWorkerById(uid));
+    public String findWorker(@PathVariable int uid) throws Exception{
+        UserExtend user = adminService.findWorkerById(uid);
+       // System.out.println(user);
+        if(user != null) {
+            return JSON.toJSONString(adminService.findWorkerById(uid), SerializerFeature.DisableCircularReferenceDetect);
+        }else {
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+            return JSON.toJSONString(map);
+        }
+
     }
 
     /**
      * 删除信息,,根据工作人员id
+     * IllegalStateException
      */
 //    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/delWorker")
     @ResponseBody
-    public String delWorker( int uid) throws Exception{
-        if(adminService.deleteWorkerById(uid) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_DEL);
+    public String delWorker(int uid) throws Exception{
+
+        if(adminService.deleteWorkerById(uid) == 2) {
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
+            return JSON.toJSONString(map);
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_DEL);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
+            return JSON.toJSONString(map);
         }
     }
 
@@ -155,15 +187,25 @@ public class AdminController {
 //    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updateWorker")
     @ResponseBody
-    public String updateWorker( User user) throws Exception{
+    public String updateWorker( User user,Integer rid) throws Exception{
+        HashMap<String,Integer> map = new HashMap<>();
+
         if(user.getUpwd() != null) {
             PassWordHelper helper = new PassWordHelper();
             user.setUpwd(helper.SHA256(user.getUpwd()));
         }
+        if(rid != null  ) {
+            if(adminService.updateUser_Role(user.getUid(),rid) == 0) {
+                map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+                return JSON.toJSONString(map);
+            }
+        }
         if(adminService.updateWorkerById(user) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_INSERT);
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
         }
     }
 
@@ -191,4 +233,25 @@ public class AdminController {
         return JSON.toJSONString(adminService.selectAllRoles());
     }
 
+//
+//    /**
+//     * 根据id返回角色和权限信息
+//     * @param uid
+//     * @return
+//     * @throws Exception
+//     */
+//    @RequestMapping(value = "/selectRoleById")
+//    @ResponseBody
+//    public String selectRoleById(int uid) throws Exception {
+//        int[] rids = adminService.selectRid(uid);
+//        return JSON.toJSONString(adminService.findRolesShow(rids));
+//    }
+//
+//    @RequestMapping(value = "/selectPermissionById")
+//    @ResponseBody
+//    public String selectPermissionById(int uid) throws Exception {
+//        int[] rids = adminService.selectRid(uid);
+//        int[] pids = adminService.selectPids(rids);
+//        return JSON.toJSONString(adminService.findPermissionsShow(pids));
+//    }
 }

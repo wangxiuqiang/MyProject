@@ -28,6 +28,7 @@ public class CompanyFile {
     private String cfloader;
     @NotNull(message = "{companyfile.number.isnull}")
     private int cfnumber;
+    @NotNull(message = "{companyfile.fontid.isnull}")
     private String cffontid;
     @NotNull(message = "{companyfile.language.isnull}")
     private String cflanguage;

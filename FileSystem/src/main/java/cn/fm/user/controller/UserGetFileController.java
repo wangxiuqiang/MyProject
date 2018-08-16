@@ -4,6 +4,7 @@ import cn.fm.pojo.GetFile;
 import cn.fm.user.service.UserGetFileService;
 import cn.fm.utils.StatusUtils;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.Logical;
@@ -13,11 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -56,14 +55,18 @@ public class UserGetFileController {
         if(getFile.getGfnumber() != 0 || getFile.getGfdatetime() != null || getFile.getGfcompany() != null
                 || getFile.getGfclassifyid() != 0 || getFile.getGfname() != null) {
             if(userGetFileService.findTypeFiles(getFile) != null) {
-                return JSON.toJSONString(userGetFileService.findTypeFiles(getFile));
+                return JSON.toJSONString(userGetFileService.findTypeFiles(getFile), SerializerFeature.DisableCircularReferenceDetect);
             }
             else {
-                return JSON.toJSONString(StatusUtils.FAILURE_FIND);
+                HashMap<String,Integer> map = new HashMap<>();
+                map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+                return JSON.toJSONString(map);
             }
 
         }else{
-            return JSON.toJSONString(StatusUtils.IS_NULL);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+            return JSON.toJSONString(map);
         }
 
 
@@ -78,7 +81,7 @@ public class UserGetFileController {
     @RequestMapping(value = "/findGetFiles")
     @ResponseBody
     public String findFiles() throws Exception {
-        return  JSON.toJSONString(userGetFileService.selectAllGetFile());
+        return  JSON.toJSONString(userGetFileService.selectAllGetFile(), SerializerFeature.DisableCircularReferenceDetect);
     }
 
     /**
@@ -89,12 +92,19 @@ public class UserGetFileController {
     @ResponseBody
     public String updateSubGetFile( GetFile getFile) throws Exception {
         if(getFile == null) {
-            return JSON.toJSONString(StatusUtils.IS_NULL);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+            return JSON.toJSONString(map);
         }
         if(userGetFileService.updateGetFileById(getFile) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
+
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_INSERT);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
         }
     }
     /**
@@ -105,12 +115,18 @@ public class UserGetFileController {
     @ResponseBody
     public String delGetFile( int gfid) throws Exception {
         if(gfid == 0) {
-            return JSON.toJSONString(StatusUtils.IS_NULL);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+            return JSON.toJSONString(map);
         }
         if(userGetFileService.deleteGetFileById(gfid) != 0) {
-            return JSON.toJSONString(StatusUtils.SUCCESS_DEL);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
+            return JSON.toJSONString(map);
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_DEL);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
+            return JSON.toJSONString(map);
         }
     }
     /**
@@ -119,13 +135,16 @@ public class UserGetFileController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/selectGetFileById")
+    @RequestMapping(value = "/selectGetFileById/{gfid}")
     @ResponseBody
-    public String selectGetFileById(int gfid) throws Exception{
+    public String selectGetFileById(@PathVariable int gfid) throws Exception{
         if (userGetFileService.selectGetFileById(gfid) != null) {
-            return JSON.toJSONString(userGetFileService.selectGetFileById(gfid));
+            return JSON.toJSONString(userGetFileService.selectGetFileById(gfid), SerializerFeature.DisableCircularReferenceDetect);
         }else {
-            return JSON.toJSONString(StatusUtils.FAILURE_FIND);
+            HashMap<String,Integer> map = new HashMap<>();
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+            return JSON.toJSONString(map);
+
         }
     }
 }

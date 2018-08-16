@@ -51,6 +51,10 @@
     <delete id="deleteWorkerById" >
         DELETE FROM user where uid = #{id}
     </delete>
+    <!--同时删除用户角色信息-->
+    <delete id="deleteUser_roles">
+        DELETE  FROM user_roles where uid = #{uid}
+    </delete>
     <update id="updateWorkerById" parameterType="cn.fm.pojo.User">
         update user
         <set>
@@ -72,7 +76,10 @@
         </set>
        WHERE uid = #{uid};
     </update>
-
+<!--根据uid更改用户角色-->
+    <update id="updateUser_Role" parameterType="int">
+        update user_roles set rid = #{rid} where uid = #{uid}
+    </update>
     <!--查找全部的权限-->
     <select id="selectAllPermissions" resultType="cn.fm.pojo.Permission">
         SELECT pid,pname,pdescribe from permission;
@@ -85,22 +92,42 @@
 
 
     <!--从关联表中根据Uid查Rid-->
-    <select id="selectRid" parameterType="int">
-        select rid from user_role where uid = #{uid}
+    <select id="selectRid" parameterType="int" resultType="int">
+        select rid from user_roles where uid = #{uid}
     </select>
 
     <!--根据rid 查找相应的角色名称-->
-    <select id="selectRoles" parameterType="int">
-        select rname FROM role where rid = #{rid}
+    <select id="selectRoles" parameterType="int" resultType="String">
+        select rname FROM role where rid IN
+        <foreach collection="rids" item="item" close=")" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <!--用于前台角色名的展示-->
+    <select id="findRoles" parameterType="int" resultType="cn.fm.pojo.Role">
+        select rid,rname,rdescribe FROM role where rid IN
+        <foreach collection="rids" item="item" close=")" open="(" separator=",">
+            #{item}
+        </foreach>
     </select>
 <!--从关联表中根据Rid查出来Pid , 用于权限名的查询-->
     <select id="selectPids" parameterType="int" resultType="int">
-        select pid from role_permission where rid = #{rid}
+        select pid from role_permission where rid IN
+        <foreach collection="rids" item="item" close=")" open="(" separator=",">
+            #{item}
+        </foreach>
     </select>
 
     <!--根据角色查找权限的名称,用来验证-->
     <select id="selectPermissions" parameterType="int" resultType="String">
         select pname from permission where pid IN
+        <foreach collection="pids" item="item" close=")" open="(" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <!--用于前台显示-->
+    <select id="findPermissions" parameterType="int" resultType="cn.fm.pojo.Permission">
+        select pid,pname,pdescribe from permission where pid IN
         <foreach collection="pids" item="item" close=")" open="(" separator=",">
             #{item}
         </foreach>

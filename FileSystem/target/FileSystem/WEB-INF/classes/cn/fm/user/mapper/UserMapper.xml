@@ -22,12 +22,12 @@
 
     <!--添加借阅信息-->
     <insert id="insertBorrowcfInfo" parameterType="cn.fm.pojo.Borrow" >
-        insert into borrow_companyFile(uid,fileid) VALUES (#{uid},#{fileid});
+        insert into borrow_companyFile(uid,fileid,borrowtime) VALUES (#{uid},#{fileid},#{borrowtime});
     </insert>
 
     <!--添加借阅信息-->
     <insert id="insertBorrowgfInfo" parameterType="cn.fm.pojo.Borrow" >
-        insert into borrow_getFile(uid,fileid) VALUES (#{uid},#{fileid});
+        insert into borrow_getFile(uid,fileid,borrowtime) VALUES (#{uid},#{fileid},#{borrowtime});
     </insert>
 
     <!--设置文件已经被借出-->
