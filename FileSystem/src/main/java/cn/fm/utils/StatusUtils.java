@@ -4,6 +4,7 @@ package cn.fm.utils;
  * 状态码的工具类
  */
 public class StatusUtils {
+    public static final int PAGE_SIZE = 15;
 
     public static final  String statecode = "statecode";
 

@@ -9,6 +9,8 @@ import cn.fm.utils.StatusUtils;
 import cn.fm.vo.UserExtend;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.Logical;
@@ -26,8 +28,8 @@ import java.util.*;
  * 管理员用于对用户的增删改查操作
  */
 @Controller
-//@RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8" ,method = RequestMethod.POST)
-@RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8")
+@RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8" ,method = RequestMethod.POST)
+//@RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8")
 public class AdminController {
     /**
      * 引入service接口的实现类
@@ -50,7 +52,7 @@ public class AdminController {
      * @param user
      * @return
      */
-//    @RequiresRoles("admin")
+    @RequiresRoles("admin")
     @RequestMapping(value = "/regSub")
     @ResponseBody
     public String addUser(@Validated UserExtend user , BindingResult bindingResult) throws Exception{
@@ -88,7 +90,6 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-//    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/selectWorkPlace")
     @ResponseBody
     public String selectWorkPlace() throws Exception{
@@ -103,10 +104,9 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-//    @RequiresRoles(value = "admin")
-    @RequestMapping(value = "/selectEmail/{uemail}")
+    @RequestMapping(value = "/selectEmail")
     @ResponseBody
-    public String selectEmail(@PathVariable String uemail) throws Exception {
+    public String selectEmail(String uemail) throws Exception {
         String result = adminService.selectEmailIfExist(uemail);
          if(result != null ) {
              HashMap<String,Integer> map = new HashMap<>();
@@ -125,14 +125,19 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-//    @RequiresRoles(value = "admin")
-    @RequestMapping(value = "/findWorkers")
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/findWorkers/{page}")
     @ResponseBody
-    public String findWorkers() throws Exception{
+    public String findWorkers(@PathVariable Integer page) throws Exception{
+        PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
-        if(adminService.findAllWorker().size() > 0)
+        List<User> users= adminService.findAllWorker();
+
+        PageInfo<User> pageInfo = new PageInfo<User>(users);
+
+        if(users.size() > 0)
         {
-            return JSON.toJSONString(adminService.findAllWorker());
+            return JSON.toJSONString(pageInfo);
         }else {
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
@@ -142,7 +147,7 @@ public class AdminController {
     /**
      * 根据id查找用户信息
      */
-//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
     @RequestMapping(value = "/findWorker/{uid}")
     @ResponseBody
     public String findWorker(@PathVariable int uid) throws Exception{
@@ -162,10 +167,10 @@ public class AdminController {
      * 删除信息,,根据工作人员id
      * IllegalStateException
      */
-//    @RequiresRoles(value = "admin")
-    @RequestMapping(value = "/delWorker")
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/delWorker/{uid}")
     @ResponseBody
-    public String delWorker(int uid) throws Exception{
+    public String delWorker(@PathVariable int uid) throws Exception{
 
         if(adminService.deleteWorkerById(uid) == 2) {
             HashMap<String,Integer> map = new HashMap<>();
@@ -184,7 +189,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-//    @RequiresRoles(value = "admin")
+    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updateWorker")
     @ResponseBody
     public String updateWorker( User user,Integer rid) throws Exception{
@@ -214,7 +219,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-//    @RequiresRoles(value = "admin")
+    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/selectAllPermissions")
     @ResponseBody
     public String selectAllPermissions() throws Exception {
@@ -226,7 +231,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-//    @RequiresRoles(value = "admin")
+    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/selectAllRoles")
     @ResponseBody
     public String selectAllRoles() throws Exception {

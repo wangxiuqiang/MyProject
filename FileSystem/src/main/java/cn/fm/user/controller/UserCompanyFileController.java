@@ -1,11 +1,15 @@
 package cn.fm.user.controller;
 
 import cn.fm.pojo.CompanyFile;
+import cn.fm.pojo.User;
 import cn.fm.user.service.UserCompanyFileService;
 import cn.fm.user.service.serviceImpl.UserCompanyFileServiceImpl;
 import cn.fm.utils.StatusUtils;
+import cn.fm.vo.CompanyFileExtends;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.Logical;
@@ -22,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/worker",produces = "application/json;charset=utf8")
+@RequestMapping(value = "/worker",produces = "application/json;charset=utf8" , method = RequestMethod.POST)
 public class UserCompanyFileController {
 
     @Autowired
@@ -33,11 +37,16 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-   @RequestMapping(value = "/findCompanyFiles")
+    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+   @RequestMapping(value = "/findCompanyFiles/{page}")
    @ResponseBody
-    public String findCompanyFiles() throws Exception {
-       return JSON.toJSONString(userCompanyFileService.selectAllCompanyFile(), SerializerFeature.DisableCircularReferenceDetect);
+    public String findCompanyFiles(@PathVariable Integer page) throws Exception {
+       PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
+
+       List<CompanyFile> companyFiles= userCompanyFileService.selectAllCompanyFile();
+
+       PageInfo<CompanyFile> pageInfo = new PageInfo<CompanyFile>(companyFiles);
+       return JSON.toJSONString(pageInfo, SerializerFeature.DisableCircularReferenceDetect);
    }
 
      /**
@@ -46,13 +55,18 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-//     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/findTypeCompanyFiles")
+     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+    @RequestMapping(value = "/findTypeCompanyFiles/{page}")
     @ResponseBody
-    public String findTypeCompanyFiles( CompanyFile companyFile) throws Exception {
+    public String findTypeCompanyFiles( CompanyFile companyFile,@PathVariable  Integer page) throws Exception {
         if( companyFile.getCfname() != null || companyFile.getCfclassifyid() != 0 || companyFile.getCflanguage() != null
                 || companyFile.getCfdate() != null || companyFile.getCffontid() != null) {
-            return JSON.toJSONString(userCompanyFileService.findTypeFiles(companyFile), SerializerFeature.DisableCircularReferenceDetect);
+            PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
+
+            List<CompanyFile> companyFiles = userCompanyFileService.findTypeFiles(companyFile);
+
+            PageInfo<CompanyFile> pageInfo = new PageInfo<CompanyFile>(companyFiles);
+            return JSON.toJSONString(pageInfo, SerializerFeature.DisableCircularReferenceDetect);
 
         }
         HashMap<String,Integer> map = new HashMap<>();
@@ -64,6 +78,8 @@ public class UserCompanyFileController {
     /**
      * 根据id查找文件
      */
+    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+
     @RequestMapping(value = "/findCompanyFileById/{cfid}")
     @ResponseBody
     public String findCompanyFileById(@PathVariable int cfid) throws Exception {
@@ -83,7 +99,7 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/infoSubCompanyFile")
     @ResponseBody
     public String infoSubCompanyFile( @Validated CompanyFile companyFile,
@@ -108,7 +124,7 @@ public class UserCompanyFileController {
     /**
      * 根据id更新  文件
      */
-//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/updateSubCompanyFile")
     @ResponseBody
     public String updateSubGetFile( CompanyFile companyFile) throws Exception {
@@ -127,11 +143,11 @@ public class UserCompanyFileController {
     /**
      * 根据id删除单条记录
      */
-//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delCompanyFile")
     @ResponseBody
-    public String delGetFile( int cfid) throws Exception {
-        if(cfid == 0) {
+    public String delGetFile(int[] cfid) throws Exception {
+        if(cfid.length <= 0) {
             return JSON.toJSONString(StatusUtils.IS_NULL);
         }
         if(userCompanyFileService.deleteCompanyFileById(cfid) != 0) {

@@ -10,12 +10,14 @@
     </sql>
 
       <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile" >
-          insert into getFile(gfname,gfclassifyid,gfclassifyname,gfaddress,gfdatetime,gfnumber) values(#{gfname},
-          #{gfclassifyid} ,#{gfclassifyname},#{gfaddress},#{gfdatetime},#{gfnumber})
+          insert into getFile(gfname,gfclassifyid,gfclassifyname,gfaddress,gfdatetime,gfnumber,
+          gfidea,gfresult,gfloader,gfcompany) values(#{gfname},
+          #{gfclassifyid} ,#{gfclassifyname},#{gfaddress},#{gfdatetime},#{gfnumber},#{gfidea},
+          #{gfresult}, #{gfloader},#{gfcompany})
       </insert>
 
       <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
-          select cyid,cyname,cyfather,cyaddress from classify WHERE cyid = #{value};
+          select cyid,cyname,cyfather,cyaddress from classify WHERE cyid = #{value}
       </select>
 
     <select id="selectGetFileById" parameterType="int" resultType="cn.fm.pojo.GetFile">
@@ -88,7 +90,7 @@
     <select id="selectAllGetFile" resultType="cn.fm.pojo.GetFile">
          select
          <include refid="Base_Columns_List" />
-        from getFile;
+        from getFile
     </select>
 
     <!--更新 -->
@@ -110,6 +112,9 @@
         <if test="gfresult != null" >
             gfresult = #{gfresult},
         </if>
+        <if test="gfclassifyid != 0">
+            gfclassifyid = #{gfclassifyid},
+        </if>
         <if test="gfclassifyname != null" >
             gfclassifyname = #{gfclassifyname},
         </if>
@@ -121,13 +126,19 @@
             gfdatetime = #{gfdatetime},
         </if>
         <if test="gfnumber != 0" >
-            gfnumber = #{gfnumber}
+            gfnumber = #{gfnumber},
+        </if>
+        <if test="isborrow != 0">
+            isborrow = #{isborrow}
         </if>
         </set>
        where gfid = #{gfid}
     </update>
 
     <delete id="deleteGetFileById" parameterType="int">
-        delete from getFile where gfid = #{id}
+        delete from getFile where gfid IN
+        <foreach collection="gfid" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
     </delete>
 </mapper>

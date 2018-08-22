@@ -91,20 +91,37 @@ public class UserServiceImpl implements UserService {
      * 更新归还时间  ,同时在这里面完成对文件状态的改变
      */
     @Override
-    public int updatecfBackTime(Borrow borrow) throws Exception{
-        String time = DateToStringUtils.dataTostring();
-        if(borrow.getBorrowtime() != null) {
-            borrow.setBacktime(time);
+    public int updatecfBackTime(int[] fileid) throws Exception{
+        int[] isborrow = userMapper.selectcfisBorrow(fileid);
+        for(int i = 0;i < isborrow.length; i++) {
+            //没有被借出 ,表明 传输的有错误 ,  返回一个-5 ,表示  不对
+            if(isborrow[1] != 2) {
+                return -5;
+            }
         }
-        return userMapper.updateCompanyFileBack(borrow.getFileid()) +userMapper.updatecfBackTime(borrow);
+        return userMapper.updateCompanyFileBack(fileid) +userMapper.updatecfBackTime(fileid);
+
+//        String time = DateToStringUtils.dataTostring();
+//        if(borrow.getBorrowtime() != null) {
+//            borrow.setBacktime(time);
+//        }
+//        return userMapper.updateCompanyFileBack(borrow.getFileid()) +userMapper.updatecfBackTime(borrow);
     }
     @Override
-    public int updategfBackTime(Borrow borrow) throws Exception{
-        String time = DateToStringUtils.dataTostring();
-        if(borrow.getBorrowtime() != null) {
-            borrow.setBacktime(time);
+    public int updategfBackTime(int[] fileid) throws Exception{
+        int[] isborrow = userMapper.selectgfisBorrow(fileid);
+        for(int i = 0;i < isborrow.length; i++) {
+            //没有被借出 ,表明 传输的有错误 ,  返回一个-5 ,表示  不对
+            if(isborrow[1] != 2) {
+                return -5;
+            }
         }
-        return userMapper.updateGetFileBack(borrow.getFileid()) +userMapper.updategfBackTime(borrow);
+        return userMapper.updateGetFileBack(fileid) +userMapper.updategfBackTime(fileid);
+//        String time = DateToStringUtils.dataTostring();
+//        if(borrow.getBorrowtime() != null) {
+//            borrow.setBacktime(time);
+//        }
+//        return userMapper.updateGetFileBack(borrow.getFileid()) +userMapper.updategfBackTime(borrow);
     }
 
     /**

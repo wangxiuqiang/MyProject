@@ -11,13 +11,13 @@
 
     <insert id="insertCompanyFile" parameterType="cn.fm.pojo.CompanyFile" >
         insert into companyFile(cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
-        cfsend,cflevel,cffontid,cfnumber,cflanguage) values(#{cfname},
+        cfsend,cflevel,cffontid,cfnumber,cflanguage,cfloader) values(#{cfname},
         #{cfclassifyid} ,#{cfclassifyname},#{cfaddress},#{cfdate},#{cfeditor},#{cfaccept},
-        #{cfsend},#{cflevel},#{cffontid},#{cfnumber},#{cflanguage});
+        #{cfsend},#{cflevel},#{cffontid},#{cfnumber},#{cflanguage},#{cfloader});
     </insert>
 
     <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
-        select cyid,cyname,cyfather,cyaddress from classify where cyid =#{value};
+        select cyid,cyname,cyfather,cyaddress from classify where cyid =#{value}
     </select>
 
     <select id="selectCompanyFileById" parameterType="int" resultType="cn.fm.pojo.CompanyFile">
@@ -64,7 +64,7 @@
     <select id="selectAllCompanyFile" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile ;
+        from companyFile
     </select>
 
     <!--修改文件信息-->
@@ -108,7 +108,10 @@
             cfclassifyname = #{cfclassifyname} ,
         </if>
         <if test="cfaddress != null">
-            cfaddress = #{cfaddress}
+            cfaddress = #{cfaddress},
+        </if>
+        <if test="isborrow != 0">
+            isborrow = #{isborrow}
         </if>
         </set>
         where cfid  = #{cfid}
@@ -139,6 +142,12 @@
 
     <!--删除文件信息-->
     <delete id="deleteCompanyFileById" parameterType="int">
-        delete from companyFile where cfid = #{cfid};
+        delete from companyFile
+        <where>
+            cfid IN
+            <foreach collection="cfid" open="(" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </where>
     </delete>
 </mapper>

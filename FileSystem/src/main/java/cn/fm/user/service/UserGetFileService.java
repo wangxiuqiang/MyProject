@@ -28,7 +28,7 @@ public interface UserGetFileService {
     /**
      * 总的包揽下面几个查询的函数
      */
-    public GetFileExtends findTypeFiles(GetFile getFile) throws Exception;
+    public List<GetFile> findTypeFiles(GetFile getFile) throws Exception;
 
     /**
      * 单独用名字来做模糊查询
@@ -92,7 +92,7 @@ public interface UserGetFileService {
      * @return
      * @throws Exception
      */
-    public int deleteGetFileById(int id) throws Exception;
+    public int deleteGetFileById(int[] id) throws Exception;
     /**
      * 通过两个或以上进行查询
      * @param getFile

@@ -9,6 +9,33 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--&lt;!&ndash; 会话ID生成器 &ndash;&gt;-->
+    <!--<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>-->
+
+    <!--&lt;!&ndash; 会话Cookie模板 &ndash;&gt;-->
+    <!--<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">-->
+        <!--<constructor-arg value="sid"/>-->
+        <!--<property name="httpOnly" value="true"/>-->
+        <!--&lt;!&ndash;cookie 过期时间,单位为秒,  如果是-1 那么关闭浏览器就过期cookie&ndash;&gt;-->
+        <!--<property name="maxAge" value="180000"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 会话验证调度器 &ndash;&gt;-->
+    <!--<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">-->
+        <!--&lt;!&ndash;验证的间隔时间是30分钟, 单位毫秒&ndash;&gt;-->
+        <!--<property name="interval" value="1800000"/>-->
+        <!--&lt;!&ndash;使用哪个会话管理器&ndash;&gt;-->
+        <!--<property name="sessionManager" ref="sessionManager"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; 会话管理器 &ndash;&gt;-->
+    <!--<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">-->
+        <!--<property name="globalSessionTimeout" value="1800000"/>-->
+        <!--<property name="deleteInvalidSessions" value="true"/>-->
+        <!--<property name="sessionValidationSchedulerEnabled" value="true"/>-->
+        <!--<property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>-->
+        <!--<property name="sessionIdCookieEnabled" value="true"/>-->
+        <!--<property name="sessionIdCookie" ref="sessionIdCookie"/>-->
+    <!--</bean>-->
     <!-- 自定义Realm -->
     <bean id="myRealm" class="cn.fm.Realm.MyRealm">
         <property name="credentialsMatcher" ref="credentialsMather"/>
@@ -23,22 +50,25 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <!--配置自定义的realm-->
         <property name="realm" ref="myRealm"/>
+        <!--配置一个SessionDao管理器-->
+        <!--<property name="sessionManager" ref="sessionManager" />-->
     </bean>
 
     <!-- Shiro过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
         <property name="securityManager" ref="securityManager"/>
-        <!-- 身份认证失败，则跳转到登录页面的配置 ,默认是/login.jsp-->
-        <property name="loginUrl" value="/loginFailure"/>
-        <!-- 权限认证失败，则跳转到指定页面 -->
-        <property name="unauthorizedUrl" value="/authcFailure"/>
+        <!--&lt;!&ndash; 身份认证失败，则跳转到登录页面的配置 ,默认是/login.jsp&ndash;&gt;-->
+        <!--<property name="loginUrl" value="/loginFailure"/>-->
+        <!--&lt;!&ndash; 权限认证失败，则跳转到指定页面 &ndash;&gt;-->
+        <!--<property name="unauthorizedUrl" value="/authcFailure"/>-->
         <!-- Shiro连接约束配置,即过滤链的定义 -->
-        <property name="filterChainDefinitions">
-            <value>
-                /login=anon
-            </value>
-        </property>
+        <!--<property name="filterChainDefinitions">-->
+            <!--<value>-->
+                <!--/login=anon-->
+                <!--/**/**=authc-->
+            <!--</value>-->
+        <!--</property>-->
     </bean>
 
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 生命周期管理器-->

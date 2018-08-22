@@ -40,26 +40,26 @@ public interface UserMapper {
 
     /**
      * 设置 cf 文件归还
-     * @param cfid
+     * @param
      * @return
      * @throws Exception
      */
-    public int updateCompanyFileBack(int cfid) throws Exception;
+    public int updateCompanyFileBack(@Param(value = "fileid") int[] fileid) throws Exception;
 
     /**
      * 设置gf 文件借出归还
-     * @param gfid
+     * @param
      * @return
      * @throws Exception
      */
-    public int updateGetFileIsBorrow(int gfid) throws Exception;
-    public int updateGetFileBack(int gfid) throws Exception;
+    public int updateGetFileIsBorrow(int fileid) throws Exception;
+    public int updateGetFileBack(@Param(value = "fileid") int[] fileid) throws Exception;
 
     /**
      * 更新归还时间
      */
-    public int updatecfBackTime(Borrow borrow) throws Exception;
-    public int updategfBackTime(Borrow borrow) throws Exception;
+    public int updatecfBackTime(@Param(value = "fileid") int[] fileid) throws Exception;
+    public int updategfBackTime(@Param(value = "fileid") int[] fileid) throws Exception;
 
 
     /**
@@ -77,4 +77,12 @@ public interface UserMapper {
      */
     public List<Borrow> selectBorrowgfById(@Param(value = "uid") int uid) throws Exception;
 
+    /**
+     * 查看是不是 被借出去了
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    public int[] selectcfisBorrow(@Param(value = "cfid") int[] cfid) throws Exception;
+    public int[] selectgfisBorrow(@Param(value = "gfid") int[] gfid) throws Exception;
 }

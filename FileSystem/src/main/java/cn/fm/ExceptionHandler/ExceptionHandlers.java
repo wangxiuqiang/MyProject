@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+
 /**
  * 异常处理类
  */
@@ -23,16 +25,23 @@ public class ExceptionHandlers {
      * @return
      */
 
+
+    HashMap<String ,Integer> map = new HashMap<>();
+
     @ExceptionHandler({UnauthenticatedException.class})
     @ResponseBody
     public String no_sujectLogin() {
-        return JSON.toJSONString(StatusUtils.FAILURE_LOGIN);
+        map.clear();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_LOGIN);
+        return JSON.toJSONString(map);
     }
 
     @ExceptionHandler({UnauthorizedException.class})
     @ResponseBody
     public String nohave_role_permission() {
-        return JSON.toJSONString(StatusUtils.NO_ROLE_PERMISSION);
+        map.clear();
+        map.put(StatusUtils.statecode,StatusUtils.NO_ROLE_PERMISSION);
+        return JSON.toJSONString(map);
     }
 
 
@@ -42,19 +51,25 @@ public class ExceptionHandlers {
     @ExceptionHandler({IncorrectCredentialsException.class})
     @ResponseBody
     public String pwdoremail_Failure() {
-        return JSON.toJSONString(StatusUtils.FAILURE_LOGIN);
+        map.clear();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_LOGIN);
+        return JSON.toJSONString(map);
     }
 
     @ExceptionHandler({UnknownAccountException.class})
     @ResponseBody
     public String emailorpwd_Failure() {
-        return JSON.toJSONString(StatusUtils.FAILURE_LOGIN);
+        map.clear();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_LOGIN);
+        return JSON.toJSONString(map);
     }
 
     @ExceptionHandler({LockedAccountException.class})
     @ResponseBody
     public String lock_account(){
-        return JSON.toJSONString(StatusUtils.LOCK_INFO);
+        map.clear();
+        map.put(StatusUtils.statecode,StatusUtils.LOCK_INFO);
+        return JSON.toJSONString(map);
     }
 
     /**
@@ -64,6 +79,8 @@ public class ExceptionHandlers {
     @ExceptionHandler({MySQLIntegrityConstraintViolationException.class})
     @ResponseBody
     public String insert_before() {
-        return JSON.toJSONString(StatusUtils.EXIST_CONTENT);
+        map.clear();
+        map.put(StatusUtils.statecode,StatusUtils.EXIST_CONTENT);
+        return JSON.toJSONString(map);
     }
 }

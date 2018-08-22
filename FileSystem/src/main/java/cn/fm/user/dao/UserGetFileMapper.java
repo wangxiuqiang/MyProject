@@ -83,11 +83,11 @@ public interface UserGetFileMapper {
 
     /**
      * 根据id删除相关的信息,单条删除
-     * @param id
+     * @param gfid
      * @return
      * @throws Exception
      */
-    public int deleteGetFileById(int id) throws Exception;
+    public int deleteGetFileById(@Param(value = "gfid") int[] gfid) throws Exception;
 
     /**
      * 通过两个或以上进行查询

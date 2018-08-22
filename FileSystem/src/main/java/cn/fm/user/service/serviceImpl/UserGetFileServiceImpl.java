@@ -103,8 +103,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
         getFile.setGfaddress(address.toString());
         getFile.setGfclassifyname(classifyname.toString());
 
-        System.out.println(getFile.getGfaddress());
-        System.out.println(getFile.getGfclassifyname());
+//        System.out.println(getFile.getGfaddress());
+//        System.out.println(getFile.getGfclassifyname());
 
         return userGetFileMapper.insertGetFile(getFile);
     }
@@ -121,56 +121,37 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @throws Exception
      */
     @Override
-    public GetFileExtends findTypeFiles(GetFile getFile) throws Exception {
-         GetFileExtends getFileExtends = new GetFileExtends();
+    public List<GetFile> findTypeFiles(GetFile getFile) throws Exception {
 
         if(getFile.getGfname() != null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
-
-              getFileExtends.setGetFiles(selectGetFileByName(getFile.getGfname()));
+            return   selectGetFileByName(getFile.getGfname());
 
 
         }else if(getFile.getGfname() == null && getFile.getGfclassifyid() != 0 && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
-
-            getFileExtends.setGetFiles(selectGetFileByClassifyId(getFile.getGfclassifyid()));
+            return selectGetFileByClassifyId(getFile.getGfclassifyid());
 
 
         }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() != null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
-
-            getFileExtends.setGetFiles(selectGetFileByCompany(getFile.getGfcompany()));
+            return selectGetFileByCompany(getFile.getGfcompany());
 
         }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() != null && getFile.getGfnumber() == 0) {
 
-            getFileExtends.setGetFiles(selectGetFileByDateTime(getFile.getGfdatetime()));
+            return selectGetFileByDateTime(getFile.getGfdatetime());
         }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() != 0){
-            getFileExtends.setGetFiles(selectGetFileByNumber(getFile.getGfnumber()));
+           return  selectGetFileByNumber(getFile.getGfnumber());
 
         }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0){
-            getFileExtends = null;
+             return  null;
         }else {
             //多项查询
-            getFileExtends.setGetFiles(selectGetFileByTwoAndMore(getFile));
+          return selectGetFileByTwoAndMore(getFile);
         }
-
-        System.out.println(getFileExtends);
-        if(getFileExtends != null  && getFileExtends.getGetFiles().size() > 0) {
-            getFileExtends.setState(StatusUtils.SUCCESS_FIND);
-            getFileExtends.setCount(getFileExtends.getGetFiles().size());
-            return getFileExtends;
-        }else {
-            return null;
-        }
-
-
-
-
-
-
     }
 
     @Override
@@ -233,6 +214,64 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @throws Exception
      */
     public int updateGetFileById(GetFile file) throws Exception{
+        /**
+         * 设置变量,让变量来完成字符串的拼接
+         * 记录一开始的分类id
+         */
+       if(file.getGfclassifyid() != 0) {
+           StringBuffer address = new StringBuffer();
+           StringBuffer classifyname = new StringBuffer();
+           int id = file.getGfclassifyid();
+//        System.out.println(id);
+           while (id != 0) {
+               Classify classify = this.selectClassify(id);
+               /**
+                * 最上层的分类的父分类id为0
+                */
+               id = classify.getCyfather();
+               if (classify.getCyfather() != 0) {
+                   address.append(classify.getCyaddress() + "-");
+                   classifyname.append(classify.getCyname() + "-");
+
+               } else {
+                   address.append(classify.getCyaddress());
+                   classifyname.append(classify.getCyname());
+
+               }
+           }
+
+//        System.out.println(address);
+//        System.out.println(classifyname);
+           /**
+            * 因为取分类名是从后取的,,所以应该把address和classifyname ,反过来
+            */
+           //临时变量
+           String addressTime = address.toString();
+           String[] splits = addressTime.split("-");
+           address.delete(0, address.length());
+           for (int i = splits.length - 1; i >= 0; i--) {
+               if (i != 0) {
+                   address.append(splits[i] + "-");
+               } else {
+                   address.append(splits[i]);
+               }
+           }
+
+           String classifynameTime = classifyname.toString();  //临时变量
+           String[] splits2 = classifynameTime.split("-");
+           classifyname.delete(0, classifyname.length());
+           for (int i = splits2.length - 1; i >= 0; i--) {
+               if (i != 0) {
+
+                   classifyname.append(splits2[i] + "-");
+               } else {
+                   classifyname.append(splits2[i]);
+               }
+           }
+
+           file.setGfaddress(address.toString());
+           file.setGfclassifyname(classifyname.toString());
+       }
         return userGetFileMapper.updateGetFileById(file);
     }
     /**
@@ -241,7 +280,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @return
      * @throws Exception
      */
-    public int deleteGetFileById(int id) throws Exception{
+    public int deleteGetFileById(int[] id) throws Exception{
         return userGetFileMapper.deleteGetFileById(id);
     }
 

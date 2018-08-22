@@ -109,53 +109,44 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      * @throws Exception
      */
     @Override
-    public CompanyFileExtends findTypeFiles(CompanyFile companyFile) throws Exception {
+    public List<CompanyFile> findTypeFiles(CompanyFile companyFile) throws Exception {
 
         CompanyFileExtends cfe = new CompanyFileExtends();
         if(companyFile.getCfname() != null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
-            cfe.setCompanyFiles(selectCompanyFileByName(companyFile.getCfname()));
+            return selectCompanyFileByName(companyFile.getCfname());
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() != 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
-            cfe.setCompanyFiles(selectCompanyFileByClassifyId(companyFile.getCfclassifyid()));
+            return selectCompanyFileByClassifyId(companyFile.getCfclassifyid());
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() != null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
-            cfe.setCompanyFiles(selectCompanyFileByLanguage(companyFile.getCflanguage()));
+          return   selectCompanyFileByLanguage(companyFile.getCflanguage());
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() != null && companyFile.getCffontid() == null) {
 
-            cfe.setCompanyFiles( selectCompanyFileByDateTime(companyFile.getCfdate()));
+            return selectCompanyFileByDateTime(companyFile.getCfdate());
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null){
 
-            cfe.setCompanyFiles(selectCompanyFileByFontid(companyFile.getCffontid()));
+           return selectCompanyFileByFontid(companyFile.getCffontid());
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null){
-            cfe = null;
+           return  null;
         }else {
-            cfe.setCompanyFiles(selectCompanyFileByTwoOrMore(companyFile));
-        }
-        if(cfe != null) {
-            cfe.setState(StatusUtils.SUCCESS_FIND);
-            /**
-             * 设置 查询了多少条数据
-             */
-
-            cfe.setCount(cfe.getCompanyFiles().size());
+            return selectCompanyFileByTwoOrMore(companyFile);
         }
 
-        return cfe;
     }
 
     /**
@@ -214,14 +205,66 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     /**
      * 更改数据
      */
-    public int updateCompanyFileById(CompanyFile file) throws Exception{
-        return userCompanyFileMapper.updateCompanyFileById(file);
+    public int updateCompanyFileById(CompanyFile companyFile) throws Exception{
+        /**
+         * 设置变量,让变量来完成字符串的拼接
+         * 记录一开始的分类id
+         */
+      if(companyFile.getCfclassifyid() != 0) {
+          StringBuffer address = new StringBuffer();
+          StringBuffer classifyname = new StringBuffer();
+          int id = companyFile.getCfclassifyid();
+          Classify classify = new Classify();
+          while (id != 0) {
+              classify = selectClassify(id);
+              id = classify.getCyfather();
+              if (classify.getCyfather() != 0) {
+                  address.append(classify.getCyaddress() + "-");
+                  classifyname.append(classify.getCyname() + "-");
+
+              } else {
+                  address.append(classify.getCyaddress());
+                  classifyname.append(classify.getCyname());
+
+              }
+          }
+
+          /**
+           * 因为取分类名是从后取的,,所以应该把address和classifyname ,反过来
+           */
+          //临时变量
+          String addressTime = address.toString();
+          String[] splits = addressTime.split("-");
+          address.delete(0, address.length());
+          for (int i = splits.length - 1; i >= 0; i--) {
+              if (i != 0) {
+                  address.append(splits[i] + "-");
+              } else {
+                  address.append(splits[i]);
+              }
+          }
+
+          String classifynameTime = classifyname.toString();  //临时变量
+          String[] splits2 = classifynameTime.split("-");
+          classifyname.delete(0, classifyname.length());
+          for (int i = splits2.length - 1; i >= 0; i--) {
+              if (i != 0) {
+                  classifyname.append(splits2[i] + "-");
+              } else {
+                  classifyname.append(splits2[i]);
+              }
+          }
+
+          companyFile.setCfaccept(address.toString());
+          companyFile.setCfclassifyname(classifyname.toString());
+      }
+        return userCompanyFileMapper.updateCompanyFileById(companyFile);
     }
 
     /**
      *根据id删除单行数据
      */
-    public int deleteCompanyFileById(int cfid) throws Exception{
+    public int deleteCompanyFileById(int[] cfid) throws Exception{
         return userCompanyFileMapper.deleteCompanyFileById(cfid);
     }
 }

@@ -13,8 +13,8 @@ code varchar(50) NOT NULL,
 ucompany varchar(30),
 ifAdmin int
 );
-insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("123","admin","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813",1,"0","2018",1);
-insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("123","admin","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813",1,"0","2018",0);
+insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("123","admin","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813",1,1,"2018",1);
+insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("123","user","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813","1",1,"2018",0);
 
 create table workPlace (
 wid int primary key auto_increment,
@@ -65,7 +65,16 @@ insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassify
 insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第8份文件","第一单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
 insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第9份文件","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
 insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第10份文件","第一单位",4,"2015-02-15",1,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第一1份文件","第一单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱");
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第21份文件","第一单位",4,"2013-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第31份文件","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第41份文件","第二单位",4,"2014-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第51份文件","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第61份文件","第一单位",4,"2019-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第71份文件","第二单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第81份文件","第一单位",4,"2025-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第91份文件","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第11份文件","第一单位",4,"2045-02-15",1,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
 
 
 create table companyFile (

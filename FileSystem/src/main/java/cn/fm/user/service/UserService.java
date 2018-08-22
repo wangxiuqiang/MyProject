@@ -25,8 +25,8 @@ public interface UserService {
     /**
      * 更新归还时间  ,同时在这里面完成对文件状态的改变
      */
-    public int updatecfBackTime(Borrow borrow) throws Exception;
-    public int updategfBackTime(Borrow borrow) throws Exception;
+    public int updatecfBackTime(int[] fileid) throws Exception;
+    public int updategfBackTime(int[] fileid) throws Exception;
 
     /**
      * 传过来 用户名和单位,根据这个找到id, 根据id 去查找相应的borrow ,找到之后查找根据uid 找相应的User,

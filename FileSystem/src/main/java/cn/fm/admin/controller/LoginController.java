@@ -21,11 +21,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping( produces = "application/json;charset=utf-8")
-//@RequestMapping( produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
+//@RequestMapping( produces = "application/json;charset=utf-8")
+@RequestMapping( produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
 public class LoginController {
 
     @Autowired
@@ -50,7 +51,9 @@ public class LoginController {
 
         subject.login(token);
 
-        return JSON.toJSONString(StatusUtils.SUCCESS_LOGIN);
+        HashMap<String ,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.SUCCESS_LOGIN);
+        return JSON.toJSONString(map);
 //        User users = adminService.findUserByEmail(user.getUemail());
 //        if (user != null) {
 //            return JSON.toJSONString(StatusUtils.SUCCESS_LOGIN);

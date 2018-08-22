@@ -21,7 +21,7 @@ public interface UserCompanyFileService {
     /**
      * 总的包揽下面几个查询的函数
      */
-    public CompanyFileExtends findTypeFiles(CompanyFile companyFile) throws Exception;
+    public List<CompanyFile> findTypeFiles(CompanyFile companyFile) throws Exception;
     /**
      * 根据id 查找分类信息
      * @param classifyid
@@ -91,7 +91,7 @@ public interface UserCompanyFileService {
     /**
      *根据id删除单行数据
      */
-    public int deleteCompanyFileById(int cfid) throws Exception;
+    public int deleteCompanyFileById(int[] cfid) throws Exception;
 
 
 }

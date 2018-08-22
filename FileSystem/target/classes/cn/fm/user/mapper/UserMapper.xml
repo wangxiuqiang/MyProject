@@ -22,12 +22,12 @@
 
     <!--添加借阅信息-->
     <insert id="insertBorrowcfInfo" parameterType="cn.fm.pojo.Borrow" >
-        insert into borrow_companyFile(uid,fileid,borrowtime) VALUES (#{uid},#{fileid},#{borrowtime});
+        insert into borrow_companyFile(uid,fileid,borrowtime) VALUES (#{uid},#{fileid},#{borrowtime})
     </insert>
 
     <!--添加借阅信息-->
     <insert id="insertBorrowgfInfo" parameterType="cn.fm.pojo.Borrow" >
-        insert into borrow_getFile(uid,fileid,borrowtime) VALUES (#{uid},#{fileid},#{borrowtime});
+        insert into borrow_getFile(uid,fileid,borrowtime) VALUES (#{uid},#{fileid},#{borrowtime})
     </insert>
 
     <!--设置文件已经被借出-->
@@ -37,7 +37,10 @@
 
     <!--设置文件已经归还-->
     <update id="updateCompanyFileBack" parameterType="int">
-        update companyFile set isborrow = 1 where cfid = #{cfid}
+        update companyFile set isborrow = 1 where cfid
+        <foreach collection="fileid" close=")" open="(" separator="," item="id">
+            #{id}
+        </foreach>
     </update>
 
     <!--设置文件已经被借出-->
@@ -47,14 +50,24 @@
 
     <!--设置文件已经归还-->
     <update id="updateGetFileBack" parameterType="int">
-        update getFile set isborrow = 1 where gfid = #{gfid}
+        update getFile set isborrow = 1 where gfid IN
+        <foreach collection="fileid" close=")" open="(" separator="," item="id">
+            #{id}
+        </foreach>
     </update>
-    <!--更新归还时间-->
-    <update id="updatecfBackTime" parameterType="cn.fm.pojo.Borrow">
-        update borrow_companyFile set backtime = #{backtime} WHERE uid =#{uid} and fileid = #{fileid}
+    <!--更新归还时间 ,因为一个文件只能借一次 所以  根据文件id就可以归还,但是要进行判断, 判断这个文件是不是在借阅中,并且
+    这个文件是不是没更新过-->
+    <update id="updatecfBackTime" parameterType="int">
+        update borrow_companyFile set backtime = CURDATE()   WHERE backtime!=null AND fileid IN
+        <foreach collection="fileid" close=")" open="(" separator="," item="id">
+            #{id}
+        </foreach>
     </update>
-    <update id="updategfBackTime" parameterType="cn.fm.pojo.Borrow">
-        update borrow_getFile set backtime = #{backtime} WHERE uid =#{uid} and fileid = #{fileid}
+    <update id="updategfBackTime" parameterType="int">
+        update borrow_getFile set backtime = CURDATE() WHERE backtime!=null AND fileid IN
+        <foreach collection="fileid" close=")" open="(" separator="," item="id">
+            #{id}
+        </foreach>
     </update>
 
 
@@ -76,5 +89,20 @@
                 uid = #{uid}
             </if>
         </where>
+    </select>
+
+    <!--查看该文件是不是被借出去了-->
+    <select id="selectgfisBorrow" parameterType="int" resultType="int">
+        select isborrow from getFile where gfid IN
+        <foreach collection="gfid" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="selectcfisBorrow" parameterType="int" resultType="int">
+        select isborrow from getFile where gfid IN
+        <foreach collection="gfid" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
     </select>
 </mapper>

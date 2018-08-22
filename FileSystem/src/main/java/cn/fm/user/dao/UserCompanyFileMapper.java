@@ -3,6 +3,7 @@ package cn.fm.user.dao;
 import cn.fm.pojo.Classify;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.pojo.GetFile;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -84,7 +85,7 @@ public interface UserCompanyFileMapper {
         /**
          *根据id删除单行数据
          */
-        public int deleteCompanyFileById(int cfid) throws Exception;
+        public int deleteCompanyFileById(@Param(value = "cfid") int[] cfid) throws Exception;
 
         /**
          * 多项组合查询
