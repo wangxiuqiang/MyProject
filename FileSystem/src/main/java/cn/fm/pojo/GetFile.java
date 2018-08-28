@@ -1,6 +1,7 @@
 package cn.fm.pojo;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class GetFile {
 
@@ -37,6 +38,21 @@ public class GetFile {
      */
     private int isborrow;
 
+    /**
+     * 所在的分类的所有id地址
+     */
+    /**
+     * 用来 返回自己的分类和全部父类id
+     * */
+    private List<Integer> classifies;
+
+    public List<Integer> getClassifies() {
+        return classifies;
+    }
+
+    public void setClassifies(List<Integer> classifies) {
+        this.classifies = classifies;
+    }
     public int getIsborrow() {
         return isborrow;
     }

@@ -94,6 +94,6 @@ public interface UserGetFileMapper {
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile);
+    public List<GetFile> selectGetFileByTwoAndMore(GetFile getFile);
 
 }

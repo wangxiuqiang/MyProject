@@ -133,4 +133,14 @@
         </foreach>
     </select>
 
+
+    <!--添加用户单位-->
+    <insert id="insertCompany" parameterType="cn.fm.pojo.WorkPlace" >
+        insert into workPlace(wname) VALUES (#{wname})
+    </insert>
+
+    <!--添加分类 -->
+    <insert id="insertClassify" parameterType="cn.fm.pojo.Classify">
+        insert into classify(cyname,cyfatherid,cyaddress) VALUES (#{cyname},#{cyfatherid},#{cyaddress})
+    </insert>
 </mapper>

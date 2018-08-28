@@ -1,10 +1,7 @@
 package cn.fm.user.service.serviceImpl;
 
 import cn.fm.admin.dao.AdminMapper;
-import cn.fm.pojo.Borrow;
-import cn.fm.pojo.CompanyFile;
-import cn.fm.pojo.GetFile;
-import cn.fm.pojo.User;
+import cn.fm.pojo.*;
 import cn.fm.user.dao.UserCompanyFileMapper;
 import cn.fm.user.dao.UserGetFileMapper;
 import cn.fm.user.dao.UserMapper;
@@ -231,5 +228,27 @@ public class UserServiceImpl implements UserService {
         }
         return bgfes;
     }
-
+    /**
+     * 查最顶层的分类
+     */
+    @Override
+    public List<Classify> selectClassifyBiggest() throws Exception{
+        return userMapper.selectClassifyBiggest();
+    }
+    /**
+     * 根据父类id查找子类 信息
+     * @param fatherid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Classify> selectClassifyByFatherId(int fatherid) throws Exception{
+//        Classify classify = userGetFileMapper.selectClassify(fatherid);
+//        classify.setCyid(0);
+//        classify.setCyname("0");
+//        classify.setCyfather(0);
+        List<Classify> classifies = userMapper.selectClassifyByFatherId(fatherid);
+//        classifies.add(classify);
+        return classifies;
+    }
 }

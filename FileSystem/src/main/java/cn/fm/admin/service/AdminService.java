@@ -138,4 +138,18 @@ public interface AdminService {
      public List<Role> findRolesShow(int[] rids) throws Exception;
     public List<Permission> findPermissionsShow(int[] pids) throws Exception;
 
+    /**
+     * 添加用户单位
+     * @param workPlace
+     * @return
+     * @throws Exception
+     */
+    public int insertCompany(WorkPlace workPlace) throws Exception;
+    /**
+     * 添加分类
+     * @param classify
+     * @return
+     * @throws Exception
+     */
+    public int insertClassify(Classify classify) throws Exception;
 }

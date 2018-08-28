@@ -89,7 +89,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     /**
-     * 查找指定的用户,根据id
+     * 查找指定的用户,根据id  ,返回一个展现给前台页面
      * @param id
      * @return
      * @throws Exception
@@ -117,7 +117,24 @@ public class AdminServiceImpl implements AdminService{
         ue.setPname(stringBuffer.toString());
         return ue;
     }
+    /**
+     * 展示给前端的权限和角色信息 ,展示这个人有多少的角色和信息, 给上面的类,让他使用
+     */
+    @Override
+    public List<Role> findRolesShow(int[] rids) throws Exception{
+        return adminMapper.findRoles(rids);
+    }
+    @Override
+    public List<Permission> findPermissionsShow(int[] pids) throws Exception{
+        return adminMapper.findPermissions(pids);
+    }
 
+    /**
+     * 给上面的类负责把user 放到userExtend中
+     * @param user
+     * @return
+     * @throws Exception
+     */
     public UserExtend setUserExtend(User user) throws Exception {
         UserExtend ue = new UserExtend();
         ue.setUid(user.getUid());
@@ -134,6 +151,7 @@ public class AdminServiceImpl implements AdminService{
      * @return
      * @throws Exception
      */
+    @Override
     public int deleteWorkerById(int id) throws Exception{
         return adminMapper.deleteWorkerById(id) + adminMapper.deleteUser_roles(id) ;
     }
@@ -141,6 +159,7 @@ public class AdminServiceImpl implements AdminService{
     /**
      * 根据id进行修改用户信息
      */
+    @Override
     public int updateWorkerById(User user) throws Exception{
         return adminMapper.updateWorkerById(user);
     }
@@ -158,6 +177,7 @@ public class AdminServiceImpl implements AdminService{
      * @return
      * @throws Exception
      */
+    @Override
     public List<Role> selectAllRoles() throws Exception{
         return adminMapper.selectAllRoles();
     }
@@ -167,6 +187,7 @@ public class AdminServiceImpl implements AdminService{
      * @return
      * @throws Exception
      */
+    @Override
     public List<Permission> selectAllPermissions() throws Exception{
         return adminMapper.selectAllPermissions();
     }
@@ -220,7 +241,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     /**
-     * 将上面的几个函数整合一下查出一个全的来
+     * 将上面的几个函数整合一下查出一个全的来, 通过用户id 来查找用户的角色和权限信息
+     * 放到Realm中进行验证
      * @param uid
      * @return
      * @throws Exception
@@ -240,17 +262,25 @@ public class AdminServiceImpl implements AdminService{
         return selectRoles(selectRid(uid));
     }
 
-
     /**
-     * 展示给前端的权限和角色信息
+     * 添加用户单位
+     * @param workPlace
+     * @return
+     * @throws Exception
      */
     @Override
-    public List<Role> findRolesShow(int[] rids) throws Exception{
-        return adminMapper.findRoles(rids);
+    public int insertCompany(WorkPlace workPlace) throws Exception{
+        return adminMapper.insertCompany(workPlace);
     }
+    /**
+     * 添加分类
+     * @param classify
+     * @return
+     * @throws Exception
+     */
     @Override
-    public List<Permission> findPermissionsShow(int[] pids) throws Exception{
-        return adminMapper.findPermissions(pids);
+    public int insertClassify(Classify classify) throws Exception{
+        return adminMapper.insertClassify(classify);
     }
 
 }

@@ -29,7 +29,7 @@
      <select id="selectGetFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
          select
          <include refid="Base_Columns_List" />
-         from getFile where gfname like concat(concat('%',#{value}), '%') ;
+         from getFile where gfname like concat(concat('%',#{value}), '%')
      </select>
 
     <select id="selectGetFileByCompany" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
@@ -60,7 +60,8 @@
     <!--多项查询-->
     <select id="selectGetFileByTwoAndMore" parameterType="cn.fm.pojo.GetFile" resultType="cn.fm.pojo.GetFile">
         select
-        <include refid="Base_Columns_List" /> from getFile
+        <include refid="Base_Columns_List" />
+        from getFile
         <where>
 
             <if test="gfclassifyid != 0">

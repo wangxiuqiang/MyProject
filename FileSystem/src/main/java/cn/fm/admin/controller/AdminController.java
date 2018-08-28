@@ -1,6 +1,7 @@
 package cn.fm.admin.controller;
 
 import cn.fm.admin.service.AdminService;
+import cn.fm.pojo.Classify;
 import cn.fm.pojo.User;
 import cn.fm.pojo.WorkPlace;
 import cn.fm.utils.DateToStringUtils;
@@ -199,6 +200,7 @@ public class AdminController {
             PassWordHelper helper = new PassWordHelper();
             user.setUpwd(helper.SHA256(user.getUpwd()));
         }
+        //如果对角色插入失败, 就返回
         if(rid != null  ) {
             if(adminService.updateUser_Role(user.getUid(),rid) == 0) {
                 map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
@@ -238,6 +240,51 @@ public class AdminController {
         return JSON.toJSONString(adminService.selectAllRoles());
     }
 
+    /**
+     * 添加一个 单位
+     * @param workPlace
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/addWorkPlace")
+    @ResponseBody
+    public String addWorkPlace(WorkPlace workPlace) throws Exception {
+        int flag = adminService.insertCompany(workPlace);
+        HashMap<String,Integer> map = new HashMap<>();
+
+        if(flag != 0) {
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
+        }else {
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
+        }
+
+    }
+
+    /**
+     * 添加一个分类
+     * @param classify
+     * @param fatherid
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/addClassify/{fatherid}")
+    @ResponseBody
+    public String addClassify(Classify classify ,@PathVariable int fatherid)throws Exception{
+        classify.setCyfather(fatherid);
+        HashMap<String,Integer> map = new HashMap<>();
+        if(adminService.insertClassify(classify) != 0) {
+            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            return JSON.toJSONString(map);
+        }else {
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+            return JSON.toJSONString(map);
+        }
+
+    }
 //
 //    /**
 //     * 根据id返回角色和权限信息

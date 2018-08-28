@@ -4,6 +4,7 @@ package cn.fm.user.controller;
  */
 
 import cn.fm.pojo.Borrow;
+import cn.fm.pojo.Classify;
 import cn.fm.pojo.GetFile;
 import cn.fm.pojo.User;
 import cn.fm.user.service.UserService;
@@ -31,6 +32,8 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/worker" , produces = "application/json;charset=utf8" ,method = RequestMethod.POST)
 public class UserController {
+
+    private static String address = "";
     @Autowired
     UserService userService;
 
@@ -266,5 +269,44 @@ public class UserController {
         }
     }
 
+    /**
+     * 查找最顶层的 分类
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    @RequestMapping(value = "/selectClassifyBiggest")
+    @ResponseBody
+    public String selectClassifyBiggst() throws Exception {
+        List<Classify> classifies = userService.selectClassifyBiggest();
+        if(classifies != null && classifies.size() > 0) {
+            return JSON.toJSONString(classifies);
+        }
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+        return JSON.toJSONString(map);
+    }
+    /**
+     * 查找下一级的分类, 并且 打印出这些分类的总的存放地址
+     */
+    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    @RequestMapping(value = "/selectClassifyByFather/{fatherid}")
+    @ResponseBody
+    public String selectClassifyByFather(@PathVariable int fatherid) throws Exception{
+        List<Classify> classifies = userService.selectClassifyByFatherId(fatherid);
+//        如果这个 cyid = 0 则带出去的是选择了的分类的地址
+        if(classifies != null && classifies.size() > 0) {
+//            for (Classify c: classifies) {
+//                if(c.getCyid() == 0) {
+//                    address = address + "-" + c.getCyaddress();
+//                    c.setCyaddress(address);
+//                }
+//            }
+            return JSON.toJSONString(classifies);
+        }
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+        return JSON.toJSONString(map);
+    }
 
 }

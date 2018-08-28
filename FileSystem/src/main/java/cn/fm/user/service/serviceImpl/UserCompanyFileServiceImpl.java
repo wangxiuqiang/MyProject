@@ -10,6 +10,7 @@ import cn.fm.vo.CompanyFileExtends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class UserCompanyFileServiceImpl implements UserCompanyFileService {
@@ -91,7 +92,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     }
 
     /**
-     * 查找相应的分类  ,给录入使用
+     * 查找相应的分类  ,给录入使用  ,查询也使用
      * @param classifyid
      * @return
      * @throws Exception
@@ -103,7 +104,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
 
     /**
-     * 总的查找  ,这个是将查出来的list  放到一个类里,,后面用分页的时候改掉
+     * 总的查找,不根据id查询  ,这个是将查出来的list  放到一个类里,,后面用分页的时候改掉
      * @param companyFile
      * @return
      * @throws Exception
@@ -111,7 +112,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     @Override
     public List<CompanyFile> findTypeFiles(CompanyFile companyFile) throws Exception {
 
-        CompanyFileExtends cfe = new CompanyFileExtends();
+
         if(companyFile.getCfname() != null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
@@ -167,29 +168,72 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
         return userCompanyFileMapper.selectCompanyFileById(cfid);
     }
 
+    /**
+     * 用来返回文件的所有的父分类的id和自己的id
+     * @param cfs
+     * @return
+     * @throws Exception
+     */
+    public List<CompanyFile> selectAllClassifyId(List<CompanyFile> cfs) throws Exception {
+        List<Integer> list = new ArrayList<Integer>();
+        cfs.forEach(n -> {
+            list.clear();
+            int fatherid = 1;
+            Classify classify = new Classify();
+            try {
+                classify = selectClassify(n.getCfclassifyid());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            list.add(classify.getCyid()) ;
+            list.add(classify.getCyfather());
+
+            while (fatherid != 0){
+                try {
+                    classify = selectClassify(classify.getCyfather());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                fatherid = classify.getCyfather();
+                if(fatherid != 0)
+                   list.add(fatherid);
+            }
+            n.setClassifies(list);
+
+        });
+        return cfs;
+    }
+
     @Override
     public List<CompanyFile> selectCompanyFileByName(String cfname) throws Exception {
-        return userCompanyFileMapper.selectCompanyFileByName(cfname);
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByName(cfname);
+
+        return selectAllClassifyId(cfs);
     }
 
     @Override
     public List<CompanyFile> selectCompanyFileByLanguage(String language) throws Exception {
-        return userCompanyFileMapper.selectCompanyFileByLanguage(language);
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByLanguage(language);
+        return selectAllClassifyId(cfs);
     }
 
     @Override
     public List<CompanyFile> selectCompanyFileByClassifyId(int classifyid) throws Exception {
-        return userCompanyFileMapper.selectCompanyFileByClassifyId(classifyid);
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByClassifyId(classifyid);
+        return selectAllClassifyId(cfs);
     }
 
     @Override
     public List<CompanyFile> selectCompanyFileByDateTime(String date) throws Exception {
-        return userCompanyFileMapper.selectCompanyFileByDateTime(date);
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByDateTime(date);
+        return selectAllClassifyId(cfs);
     }
 
     @Override
     public List<CompanyFile> selectCompanyFileByFontid(String cffontid) throws Exception {
-        return userCompanyFileMapper.selectCompanyFileByFontid(cffontid);
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByFontid(cffontid);
+        return selectAllClassifyId(cfs);
     }
 
     /**
@@ -199,7 +243,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      */
     @Override
     public List<CompanyFile> selectAllCompanyFile() throws Exception {
-        return userCompanyFileMapper.selectAllCompanyFile();
+        List<CompanyFile> cfs = userCompanyFileMapper.selectAllCompanyFile();
+        return selectAllClassifyId(cfs);
     }
 
     /**

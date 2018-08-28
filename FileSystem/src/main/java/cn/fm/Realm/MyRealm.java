@@ -28,8 +28,8 @@ public class MyRealm extends AuthorizingRealm {
 
         try {
             user = adminMapper.findUserByEmail(email);
-            System.out.println(adminService.findPermissions(user.getUid())+"----------------------");
-            System.out.println(adminService.findPermissions(user.getUid())+"``````````````````````");
+//            System.out.println(adminService.findPermissions(user.getUid())+"----------------------");
+//            System.out.println(adminService.findPermissions(user.getUid())+"``````````````````````");
             simpleAuthorizationInfo.setStringPermissions(adminService.findPermissions(user.getUid()));
             simpleAuthorizationInfo.setRoles(adminService.findRoles(user.getUid()));
         } catch (Exception e) {

@@ -1,6 +1,7 @@
 package cn.fm.pojo;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class CompanyFile {
 
@@ -37,6 +38,18 @@ public class CompanyFile {
     @NotNull(message = "{companyfile.classifyname.isnull}")
     private String cfclassifyname;
 
+    /**
+     * 用来 返回自己的分类和全部父类id
+     * */
+    private List<Integer> classifies;
+
+    public List<Integer> getClassifies() {
+        return classifies;
+    }
+
+    public void setClassifies(List<Integer> classifies) {
+        this.classifies = classifies;
+    }
 
     public int getType() {
         return type;

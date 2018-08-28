@@ -53,8 +53,8 @@ public class UserGetFileController {
     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/findTypeGetFiles/{page}")
     @ResponseBody
-    public String findTypeFiles( GetFile getFile,@PathVariable  Integer page) throws Exception {
-//        System.out.println(getFile);
+    public String findTypeFiles(@PathVariable Integer page , GetFile getFile) throws Exception {
+        System.out.println(getFile);
         if(getFile.getGfnumber() != 0 || getFile.getGfdatetime() != null || getFile.getGfcompany() != null
                 || getFile.getGfclassifyid() != 0 || getFile.getGfname() != null) {
             PageHelper.startPage(page,StatusUtils.PAGE_SIZE);

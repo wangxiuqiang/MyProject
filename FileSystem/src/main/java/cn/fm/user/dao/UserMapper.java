@@ -1,6 +1,7 @@
 package cn.fm.user.dao;
 
 import cn.fm.pojo.Borrow;
+import cn.fm.pojo.Classify;
 import cn.fm.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -85,4 +86,17 @@ public interface UserMapper {
      */
     public int[] selectcfisBorrow(@Param(value = "cfid") int[] cfid) throws Exception;
     public int[] selectgfisBorrow(@Param(value = "gfid") int[] gfid) throws Exception;
+
+    /**
+     * 查最顶层的分类
+     */
+    public List<Classify> selectClassifyBiggest() throws Exception;
+
+    /**
+     * 根据父类id查找子类 信息
+     * @param fatherid
+     * @return
+     * @throws Exception
+     */
+    public List<Classify> selectClassifyByFatherId(int fatherid) throws Exception;
 }

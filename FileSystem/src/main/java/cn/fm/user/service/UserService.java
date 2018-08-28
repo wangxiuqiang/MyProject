@@ -1,6 +1,7 @@
 package cn.fm.user.service;
 
 import cn.fm.pojo.Borrow;
+import cn.fm.pojo.Classify;
 import cn.fm.pojo.User;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
@@ -39,5 +40,15 @@ public interface UserService {
     public List<BorrowCFExtends> selectBorrowcfInfo(String uname,String ucompany ,int flag) throws Exception;
 
     public List<BorrowGFExtends> selectBorrowgfInfo(String uname,String ucompany,int flag) throws Exception;
-
+    /**
+     * 查最顶层的分类
+     */
+    public List<Classify> selectClassifyBiggest() throws Exception;
+    /**
+     * 根据父类id查找子类 信息
+     * @param fatherid
+     * @return
+     * @throws Exception
+     */
+    public List<Classify> selectClassifyByFatherId(int fatherid) throws Exception;
 }

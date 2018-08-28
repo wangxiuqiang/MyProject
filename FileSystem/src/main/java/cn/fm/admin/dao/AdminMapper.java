@@ -142,4 +142,19 @@ public interface AdminMapper {
     public List<Role> findRoles(@Param(value = "rids") int[] rid) throws Exception;
     public List<Permission> findPermissions(@Param(value = "pids") int[] pid) throws Exception;
 
+    /**
+     * 添加用户单位
+     * @param workPlace
+     * @return
+     * @throws Exception
+     */
+    public int insertCompany(WorkPlace workPlace) throws Exception;
+
+    /**
+     * 添加分类
+     * @param classify
+     * @return
+     * @throws Exception
+     */
+    public int insertClassify(Classify classify) throws Exception;
 }
