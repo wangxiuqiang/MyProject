@@ -17,7 +17,7 @@ public class UserExtend {
 
     @NotNull(message = "{user.ifadmin.isnull}")
     private int ifAdmin;
-
+    @NotNull(message = "{user.roles.isnull}")
     private int rid;
 
     @NotNull(message = "{user.roles.isnull}")

@@ -35,7 +35,7 @@ public class CompanyFile {
     private String cflanguage;
     private String cfaddress;
     private int cfclassifyid;
-    @NotNull(message = "{companyfile.classifyname.isnull}")
+//    @NotNull(message = "{companyfile.classifyname.isnull}")
     private String cfclassifyname;
 
     /**

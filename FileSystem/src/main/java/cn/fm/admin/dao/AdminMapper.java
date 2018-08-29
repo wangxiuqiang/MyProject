@@ -68,12 +68,12 @@ public interface AdminMapper {
      * @return
      * @throws Exception
      */
-    public int deleteWorkerById(int id) throws Exception;
+    public int deleteWorkerById(@Param("id") int[] id) throws Exception;
 
     /**
      * 同时删掉用户和角色的关联
      */
-    public int deleteUser_roles(int uid) throws Exception;
+    public int deleteUser_roles(@Param("uid")int[] uid) throws Exception;
     /**
      * 根据id进行修改用户信息
      */

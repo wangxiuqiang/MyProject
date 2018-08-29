@@ -128,7 +128,7 @@ public class UserGetFileController {
     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delGetFile")
     @ResponseBody
-    public String delGetFile(int[] gfid) throws Exception {
+    public String delGetFile(@RequestBody  int[] gfid) throws Exception {
         if(gfid.length <= 0) {
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.IS_NULL);

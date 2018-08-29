@@ -27,7 +27,7 @@ public class GetFile {
     private String gfcompany;
     private String gfresult;
     private int gfclassifyid;
-    @NotNull(message = "{getfile.classifyname.isnull}")
+//    @NotNull(message = "{getfile.classifyname.isnull}")
     private String gfclassifyname;
     private String gfaddress;
     private String gfdatetime;

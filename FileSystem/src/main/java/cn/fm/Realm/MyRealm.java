@@ -1,6 +1,6 @@
 package cn.fm.Realm;
 
-import cn.fm.admin.dao.AdminMapper;
+
 import cn.fm.admin.service.AdminService;
 import cn.fm.pojo.User;
 import cn.fm.utils.PassWordHelper;
@@ -15,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MyRealm extends AuthorizingRealm {
 
     private User user = null;
-    @Autowired
-    AdminMapper adminMapper;
+
 
     @Autowired
     AdminService adminService;
@@ -27,7 +26,7 @@ public class MyRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 
         try {
-            user = adminMapper.findUserByEmail(email);
+            user = adminService.findUserByEmail(email);
 //            System.out.println(adminService.findPermissions(user.getUid())+"----------------------");
 //            System.out.println(adminService.findPermissions(user.getUid())+"``````````````````````");
             simpleAuthorizationInfo.setStringPermissions(adminService.findPermissions(user.getUid()));
@@ -46,7 +45,7 @@ public class MyRealm extends AuthorizingRealm {
          System.out.println(email + "-----------------------------------------");
 // 从数据库中获取相应的内容
         try {
-          user  = adminMapper.findUserByEmail(email);
+          user  = adminService.findUserByEmail(email);
         } catch (Exception e) {
             e.printStackTrace();
         }

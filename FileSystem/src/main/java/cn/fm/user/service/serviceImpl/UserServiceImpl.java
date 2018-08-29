@@ -1,6 +1,7 @@
 package cn.fm.user.service.serviceImpl;
 
 import cn.fm.admin.dao.AdminMapper;
+import cn.fm.admin.service.AdminService;
 import cn.fm.pojo.*;
 import cn.fm.user.dao.UserCompanyFileMapper;
 import cn.fm.user.dao.UserGetFileMapper;
@@ -10,6 +11,7 @@ import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.PassWordHelper;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
+import cn.fm.vo.UserExtend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    AdminService adminService;
     @Autowired
     AdminMapper adminMapper;
     @Autowired
@@ -50,17 +54,23 @@ public class UserServiceImpl implements UserService {
 
     }
 
-
+/**
+ * 通过姓名进行查询 信息 ,给下面借文件提供id
+ */
+    @Override
+    public List<User> selectUserByName(String name) throws Exception{
+        return userMapper.selectUserId(name);
+    }
 
     /**
      * 添加借阅信息,同时在这里修改借出的状态
-     * @param ucompany
+     * @param uid,cfid
      * @return
      * @throws Exception
      */
     @Override
-    public int insertBorrowcfInfo(String uname,String ucompany,int cfid) throws Exception{
-        int uid = userMapper.selectUserId(uname,ucompany);
+    public int insertBorrowcfInfo(int uid,int cfid) throws Exception{
+
         Borrow borrow = new Borrow();
         borrow.setUid(uid);
         borrow.setFileid(cfid);
@@ -72,9 +82,8 @@ public class UserServiceImpl implements UserService {
 
     }
     @Override
-    public int insertBorrowgfInfo(String uname,String ucompany,int gfid) throws Exception{
+    public int insertBorrowgfInfo(int uid,int gfid) throws Exception{
 
-        int uid = userMapper.selectUserId(uname,ucompany);
         Borrow borrow = new Borrow();
         borrow.setUid(uid);
         borrow.setFileid(gfid);
@@ -83,7 +92,112 @@ public class UserServiceImpl implements UserService {
         }
         return userMapper.insertBorrowgfInfo(borrow) + userMapper.updateGetFileIsBorrow(gfid);
     }
-
+/**
+ *  查询一个用户所有的借阅出去的文件
+ */
+    @Override
+    public List<BorrowCFExtends> selectBorrowcfInfo(int uid,int flag) throws Exception{
+        //找到用户信息
+        User user = adminMapper.findWorkerById(uid);
+        //根据用户id找到借阅的文件信息
+        List<Borrow> bs = userMapper.selectBorrowcfById(uid);
+        List<BorrowCFExtends> bcf = new ArrayList<BorrowCFExtends>();
+        bs.forEach(n -> {
+            try {
+                BorrowCFExtends bcfe = new BorrowCFExtends();
+                CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(n.getFileid());
+                bcfe.setUser(user);
+                bcfe.setCompanyFile(cf);
+                bcfe.setBorrowtime(n.getBorrowtime());
+                bcfe.setBacktime(n.getBacktime());
+                if(flag == 0) {
+                    bcf.add(bcfe);
+                }
+                if(flag == 1 && n.getBacktime() == null) {
+                    bcf.add(bcfe);
+                }
+                if(flag == 2 && n.getBacktime() != null){
+                    bcf.add(bcfe);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+       return bcf;
+    }
+    @Override
+    public List<BorrowGFExtends> selectBorrowgfInfo(int uid,int flag) throws Exception{
+        //找到用户信息
+        User user = adminMapper.findWorkerById(uid);
+        //根据用户id找到借阅的文件信息
+        List<Borrow> bs = userMapper.selectBorrowgfById(uid);
+        List<BorrowGFExtends> bgf = new ArrayList<BorrowGFExtends>();
+        bs.forEach(n -> {
+            try {
+                BorrowGFExtends bgfe = new BorrowGFExtends();
+                GetFile gf = userGetFileMapper.selectGetFileById(n.getFileid());
+                bgfe.setUser(user);
+                bgfe.setGetFile(gf);
+                bgfe.setBorrowtime(n.getBorrowtime());
+                bgfe.setBacktime(n.getBacktime());
+                if(flag == 0) {
+                    bgf.add(bgfe);
+                }
+                if(flag == 1 && n.getBacktime() == null) {
+                    bgf.add(bgfe);
+                }
+                if(flag == 2 && n.getBacktime() != null){
+                    bgf.add(bgfe);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return bgf;
+    }
+    /**
+     * 查询一个文件所有的借阅数据
+     */
+    @Override
+    public List<BorrowCFExtends> selectBorrowcfInfoByFileid(int fileid) throws Exception{
+        List<Borrow> borrows = userMapper.selectBorrowcfInfoByFileid(fileid);
+        List<BorrowCFExtends> bcfes = new ArrayList<>();
+        CompanyFile companyFile = userCompanyFileMapper.selectCompanyFileById(fileid);
+        borrows.forEach(n -> {
+            try {
+                BorrowCFExtends bcf = new BorrowCFExtends();
+              User  user = adminMapper.findWorkerById(n.getUid());
+              bcf.setBacktime(n.getBacktime());
+              bcf.setBorrowtime(n.getBorrowtime());
+              bcf.setCompanyFile(companyFile);
+              bcf.setUser(user);
+              bcfes.add(bcf);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return bcfes;
+    }
+    @Override
+    public List<BorrowGFExtends> selectBorrowgfInfoByFileid(int fileid) throws Exception{
+        List<Borrow> borrows = userMapper.selectBorrowgfInfoByFileid(fileid);
+        List<BorrowGFExtends> bgfes = new ArrayList<>();
+        GetFile getFile = userGetFileMapper.selectGetFileById(fileid);
+        borrows.forEach(n -> {
+            try {
+                BorrowGFExtends bgf = new BorrowGFExtends();
+                User  user = adminMapper.findWorkerById(n.getUid());
+                bgf.setBacktime(n.getBacktime());
+                bgf.setBorrowtime(n.getBorrowtime());
+                bgf.setGetFile(getFile);
+                bgf.setUser(user);
+                bgfes.add(bgf);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return bgfes;
+    }
     /**
      * 更新归还时间  ,同时在这里面完成对文件状态的改变
      */
@@ -121,121 +235,21 @@ public class UserServiceImpl implements UserService {
 //        return userMapper.updateGetFileBack(borrow.getFileid()) +userMapper.updategfBackTime(borrow);
     }
 
+
+
+
     /**
-     * 传过来 用户名和单位,根据这个找到id, 根据id 去查找相应的borrow ,找到之后查找根据uid 找相应的User,
-     * 根据fileid找相应的 文件找到之后放在Extends类中,最后加入List
-     * @param uname
-     * @param ucompany
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public List<BorrowCFExtends> selectBorrowcfInfo(String uname,String ucompany ,int flag) throws Exception{
-        int uid;
-        User user = null;
-//        如果传过来的值为空 那么 就没必要查id,查user了,直接uid = 0,查全部的借阅信息
-        if(uname != null && ucompany != null) {
-            uid = userMapper.selectUserId(uname,ucompany);
-            user = adminMapper.findWorkerById(uid);
-        }else {
-            uid = 0;
-        }
-
-
-        List<BorrowCFExtends> bcfes = new ArrayList<>();
-        List<Borrow> borrows = userMapper.selectBorrowcfById(uid);
-
-
-        System.out.println(borrows);
-//        如果查出来借阅信息没有, 表示这个用户或者还没有文件外借 就返回
-        if (borrows.size() <= 0) {
-            return null;
-        }
-
-
-
-        for(Borrow b:borrows) {
-            if(flag == 1) {
-                if(b.getBacktime() != null) {
-                    continue;
-                }
-            }
-            if(flag == 2){
-                if(b.getBacktime() == null) {
-                    continue;
-                }
-            }
-//      根据文件id查找文件信息
-            CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(b.getFileid());
-            BorrowCFExtends borrowCFExtends = new BorrowCFExtends();
-            borrowCFExtends.setBacktime(b.getBacktime());
-            borrowCFExtends.setBorrowtime(b.getBorrowtime());
-            borrowCFExtends.setCompanyFile(cf);
-//如果 传过来的值为空,那么就需要从查出来的借阅信息来查找用户的信息.
-            if(uname == null && ucompany == null) {
-                user = adminMapper.findWorkerById(b.getUid());
-            }
-            borrowCFExtends.setUser(user);
-            bcfes.add(borrowCFExtends);
-        }
-        return bcfes;
-    }
-
-    @Override
-    public List<BorrowGFExtends> selectBorrowgfInfo(String uname,String ucompany,int flag) throws Exception{
-        int uid;
-        User user = null;
-        if(uname != null && ucompany != null) {
-           uid = userMapper.selectUserId(uname,ucompany);
-            user = adminMapper.findWorkerById(uid);
-        }else {
-            uid = 0;
-        }
-
-        System.out.println(uid);
-
-        List<BorrowGFExtends> bgfes = new ArrayList<>();
-        List<Borrow> borrows = userMapper.selectBorrowgfById(uid);
-
-        System.out.println(borrows);
-
-        if (borrows.size() <= 0) {
-            return null;
-        }
-
-        for(Borrow b:borrows) {
-            if(flag == 1) {
-                if(b.getBacktime() != null) {
-                    continue;
-                }
-            }
-            if(flag == 2){
-                if(b.getBacktime() == null) {
-                    continue;
-                }
-            }
-            GetFile cf = userGetFileMapper.selectGetFileById(b.getFileid());
-            BorrowGFExtends borrowGFExtends = new BorrowGFExtends();
-            borrowGFExtends.setBacktime(b.getBacktime());
-            borrowGFExtends.setBorrowtime(b.getBorrowtime());
-            borrowGFExtends.setGetFile(cf);
-//            如果 没有传参数的话,就是查询全部的借阅信息,那就从查出来的借阅信息中找用户
-            if(uname == null && ucompany == null) {
-                user = adminMapper.findWorkerById(b.getUid());
-            }
-            borrowGFExtends.setUser(user);
-            bgfes.add(borrowGFExtends);
-        }
-        return bgfes;
-    }
-    /**
+     * 用在录入或修改文件信息的时候,,俩文件
      * 查最顶层的分类
      */
     @Override
     public List<Classify> selectClassifyBiggest() throws Exception{
         return userMapper.selectClassifyBiggest();
     }
+
+
     /**
+     * 用在录入或修改文件信息的时候,,俩文件
      * 根据父类id查找子类 信息
      * @param fatherid
      * @return
@@ -250,5 +264,16 @@ public class UserServiceImpl implements UserService {
         List<Classify> classifies = userMapper.selectClassifyByFatherId(fatherid);
 //        classifies.add(classify);
         return classifies;
+    }
+
+    /***
+     * 根据邮箱找到自己的信息 ,包括其中的角色和权限信息
+     */
+    @Override
+    public UserExtend selectMySelf(String email) throws Exception{
+
+        User user = adminMapper.findUserByEmail(email);
+        UserExtend userEd = adminService.findWorkerById(user.getUid());
+        return userEd;
     }
 }

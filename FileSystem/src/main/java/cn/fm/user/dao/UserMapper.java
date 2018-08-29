@@ -19,8 +19,7 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
-    public int selectUserId(@Param(value = "uname") String uname,
-                            @Param(value = "ucompany") String ucompany) throws Exception;
+    public List<User> selectUserId(@Param(value = "uname") String uname) throws Exception;
 
     /**
      * 添加借阅信息
@@ -78,6 +77,11 @@ public interface UserMapper {
      */
     public List<Borrow> selectBorrowgfById(@Param(value = "uid") int uid) throws Exception;
 
+    /**
+     * 查询一个文件所有的借阅数据
+     */
+    public List<Borrow> selectBorrowcfInfoByFileid(@Param(value = "fileid") int fileid) throws Exception;
+    public List<Borrow> selectBorrowgfInfoByFileid(@Param(value = "fileid") int fileid) throws Exception;
     /**
      * 查看是不是 被借出去了
      * @param cfid

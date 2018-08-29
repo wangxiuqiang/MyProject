@@ -28,12 +28,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     @Override
     public int insertCompanyFile(CompanyFile companyFile) throws Exception {
 
-        /**
-         * 设置录入时间
-         */
-        if(companyFile.getCfdate() == null){
-            companyFile.setCfdate(DateToStringUtils.dataTostring());
-        }
+
 
         /**
          * 设置变量,让变量来完成字符串的拼接
@@ -83,7 +78,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
             }
         }
 
-        companyFile.setCfaccept(address.toString());
+        companyFile.setCfaddress(address.toString());
         companyFile.setCfclassifyname(classifyname.toString());
 
 
@@ -189,15 +184,20 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
             list.add(classify.getCyid()) ;
             list.add(classify.getCyfather());
 
+            fatherid = classify.getCyfather();
             while (fatherid != 0){
                 try {
-                    classify = selectClassify(classify.getCyfather());
+                    classify = selectClassify(fatherid);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                fatherid = classify.getCyfather();
+                if(classify != null) {
+                    fatherid = classify.getCyfather();
+                }
                 if(fatherid != 0)
-                   list.add(fatherid);
+                {
+                    list.add(fatherid);
+                }
             }
             n.setClassifies(list);
 

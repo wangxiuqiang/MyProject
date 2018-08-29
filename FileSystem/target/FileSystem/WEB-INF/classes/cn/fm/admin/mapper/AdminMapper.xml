@@ -27,10 +27,10 @@
     <insert id="addUser_Role" parameterType="int">
         insert into user_roles(uid,rid) values(#{uid},#{rid})
     </insert>
-    <!-- 更新的时候写权限到数据库-->
-    <insert id="insertUser_Role" parameterType="int" >
-         insert into user_roles(uid,pid) VALUES(#{uid},#{pid})
-    </insert>
+    <!-- 更新的时候写权限到数据库 ,没用到,暂时-->
+    <!--<insert id="insertUser_Role" parameterType="int" >-->
+         <!--insert into user_roles(uid,pid) VALUES(#{uid},#{pid})-->
+    <!--</insert>-->
     <!--查找工作的单位-->
     <select id="selectWorkPlace" resultType="cn.fm.pojo.WorkPlace">
         select wid ,wname from workPlace;

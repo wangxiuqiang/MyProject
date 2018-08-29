@@ -7,14 +7,11 @@
         update user set upwd = #{arg0} ,state = 1 where code = #{arg1}
     </update>
     <!--根据用户的姓名 ,单位等信息,查找id-->
-    <select id="selectUserId" parameterType="cn.fm.pojo.User" resultType="java.lang.Integer">
-        select uid from user
+    <select id="selectUserId" parameterType="cn.fm.pojo.User" resultType="cn.fm.pojo.User">
+        select uid,uname,ucompany,uemail,ifAdmin,uupdatetime,state from user
         <where>
             <if test="uname != null" >
-                uname = #{uname}
-            </if>
-            <if test="ucompany != null">
-                and ucompany = #{ucompany}
+                uname like concat(concat('%',#{uname}), '%')
             </if>
         </where>
     </select>
@@ -90,8 +87,15 @@
             </if>
         </where>
     </select>
+    <!--根据文件id查找这个文件的借阅历史-->
+    <select id="selectBorrowcfInfoByFileid" resultType="cn.fm.pojo.Borrow" parameterType="java.lang.Integer" >
+         select uid,fileid,borrowtime,backtime from borrow_companyFile where fileid = #{fileid}
+    </select>
+    <select id="selectBorrowgfInfoByFileid" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Borrow">
+        select uid,fileid,borrowtime,backtime from borrow_getFile where fileid = #{fileid}
+    </select>
 
-    <!--查看该文件是不是被借出去了-->
+    <!--查看该文件是不是被借出去了,-->
     <select id="selectgfisBorrow" parameterType="int" resultType="int">
         select isborrow from getFile where gfid IN
         <foreach collection="gfid" item="id" separator="," open="(" close=")">

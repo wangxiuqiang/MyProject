@@ -1,6 +1,7 @@
 package cn.fm.user.service.serviceImpl;
 
 import cn.fm.pojo.Classify;
+import cn.fm.pojo.CompanyFile;
 import cn.fm.pojo.GetFile;
 import cn.fm.user.dao.UserGetFileMapper;
 import cn.fm.user.service.UserGetFileService;
@@ -10,6 +11,7 @@ import cn.fm.vo.GetFileExtends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,12 +42,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      */
     @Override
     public int insertGetFile(GetFile getFile) throws Exception {
-        /**
-         * 设置录入时间
-         */
-        if(getFile.getGfdatetime() == null) {
-            getFile.setGfdatetime(DateToStringUtils.dataTostring());
-        }
+
         /**
          * 设置变量,让变量来完成字符串的拼接
          * 记录一开始的分类id
@@ -108,6 +105,47 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 
         return userGetFileMapper.insertGetFile(getFile);
     }
+    /**
+     * 用来返回文件的所有的父分类的id和自己的id
+     * @param cgs
+     * @return
+     * @throws Exception
+     */
+    public List<GetFile> selectAllClassifyId(List<GetFile> cgs) throws Exception {
+        List<Integer> list = new ArrayList<Integer>();
+        cgs.forEach(n -> {
+            list.clear();
+            int fatherid = 1;
+            Classify classify = new Classify();
+            try {
+                classify = selectClassify(n.getGfclassifyid());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            list.add(classify.getCyid()) ;
+            list.add(classify.getCyfather());
+
+            fatherid = classify.getCyfather();
+            while (fatherid != 0){
+                try {
+                    classify = selectClassify(fatherid);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if(classify != null) {
+                    fatherid = classify.getCyfather();
+                }
+                if(fatherid != 0)
+                {
+                    list.add(fatherid);
+                }
+            }
+            n.setClassifies(list);
+
+        });
+        return cgs;
+    }
 
     /**
      * 根据单项 或多项查收文信息
@@ -156,27 +194,27 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 
     @Override
     public List<GetFile> selectGetFileByName(String gfname) throws Exception {
-        return userGetFileMapper.selectGetFileByName(gfname);
+        return selectAllClassifyId(userGetFileMapper.selectGetFileByName(gfname));
     }
 
     @Override
     public List<GetFile> selectGetFileByCompany(String gfcompany) throws Exception {
-        return userGetFileMapper.selectGetFileByCompany(gfcompany);
+        return selectAllClassifyId(userGetFileMapper.selectGetFileByCompany(gfcompany));
     }
 
     @Override
     public List<GetFile> selectGetFileByClassifyId(int classifyid) throws Exception {
-        return userGetFileMapper.selectGetFileByClassifyId(classifyid);
+        return selectAllClassifyId(userGetFileMapper.selectGetFileByClassifyId(classifyid));
     }
 
     @Override
     public List<GetFile> selectGetFileByDateTime(String datetime) throws Exception {
-        return userGetFileMapper.selectGetFileByDateTime(datetime);
+        return selectAllClassifyId(userGetFileMapper.selectGetFileByDateTime(datetime));
     }
 
     @Override
     public List<GetFile> selectGetFileByNumber(int num) throws Exception {
-        return userGetFileMapper.selectGetFileByNumber(num);
+        return selectAllClassifyId(userGetFileMapper.selectGetFileByNumber(num));
     }
     /**
      * 根据id找文件
@@ -196,7 +234,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      */
     @Override
     public List<GetFile> selectAllGetFile() throws Exception {
-        return userGetFileMapper.selectAllGetFile();
+        return selectAllClassifyId(userGetFileMapper.selectAllGetFile());
     }
     /**
      * 通过两个或以上进行查询

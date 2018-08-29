@@ -51,10 +51,10 @@ public class AdminServiceImpl implements AdminService{
         user.setCode(UUID.randomUUID().toString());
 //        MailUtils.sendMail(user.getCode(),user.getUemail());
 
-       user.setUupdatetime(DateToStringUtils.dataTostring());
        int uid = adminMapper.addUser(user);
-       System.out.println(uid);
-       System.out.println(user.getUid());
+//       System.out.println(uid);
+//       System.out.println(user.getUid());
+        System.out.println(user.getRid());
        return adminMapper.addUser_Role(user.getUid(),user.getRid()) ;
     }
 
@@ -152,7 +152,7 @@ public class AdminServiceImpl implements AdminService{
      * @throws Exception
      */
     @Override
-    public int deleteWorkerById(int id) throws Exception{
+    public int deleteWorkerById(int[] id) throws Exception{
         return adminMapper.deleteWorkerById(id) + adminMapper.deleteUser_roles(id) ;
     }
 
@@ -168,8 +168,8 @@ public class AdminServiceImpl implements AdminService{
      * 根据id更改用户角色
      */
     @Override
-    public int  updateUser_Role(int uid,int rid) throws Exception{
-        return updateUser_Role(uid,rid);
+    public int updateUser_Role(int uid,int rid) throws Exception{
+        return adminMapper.updateUser_Role(uid,rid);
     }
 
     /**
@@ -183,7 +183,7 @@ public class AdminServiceImpl implements AdminService{
     }
 
     /**
-     * 查找全部的权限,在添加用户的时候设置
+     * 查找全部的权限,在添加用户的时候设置 ,暂时未用
      * @return
      * @throws Exception
      */
@@ -191,6 +191,28 @@ public class AdminServiceImpl implements AdminService{
     public List<Permission> selectAllPermissions() throws Exception{
         return adminMapper.selectAllPermissions();
     }
+
+    /**
+     * 添加用户单位
+     * @param workPlace
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int insertCompany(WorkPlace workPlace) throws Exception{
+        return adminMapper.insertCompany(workPlace);
+    }
+    /**
+     * 添加分类
+     * @param classify
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int insertClassify(Classify classify) throws Exception{
+        return adminMapper.insertClassify(classify);
+    }
+
 
     /**
      * 根据用户查角色和权限,写到shiro里面
@@ -249,7 +271,7 @@ public class AdminServiceImpl implements AdminService{
      */
     @Override
     public Set<String> findPermissions(int uid) throws Exception {
-         return selectPermissions(selectPids(selectRid(uid)));
+        return selectPermissions(selectPids(selectRid(uid)));
     }
     /**
      * 将上面的几个函数整合一下查出一个全的来Role
@@ -262,25 +284,5 @@ public class AdminServiceImpl implements AdminService{
         return selectRoles(selectRid(uid));
     }
 
-    /**
-     * 添加用户单位
-     * @param workPlace
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public int insertCompany(WorkPlace workPlace) throws Exception{
-        return adminMapper.insertCompany(workPlace);
-    }
-    /**
-     * 添加分类
-     * @param classify
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public int insertClassify(Classify classify) throws Exception{
-        return adminMapper.insertClassify(classify);
-    }
 
 }

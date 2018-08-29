@@ -21,7 +21,7 @@ public interface AdminService {
 //    public int addAdmin(Admin admin) throws Exception;
 
     /**
-     * 用于登录
+     *  用于登录
      */
 
     public User findUserByEmail(String uemail) throws Exception;
@@ -62,7 +62,7 @@ public interface AdminService {
      * @return
      * @throws Exception
      */
-    public int deleteWorkerById(int id) throws Exception;
+    public int deleteWorkerById(int[] id) throws Exception;
 
     /**
      * 根据id进行修改用户信息

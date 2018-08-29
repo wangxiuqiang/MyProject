@@ -127,7 +127,7 @@ public class UserCompanyFileController {
     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/updateSubCompanyFile")
     @ResponseBody
-    public String updateSubGetFile( CompanyFile companyFile) throws Exception {
+    public String updateSubGetFile(CompanyFile companyFile) throws Exception {
 
         if(userCompanyFileService.updateCompanyFileById(companyFile) != 0) {
             HashMap<String,Integer> map = new HashMap<>();
@@ -146,7 +146,7 @@ public class UserCompanyFileController {
     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delCompanyFile")
     @ResponseBody
-    public String delGetFile(int[] cfid) throws Exception {
+    public String delGetFile(@RequestBody int[] cfid) throws Exception {
         if(cfid.length <= 0) {
             return JSON.toJSONString(StatusUtils.IS_NULL);
         }

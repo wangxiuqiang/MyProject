@@ -62,10 +62,8 @@ public class AdminController {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             return JSON.toJSONString(allErrors);
         }
-
-
 //        System.out.println(user.getUcompany());
-        user.setUupdatetime(DateToStringUtils.dataTostring());
+//        user.setUupdatetime(DateToStringUtils.dataTostring());
         if(adminService.addUser(user) != 0 ){
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_REG);
@@ -169,9 +167,9 @@ public class AdminController {
      * IllegalStateException
      */
     @RequiresRoles(value = "admin")
-    @RequestMapping(value = "/delWorker/{uid}")
+    @RequestMapping(value = "/delWorker")
     @ResponseBody
-    public String delWorker(@PathVariable int uid) throws Exception{
+    public String delWorker(@RequestBody int[] uid) throws Exception{
 
         if(adminService.deleteWorkerById(uid) == 2) {
             HashMap<String,Integer> map = new HashMap<>();
