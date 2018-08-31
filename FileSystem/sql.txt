@@ -177,14 +177,12 @@ create table borrow_getFile (
 uid int ,
 fileid int,
 borrowtime varchar(30) ,
-backtime varchar(30),
-primary key(uid,fileid)
+backtime varchar(30)
 );
 
 create table borrow_companyFile (
 uid int ,
 fileid int,
 borrowtime varchar(30)  ,
-backtime varchar(30) ,
-primary key(uid,fileid)
+backtime varchar(30)
 );

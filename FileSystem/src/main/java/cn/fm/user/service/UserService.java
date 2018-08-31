@@ -25,8 +25,8 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    public int insertBorrowcfInfo(int uid,int cfid) throws Exception;
-    public int insertBorrowgfInfo(int uid,int gfid) throws Exception;
+    public int insertBorrowcfInfo(int uid,int[] cfid) throws Exception;
+    public int insertBorrowgfInfo(int uid,int[] gfid) throws Exception;
     /**
      * 更新归还时间  ,同时在这里面完成对文件状态的改变
      */

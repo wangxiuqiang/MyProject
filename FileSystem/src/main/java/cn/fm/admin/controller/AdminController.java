@@ -169,9 +169,15 @@ public class AdminController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/delWorker")
     @ResponseBody
-    public String delWorker(@RequestBody int[] uid) throws Exception{
+    public String delWorker(String uid) throws Exception{
 
-        if(adminService.deleteWorkerById(uid) == 2) {
+        String[] uidstring = uid.split(",");
+        int[] uids = new int[uidstring.length];
+        for (int i = 0; i < uidstring.length; i++) {
+            uids[i] = Integer.parseInt(uidstring[i]);
+            System.out.println(uids[i]);
+        }
+        if(adminService.deleteWorkerById(uids) != 0) {
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
             return JSON.toJSONString(map);
@@ -191,7 +197,7 @@ public class AdminController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updateWorker")
     @ResponseBody
-    public String updateWorker( User user,Integer rid) throws Exception{
+    public String updateWorker( User user,int rid) throws Exception{
         HashMap<String,Integer> map = new HashMap<>();
 
         if(user.getUpwd() != null) {
@@ -199,12 +205,12 @@ public class AdminController {
             user.setUpwd(helper.SHA256(user.getUpwd()));
         }
         //如果对角色插入失败, 就返回
-        if(rid != null  ) {
+
             if(adminService.updateUser_Role(user.getUid(),rid) == 0) {
                 map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
                 return JSON.toJSONString(map);
             }
-        }
+
         if(adminService.updateWorkerById(user) != 0) {
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
             return JSON.toJSONString(map);

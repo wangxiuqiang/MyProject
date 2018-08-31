@@ -146,11 +146,17 @@ public class UserCompanyFileController {
     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delCompanyFile")
     @ResponseBody
-    public String delGetFile(@RequestBody int[] cfid) throws Exception {
-        if(cfid.length <= 0) {
+    public String delGetFile(String cfid) throws Exception {
+        String[] cfidstring =cfid.split(",");
+        int[] cfids = new int[cfidstring.length];
+        for (int i = 0; i < cfidstring.length; i++) {
+            cfids[i] = Integer.parseInt(cfidstring[i]);
+            System.out.println(cfids[i]);
+        }
+        if(cfids.length <= 0) {
             return JSON.toJSONString(StatusUtils.IS_NULL);
         }
-        if(userCompanyFileService.deleteCompanyFileById(cfid) != 0) {
+        if(userCompanyFileService.deleteCompanyFileById(cfids) != 0) {
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
             return JSON.toJSONString(map);

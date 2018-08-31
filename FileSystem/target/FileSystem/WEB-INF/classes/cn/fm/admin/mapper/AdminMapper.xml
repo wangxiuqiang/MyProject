@@ -49,11 +49,17 @@
     </select>
 
     <delete id="deleteWorkerById" >
-        DELETE FROM user where uid = #{id}
+        DELETE FROM user where uid IN
+        <foreach collection="id" close=")" open="(" separator="," item="uid" >
+            #{uid}
+        </foreach>
     </delete>
     <!--同时删除用户角色信息-->
     <delete id="deleteUser_roles">
-        DELETE  FROM user_roles where uid = #{uid}
+        DELETE  FROM user_roles where uid IN
+        <foreach collection="uid" close=")" open="(" separator="," item="id" >
+            #{id}
+        </foreach>
     </delete>
     <update id="updateWorkerById" parameterType="cn.fm.pojo.User">
         update user

@@ -9,6 +9,7 @@ import cn.fm.user.dao.UserMapper;
 import cn.fm.user.service.UserService;
 import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.PassWordHelper;
+import cn.fm.utils.StatusUtils;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
 import cn.fm.vo.UserExtend;
@@ -63,46 +64,100 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 添加借阅信息,同时在这里修改借出的状态
+     * 添加借阅信息,同时在这里修改文件的状态
      * @param uid,cfid
      * @return
      * @throws Exception
      */
     @Override
-    public int insertBorrowcfInfo(int uid,int cfid) throws Exception{
+    public int insertBorrowcfInfo(int uid,int[] cfid) throws Exception{
 
         Borrow borrow = new Borrow();
-        borrow.setUid(uid);
-        borrow.setFileid(cfid);
-        if(borrow.getBorrowtime() != null) {
+
+        //查看这些文件是不是被借了,如果被借了就返回 - 5
+        int[] isBorrow = userMapper.selectcfisBorrow(cfid);
+        for(int j = 0; j < isBorrow.length; j++){
+            if(isBorrow[j] == 2) {
+                return -5;
+            }
+            borrow.setUid(uid);
+            borrow.setFileid(cfid[j]);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
+            //添加文件的借出状态
+            int res = userMapper.insertBorrowcfInfo(borrow);
+            if(res == 0) {
+                return -4;
+            }
+            //设置文件被借出
+            int re = userMapper.updateCompanyFileIsBorrow(cfid[j]);
+            if(re == 0) {
+                return -4;
+            }
         }
-
-        return  userMapper.insertBorrowcfInfo(borrow) + userMapper.updateCompanyFileIsBorrow(cfid);
-
+        return  1;
     }
     @Override
-    public int insertBorrowgfInfo(int uid,int gfid) throws Exception{
-
+    public int insertBorrowgfInfo(int uid,int[] gfid) throws Exception{
         Borrow borrow = new Borrow();
-        borrow.setUid(uid);
-        borrow.setFileid(gfid);
-        if(borrow.getBorrowtime() != null) {
+
+        //查看这些文件是不是被借了,如果被借了就返回 - 5
+        int[] isBorrow = userMapper.selectgfisBorrow(gfid);
+        for(int j = 0; j < isBorrow.length; j++){
+            if(isBorrow[j] == 2) {
+                return -5;
+            }
+            borrow.setUid(uid);
+            borrow.setFileid(gfid[j]);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
+            int r = userMapper.insertBorrowgfInfo(borrow);
+            if(r == 0) {
+                return -4;
+            }
+           int re = userMapper.updateGetFileIsBorrow(gfid[j]);
+            if(re == 0) {
+                return -4;
+            }
         }
-        return userMapper.insertBorrowgfInfo(borrow) + userMapper.updateGetFileIsBorrow(gfid);
+        return  1;
     }
 /**
  *  查询一个用户所有的借阅出去的文件
  */
     @Override
     public List<BorrowCFExtends> selectBorrowcfInfo(int uid,int flag) throws Exception{
+        if(uid == 0) {
+            List<Borrow> cs = userMapper.selectBorrowcfById(0);
+            List<BorrowCFExtends> bcf = new ArrayList<BorrowCFExtends>();
+            cs.forEach(n -> {
+                try {
+                    BorrowCFExtends bcfe = new BorrowCFExtends();
+                    CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(n.getFileid());
+                    User  user = adminMapper.findWorkerById(n.getUid());
+                    bcfe.setUser(user);
+                    bcfe.setCompanyFile(cf);
+                    bcfe.setBorrowtime(n.getBorrowtime());
+                    bcfe.setBacktime(n.getBacktime());
+                    if(flag == 0) {
+                        bcf.add(bcfe);
+                    }
+                    if(flag == 1 && n.getBacktime() == null) {
+                        bcf.add(bcfe);
+                    }
+                    if(flag == 2 && n.getBacktime() != null){
+                        bcf.add(bcfe);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            return bcf;
+        }
         //找到用户信息
         User user = adminMapper.findWorkerById(uid);
         //根据用户id找到借阅的文件信息
-        List<Borrow> bs = userMapper.selectBorrowcfById(uid);
+        List<Borrow> cs = userMapper.selectBorrowcfById(uid);
         List<BorrowCFExtends> bcf = new ArrayList<BorrowCFExtends>();
-        bs.forEach(n -> {
+        cs.forEach(n -> {
             try {
                 BorrowCFExtends bcfe = new BorrowCFExtends();
                 CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(n.getFileid());
@@ -127,6 +182,35 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public List<BorrowGFExtends> selectBorrowgfInfo(int uid,int flag) throws Exception{
+        if(uid == 0) {
+            List<Borrow> bs = userMapper.selectBorrowgfById(0);
+            List<BorrowGFExtends> bgf = new ArrayList<BorrowGFExtends>();
+            bs.forEach(n -> {
+                try {
+                    BorrowGFExtends bgfe = new BorrowGFExtends();
+                    GetFile gf = userGetFileMapper.selectGetFileById(n.getFileid());
+                    User  user = adminMapper.findWorkerById(n.getUid());
+                    bgfe.setUser(user);
+                    bgfe.setGetFile(gf);
+                    bgfe.setBorrowtime(n.getBorrowtime());
+                    bgfe.setBacktime(n.getBacktime());
+                    if(flag == 0) {
+                        bgf.add(bgfe);
+                    }
+                    if(flag == 1 && n.getBacktime() == null) {
+                        bgf.add(bgfe);
+                    }
+                    if(flag == 2 && n.getBacktime() != null){
+                        bgf.add(bgfe);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            return bgf;
+        }
+
+
         //找到用户信息
         User user = adminMapper.findWorkerById(uid);
         //根据用户id找到借阅的文件信息
@@ -155,6 +239,7 @@ public class UserServiceImpl implements UserService {
         });
         return bgf;
     }
+
     /**
      * 查询一个文件所有的借阅数据
      */

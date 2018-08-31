@@ -128,13 +128,19 @@ public class UserGetFileController {
     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delGetFile")
     @ResponseBody
-    public String delGetFile(@RequestBody  int[] gfid) throws Exception {
-        if(gfid.length <= 0) {
+    public String delGetFile(String gfid) throws Exception {
+        String[] gfidstring =gfid.split(",");
+        int[] gfids = new int[gfidstring.length];
+        for (int i = 0; i < gfidstring.length; i++) {
+            gfids[i] = Integer.parseInt(gfidstring[i]);
+            System.out.println(gfids[i]);
+        }
+        if(gfids.length <= 0) {
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
             return JSON.toJSONString(map);
         }
-        if(userGetFileService.deleteGetFileById(gfid) != 0) {
+        if(userGetFileService.deleteGetFileById(gfids) != 0) {
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
             return JSON.toJSONString(map);

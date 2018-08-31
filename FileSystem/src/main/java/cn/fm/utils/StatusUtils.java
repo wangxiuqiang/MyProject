@@ -64,4 +64,6 @@ public class StatusUtils {
      *   记录 存在
      */
     public static final int EXIST_CONTENT = 12;
+//    文件被借阅了
+    public static final int IS_BORROW = 13;
 }

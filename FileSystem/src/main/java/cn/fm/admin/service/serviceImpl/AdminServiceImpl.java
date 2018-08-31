@@ -49,7 +49,7 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public int addUser(UserExtend user) throws Exception {
         user.setCode(UUID.randomUUID().toString());
-//        MailUtils.sendMail(user.getCode(),user.getUemail());
+        MailUtils.sendMail(user.getCode(),user.getUemail());
 
        int uid = adminMapper.addUser(user);
 //       System.out.println(uid);

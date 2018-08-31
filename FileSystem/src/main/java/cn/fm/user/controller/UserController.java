@@ -139,49 +139,53 @@ public class UserController {
     @RequestMapping(value = "/insertBorrowcfInfo")
     @ResponseBody
     public String insertBorrowcfInfo(int uid,
-                                      Integer cfid) throws Exception {
+                                     String cfid) throws Exception {
        // System.out.println("------------------" + cfid +"--------------------------");
-
-        if(cfid == null) {
-            cfid = 0;
+        HashMap<String,Integer> map = new HashMap<>();
+        String[] cfidStrings = cfid.split(",");
+        int[] cfids = new int[cfidStrings.length];
+        int i = 0;
+        for( i = 0; i <cfids.length ; i++) {
+            cfids[i] = Integer.parseInt(cfidStrings[i]);
         }
-        if(cfid == 0) {
-            HashMap<String,Integer> map = new HashMap<>();
-            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+        int result = userService.insertBorrowcfInfo(uid, cfids);
+        if (result == -5) {
+            map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
             return JSON.toJSONString(map);
-        }
 
-        if (userService.insertBorrowcfInfo(uid, cfid) != 0) {
-            HashMap<String,Integer> map = new HashMap<>();
+        }
+        if (result != -4) {
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
             return JSON.toJSONString(map);
-        } else {
-            HashMap<String,Integer> map = new HashMap<>();
+        }else {
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
             return JSON.toJSONString(map);
         }
+
     }
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/insertBorrowgfInfo")
     @ResponseBody
     public String insertBorrowgfInfo( int uid,
-                                      Integer gfid) throws Exception {
+                                      String gfid) throws Exception {
       //  System.out.println("------------------" + gfid +"--------------------------");
         HashMap<String,Integer> map = new HashMap<>();
-
-        if(gfid == null) {
-            gfid = 0;
-
+        String[] gfidStrings = gfid.split(",");
+        int[] gfids = new int[gfidStrings.length];
+        int i = 0;
+        for( i = 0; i <gfids.length ; i++) {
+            gfids[i] = Integer.parseInt(gfidStrings[i]);
         }
-        if(gfid == 0) {
-            map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+        int result = userService.insertBorrowgfInfo(uid, gfids);
+        if (result == -5) {
+            map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
             return JSON.toJSONString(map);
-        }
 
-        if (userService.insertBorrowgfInfo(uid, gfid) != 0) {
+        }
+        if (result != -4) {
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
             return JSON.toJSONString(map);
-        } else {
+        }else {
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
             return JSON.toJSONString(map);
         }
@@ -193,9 +197,11 @@ public class UserController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updatecfBackTime")
     @ResponseBody
-    public String updatecfBackTime(int[] cfid) throws Exception {
+    public String updatecfBackTime(String cfid) throws Exception {
         HashMap<String,Integer> map = new HashMap<>();
-        int result = userService.updatecfBackTime(cfid);
+        String[] cfidStrings = cfid.split(",");
+        int[] cfids = new int[cfidStrings.length];
+        int result = userService.updatecfBackTime(cfids);
         if(result == -5){
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
             return JSON.toJSONString(map);
@@ -212,14 +218,16 @@ public class UserController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updategfBackTime")
     @ResponseBody
-    public String updategfBackTime(int[] gfid) throws Exception {
+    public String updategfBackTime(String gfid) throws Exception {
+
         HashMap<String,Integer> map = new HashMap<>();
 //        Borrow borrow = new Borrow();
 ////        System.out.println(uid + "---------------------" + gfid);
 //        borrow.setFileid(gfid);
 //        borrow.setUid(uid);
-
-        int result = userService.updategfBackTime(gfid);
+        String[] gfidStrings = gfid.split(",");
+        int[] gfids = new int[gfidStrings.length];
+        int result = userService.updategfBackTime(gfids);
         if(result == -5){
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
             return JSON.toJSONString(map);

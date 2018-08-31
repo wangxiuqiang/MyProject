@@ -36,7 +36,7 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
-    public int updateCompanyFileIsBorrow(int cfid) throws Exception;
+    public int updateCompanyFileIsBorrow(@Param(value = "cfid") int cfid) throws Exception;
 
     /**
      * 设置 cf 文件归还
@@ -52,7 +52,7 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
-    public int updateGetFileIsBorrow(int fileid) throws Exception;
+    public int updateGetFileIsBorrow(int gfid) throws Exception;
     public int updateGetFileBack(@Param(value = "fileid") int[] fileid) throws Exception;
 
     /**
