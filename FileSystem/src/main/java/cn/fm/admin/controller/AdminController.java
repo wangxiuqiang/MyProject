@@ -4,6 +4,7 @@ import cn.fm.admin.service.AdminService;
 import cn.fm.pojo.Classify;
 import cn.fm.pojo.User;
 import cn.fm.pojo.WorkPlace;
+import cn.fm.user.service.UserService;
 import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.PassWordHelper;
 import cn.fm.utils.StatusUtils;
@@ -38,6 +39,9 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
+
+    @Autowired
+    UserService userService;
     /**
      * 展示主页
      * @return
@@ -63,7 +67,7 @@ public class AdminController {
             return JSON.toJSONString(allErrors);
         }
 //        System.out.println(user.getUcompany());
-//        user.setUupdatetime(DateToStringUtils.dataTostring());
+        user.setUupdatetime(DateToStringUtils.dataTostring());
         if(adminService.addUser(user) != 0 ){
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_REG);

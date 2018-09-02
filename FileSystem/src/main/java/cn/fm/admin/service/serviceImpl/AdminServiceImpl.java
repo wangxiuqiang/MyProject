@@ -3,14 +3,19 @@ package cn.fm.admin.service.serviceImpl;
 import cn.fm.admin.service.AdminService;
 import cn.fm.admin.dao.AdminMapper;
 import cn.fm.pojo.*;
+import cn.fm.user.dao.UserCompanyFileMapper;
+import cn.fm.user.dao.UserGetFileMapper;
+import cn.fm.user.dao.UserMapper;
 import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.MD5Utils;
 import cn.fm.utils.MailUtils;
+import cn.fm.vo.BorrowGFExtends;
 import cn.fm.vo.UserExtend;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -21,6 +26,13 @@ public class AdminServiceImpl implements AdminService{
     @Autowired
     AdminMapper adminMapper;
 
+    @Autowired
+    UserMapper userMapper;
+    @Autowired
+    UserGetFileMapper userGetFileMapper;
+
+    @Autowired
+    UserCompanyFileMapper userCompanyFileMapper;
 //    /***
 //     * 查找admin用来进行登录
 //     * @param admin
@@ -49,12 +61,12 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public int addUser(UserExtend user) throws Exception {
         user.setCode(UUID.randomUUID().toString());
-        MailUtils.sendMail(user.getCode(),user.getUemail());
+        MailUtils.sendMail(user.getCode(),user.getUemail(),user.getUname());
 
        int uid = adminMapper.addUser(user);
 //       System.out.println(uid);
 //       System.out.println(user.getUid());
-        System.out.println(user.getRid());
+//        System.out.println(user.getRid());
        return adminMapper.addUser_Role(user.getUid(),user.getRid()) ;
     }
 
@@ -153,6 +165,42 @@ public class AdminServiceImpl implements AdminService{
      */
     @Override
     public int deleteWorkerById(int[] id) throws Exception{
+        int flag = 0;
+        for(int i = 0; i < id.length; i++) {
+
+            List<Borrow> bs = userMapper.selectBorrowgfById(id[i]);
+            for(int j = 0; j < bs.size() ; j++) {
+                Borrow b = bs.get(i);
+                if(b.getBacktime() == null) {
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 1){
+                break;
+            }
+        }
+        if(flag == 1) {
+            return 0;
+        }else {
+            for(int i = 0; i < id.length; i++) {
+
+                List<Borrow> bs = userMapper.selectBorrowcfById(id[i]);
+                for(int j = 0; j < bs.size() ; j++) {
+                    Borrow b = bs.get(i);
+                    if(b.getBacktime() == null) {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if(flag == 1){
+                    break;
+                }
+            }
+        }
+        if(flag == 1) {
+            return 0;
+        }
         return adminMapper.deleteWorkerById(id) + adminMapper.deleteUser_roles(id) ;
     }
 

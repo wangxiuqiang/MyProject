@@ -45,7 +45,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUserpwd(String upwd, String code) throws Exception {
         PassWordHelper pwh = new PassWordHelper();
-
         upwd = pwh.SHA256(upwd);
         if(upwd != null) {
             return userMapper.updateUserpwd(upwd,code);
@@ -360,5 +359,14 @@ public class UserServiceImpl implements UserService {
         User user = adminMapper.findUserByEmail(email);
         UserExtend userEd = adminService.findWorkerById(user.getUid());
         return userEd;
+    }
+
+
+    /**
+     * 根据code 查找用户了录入时间
+     */
+    @Override
+    public String selectUserupdatetime(String code) throws Exception{
+        return userMapper.selectUserupdatetime(code);
     }
 }

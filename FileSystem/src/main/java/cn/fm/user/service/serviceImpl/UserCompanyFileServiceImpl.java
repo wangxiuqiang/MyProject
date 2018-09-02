@@ -4,9 +4,6 @@ import cn.fm.pojo.Classify;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.user.dao.UserCompanyFileMapper;
 import cn.fm.user.service.UserCompanyFileService;
-import cn.fm.utils.DateToStringUtils;
-import cn.fm.utils.StatusUtils;
-import cn.fm.vo.CompanyFileExtends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -80,9 +77,6 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
         companyFile.setCfaddress(address.toString());
         companyFile.setCfclassifyname(classifyname.toString());
-
-
-
         return userCompanyFileMapper.insertCompanyFile(companyFile);
     }
 

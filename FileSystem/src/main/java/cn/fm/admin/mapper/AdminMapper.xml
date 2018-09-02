@@ -48,12 +48,12 @@
         select uid,uname,ucompany,uupdatetime,uemail,state,ifAdmin from user where uid = #{id}
     </select>
 
-    <delete id="deleteWorkerById" >
-        DELETE FROM user where uid IN
+    <update id="deleteWorkerById" parameterType="int">
+       update user set state = 0 where uid IN
         <foreach collection="id" close=")" open="(" separator="," item="uid" >
             #{uid}
         </foreach>
-    </delete>
+    </update>
     <!--同时删除用户角色信息-->
     <delete id="deleteUser_roles">
         DELETE  FROM user_roles where uid IN

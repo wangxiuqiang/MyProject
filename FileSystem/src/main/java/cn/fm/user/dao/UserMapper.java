@@ -52,7 +52,7 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
-    public int updateGetFileIsBorrow(int gfid) throws Exception;
+    public int updateGetFileIsBorrow(@Param(value = "gfid") int gfid) throws Exception;
     public int updateGetFileBack(@Param(value = "fileid") int[] fileid) throws Exception;
 
     /**
@@ -103,4 +103,9 @@ public interface UserMapper {
      * @throws Exception
      */
     public List<Classify> selectClassifyByFatherId(int fatherid) throws Exception;
+
+    /**
+     * 根据code 查找用户了录入时间
+     */
+    public String selectUserupdatetime(@Param(value = "code") String code) throws Exception;
 }

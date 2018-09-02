@@ -29,6 +29,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,6 +55,37 @@ public class UserController {
 //
 //        return "/user/userReg";
 //    }
+
+    /**
+     * 从数据库中查找这个时间,比较时间的变化是不是超了24小时
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/regbefore")
+    @ResponseBody
+    public String regbefore(String code) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+
+        long now = System.currentTimeMillis();
+//        从数据库找个取出时间的字符串类型数据
+        String dateString = userService.selectUserupdatetime(code);
+        Date date  = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if(dateString == null) {
+            map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+            return JSON.toJSONString(map);
+        }
+       date =  sdf.parse(dateString);
+       long before = date.getTime();
+
+       if((((now - before)/1000)/3600) >= 24 ) {
+           map.put(StatusUtils.statecode,StatusUtils.TIME_OUT);
+           return JSON.toJSONString(map);
+       }else {
+           map.put(StatusUtils.statecode,StatusUtils.TIME_IN);
+           return JSON.toJSONString(map);
+       }
+    }
 
     /**
      * 发送激活的code 和设置密码
@@ -114,6 +147,7 @@ public class UserController {
      * @return
      * @throws Exception
      */
+    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
     @RequestMapping(value = "/selectUserByName")
     @ResponseBody
     public String selectUserByName(String uname) throws Exception{

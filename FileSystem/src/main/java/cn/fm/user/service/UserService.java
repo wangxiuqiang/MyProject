@@ -61,4 +61,10 @@ public interface UserService {
      * 根据邮箱找到自己的信息
      */
     public UserExtend selectMySelf(String email) throws Exception;
+
+
+    /**
+     * 根据code 查找用户了录入时间
+     */
+    public String selectUserupdatetime(String code) throws Exception;
 }

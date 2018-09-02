@@ -25,8 +25,9 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
     <mvc:annotation-driven validator="validation"/>
     <!--静态资源的加载 -->
     <mvc:resources mapping="/js/**" location="/js/" />
-    <mvc:resources mapping="/images/**" location="/images/" />
+    <mvc:resources mapping="/images/**" location="/html/" />
     <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/fonts/**" location="/fonts/" />
     <!-- 视图解析器 -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

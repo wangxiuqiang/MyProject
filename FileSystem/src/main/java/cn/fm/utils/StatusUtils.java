@@ -66,4 +66,8 @@ public class StatusUtils {
     public static final int EXIST_CONTENT = 12;
 //    文件被借阅了
     public static final int IS_BORROW = 13;
+//    激活超时
+    public static final int TIME_OUT = 14;
+    public static final int TIME_IN = 16;
 }
+

@@ -13,6 +13,7 @@
             <if test="uname != null" >
                 uname like concat(concat('%',#{uname}), '%')
             </if>
+            and state != 0
         </where>
     </select>
 
@@ -105,7 +106,7 @@
 
     <select id="selectcfisBorrow" parameterType="int" resultType="int">
         select isborrow from getFile where gfid IN
-        <foreach collection="gfid" item="id" separator="," open="(" close=")">
+        <foreach collection="cfid" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
     </select>
@@ -118,6 +119,12 @@
 <!--根据父类查找子类分类-->
     <select id="selectClassifyByFatherId" resultType="cn.fm.pojo.Classify" parameterType="java.lang.Integer">
         select cyid,cyname from classify where cyfather = #{fatherid}
+    </select>
+
+
+    <!--查找更新时间-->
+    <select id="selectUserupdatetime" parameterType="java.lang.String" resultType="java.lang.String">
+        select uupdatetime from user where code = #{code}
     </select>
 
 </mapper>

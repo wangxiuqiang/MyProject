@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class MailUtils {
 
-    public static void sendMail(String code,String email) throws Exception {
+    public static void sendMail(String code,String email,String uname) throws Exception {
         Properties prop = new Properties();
         prop.setProperty("mail.host","smtp.163.com");
         prop.setProperty("mail.smtp.auth","true");
@@ -26,6 +26,7 @@ public class MailUtils {
                 return new PasswordAuthentication("wangxiuqianga@163.com","251698wodewxqWXQ");
             }
         };
+       String uname1 = "*" + uname.substring(1);
 
         Session session = Session.getInstance(prop,authenticator);
 
@@ -42,7 +43,7 @@ public class MailUtils {
         message.setSubject("请激活");
 //设置文件正文
       //  String content = "<a href='http://localhost:8080/user/activecode?code="+code+"'>点击激活</a>";
-        String content = "<a href='http://39.106.191.144:8087/user/activecode?code="+code+"'>点击激活</a>";
+        String content = "<a href='http://39.106.191.144/worker/activecode?activecode="+code+"'>" + uname1 + ",主管使用您的邮箱进行登录,确认则点击激活</a>";
         message.setContent(content,"text/html;charset=UTF-8");
         Transport.send(message);
     }
