@@ -83,10 +83,13 @@ public interface UserCompanyFileMapper {
          public int updateCompanyFileById(CompanyFile file) throws Exception;
 
         /**
-         *根据id删除单行数据
+         *根据id删除多行数据
          */
         public int deleteCompanyFileById(@Param(value = "cfid") int[] cfid) throws Exception;
-
+        /**
+         * 同时删除这个文件留下的借阅信息
+         */
+        public int deleteCompanyFileBorrowInfo(@Param(value = "cfid") int[] cfid) throws Exception;
         /**
          * 多项组合查询
          */

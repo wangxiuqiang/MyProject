@@ -3,6 +3,7 @@ package cn.fm.user.service;
 import cn.fm.pojo.Classify;
 import cn.fm.pojo.GetFile;
 import cn.fm.vo.GetFileExtends;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -93,6 +94,10 @@ public interface UserGetFileService {
      * @throws Exception
      */
     public int deleteGetFileById(int[] id) throws Exception;
+    /**
+     * 同时删除借阅信息表里的信息
+     */
+    public int deleteGetFileBorrowInfo( int[] gfid) throws Exception;
     /**
      * 通过两个或以上进行查询
      * @param getFile

@@ -131,7 +131,8 @@ public class UserServiceImpl implements UserService {
                 try {
                     BorrowCFExtends bcfe = new BorrowCFExtends();
                     CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(n.getFileid());
-                    User  user = adminMapper.findWorkerById(n.getUid());
+                    System.out.println(n.getUid() + "``````````````````````````````````````");
+                    User user = adminMapper.findWorkerById(n.getUid());
                     bcfe.setUser(user);
                     bcfe.setCompanyFile(cf);
                     bcfe.setBorrowtime(n.getBorrowtime());
@@ -188,7 +189,8 @@ public class UserServiceImpl implements UserService {
                 try {
                     BorrowGFExtends bgfe = new BorrowGFExtends();
                     GetFile gf = userGetFileMapper.selectGetFileById(n.getFileid());
-                    User  user = adminMapper.findWorkerById(n.getUid());
+                    User user = adminMapper.findWorkerById(n.getUid());
+                    System.out.println(user.toString() + "`````````````````````````");
                     bgfe.setUser(user);
                     bgfe.setGetFile(gf);
                     bgfe.setBorrowtime(n.getBorrowtime());
@@ -250,7 +252,7 @@ public class UserServiceImpl implements UserService {
         borrows.forEach(n -> {
             try {
                 BorrowCFExtends bcf = new BorrowCFExtends();
-              User  user = adminMapper.findWorkerById(n.getUid());
+              User user = adminMapper.findWorkerById(n.getUid());
               bcf.setBacktime(n.getBacktime());
               bcf.setBorrowtime(n.getBorrowtime());
               bcf.setCompanyFile(companyFile);
@@ -270,7 +272,7 @@ public class UserServiceImpl implements UserService {
         borrows.forEach(n -> {
             try {
                 BorrowGFExtends bgf = new BorrowGFExtends();
-                User  user = adminMapper.findWorkerById(n.getUid());
+                User user = adminMapper.findWorkerById(n.getUid());
                 bgf.setBacktime(n.getBacktime());
                 bgf.setBorrowtime(n.getBorrowtime());
                 bgf.setGetFile(getFile);
@@ -290,11 +292,16 @@ public class UserServiceImpl implements UserService {
         int[] isborrow = userMapper.selectcfisBorrow(fileid);
         for(int i = 0;i < isborrow.length; i++) {
             //没有被借出 ,表明 传输的有错误 ,  返回一个-5 ,表示  不对
-            if(isborrow[1] != 2) {
+            if(isborrow[i] != 2) {
                 return -5;
             }
         }
-        return userMapper.updateCompanyFileBack(fileid) +userMapper.updatecfBackTime(fileid);
+        if( userMapper.updateCompanyFileBack(fileid) != 0){
+            if(userMapper.updatecfBackTime(fileid) != 0) {
+                return 1;
+            }
+        }
+        return 0;
 
 //        String time = DateToStringUtils.dataTostring();
 //        if(borrow.getBorrowtime() != null) {
@@ -307,11 +314,17 @@ public class UserServiceImpl implements UserService {
         int[] isborrow = userMapper.selectgfisBorrow(fileid);
         for(int i = 0;i < isborrow.length; i++) {
             //没有被借出 ,表明 传输的有错误 ,  返回一个-5 ,表示  不对
-            if(isborrow[1] != 2) {
+            if(isborrow[i] != 2) {
                 return -5;
             }
         }
-        return userMapper.updateGetFileBack(fileid) +userMapper.updategfBackTime(fileid);
+        if(userMapper.updateGetFileBack(fileid) != 0) {
+            System.out.println(userMapper.updateGetFileBack(fileid));
+            if(userMapper.updategfBackTime(fileid) != 0) {
+                return 1;
+            }
+        }
+        return 0;
 //        String time = DateToStringUtils.dataTostring();
 //        if(borrow.getBorrowtime() != null) {
 //            borrow.setBacktime(time);

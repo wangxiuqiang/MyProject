@@ -1,8 +1,11 @@
 package cn.fm.user.controller;
 
+import cn.fm.pojo.Borrow;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.pojo.User;
+import cn.fm.user.dao.UserMapper;
 import cn.fm.user.service.UserCompanyFileService;
+import cn.fm.user.service.UserService;
 import cn.fm.user.service.serviceImpl.UserCompanyFileServiceImpl;
 import cn.fm.utils.StatusUtils;
 import cn.fm.vo.CompanyFileExtends;
@@ -29,6 +32,8 @@ import java.util.List;
 @RequestMapping(value = "/worker",produces = "application/json;charset=utf8" , method = RequestMethod.POST)
 public class UserCompanyFileController {
 
+    @Autowired
+    UserService userService;
     @Autowired
     UserCompanyFileService userCompanyFileService;
 
@@ -147,26 +152,26 @@ public class UserCompanyFileController {
     @RequestMapping(value = "/delCompanyFile")
     @ResponseBody
     public String delGetFile(String cfid) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
         String[] cfidstring =cfid.split(",");
         int[] cfids = new int[cfidstring.length];
         for (int i = 0; i < cfidstring.length; i++) {
             cfids[i] = Integer.parseInt(cfidstring[i]);
             System.out.println(cfids[i]);
         }
+
         if(cfids.length <= 0) {
             return JSON.toJSONString(StatusUtils.IS_NULL);
         }
         if(userCompanyFileService.deleteCompanyFileById(cfids) != 0) {
-            HashMap<String,Integer> map = new HashMap<>();
-            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
-            return JSON.toJSONString(map);
-
-        }else {
-
-            HashMap<String,Integer> map = new HashMap<>();
-            map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
-            return JSON.toJSONString(map);
+            if(userCompanyFileService.deleteCompanyFileBorrowInfo(cfids) != 0){
+                map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
+                return JSON.toJSONString(map);
+            }
         }
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
+        return JSON.toJSONString(map);
+
     }
 
 

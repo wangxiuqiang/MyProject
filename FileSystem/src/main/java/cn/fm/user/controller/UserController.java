@@ -235,6 +235,9 @@ public class UserController {
         HashMap<String,Integer> map = new HashMap<>();
         String[] cfidStrings = cfid.split(",");
         int[] cfids = new int[cfidStrings.length];
+        for(int i = 0; i < cfidStrings.length; i++) {
+            cfids[i] = Integer.parseInt(cfidStrings[i]);
+        }
         int result = userService.updatecfBackTime(cfids);
         if(result == -5){
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
@@ -260,7 +263,12 @@ public class UserController {
 //        borrow.setFileid(gfid);
 //        borrow.setUid(uid);
         String[] gfidStrings = gfid.split(",");
+//        System.out.println(gfidStrings[0]);
         int[] gfids = new int[gfidStrings.length];
+//        System.out.println(gfids[0]);
+        for(int i = 0; i < gfidStrings.length; i++) {
+            gfids[i] = Integer.parseInt(gfidStrings[i]);
+        }
         int result = userService.updategfBackTime(gfids);
         if(result == -5){
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
@@ -451,5 +459,8 @@ public class UserController {
         map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
         return JSON.toJSONString(map);
     }
+
+
+
 
 }

@@ -142,4 +142,14 @@
             #{id}
         </foreach>
     </delete>
+
+    <delete id="deleteGetFileBorrowInfo" parameterType="int">
+        delete FROM borrow_getFile
+        <where>
+            fileid IN
+            <foreach collection="gfid" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
 </mapper>

@@ -318,8 +318,17 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @return
      * @throws Exception
      */
+    @Override
     public int deleteGetFileById(int[] id) throws Exception{
         return userGetFileMapper.deleteGetFileById(id);
+    }
+
+    /**
+     * 同时删除借阅信息表里的信息
+     */
+    @Override
+    public int deleteGetFileBorrowInfo( int[] gfid) throws Exception{
+        return userGetFileMapper.deleteGetFileBorrowInfo(gfid);
     }
 
 }

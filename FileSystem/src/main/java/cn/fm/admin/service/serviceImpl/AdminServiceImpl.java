@@ -201,7 +201,7 @@ public class AdminServiceImpl implements AdminService{
         if(flag == 1) {
             return 0;
         }
-        return adminMapper.deleteWorkerById(id) + adminMapper.deleteUser_roles(id) ;
+        return adminMapper.deleteWorkerById(id) + adminMapper.deleteUser_roles(id);
     }
 
     /**

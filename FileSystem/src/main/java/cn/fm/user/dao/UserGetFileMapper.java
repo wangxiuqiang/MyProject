@@ -90,6 +90,10 @@ public interface UserGetFileMapper {
     public int deleteGetFileById(@Param(value = "gfid") int[] gfid) throws Exception;
 
     /**
+     * 同时删除借阅信息表里的信息
+     */
+    public int deleteGetFileBorrowInfo(@Param(value = "gfid") int[] gfid) throws Exception;
+    /**
      * 通过两个或以上进行查询
      * @param getFile
      * @return

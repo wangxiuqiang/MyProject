@@ -306,4 +306,11 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     public int deleteCompanyFileById(int[] cfid) throws Exception{
         return userCompanyFileMapper.deleteCompanyFileById(cfid);
     }
+    /**
+     * 同时删除这个文件留下的借阅信息
+     */
+    @Override
+    public int deleteCompanyFileBorrowInfo(int[] cfid) throws Exception{
+        return userCompanyFileMapper.deleteCompanyFileBorrowInfo(cfid);
+    }
 }

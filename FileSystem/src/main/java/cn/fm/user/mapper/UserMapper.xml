@@ -35,7 +35,7 @@
 
     <!--设置文件已经归还-->
     <update id="updateCompanyFileBack" parameterType="int">
-        update companyFile set isborrow = 1 where cfid
+        update companyFile set isborrow = 1 where cfid IN
         <foreach collection="fileid" close=")" open="(" separator="," item="id">
             #{id}
         </foreach>
@@ -56,13 +56,13 @@
     <!--更新归还时间 ,因为一个文件只能借一次 所以  根据文件id就可以归还,但是要进行判断, 判断这个文件是不是在借阅中,并且
     这个文件是不是没更新过-->
     <update id="updatecfBackTime" parameterType="int">
-        update borrow_companyFile set backtime = CURDATE()   WHERE backtime!=null AND fileid IN
+        update borrow_companyFile set backtime=CURDATE() WHERE backtime is null AND fileid IN
         <foreach collection="fileid" close=")" open="(" separator="," item="id">
             #{id}
         </foreach>
     </update>
     <update id="updategfBackTime" parameterType="int">
-        update borrow_getFile set backtime = CURDATE() WHERE backtime!=null AND fileid IN
+        update borrow_getFile set backtime=CURDATE() WHERE backtime is null AND fileid IN
         <foreach collection="fileid" close=")" open="(" separator="," item="id">
             #{id}
         </foreach>
@@ -89,6 +89,7 @@
         </where>
     </select>
     <!--根据文件id查找这个文件的借阅历史-->
+    <!--可以用来查找这个文件是不是被解阅,,是的话,不能进行删除-->
     <select id="selectBorrowcfInfoByFileid" resultType="cn.fm.pojo.Borrow" parameterType="java.lang.Integer" >
          select uid,fileid,borrowtime,backtime from borrow_companyFile where fileid = #{fileid}
     </select>
@@ -105,7 +106,7 @@
     </select>
 
     <select id="selectcfisBorrow" parameterType="int" resultType="int">
-        select isborrow from getFile where gfid IN
+        select isborrow from companyFile where cfid IN
         <foreach collection="cfid" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>

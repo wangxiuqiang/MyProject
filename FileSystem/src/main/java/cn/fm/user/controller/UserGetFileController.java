@@ -129,6 +129,7 @@ public class UserGetFileController {
     @RequestMapping(value = "/delGetFile")
     @ResponseBody
     public String delGetFile(String gfid) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
         String[] gfidstring =gfid.split(",");
         int[] gfids = new int[gfidstring.length];
         for (int i = 0; i < gfidstring.length; i++) {
@@ -136,19 +137,19 @@ public class UserGetFileController {
             System.out.println(gfids[i]);
         }
         if(gfids.length <= 0) {
-            HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
             return JSON.toJSONString(map);
         }
         if(userGetFileService.deleteGetFileById(gfids) != 0) {
-            HashMap<String,Integer> map = new HashMap<>();
-            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
-            return JSON.toJSONString(map);
-        }else {
-            HashMap<String,Integer> map = new HashMap<>();
-            map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
-            return JSON.toJSONString(map);
+            if(userGetFileService.deleteGetFileBorrowInfo(gfids) != 0) {
+                map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
+                return JSON.toJSONString(map);
+            }
+
         }
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
+        return JSON.toJSONString(map);
+
     }
     /**
      * 根据id找文件

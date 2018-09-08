@@ -37,7 +37,7 @@ public class MailUtils {
         message.setFrom(new InternetAddress(fromWhere));//括号里需要一个地址对象，不能直接输入字符串
 //设置收件人
         message.setRecipient(Message.RecipientType.TO,new InternetAddress(email));
-        /**message.setRecipient(type,address) 前面的type有三种TO 发送给谁
+        /**message.setRecipient(type,address) 前面的type有三种 TO 发送给谁
          ， CC  ：抄送给谁 , BCC : 暗送给谁*/
 //设置邮件主题
         message.setSubject("请激活");

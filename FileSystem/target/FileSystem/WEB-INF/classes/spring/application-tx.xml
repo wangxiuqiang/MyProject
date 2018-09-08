@@ -15,7 +15,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
  http://www.springframework.org/schema/tx/spring-tx.xsd
  http://www.springframework.org/schema/aop
  http://www.springframework.org/schema/aop/spring-aop.xsd">
-
+<import resource="application-dao.xml"/>
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
@@ -30,29 +30,29 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
              另外一个事务,里面的事务方法要不要事务管理 REQUIRED 必须有,
              SUPPORT 可以有可以没有  read-only只能读,不能改
                默认是false ,如果是select可以是true-->
-            <tx:method name="insert*" isolation="DEFAULT"
+            <tx:method name="insert*"
                        propagation="REQUIRED" />
-            <tx:method name="update*" isolation="DEFAULT"
+            <tx:method name="update*"
                        propagation="REQUIRED" />
-            <tx:method name="delete*" isolation="DEFAULT"
+            <tx:method name="delete*"
                        propagation="REQUIRED" />
-            <tx:method name="select*" isolation="DEFAULT"
-                       propagation="REQUIRED" />
-
-            <tx:method name="add*" isolation="DEFAULT"
-                       propagation="REQUIRED" />
-            <tx:method name="get*" isolation="DEFAULT"
-                       propagation="REQUIRED" />
-            <tx:method name="del*" isolation="DEFAULT"
-                       propagation="REQUIRED" />
-            <tx:method name="edit*" isolation="DEFAULT"
+            <tx:method name="select*"
                        propagation="REQUIRED" />
 
-            <tx:method name="find*" isolation="DEFAULT"
+            <tx:method name="add*"
                        propagation="REQUIRED" />
-            <tx:method name="remove*" isolation="DEFAULT"
+            <tx:method name="get*"
                        propagation="REQUIRED" />
-            <tx:method name="save*" isolation="DEFAULT"
+            <tx:method name="del*"
+                       propagation="REQUIRED" />
+            <tx:method name="edit*"
+                       propagation="REQUIRED" />
+
+            <tx:method name="find*"
+                       propagation="REQUIRED" />
+            <tx:method name="remove*"
+                       propagation="REQUIRED" />
+            <tx:method name="save*"
                        propagation="REQUIRED" />
 
         </tx:attributes>
@@ -62,7 +62,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
         <!-- .* 代表一层目录, .. 代表下面不管有多少目录 cn.ssm.crm.. execution中的内容: 修饰符(可省略) 返回值(*) 包.类.方法名(参数) -->
         <!-- 切点 -->
         <aop:pointcut
-                expression="execution(* cn.fm.*.service.serviceImpl.*Impl.*(..))"
+                expression="execution(* cn.fm.*.service.serviceImpl..*.*(..))"
                 id="mypointcut" />
         <!-- 切面 -->
         <aop:advisor advice-ref="txAdvice"
