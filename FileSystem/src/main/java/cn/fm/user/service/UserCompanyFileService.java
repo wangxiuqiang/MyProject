@@ -96,5 +96,5 @@ public interface UserCompanyFileService {
     /**
      * 同时删除这个文件留下的借阅信息
      */
-    public int deleteCompanyFileBorrowInfo(int[] cfid) throws Exception;
+    public int deleteCompanyFileBorrowInfo(int cfid) throws Exception;
 }

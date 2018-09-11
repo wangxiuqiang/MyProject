@@ -3,6 +3,7 @@ package cn.fm.user.controller;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.pojo.GetFile;
 import cn.fm.user.service.UserGetFileService;
+import cn.fm.user.service.UserService;
 import cn.fm.utils.StatusUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -29,6 +30,9 @@ public class UserGetFileController {
 
     @Autowired
     UserGetFileService userGetFileService;
+
+    @Autowired
+    UserService userService;
 
     /**
      * 录入收文信息
@@ -140,12 +144,18 @@ public class UserGetFileController {
             map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
             return JSON.toJSONString(map);
         }
-        if(userGetFileService.deleteGetFileById(gfids) != 0) {
-            if(userGetFileService.deleteGetFileBorrowInfo(gfids) != 0) {
-                map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
+        //判断是不是有 还没有归还的
+        int gfisborrow[] =userService.selectcfisBorrow(gfids);
+        for(int i = 0; i < gfisborrow.length;i++) {
+            if(gfisborrow[i] == 2) {
+                map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
                 return JSON.toJSONString(map);
             }
+        }
 
+        if(userGetFileService.deleteGetFileById(gfids) != 0) {
+                map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
+                return JSON.toJSONString(map);
         }
         map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
         return JSON.toJSONString(map);

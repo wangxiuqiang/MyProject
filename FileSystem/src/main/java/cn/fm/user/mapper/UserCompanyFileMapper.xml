@@ -139,7 +139,10 @@
             </if>
         </where>
     </select>
-
+    <!--查询是不是有借阅信息-->
+    <select id="selectCFhasBorrowInfo" resultType="cn.fm.pojo.Borrow" parameterType="int">
+        select * from borrow_companyFile where fileid=#{id}
+    </select>
     <!--删除文件信息-->
     <delete id="deleteCompanyFileById" parameterType="int">
         delete from companyFile
@@ -154,10 +157,7 @@
    <delete id="deleteCompanyFileBorrowInfo" parameterType="int">
        delete FROM borrow_companyFile
        <where>
-           fileid IN
-           <foreach collection="cfid" item="id" separator="," open="(" close=")">
-               #{id}
-           </foreach>
+           fileid=#{cfid}
        </where>
    </delete>
 </mapper>

@@ -1,5 +1,6 @@
 package cn.fm.user.dao;
 
+import cn.fm.pojo.Borrow;
 import cn.fm.pojo.Classify;
 import cn.fm.pojo.GetFile;
 import org.apache.ibatis.annotations.Param;
@@ -92,12 +93,20 @@ public interface UserGetFileMapper {
     /**
      * 同时删除借阅信息表里的信息
      */
-    public int deleteGetFileBorrowInfo(@Param(value = "gfid") int[] gfid) throws Exception;
+    public int deleteGetFileBorrowInfo(@Param(value = "gfid") int gfid) throws Exception;
     /**
      * 通过两个或以上进行查询
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore(GetFile getFile);
+    public List<GetFile> selectGetFileByTwoAndMore(GetFile getFile) throws Exception;
+
+    /**
+     * 通过 查询是不是有借阅信息，决定是不是删除
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public List<Borrow> selectGFhasBorrowInfo(int id) throws Exception;
 
 }

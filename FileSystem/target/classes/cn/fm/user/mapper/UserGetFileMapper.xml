@@ -136,6 +136,10 @@
        where gfid = #{gfid}
     </update>
 
+    <!--查询这个文件的借阅信息是不是存在-->
+    <select id="selectGFhasBorrowInfo" parameterType="int" resultType="cn.fm.pojo.Borrow">
+         select * from borrow_getFile where fileid=#{id}
+    </select>
     <delete id="deleteGetFileById" parameterType="int">
         delete from getFile where gfid IN
         <foreach collection="gfid" item="id" separator="," open="(" close=")">
@@ -146,10 +150,7 @@
     <delete id="deleteGetFileBorrowInfo" parameterType="int">
         delete FROM borrow_getFile
         <where>
-            fileid IN
-            <foreach collection="gfid" item="id" separator="," open="(" close=")">
-                #{id}
-            </foreach>
+            fileid=#{gfid}
         </where>
     </delete>
 </mapper>

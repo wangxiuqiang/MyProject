@@ -1,5 +1,6 @@
 package cn.fm.user.dao;
 
+import cn.fm.pojo.Borrow;
 import cn.fm.pojo.Classify;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.pojo.GetFile;
@@ -83,13 +84,18 @@ public interface UserCompanyFileMapper {
          public int updateCompanyFileById(CompanyFile file) throws Exception;
 
         /**
+         * 查询这个文件是不是有借阅信息，如果有，删除 借阅信息，如果没有就算了
+         * 如果没有归还 一样不能删除，返回有文件没有归还
+         */
+        public List<Borrow> selectCFhasBorrowInfo(int id) throws Exception;
+        /**
          *根据id删除多行数据
          */
         public int deleteCompanyFileById(@Param(value = "cfid") int[] cfid) throws Exception;
         /**
          * 同时删除这个文件留下的借阅信息
          */
-        public int deleteCompanyFileBorrowInfo(@Param(value = "cfid") int[] cfid) throws Exception;
+        public int deleteCompanyFileBorrowInfo(@Param(value = "cfid") int cfid) throws Exception;
         /**
          * 多项组合查询
          */

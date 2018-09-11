@@ -37,6 +37,7 @@ public class UserCompanyFileController {
     @Autowired
     UserCompanyFileService userCompanyFileService;
 
+
     /**
      * 查询所有的文件信息
      * @return
@@ -146,7 +147,7 @@ public class UserCompanyFileController {
         }
     }
     /**
-     * 根据id删除单条记录
+     * 根据id删除单条记录,,如果文件被借出了则不能删除文件
      */
     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delCompanyFile")
@@ -163,11 +164,18 @@ public class UserCompanyFileController {
         if(cfids.length <= 0) {
             return JSON.toJSONString(StatusUtils.IS_NULL);
         }
-        if(userCompanyFileService.deleteCompanyFileById(cfids) != 0) {
-            if(userCompanyFileService.deleteCompanyFileBorrowInfo(cfids) != 0){
-                map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
+        //判断是不是有 还没有归还的
+        int cfisborrow[] =userService.selectcfisBorrow(cfids);
+        for(int i = 0; i < cfisborrow.length;i++) {
+            if(cfisborrow[i] == 2) {
+                map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
                 return JSON.toJSONString(map);
             }
+        }
+
+        if(userCompanyFileService.deleteCompanyFileById(cfids) != 0) {
+                map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
+                return JSON.toJSONString(map);
         }
         map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
         return JSON.toJSONString(map);

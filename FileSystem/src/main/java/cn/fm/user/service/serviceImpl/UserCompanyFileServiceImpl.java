@@ -1,13 +1,16 @@
 package cn.fm.user.service.serviceImpl;
 
+import cn.fm.pojo.Borrow;
 import cn.fm.pojo.Classify;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.user.dao.UserCompanyFileMapper;
 import cn.fm.user.service.UserCompanyFileService;
+import cn.fm.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 @Service
 public class UserCompanyFileServiceImpl implements UserCompanyFileService {
@@ -304,13 +307,22 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      *根据id删除单行数据
      */
     public int deleteCompanyFileById(int[] cfid) throws Exception{
+
+        for(int i = 0; i < cfid.length; i++) {
+            List<Borrow> list = userCompanyFileMapper.selectCFhasBorrowInfo(cfid[i]);
+            //如果不为空 就删除 借阅信息
+            if(list == null && list.size() > 0) {
+                deleteCompanyFileBorrowInfo(cfid[i]);
+            }
+        }
+
         return userCompanyFileMapper.deleteCompanyFileById(cfid);
     }
     /**
      * 同时删除这个文件留下的借阅信息
      */
     @Override
-    public int deleteCompanyFileBorrowInfo(int[] cfid) throws Exception{
+    public int deleteCompanyFileBorrowInfo(int cfid) throws Exception{
         return userCompanyFileMapper.deleteCompanyFileBorrowInfo(cfid);
     }
 }

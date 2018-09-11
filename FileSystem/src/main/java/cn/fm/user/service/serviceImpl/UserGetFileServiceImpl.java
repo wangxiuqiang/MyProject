@@ -1,5 +1,6 @@
 package cn.fm.user.service.serviceImpl;
 
+import cn.fm.pojo.Borrow;
 import cn.fm.pojo.Classify;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.pojo.GetFile;
@@ -241,7 +242,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile){
+    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile) throws Exception{
         return userGetFileMapper.selectGetFileByTwoAndMore(getFile);
     }
 
@@ -320,6 +321,13 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      */
     @Override
     public int deleteGetFileById(int[] id) throws Exception{
+        for(int i = 0; i < id.length; i++) {
+            List<Borrow> list = userGetFileMapper.selectGFhasBorrowInfo(id[i]);
+            //如果不为空 就删除 借阅信息
+            if(list == null && list.size() > 0) {
+                deleteGetFileBorrowInfo(id[i]);
+            }
+        }
         return userGetFileMapper.deleteGetFileById(id);
     }
 
@@ -327,7 +335,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * 同时删除借阅信息表里的信息
      */
     @Override
-    public int deleteGetFileBorrowInfo( int[] gfid) throws Exception{
+    public int deleteGetFileBorrowInfo(int gfid) throws Exception{
         return userGetFileMapper.deleteGetFileBorrowInfo(gfid);
     }
 

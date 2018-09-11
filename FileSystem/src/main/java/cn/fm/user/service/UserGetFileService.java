@@ -97,12 +97,12 @@ public interface UserGetFileService {
     /**
      * 同时删除借阅信息表里的信息
      */
-    public int deleteGetFileBorrowInfo( int[] gfid) throws Exception;
+    public int deleteGetFileBorrowInfo(int gfid) throws Exception;
     /**
      * 通过两个或以上进行查询
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile);
+    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile) throws Exception;
 
 }

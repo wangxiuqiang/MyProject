@@ -13,6 +13,7 @@ import cn.fm.utils.StatusUtils;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
 import cn.fm.vo.UserExtend;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -376,10 +377,23 @@ public class UserServiceImpl implements UserService {
 
 
     /**
-     * 根据code 查找用户了录入时间
+     * 根据code 查找用户的录入时间
      */
     @Override
     public String selectUserupdatetime(String code) throws Exception{
         return userMapper.selectUserupdatetime(code);
+    }
+
+    /**
+     * 查看是不是 被借出去了
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    public int[] selectcfisBorrow(@Param(value = "cfid") int[] cfid) throws Exception{
+        return userMapper.selectcfisBorrow(cfid);
+    }
+    public int[] selectgfisBorrow(@Param(value = "gfid") int[] gfid) throws Exception{
+        return userMapper.selectcfisBorrow(gfid);
     }
 }

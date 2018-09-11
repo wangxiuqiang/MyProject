@@ -6,6 +6,7 @@ import cn.fm.pojo.User;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
 import cn.fm.vo.UserExtend;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -67,4 +68,13 @@ public interface UserService {
      * 根据code 查找用户了录入时间
      */
     public String selectUserupdatetime(String code) throws Exception;
+
+    /**
+     * 查看是不是 被借出去了
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    public int[] selectcfisBorrow(@Param(value = "cfid") int[] cfid) throws Exception;
+    public int[] selectgfisBorrow(@Param(value = "gfid") int[] gfid) throws Exception;
 }
