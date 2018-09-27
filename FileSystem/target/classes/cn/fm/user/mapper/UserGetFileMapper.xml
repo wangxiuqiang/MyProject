@@ -23,38 +23,38 @@
     <select id="selectGetFileById" parameterType="int" resultType="cn.fm.pojo.GetFile">
         select
         <include refid="Base_Columns_List" />
-        from getFile where gfid = #{gfid}
+        from getFile where gfid = #{gfid} and state=1
     </select>
 
      <select id="selectGetFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
          select
          <include refid="Base_Columns_List" />
-         from getFile where gfname like concat(concat('%',#{value}), '%')
+         from getFile where gfname like concat(concat('%',#{value}), '%') and state=1
      </select>
 
     <select id="selectGetFileByCompany" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
          select
          <include refid="Base_Columns_List"/>
-         from getFile where gfcompany = #{value}
+         from getFile where gfcompany = #{value} and state=1
      </select>
 
     <select id="selectGetFileByClassifyId" parameterType="java.lang.Integer" resultType="cn.fm.pojo.GetFile">
         select
          <include refid="Base_Columns_List" />
-        from getFile where gfclassifyid = #{value}
+        from getFile where gfclassifyid = #{value} and state=1
     </select>
 
 
     <select id="selectGetFileByDateTime" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
         select
         <include refid="Base_Columns_List" />
-        from getFile where gfdatetime like concat(concat('%',#{value}), '%')
+        from getFile where gfdatetime like concat(concat('%',#{value}), '%') and state=1
     </select>
 
     <select id="selectGetFileByNumber" parameterType="java.lang.Integer" resultType="cn.fm.pojo.GetFile">
         select
         <include refid="Base_Columns_List" />
-        from getFile where gfnumber = #{value}
+        from getFile where gfnumber = #{value} and state=1
     </select>
 
     <!--多项查询-->
@@ -80,6 +80,7 @@
             <if test="gfdatetime != null">
                 and gfdatetime like concat(concat('%',#{gfdatetime}), '%')
             </if>
+            and state=1
         </where>
 
 
@@ -91,7 +92,7 @@
     <select id="selectAllGetFile" resultType="cn.fm.pojo.GetFile">
          select
          <include refid="Base_Columns_List" />
-        from getFile
+        from getFile and state=1
     </select>
 
     <!--更新 -->
@@ -140,17 +141,17 @@
     <select id="selectGFhasBorrowInfo" parameterType="int" resultType="cn.fm.pojo.Borrow">
          select * from borrow_getFile where fileid=#{id}
     </select>
-    <delete id="deleteGetFileById" parameterType="int">
-        delete from getFile where gfid IN
+    <update id="deleteGetFileById" parameterType="int">
+        update getFile set state=0 where gfid IN
         <foreach collection="gfid" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
-    </delete>
+    </update>
 
-    <delete id="deleteGetFileBorrowInfo" parameterType="int">
-        delete FROM borrow_getFile
+    <update id="deleteGetFileBorrowInfo" parameterType="int">
+        update borrow_getFile set state=0
         <where>
             fileid=#{gfid}
         </where>
-    </delete>
+    </update>
 </mapper>

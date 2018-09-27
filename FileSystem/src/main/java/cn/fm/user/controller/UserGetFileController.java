@@ -41,14 +41,18 @@ public class UserGetFileController {
     @RequestMapping(value = "/infoSubGetFile")
     @ResponseBody
     public String infoSub(@Validated GetFile getFile, BindingResult bindingResult) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
         if(bindingResult.hasErrors()) {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             return JSON.toJSONString(allErrors);
         }
        if(userGetFileService.insertGetFile(getFile) != 0) {
-           return JSON.toJSONString(StatusUtils.SUCCESS_INSERT);
+           map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+           return JSON.toJSONString(map);
+
        }
-       return JSON.toJSONString(StatusUtils.FAILURE_INSERT);
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+       return JSON.toJSONString(map);
     }
 
     /**

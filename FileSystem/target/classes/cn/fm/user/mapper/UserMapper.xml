@@ -76,6 +76,7 @@
             <if test="uid != 0" >
                 uid = #{uid}
             </if>
+            and state=1
         </where>
     </select>
 
@@ -86,15 +87,16 @@
             <if test="uid != 0" >
                 uid = #{uid}
             </if>
+            and state=1
         </where>
     </select>
     <!--根据文件id查找这个文件的借阅历史-->
     <!--可以用来查找这个文件是不是被解阅,,是的话,不能进行删除-->
     <select id="selectBorrowcfInfoByFileid" resultType="cn.fm.pojo.Borrow" parameterType="java.lang.Integer" >
-         select uid,fileid,borrowtime,backtime from borrow_companyFile where fileid = #{fileid}
+         select uid,fileid,borrowtime,backtime from borrow_companyFile where fileid = #{fileid} and state=1
     </select>
     <select id="selectBorrowgfInfoByFileid" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Borrow">
-        select uid,fileid,borrowtime,backtime from borrow_getFile where fileid = #{fileid}
+        select uid,fileid,borrowtime,backtime from borrow_getFile where fileid = #{fileid} and state=1
     </select>
 
     <!--查看该文件是不是被借出去了,-->
@@ -103,6 +105,7 @@
         <foreach collection="gfid" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
+        and state=1
     </select>
 
     <select id="selectcfisBorrow" parameterType="int" resultType="int">
@@ -110,6 +113,7 @@
         <foreach collection="cfid" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
+        and state=1
     </select>
 
 

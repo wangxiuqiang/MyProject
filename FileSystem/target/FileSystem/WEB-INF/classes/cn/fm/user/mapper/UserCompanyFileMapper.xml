@@ -23,33 +23,33 @@
     <select id="selectCompanyFileById" parameterType="int" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cfid = #{cfid}
+        from companyFile where cfid = #{cfid} and state=1
     </select>
 
     <select id="selectCompanyFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cfname like concat(concat('%',#{value}), '%')
+        from companyFile where cfname like concat(concat('%',#{value}), '%') and state=1
     </select>
 
 
     <select id="selectCompanyFileByClassifyId" parameterType="java.lang.Integer" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cfclassifyid = #{value}
+        from companyFile where cfclassifyid = #{value} and state=1
     </select>
 
 
     <select id="selectCompanyFileByDateTime" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cfdate like concat(concat('%',#{value}), '%')
+        from companyFile where cfdate like concat(concat('%',#{value}), '%') and state=1
     </select>
 
     <select id="selectCompanyFileByFontid" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cffontid = #{value}
+        from companyFile where cffontid = #{value} and state=1
     </select>
 
     <select id="selectCompanyFileByLanguage" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
@@ -64,7 +64,7 @@
     <select id="selectAllCompanyFile" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile
+        from companyFile where state=1
     </select>
 
     <!--修改文件信息-->
@@ -137,6 +137,7 @@
             <if test="cfdate != null">
                 AND cfdate like concat(concat('%',#{cfdate}), '%')
             </if>
+            AND state=1
         </where>
     </select>
     <!--查询是不是有借阅信息-->
@@ -144,20 +145,20 @@
         select * from borrow_companyFile where fileid=#{id}
     </select>
     <!--删除文件信息-->
-    <delete id="deleteCompanyFileById" parameterType="int">
-        delete from companyFile
+    <update id="deleteCompanyFileById" parameterType="int">
+       update  companyFile set state=0
         <where>
             cfid IN
             <foreach collection="cfid" open="(" close=")" separator="," item="id">
                 #{id}
             </foreach>
         </where>
-    </delete>
+    </update>
 
-   <delete id="deleteCompanyFileBorrowInfo" parameterType="int">
-       delete FROM borrow_companyFile
+   <update id="deleteCompanyFileBorrowInfo" parameterType="int">
+       update borrow_companyFile set state=0
        <where>
            fileid=#{cfid}
        </where>
-   </delete>
+   </update>
 </mapper>

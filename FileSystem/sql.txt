@@ -52,6 +52,7 @@ gfnumber int not null,
 gfcountuse int default 1,
 type int default 2,
 isborrow int default 1,
+state int default 1,
 foreign key(gfclassifyid) references classify(cyid)
 );
 
@@ -94,6 +95,7 @@ cfclassifyid int ,
 cfclassifyname varchar(100),
 type int default 1,
 isborrow int default 1,
+state int default 1,
 foreign key(cfclassifyid) references classify(cyid)
 );
 insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第一份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
@@ -177,12 +179,14 @@ create table borrow_getFile (
 uid int ,
 fileid int,
 borrowtime varchar(30) ,
-backtime varchar(30)
+backtime varchar(30),
+state int default 1
 );
 
 create table borrow_companyFile (
 uid int ,
 fileid int,
 borrowtime varchar(30)  ,
-backtime varchar(30)
+backtime varchar(30),
+state int default 1
 );
