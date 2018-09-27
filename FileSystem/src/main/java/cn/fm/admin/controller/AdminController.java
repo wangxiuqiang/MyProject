@@ -293,7 +293,6 @@ public class AdminController {
         }
 
     }
-//
 //    /**
 //     * 根据id返回角色和权限信息
 //     * @param uid

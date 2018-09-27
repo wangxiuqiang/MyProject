@@ -54,11 +54,6 @@ public class LoginController {
         HashMap<String ,Integer> map = new HashMap<>();
         map.put(StatusUtils.statecode,StatusUtils.SUCCESS_LOGIN);
         return JSON.toJSONString(map);
-//        User users = adminService.findUserByEmail(user.getUemail());
-//        if (user != null) {
-//            return JSON.toJSONString(StatusUtils.SUCCESS_LOGIN);
-//        }
-//        return JSON.toJSONString(StatusUtils.FAILURE_LOGIN);
 
     }
 
