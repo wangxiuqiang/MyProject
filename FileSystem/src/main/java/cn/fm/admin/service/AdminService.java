@@ -2,7 +2,6 @@ package cn.fm.admin.service;
 
 import cn.fm.pojo.*;
 import cn.fm.vo.UserExtend;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Set;
@@ -152,4 +151,12 @@ public interface AdminService {
      * @throws Exception
      */
     public int insertClassify(Classify classify) throws Exception;
+    /**
+     * 添加密级
+     */
+    public int addLevelInfo(String lname) throws Exception;
+    /**
+     * 查找密级
+     */
+    public List<Level> selectAllLevel() throws Exception;
 }

@@ -6,16 +6,11 @@ import cn.fm.pojo.*;
 import cn.fm.user.dao.UserCompanyFileMapper;
 import cn.fm.user.dao.UserGetFileMapper;
 import cn.fm.user.dao.UserMapper;
-import cn.fm.utils.DateToStringUtils;
-import cn.fm.utils.MD5Utils;
 import cn.fm.utils.MailUtils;
-import cn.fm.vo.BorrowGFExtends;
 import cn.fm.vo.UserExtend;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -331,6 +326,19 @@ public class AdminServiceImpl implements AdminService{
     public Set<String> findRoles(int uid) throws Exception {
         return selectRoles(selectRid(uid));
     }
-
+    /**
+     * 添加密级
+     */
+    @Override
+    public int addLevelInfo(String lname) throws Exception{
+        return adminMapper.addLevelInfo(lname);
+    }
+    /**
+     * 查找密级
+     */
+    @Override
+    public List<Level> selectAllLevel() throws Exception{
+        return adminMapper.selectAllLevel();
+    }
 
 }

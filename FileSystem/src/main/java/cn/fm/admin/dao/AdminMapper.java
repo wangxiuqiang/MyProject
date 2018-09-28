@@ -157,4 +157,13 @@ public interface AdminMapper {
      * @throws Exception
      */
     public int insertClassify(Classify classify) throws Exception;
+
+    /**
+     * 添加密级
+     */
+    public int addLevelInfo(String lname) throws Exception;
+    /**
+     * 查找密级
+     */
+    public List<Level> selectAllLevel() throws Exception;
 }

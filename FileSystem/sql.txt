@@ -190,3 +190,10 @@ borrowtime varchar(30)  ,
 backtime varchar(30),
 state int default 1
 );
+
+
+create table level (
+lid int primary key auto_increment ,
+lname varchar(30) not null
+);
+

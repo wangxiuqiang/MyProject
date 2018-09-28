@@ -2,6 +2,7 @@ package cn.fm.admin.controller;
 
 import cn.fm.admin.service.AdminService;
 import cn.fm.pojo.Classify;
+import cn.fm.pojo.Level;
 import cn.fm.pojo.User;
 import cn.fm.pojo.WorkPlace;
 import cn.fm.user.service.UserService;
@@ -313,4 +314,47 @@ public class AdminController {
 //        int[] pids = adminService.selectPids(rids);
 //        return JSON.toJSONString(adminService.findPermissionsShow(pids));
 //    }
+
+    /**
+     * 录入密级信息
+     * @param lname
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/addLevelInfo")
+    @ResponseBody
+    public String addLevelInfo(String lname) throws Exception {
+        HashMap<String , Integer > map = new HashMap<>();
+        if(lname == null ) {
+            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+            return JSON.toJSONString(map);
+        }
+
+        if(adminService.addLevelInfo(lname) != 0 ) {
+            map.put( StatusUtils.statecode, StatusUtils.SUCCESS_INSERT );
+        }else {
+            map.put( StatusUtils.statecode, StatusUtils.FAILURE_INSERT );
+        }
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 查找 全部的密级
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/addLevelInfo")
+    @ResponseBody
+    public String selectAllLevel() throws Exception {
+        HashMap<String , Integer> map = new HashMap<>();
+        List<Level> levels = adminService.selectAllLevel();
+        if( levels.size() != 0 && levels !=null) {
+            return JSON.toJSONString(levels);
+        } else {
+            map.put(StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+            return JSON.toJSONString(map);
+        }
+    }
 }
