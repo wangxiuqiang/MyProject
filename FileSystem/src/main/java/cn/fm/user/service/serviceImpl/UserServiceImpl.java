@@ -396,4 +396,53 @@ public class UserServiceImpl implements UserService {
     public int[] selectgfisBorrow(@Param(value = "gfid") int[] gfid) throws Exception{
         return userMapper.selectcfisBorrow(gfid);
     }
+
+    /**
+     * 根据传入的开始时间和终止时间查询 没有归还的文件信息, 范围查询,并通过这里面的用户id和文件id去查询用户和文件信息
+     * @param starttime
+     * @param endtime
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<BorrowCFExtends> selectBorrowcfByborrowtime( String starttime , String endtime ) throws Exception {
+        List<Borrow> list = userMapper.selectBorrowcfByborrowtime(starttime, endtime );
+        List<BorrowCFExtends> bcf = new ArrayList<>();
+        list.forEach(n -> {
+            try {
+                User user = adminMapper.findWorkerById(n.getUid());
+                CompanyFile companyFile = userCompanyFileMapper.selectCompanyFileById( n.getFileid() );
+                BorrowCFExtends bc = new BorrowCFExtends();
+                bc.setBacktime(n.getBacktime());
+                bc.setBorrowtime(n.getBorrowtime());
+                bc.setCompanyFile(companyFile);
+                bc.setUser( user );
+                bcf.add( bc );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return bcf;
+    }
+    @Override
+    public List<BorrowGFExtends> selectBorrowgfByborrowtime( String starttime , String endtime ) throws Exception{
+        List<Borrow> list = userMapper.selectBorrowgfByborrowtime(starttime, endtime );
+        List<BorrowGFExtends> bgf = new ArrayList<>();
+        list.forEach(n -> {
+            try {
+                User user = adminMapper.findWorkerById(n.getUid());
+                GetFile getFile = userGetFileMapper.selectGetFileById( n.getFileid() );
+                BorrowGFExtends bg = new BorrowGFExtends();
+                bg.setBacktime(n.getBacktime());
+                bg.setBorrowtime(n.getBorrowtime());
+                bg.setGetFile(getFile);
+                bg.setUser( user );
+                bgf.add( bg );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return bgf;
+    }
+
 }

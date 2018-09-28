@@ -61,6 +61,15 @@ public interface UserMapper {
     public int updatecfBackTime(@Param(value = "fileid") int[] fileid) throws Exception;
     public int updategfBackTime(@Param(value = "fileid") int[] fileid) throws Exception;
 
+    /**
+     * 根据传入的开始时间和终止时间查询 没有归还的文件信息, 范围查询,并通过这里面的用户id和文件id去查询用户和文件信息
+     * @param starttime
+     * @param endtime
+     * @return
+     * @throws Exception
+     */
+    public List<Borrow> selectBorrowcfByborrowtime( @Param(value = "starttime") String starttime , @Param(value = "endtime" ) String endtime ) throws Exception;
+    public List<Borrow> selectBorrowgfByborrowtime( @Param(value = "starttime") String starttime , @Param(value = "endtime" ) String endtime ) throws Exception;
 
     /**
      * 根据用户id 查询他所有的借阅,或者让id = 0 查询该类所有的借阅  cf 类

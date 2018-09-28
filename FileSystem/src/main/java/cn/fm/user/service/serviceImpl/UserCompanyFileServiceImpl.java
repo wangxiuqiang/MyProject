@@ -102,7 +102,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      * @throws Exception
      */
     @Override
-    public List<CompanyFile> findTypeFiles(CompanyFile companyFile) throws Exception {
+    public List<CompanyFile> findTypeFiles(CompanyFile companyFile , String endtime ) throws Exception {
 
 
         if(companyFile.getCfname() != null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
@@ -123,9 +123,9 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
-                && companyFile.getCfdate() != null && companyFile.getCffontid() == null) {
+                && companyFile.getCfdate() != null && endtime != null && companyFile.getCffontid() == null) {
 
-            return selectCompanyFileByDateTime(companyFile.getCfdate());
+            return selectCompanyFileByDateTime(companyFile.getCfdate() , endtime);
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
@@ -137,7 +137,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null){
            return  null;
         }else {
-            return selectCompanyFileByTwoOrMore(companyFile);
+            return selectCompanyFileByTwoOrMore(companyFile , endtime );
         }
 
     }
@@ -145,8 +145,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     /**
      * 多项组合查询
      */
-    public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile) throws Exception{
-        return userCompanyFileMapper.selectCompanyFileByTwoOrMore(companyFile);
+    public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile , String endtime ) throws Exception{
+        return userCompanyFileMapper.selectCompanyFileByTwoOrMore( companyFile , endtime );
     }
 
     /**
@@ -222,8 +222,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     }
 
     @Override
-    public List<CompanyFile> selectCompanyFileByDateTime(String date) throws Exception {
-        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByDateTime(date);
+    public List<CompanyFile> selectCompanyFileByDateTime(String date , String endtime ) throws Exception {
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByDateTime(date , endtime );
         return selectAllClassifyId(cfs);
     }
 

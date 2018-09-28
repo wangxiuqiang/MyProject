@@ -37,6 +37,15 @@ public class CompanyFile {
     private int cfclassifyid;
 //    @NotNull(message = "{companyfile.classifyname.isnull}")
     private String cfclassifyname;
+    private int state;
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
 
     /**
      * 用来 返回自己的分类和全部父类id

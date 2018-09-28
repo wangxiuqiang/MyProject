@@ -75,6 +75,17 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    public int[] selectcfisBorrow(@Param(value = "cfid") int[] cfid) throws Exception;
-    public int[] selectgfisBorrow(@Param(value = "gfid") int[] gfid) throws Exception;
+    public int[] selectcfisBorrow( int[] cfid) throws Exception;
+    public int[] selectgfisBorrow( int[] gfid) throws Exception;
+
+    /**
+     * 根据传入的开始时间和终止时间查询 没有归还的文件信息, 范围查询,并通过这里面的用户id和文件id去查询用户和文件信息
+     * @param starttime
+     * @param endtime
+     * @return
+     * @throws Exception
+     */
+    public List<BorrowCFExtends> selectBorrowcfByborrowtime(  String starttime ,  String endtime ) throws Exception;
+    public List<BorrowGFExtends> selectBorrowgfByborrowtime( String starttime ,  String endtime ) throws Exception;
+
 }

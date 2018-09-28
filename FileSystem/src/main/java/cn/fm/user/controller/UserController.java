@@ -460,7 +460,56 @@ public class UserController {
         return JSON.toJSONString(map);
     }
 
+    /**
+     * 根据日期范围查询未归还的用户信息及其借阅的文件信息
+     * @param starttime
+     * @param endtime
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    @RequestMapping(value = "/selectBorrowcfByborrowtime")
+    @ResponseBody
+    public String selectBorrowcfByborrowtime(String starttime , String endtime ) throws  Exception {
+        HashMap<String , Integer > map = new HashMap<>();
+        if( starttime == null || endtime == null ) {
+           map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
+           return JSON.toJSONString(map);
+        }
+        List<BorrowCFExtends> bcf = userService.selectBorrowcfByborrowtime(starttime, endtime );
+        if( bcf != null ) {
+            return JSON.toJSONString(bcf);
+        }else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+            return JSON.toJSONString(map);
+        }
 
+    }
 
+    /**
+     * 根据日期范围查询未归还的用户信息及其借阅的文件信息
+     * @param starttime
+     * @param endtime
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    @RequestMapping(value = "/selectBorrowgfByborrowtime")
+    @ResponseBody
+    public String selectBorrowgfByborrowtime(String starttime , String endtime ) throws  Exception {
+        HashMap<String , Integer > map = new HashMap<>();
+        if( starttime == null || endtime == null ) {
+            map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
+            return JSON.toJSONString(map);
+        }
+        List<BorrowGFExtends> bgf = userService.selectBorrowgfByborrowtime(starttime, endtime );
+        if( bgf != null ) {
+            return JSON.toJSONString(bgf);
+        }else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+            return JSON.toJSONString(map);
+        }
+
+    }
 
 }

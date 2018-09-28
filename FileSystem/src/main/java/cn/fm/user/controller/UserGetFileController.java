@@ -61,13 +61,13 @@ public class UserGetFileController {
     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/findTypeGetFiles/{page}")
     @ResponseBody
-    public String findTypeFiles(@PathVariable Integer page , GetFile getFile) throws Exception {
+    public String findTypeFiles(@PathVariable Integer page , GetFile getFile, String endtime) throws Exception {
         System.out.println(getFile);
-        if(getFile.getGfnumber() != 0 || getFile.getGfdatetime() != null || getFile.getGfcompany() != null
+        if(getFile.getGfnumber() != 0 || (getFile.getGfdatetime() != null && endtime != null) || getFile.getGfcompany() != null
                 || getFile.getGfclassifyid() != 0 || getFile.getGfname() != null) {
             PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
-            List<GetFile> getFiles = userGetFileService.findTypeFiles(getFile);
+            List<GetFile> getFiles = userGetFileService.findTypeFiles(getFile,endtime);
 
             PageInfo<GetFile> pageInfo = new PageInfo<GetFile>(getFiles);
 
@@ -149,7 +149,7 @@ public class UserGetFileController {
             return JSON.toJSONString(map);
         }
         //判断是不是有 还没有归还的
-        int gfisborrow[] =userService.selectcfisBorrow(gfids);
+        int gfisborrow[] =userService.selectgfisBorrow(gfids);
         for(int i = 0; i < gfisborrow.length;i++) {
             if(gfisborrow[i] == 2) {
                 map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);

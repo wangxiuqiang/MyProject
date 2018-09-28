@@ -64,12 +64,12 @@ public class UserCompanyFileController {
      @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/findTypeCompanyFiles/{page}")
     @ResponseBody
-    public String findTypeCompanyFiles( CompanyFile companyFile,@PathVariable  Integer page) throws Exception {
+    public String findTypeCompanyFiles( CompanyFile companyFile,@PathVariable  Integer page,String endtime ) throws Exception {
         if( companyFile.getCfname() != null || companyFile.getCfclassifyid() != 0 || companyFile.getCflanguage() != null
                 || companyFile.getCfdate() != null || companyFile.getCffontid() != null) {
             PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
-            List<CompanyFile> companyFiles = userCompanyFileService.findTypeFiles(companyFile);
+            List<CompanyFile> companyFiles = userCompanyFileService.findTypeFiles(companyFile , endtime );
 
             PageInfo<CompanyFile> pageInfo = new PageInfo<CompanyFile>(companyFiles);
             return JSON.toJSONString(pageInfo, SerializerFeature.DisableCircularReferenceDetect);

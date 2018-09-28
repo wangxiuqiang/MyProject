@@ -5,6 +5,15 @@ public class Borrow {
     private int fileid;
     private String borrowtime;
     private String backtime;
+    private int state;
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
 
     public int getUid() {
         return uid;

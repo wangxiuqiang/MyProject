@@ -29,7 +29,7 @@ public interface UserGetFileService {
     /**
      * 总的包揽下面几个查询的函数
      */
-    public List<GetFile> findTypeFiles(GetFile getFile) throws Exception;
+    public List<GetFile> findTypeFiles(GetFile getFile,String endtime) throws Exception;
 
     /**
      * 单独用名字来做模糊查询
@@ -67,7 +67,7 @@ public interface UserGetFileService {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByDateTime(String datetime) throws Exception;
+    public List<GetFile> selectGetFileByDateTime(String datetime , String endtime ) throws Exception;
 
     /**
      *根据文号查询
@@ -103,6 +103,6 @@ public interface UserGetFileService {
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile) throws Exception;
+    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile , String endtime) throws Exception;
 
 }

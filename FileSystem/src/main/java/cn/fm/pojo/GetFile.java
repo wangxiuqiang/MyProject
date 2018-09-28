@@ -37,6 +37,8 @@ public class GetFile {
      * 是不是借出
      */
     private int isborrow;
+    //是否删除
+    private int state;
 
     /**
      * 所在的分类的所有id地址
@@ -59,6 +61,14 @@ public class GetFile {
 
     public void setIsborrow(int isborrow) {
         this.isborrow = isborrow;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     @Override

@@ -160,7 +160,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @throws Exception
      */
     @Override
-    public List<GetFile> findTypeFiles(GetFile getFile) throws Exception {
+    public List<GetFile> findTypeFiles(GetFile getFile , String endtime ) throws Exception {
 
         if(getFile.getGfname() != null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
@@ -177,9 +177,9 @@ public class UserGetFileServiceImpl implements UserGetFileService{
             return selectGetFileByCompany(getFile.getGfcompany());
 
         }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() != null && getFile.getGfnumber() == 0) {
+                && getFile.getGfdatetime() != null && endtime !=null && getFile.getGfnumber() == 0) {
 
-            return selectGetFileByDateTime(getFile.getGfdatetime());
+            return selectGetFileByDateTime(getFile.getGfdatetime() ,endtime);
         }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() != 0){
            return  selectGetFileByNumber(getFile.getGfnumber());
@@ -189,7 +189,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
              return  null;
         }else {
             //多项查询
-          return selectGetFileByTwoAndMore(getFile);
+          return selectGetFileByTwoAndMore(getFile ,endtime);
         }
     }
 
@@ -209,8 +209,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     }
 
     @Override
-    public List<GetFile> selectGetFileByDateTime(String datetime) throws Exception {
-        return selectAllClassifyId(userGetFileMapper.selectGetFileByDateTime(datetime));
+    public List<GetFile> selectGetFileByDateTime(String datetime, String endtime ) throws Exception {
+        return selectAllClassifyId(userGetFileMapper.selectGetFileByDateTime(datetime , endtime ));
     }
 
     @Override
@@ -242,8 +242,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile) throws Exception{
-        return userGetFileMapper.selectGetFileByTwoAndMore(getFile);
+    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile , String endtime) throws Exception{
+        return userGetFileMapper.selectGetFileByTwoAndMore(getFile,endtime);
     }
 
     /**
