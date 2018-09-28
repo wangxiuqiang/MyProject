@@ -149,4 +149,15 @@
     <insert id="insertClassify" parameterType="cn.fm.pojo.Classify">
         insert into classify(cyname,cyfatherid,cyaddress) VALUES (#{cyname},#{cyfatherid},#{cyaddress})
     </insert>
+
+
+    <!--添加密级-->
+    <insert id="addLevelInfo" parameterType="String" >
+        insert into level(lname) values(#{value})
+    </insert>
+
+    <!--查询所有密级-->
+    <select id="selectAllLevel" resultType="cn.fm.pojo.Level" >
+        select lid,lname from level
+    </select>
 </mapper>

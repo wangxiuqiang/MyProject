@@ -325,15 +325,15 @@ public class AdminController {
     @RequestMapping(value = "/addLevelInfo")
     @ResponseBody
     public String addLevelInfo(String lname) throws Exception {
-        HashMap<String , Integer > map = new HashMap<>();
+        HashMap<String,Integer> map = new HashMap<>();
         if(lname == null ) {
             map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
             return JSON.toJSONString(map);
         }
-
-        if(adminService.addLevelInfo(lname) != 0 ) {
+        int result = adminService.addLevelInfo(lname);
+        if( result > 0 ) {
             map.put( StatusUtils.statecode, StatusUtils.SUCCESS_INSERT );
-        }else {
+        } else {
             map.put( StatusUtils.statecode, StatusUtils.FAILURE_INSERT );
         }
         return JSON.toJSONString(map);
@@ -345,12 +345,12 @@ public class AdminController {
      * @throws Exception
      */
     @RequiresRoles(value = "admin")
-    @RequestMapping(value = "/addLevelInfo")
+    @RequestMapping(value = "/selectAllLevel")
     @ResponseBody
     public String selectAllLevel() throws Exception {
-        HashMap<String , Integer> map = new HashMap<>();
+        HashMap<String,Integer> map = new HashMap<>();
         List<Level> levels = adminService.selectAllLevel();
-        if( levels.size() != 0 && levels !=null) {
+        if( levels !=null && levels.size() != 0 ) {
             return JSON.toJSONString(levels);
         } else {
             map.put(StatusUtils.statecode , StatusUtils.FAILURE_FIND );

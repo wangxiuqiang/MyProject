@@ -48,7 +48,7 @@
     <select id="selectGetFileByDateTime" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
         select
         <include refid="Base_Columns_List" />
-        from getFile where gfdatetime like concat(concat('%',#{value}), '%') and state=1
+        from getFile where gfdatetime &gt;= #{gfdateime} AND gfdatetime &lt;= #{endtime} and state=1
     </select>
 
     <select id="selectGetFileByNumber" parameterType="java.lang.Integer" resultType="cn.fm.pojo.GetFile">
@@ -78,7 +78,7 @@
             </if>
 
             <if test="gfdatetime != null">
-                and gfdatetime like concat(concat('%',#{gfdatetime}), '%')
+                and gfdatetime &gt;= #{gfdatetime} and gfdatetime &lt;= #{endtime}
             </if>
             and state=1
         </where>

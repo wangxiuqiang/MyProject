@@ -68,7 +68,14 @@
         </foreach>
     </update>
 
-
+    <!--根据时间范围 查找没有归还的文件-->
+    <select id="selectBorrowcfByborrowtime" resultType="cn.fm.pojo.Borrow" parameterType="String" >
+        select uid,fileid,borrowtime,backtime from borrow_companyFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime}
+    </select>
+    <!--根据时间范围 查找没有归还的文件-->
+    <select id="selectBorrowgfByborrowtime" resultType="cn.fm.pojo.Borrow" parameterType="String" >
+        select uid,fileid,borrowtime,backtime from borrow_getFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime}
+    </select>
     <!--根据用户查询借阅信息 或者查询 这一类的借阅信息-->
     <select id="selectBorrowcfById" resultType="cn.fm.pojo.Borrow" parameterType="int">
         select uid,fileid,borrowtime,backtime from borrow_companyFile
@@ -107,6 +114,7 @@
         </foreach>
         and state=1
     </select>
+
 
     <select id="selectcfisBorrow" parameterType="int" resultType="int">
         select isborrow from companyFile where cfid IN
