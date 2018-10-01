@@ -69,5 +69,7 @@ public class StatusUtils {
 //    激活超时
     public static final int TIME_OUT = 14;
     public static final int TIME_IN = 16;
+
+    public static final int SUCCESS_LOGOUT = -3;
 }
 

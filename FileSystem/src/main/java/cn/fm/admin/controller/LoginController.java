@@ -56,7 +56,15 @@ public class LoginController {
         return JSON.toJSONString(map);
 
     }
-
+    @RequestMapping(value = "/logout" )
+    @ResponseBody
+    public String logout() throws Exception {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        HashMap<String ,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.SUCCESS_LOGOUT);
+        return JSON.toJSONString(map);
+    }
     @RequestMapping(value = "/loginBefore")
     @ResponseBody
     public String loginBefore() {

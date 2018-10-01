@@ -29,6 +29,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -110,12 +113,56 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
+    @RequiresRoles(value = {"admin"}, logical = Logical.OR)
     @RequestMapping(value = "/backupDatabase")
     @ResponseBody
-    public String backupDatabase() throws Exception {
+    public String backupDatabase(HttpServletResponse response , HttpServletRequest request ) throws Exception {
 
         if (MysqlBackupUtils.backup() == 0) {
+
+
+            String time = MysqlBackupUtils.sdf.format(new Date());
+            File file = new File(MysqlBackupUtils.BACKUP_DIR + time + ".sql");
+            if(file.exists()) {
+                //设置响应内容
+                response.setContentType("application/sql");
+                response.setHeader("Content-Disposition" , "attachment; filename=filesystem_" + time );
+                FileInputStream fis = null ;
+                BufferedInputStream bis = null;
+
+                try{
+                    fis = new FileInputStream(file);
+                    bis = new BufferedInputStream(fis);
+                    OutputStream os = response.getOutputStream();
+                    byte[] buffer = new byte[fis.available()];
+                    int i = bis.read( buffer );
+                    while ( i != -1 ) {
+                        os.write(buffer , 0 , i);
+                        i = bis.read( buffer );
+                    }
+                }catch ( IOException e) {
+                    e.printStackTrace();
+                    return JSON.toJSONString("备份失败");
+                }finally {
+                    if ( fis != null) {
+                        try {
+                            fis.close();
+                        } catch ( IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if( bis != null ) {
+                        try{
+                            bis.close();
+                        } catch ( IOException e) {
+                            e.printStackTrace();
+
+                        }
+
+                    }
+                }
+            }
+
             return JSON.toJSONString("备份成功");
         } else {
             return JSON.toJSONString("备份失败");
@@ -127,7 +174,7 @@ public class UserController {
     /**
      * 恢复数据库
      */
-    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
+    @RequiresRoles(value = {"admin"}, logical = Logical.OR)
     @RequestMapping(value = "/recoverDatabase")
     @ResponseBody
     public String recoverDatabase(MultipartFile file) throws Exception {

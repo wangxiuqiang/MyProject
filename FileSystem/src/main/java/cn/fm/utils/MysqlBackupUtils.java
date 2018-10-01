@@ -7,9 +7,9 @@ import java.util.Properties;
 
 public class MysqlBackupUtils {
 
-    public static String BACKUP_DIR = "/home/wxq/filesystem_";
+    public static String BACKUP_DIR = "/root/filesystem_";
     public static String DB_NAME = "filesystem";
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+    public static SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 
     public String[] getProperties() throws Exception {
         /**
