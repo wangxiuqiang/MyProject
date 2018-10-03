@@ -1,0 +1,12 @@
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/service/UserService.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/pojo/FileInSystem.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/service/serviceImpl/UserServiceImpl.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/service/serviceImpl/AdminServiceImpl.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/utils/PassWordHelper.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/pojo/Admin.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/service/AdminService.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/controller/AdminController.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/dao/UserDao.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/controller/UserController.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/utils/UploadUtils.java
+/home/wxq/IdeaProjects/Test/src/main/java/cn/query/dao/AdminDao.java

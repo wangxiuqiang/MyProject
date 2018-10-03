@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+  http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd
+ http://www.springframework.org/schema/tx
+ http://www.springframework.org/schema/tx/spring-tx.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop.xsd">
+<import resource="application_dao.xml"/>
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 先配置 事务管理平台,然后将事务管理平台给事务性设置,最后将事务设置配置给aop切面 -->
+    <!--  事务性设置-->
+    <tx:advice id="txAdvice"
+               transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--isolation事务的隔离级别 用来隔离两个事务不能看到对方 -->
+            <!--propagation 传播行为,如果有事务的嵌套的话的执行方法,在一个事务中有
+             另外一个事务,里面的事务方法要不要事务管理 REQUIRED 必须有,
+             SUPPORT 可以有可以没有  read-only只能读,不能改
+               默认是false ,如果是select可以是true-->
+            <tx:method name="insert*"
+                       propagation="REQUIRED" />
+            <tx:method name="update*"
+                       propagation="REQUIRED" />
+            <tx:method name="delete*"
+                       propagation="REQUIRED" />
+            <tx:method name="select*"
+                       propagation="REQUIRED" />
+
+            <tx:method name="add*"
+                       propagation="REQUIRED" />
+            <tx:method name="get*"
+                       propagation="REQUIRED" />
+            <tx:method name="del*"
+                       propagation="REQUIRED" />
+            <tx:method name="edit*"
+                       propagation="REQUIRED" />
+
+            <tx:method name="find*"
+                       propagation="REQUIRED" />
+            <tx:method name="remove*"
+                       propagation="REQUIRED" />
+            <tx:method name="save*"
+                       propagation="REQUIRED" />
+
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+
+        <!-- .* 代表一层目录, .. 代表下面不管有多少目录 cn.ssm.crm.. execution中的内容: 修饰符(可省略) 返回值(*) 包.类.方法名(参数) -->
+        <!-- 切点 -->
+        <aop:pointcut
+                expression="execution(* cn.query.service.serviceImpl..*.*(..))"
+                id="mypointcut" />
+        <!-- 切面 -->
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut-ref="mypointcut" />
+    <!--另一种方式-->
+        <!--<aop:advisor advice-ref="txAdvice"-->
+                    <!--pointcut="execution()" />-->
+    </aop:config>
+
+</beans>

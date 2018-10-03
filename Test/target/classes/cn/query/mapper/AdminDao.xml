@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.query.dao.AdminDao">
+    <select id="selectAdmin" parameterType="cn.query.pojo.Admin" resultType="cn.query.pojo.Admin" >
+        select name , passwd from admin where name = #{name}
+    </select>
+    <insert id="insertFile"  parameterType="cn.query.pojo.FileInSystem">
+        insert into fileInSystem(name,fileurl,path,introduce) values(#{name},#{fileurl},#{path},#{introduce})
+    </insert>
+</mapper>

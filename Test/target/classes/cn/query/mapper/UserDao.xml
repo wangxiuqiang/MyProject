@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.query.dao.UserDao">
+    <select id="selectFileByName" resultType="cn.query.pojo.FileInSystem" parameterType="String" >
+        select id,name,fileurl,path,introduce from fileInSystem where name LIKE concat( concat('%',#{name} ),'%' )
+    </select>
+</mapper>
