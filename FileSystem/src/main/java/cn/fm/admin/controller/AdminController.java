@@ -1,10 +1,7 @@
 package cn.fm.admin.controller;
 
 import cn.fm.admin.service.AdminService;
-import cn.fm.pojo.Classify;
-import cn.fm.pojo.Level;
-import cn.fm.pojo.User;
-import cn.fm.pojo.WorkPlace;
+import cn.fm.pojo.*;
 import cn.fm.user.service.UserService;
 import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.PassWordHelper;
@@ -62,16 +59,17 @@ public class AdminController {
     @RequestMapping(value = "/regSub")
     @ResponseBody
     public String addUser(@Validated UserExtend user , BindingResult bindingResult) throws Exception{
-
+        int id  = 0;
         if(bindingResult.hasErrors()) {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             return JSON.toJSONString(allErrors);
         }
 //        System.out.println(user.getUcompany());
         user.setUupdatetime(DateToStringUtils.dataTostring());
-        if(adminService.addUser(user) != 0 ){
+        if(  ( id = adminService.addUser(user) ) != 0 ){
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_REG);
+            map.put("userId" , id );
             return JSON.toJSONString(map);
         }else {
             HashMap<String,Integer> map = new HashMap<>();
@@ -168,7 +166,8 @@ public class AdminController {
     }
 
     /**
-     * 删除信息,,根据工作人员id
+     * 删除信息,,根据工作人员id ,同时删除用户的权限信息,和指纹信息
+     * 权限和指纹是要删除的,用户信息为了方便查他以前的借阅记录,所以是要将标志位改掉
      * IllegalStateException
      */
     @RequiresRoles(value = "admin")
@@ -356,5 +355,50 @@ public class AdminController {
             map.put(StatusUtils.statecode , StatusUtils.FAILURE_FIND );
             return JSON.toJSONString(map);
         }
+    }
+
+    /**
+     * 录入指纹信息
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/addFingerInfo")
+    @ResponseBody
+    public String addFingerInfo(int uid , int fid, String finger ) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        if(finger != null) {
+            Fingerprint fingerprint = new Fingerprint();
+            fingerprint.setFid(fid);
+            fingerprint.setUid(uid);
+            fingerprint.setFinger(finger);
+            int result = adminService.addFingerInfo( fingerprint );
+            if(result > 0 ) {
+                map.put(StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
+            } else {
+                map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT );
+            }
+        }else{
+            map.put(StatusUtils.statecode , StatusUtils.IS_NULL );
+        }
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 根据id删除指纹信息
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/delFingerInfo")
+    @ResponseBody
+    public String delFingerInfo( int[] uid ) throws Exception {
+        HashMap<String , Integer > map = new HashMap<>();
+        int result =  adminService.delFingerInfoByUid(uid);
+        if( result > 0) {
+           map.put( StatusUtils.statecode , StatusUtils.SUCCESS_DEL );
+        }else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
+        }
+        return JSON.toJSONString(map);
     }
 }

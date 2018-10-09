@@ -62,7 +62,13 @@ public class AdminServiceImpl implements AdminService{
 //       System.out.println(uid);
 //       System.out.println(user.getUid());
 //        System.out.println(user.getRid());
-       return adminMapper.addUser_Role(user.getUid(),user.getRid()) ;
+       int result =  adminMapper.addUser_Role(user.getUid(),user.getRid());
+        if(result != 0 && uid != 0) {
+            return uid;
+        } else {
+           return 0;
+        }
+
     }
 
     /**
@@ -196,7 +202,7 @@ public class AdminServiceImpl implements AdminService{
         if(flag == 1) {
             return 0;
         }
-        return adminMapper.deleteWorkerById(id) + adminMapper.deleteUser_roles(id);
+        return adminMapper.deleteWorkerById(id) + adminMapper.deleteUser_roles(id) + delFingerInfoByUid(id);
     }
 
     /**
@@ -340,5 +346,27 @@ public class AdminServiceImpl implements AdminService{
     public List<Level> selectAllLevel() throws Exception{
         return adminMapper.selectAllLevel();
     }
+
+    /**
+     * 添加指纹信息
+     * @param fingerprint
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int addFingerInfo(Fingerprint fingerprint) throws Exception{
+        return adminMapper.addFingerInfo(fingerprint);
+    }
+    /**
+     * 根据用户id删除指纹信息
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int delFingerInfoByUid( int[] uid ) throws Exception {
+        return adminMapper.delFingerInfoByUid(uid);
+    }
+
 
 }

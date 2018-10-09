@@ -197,3 +197,9 @@ lid int primary key auto_increment ,
 lname varchar(30) not null
 );
 
+
+create table fingerprint (
+uid int ,
+fid int primary key auto_increment,
+finger varchar(64)
+);

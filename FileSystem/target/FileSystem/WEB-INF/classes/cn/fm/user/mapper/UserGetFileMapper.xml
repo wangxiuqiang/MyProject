@@ -92,7 +92,7 @@
     <select id="selectAllGetFile" resultType="cn.fm.pojo.GetFile">
          select
          <include refid="Base_Columns_List" />
-        from getFile and state=1
+        from getFile where state=1
     </select>
 
     <!--更新 -->

@@ -4,6 +4,7 @@ cn/fm/vo/GetFileExtends.class
 cn/fm/user/service/serviceImpl/UserGetFileServiceImpl.class
 cn/fm/user/service/serviceImpl/UserCompanyFileServiceImpl.class
 cn/fm/user/controller/UserRegController.class
+cn/fm/pojo/Level.class
 cn/fm/utils/CheckImgServlet.class
 cn/fm/utils/MailUtils.class
 cn/fm/utils/MailUtils$1.class

@@ -39,6 +39,7 @@
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/service/serviceImpl/AdminServiceImpl.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/UserGetFileService.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/Admin.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/Level.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/serviceImpl/UserRegServiceImpl.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/MailUtils.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/controller/UserGetFileController.java

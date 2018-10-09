@@ -160,4 +160,16 @@
     <select id="selectAllLevel" resultType="cn.fm.pojo.Level" >
         select lid,lname from level
     </select>
+
+    <!--添加指纹信息到数据库-->
+    <insert parameterType="cn.fm.pojo.Fingerprint" id="addFingerInfo" >
+        insert into finger(uid,fid,finger) VALUES (#{uid} , #{fid},#{finger} )
+    </insert>
+    <!--根据用户id删除指纹信息-->
+    <delete id="delFingerInfoByUid" parameterType="int" >
+        delete from fingerprint where uid IN
+        <foreach collection="uid" close=")" open="(" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

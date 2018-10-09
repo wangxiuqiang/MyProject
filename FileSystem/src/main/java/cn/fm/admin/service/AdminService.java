@@ -159,4 +159,19 @@ public interface AdminService {
      * 查找密级
      */
     public List<Level> selectAllLevel() throws Exception;
+    /**
+     * 添加指纹信息
+     * @param fingerprint
+     * @return
+     * @throws Exception
+     */
+    public int addFingerInfo(Fingerprint fingerprint) throws Exception;
+    /**
+     * 根据用户id删除指纹信息
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public int delFingerInfoByUid( int[] uid ) throws Exception;
+
 }
