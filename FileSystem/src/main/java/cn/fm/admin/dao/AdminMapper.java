@@ -183,4 +183,11 @@ public interface AdminMapper {
      */
     public int delFingerInfoByUid( @Param(value = "uid") int[] uid ) throws Exception;
 
+    /**
+     * 从数据库中取出所有的指纹信息
+     * @return
+     * @throws Exception
+     */
+    public List<Fingerprint> selectAllFingerInfo() throws Exception;
+
 }

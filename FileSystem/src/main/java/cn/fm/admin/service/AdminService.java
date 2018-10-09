@@ -173,5 +173,10 @@ public interface AdminService {
      * @throws Exception
      */
     public int delFingerInfoByUid( int[] uid ) throws Exception;
-
+    /**
+     * 从数据库中取出所有的指纹信息,并进行比较,返回一个用户对象,如果为空则没有这个人
+     * @return
+     * @throws Exception
+     */
+    public User selectAllFingerInfoAndCompare( String finger) throws Exception;
 }

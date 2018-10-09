@@ -8,9 +8,13 @@ import cn.fm.user.dao.UserGetFileMapper;
 import cn.fm.user.dao.UserMapper;
 import cn.fm.utils.MailUtils;
 import cn.fm.vo.UserExtend;
+import com.machinezoo.sourceafis.FingerprintMatcher;
+import com.machinezoo.sourceafis.FingerprintTemplate;
+import com.zkteco.biometric.FingerprintSensorEx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -367,6 +371,48 @@ public class AdminServiceImpl implements AdminService{
     public int delFingerInfoByUid( int[] uid ) throws Exception {
         return adminMapper.delFingerInfoByUid(uid);
     }
-
+    /**
+     * 从数据库中取出所有的指纹信息,并进行比较,返回一个用户对象,如果为空则没有这个人
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public User selectAllFingerInfoAndCompare( String finger) throws Exception{
+        List<Fingerprint> lists = new ArrayList<>();
+        //用来将分数最高的指纹信息记录下来
+        Fingerprint fingerprint = null;
+        //两个二进制数组用来比较
+        byte[] fptemplate = new byte[2048];
+        byte[] compareTemplate = new byte[2048];
+        double maxScore = 0;
+        /**
+         * 将base64的字符串转为二进制数组,放在 第二个参数中 ,如下的compareTemplate ,
+         * 第三个参数 是而二进制数组的长度
+         */
+        FingerprintSensorEx.Base64ToBlob( finger , compareTemplate , compareTemplate.length );
+        //将二进制数组转为一个指纹模板类
+        FingerprintTemplate probe = new FingerprintTemplate().dpi(500).create(compareTemplate );
+        //定义一个用来比较的matcher
+        FingerprintMatcher matcher = new FingerprintMatcher().index(probe);
+        lists = adminMapper.selectAllFingerInfo();
+        for(Fingerprint list : lists ) {
+            FingerprintSensorEx.Base64ToBlob( list.getFinger() , fptemplate , fptemplate.length );
+            //将二进制的数组转为一个指纹模板类
+            FingerprintTemplate candidate = new FingerprintTemplate().dpi(500).create( fptemplate );
+            double score = matcher.match(candidate);
+            if(score > maxScore) {
+                maxScore = score;
+                fingerprint = list;
+            }
+        }
+        /**
+         * 如果分数>=80 表示这个人可以使用,
+         */
+        if( maxScore >= 80 ) {
+            User user = adminMapper.findWorkerById( fingerprint.getUid() );
+            return user;
+        }
+        return null;
+    }
 
 }

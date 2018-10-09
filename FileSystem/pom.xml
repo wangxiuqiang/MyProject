@@ -320,6 +320,13 @@
       <version>4.3.0.Final</version>
     </dependency>
 
+
+    <!--指纹对比算法的jar-->
+    <dependency>
+      <groupId>com.machinezoo.sourceafis</groupId>
+      <artifactId>sourceafis</artifactId>
+      <version>3.4.0</version>
+    </dependency>
   </dependencies>
 
   <build>

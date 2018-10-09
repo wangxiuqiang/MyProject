@@ -172,4 +172,8 @@
             #{id}
         </foreach>
     </delete>
+    <!--从数据库中取出所有的指纹信息进行比较-->
+    <select id="selectAllFingerInfo" resultType="cn.fm.pojo.Fingerprint">
+        select uid,fid,finger from fingerprint;
+    </select>
 </mapper>

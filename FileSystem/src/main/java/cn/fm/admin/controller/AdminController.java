@@ -401,4 +401,29 @@ public class AdminController {
         }
         return JSON.toJSONString(map);
     }
+
+    /**
+     *  比较两个指纹是不是一致
+     * @param finger
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/compareFP")
+    @ResponseBody
+    public String compareFP( String finger ) throws Exception {
+        HashMap< String , Integer > map = new HashMap<>();
+        if( finger == null) {
+            map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
+            return JSON.toJSONString( map );
+        }
+        User  user = adminService.selectAllFingerInfoAndCompare( finger );
+        if( user != null ) {
+            return JSON.toJSONString( user );
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+            return JSON.toJSONString( map );
+        }
+    }
+
 }
