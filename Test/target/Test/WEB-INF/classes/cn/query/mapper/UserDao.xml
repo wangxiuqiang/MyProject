@@ -5,5 +5,15 @@
 <mapper namespace="cn.query.dao.UserDao">
     <select id="selectFileByName" resultType="cn.query.pojo.FileInSystem" parameterType="String" >
         select id,name,fileurl,path,introduce from fileInSystem where name LIKE concat( concat('%',#{name} ),'%' )
+
+    </select>
+
+    <select id="selectAllFile" resultType="cn.query.pojo.FileInSystem">
+        select id,name,fileurl,path,introduce from fileInSystem
+
+    </select>
+
+    <select id="selectFileById" resultType="cn.query.pojo.FileInSystem"  parameterType="int">
+        select id,name,fileurl,path,introduce from fileInSystem where id = #{id}
     </select>
 </mapper>

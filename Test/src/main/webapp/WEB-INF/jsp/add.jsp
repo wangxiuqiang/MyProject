@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: wxq
@@ -17,13 +18,13 @@
 <body>
 
 <form action="${pageContext.request.contextPath}/insertInfo" enctype="multipart/form-data" method="post">
-<table>
+<table style=" border: dashed 1px black">
     <label style="color: red;">${failure}</label>
 
     <label style="color: red;">${success}</label>
 
     <tr>
-        <td>
+        <td >
             名字:
         </td>
         <td><input name="name" value="" type="text"/></td>
@@ -42,7 +43,7 @@
             文件:
         </td>
         <td>
-            <input type="file"  name="file" />
+            <input type="file"  name="file" value=""/>
         </td>
     </tr>
 
@@ -54,6 +55,8 @@
     </tr>
 
 </table>
+
+
 </form>
 </body>
 </html>

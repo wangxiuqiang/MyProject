@@ -12,4 +12,7 @@ public interface UserService {
      * @throws Exception
      */
     public List<FileInSystem> selectFileByName(String name) throws Exception;
+    public List<FileInSystem> selectFile() throws Exception;
+
+    public FileInSystem selectFileById(int id) throws Exception;
 }

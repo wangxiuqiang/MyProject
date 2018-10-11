@@ -23,4 +23,14 @@ public class AdminServiceImpl implements AdminService{
 
         return adminDao.insertFile(fileInSystem);
     }
+
+    @Override
+    public int delFile(int id) throws Exception {
+        return adminDao.delFile(id);
+    }
+
+    @Override
+    public int updateFile(FileInSystem fileInSystem) throws Exception {
+        return adminDao.updateFile( fileInSystem );
+    }
 }

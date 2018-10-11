@@ -21,6 +21,7 @@
     </table>
 </form>
 
+<c:if test="${info != null }" >
 <c:forEach items="${info}" var="info" >
     <table>
         <tr>
@@ -37,5 +38,6 @@
         </tr>
     </table>
 </c:forEach>
+</c:if>
 </body>
 </html>

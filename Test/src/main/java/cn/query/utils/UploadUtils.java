@@ -10,7 +10,7 @@ public class UploadUtils {
 	public static String upload(MultipartFile file){
 
 		//访问路径
-		String fwPath = "http://localhost:8080/upload/pic/";
+		String fwPath = "http://39.106.191.144:8180/upload/pic/";
 		String filename = "";
 		try {//定义上传的位置
 	    String path = "/root/query/pic/";

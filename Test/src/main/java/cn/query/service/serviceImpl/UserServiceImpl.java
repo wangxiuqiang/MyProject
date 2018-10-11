@@ -18,4 +18,14 @@ public class UserServiceImpl implements UserService{
     public List<FileInSystem> selectFileByName(String name) throws Exception {
         return userDao.selectFileByName(name);
     }
+
+    @Override
+    public List<FileInSystem> selectFile() throws Exception {
+        return userDao.selectAllFile();
+    }
+
+    @Override
+    public FileInSystem selectFileById(int id) throws Exception {
+        return userDao.selectFileById( id );
+    }
 }
