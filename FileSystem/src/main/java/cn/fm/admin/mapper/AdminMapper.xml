@@ -144,18 +144,62 @@
     <insert id="insertCompany" parameterType="cn.fm.pojo.WorkPlace" >
         insert into workPlace(wname) VALUES (#{wname})
     </insert>
+    <!--删除用户单位-->
+    <delete id="delCompany" parameterType="int" >
+        delete from workPlace where wid = #{wid}
+    </delete>
+    <!--更新 用户单位-->
+    <update id="updateCompany" parameterType="cn.fm.pojo.WorkPlace">
+        update workPlace
+        <set>
+            <if test="wname != null">
+                wname = #{wname}
+            </if>
 
+        </set>
+        where wid = #{wid}
+    </update>
     <!--添加分类 -->
     <insert id="insertClassify" parameterType="cn.fm.pojo.Classify">
         insert into classify(cyname,cyfatherid,cyaddress) VALUES (#{cyname},#{cyfatherid},#{cyaddress})
     </insert>
-
+    <!--删除分类-->
+    <delete id="delClassify" parameterType="int" >
+        delete from classify where cyid = #{cyid}
+    </delete>
+    <!--如果是父分类,就删除所有的子分类-->
+    <delete id="delClassifyByFatherid" parameterType="int" >
+        delete from classify where cyfatherid = #{cyfatherid}
+    </delete>
+    <!--更新 分类-->
+    <update id="updateClassify" parameterType="cn.fm.pojo.Classify">
+        update classify
+        <set>
+            <if test="cyname != null">
+                cyname = # {cyname},
+            </if>
+            <if test="cyaddress != null">
+                cyaddress = #{cyaddress},
+            </if>
+            <if test="cyfatherid != 0" >
+                cyfatherid = #{cyfatherid}
+            </if>
+        </set>
+        where cyid = #{cyid}
+    </update>
 
     <!--添加密级-->
     <insert id="addLevelInfo" parameterType="String" >
         insert into level(lname) values(#{value})
     </insert>
-
+    <!--删除密级-->
+    <delete id="delLevelInfo" parameterType="int" >
+        delete from level where lid = #{lid}
+    </delete>
+    <!--更新 密级-->
+    <update id="updateLevelInfo" parameterType="cn.fm.pojo.Level">
+        update level set lname = #{lname} where lid = #{lid}
+    </update>
     <!--查询所有密级-->
     <select id="selectAllLevel" resultType="cn.fm.pojo.Level" >
         select lid,lname from level
@@ -176,4 +220,6 @@
     <select id="selectAllFingerInfo" resultType="cn.fm.pojo.Fingerprint">
         select uid,fid,finger from fingerprint;
     </select>
+
+
 </mapper>

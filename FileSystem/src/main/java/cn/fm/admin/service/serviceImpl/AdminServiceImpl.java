@@ -256,6 +256,27 @@ public class AdminServiceImpl implements AdminService{
         return adminMapper.insertCompany(workPlace);
     }
     /**
+     * 删除一个 用户单位
+     * @param wid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int delCompany( int wid ) throws Exception {
+        return adminMapper.delCompany(wid);
+    }
+
+    /**
+     * 更新一个用户单位
+     * @param workPlace
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int updateCompany ( WorkPlace workPlace ) throws Exception {
+        return adminMapper.updateCompany( workPlace );
+    }
+    /**
      * 添加分类
      * @param classify
      * @return
@@ -266,6 +287,27 @@ public class AdminServiceImpl implements AdminService{
         return adminMapper.insertClassify(classify);
     }
 
+    /**
+     * 根据id更新一个分类
+     * @param classify
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int updateClassify( Classify classify ) throws  Exception {
+        return adminMapper.updateClassify( classify );
+    }
+
+    /**
+     * 根据id删除一个分类,  和子分类
+     * @param cyid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int delClassify( int cyid ) throws Exception {
+        return adminMapper.delClassify( cyid ) + adminMapper.delClassifyByFatherid( cyid );
+    }
 
     /**
      * 根据用户查角色和权限,写到shiro里面
@@ -342,6 +384,25 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public int addLevelInfo(String lname) throws Exception{
         return adminMapper.addLevelInfo(lname);
+    }
+    /**
+     * 删除一个密级, 根据id
+     * @param lid
+     * @return
+     * @throws Exception
+     */
+    public int delLevelInfo( int lid ) throws Exception {
+        return adminMapper.delLevelInfo(lid);
+    }
+
+    /**
+     * 更新一个密级
+     * @param level
+     * @return
+     * @throws Exception
+     */
+    public int updateLevelInfo ( Level level ) throws Exception{
+        return adminMapper.updateLevelInfo( level );
     }
     /**
      * 查找密级

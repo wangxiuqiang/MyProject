@@ -151,6 +151,21 @@ public interface AdminMapper {
     public int insertCompany(WorkPlace workPlace) throws Exception;
 
     /**
+     * 删除一个 用户单位
+     * @param wid
+     * @return
+     * @throws Exception
+     */
+    public int delCompany( int wid ) throws Exception;
+
+    /**
+     * 更新一个用户单位
+     * @param workPlace
+     * @return
+     * @throws Exception
+     */
+    public int updateCompany ( WorkPlace workPlace ) throws Exception;
+    /**
      * 添加分类
      * @param classify
      * @return
@@ -159,9 +174,50 @@ public interface AdminMapper {
     public int insertClassify(Classify classify) throws Exception;
 
     /**
+     * 根据id更新一个分类
+     * @param classify
+     * @return
+     * @throws Exception
+     */
+    public int updateClassify( Classify classify ) throws  Exception;
+
+    /**
+     * 根据id删除一个分类,最终分类 ,
+     * @param cyid
+     * @return
+     * @throws Exception
+     */
+    public int delClassify( int cyid ) throws Exception;
+
+    /**
+     * 通过父类id删除 子分类
+     * @param cyfatherid
+     * @return
+     * @throws Exception
+     */
+    public int delClassifyByFatherid( int cyfatherid ) throws Exception;
+
+    /**
      * 添加密级
      */
     public int addLevelInfo(String lname) throws Exception;
+
+    /**
+     * 删除一个密级, 根据id
+     * @param lid
+     * @return
+     * @throws Exception
+     */
+    public int delLevelInfo( int lid ) throws Exception;
+
+    /**
+     * 更新一个密级
+     * @param level
+     * @return
+     * @throws Exception
+     */
+    public int updateLevelInfo ( Level level ) throws Exception;
+
     /**
      * 查找密级
      */

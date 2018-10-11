@@ -272,6 +272,49 @@ public class AdminController {
     }
 
     /**
+     * 删除 单位信息
+     * @param wid
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/delCompany")
+    @ResponseBody
+    public String delCompany ( int wid ) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        int result = adminService.delCompany( wid );
+            if(result > 0) {
+                map.put( StatusUtils.statecode , StatusUtils.SUCCESS_DEL );
+            } else {
+                map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
+            }
+        return JSON.toJSONString( map );
+    }
+
+    /**
+     * 更新单位信息, 根据单位的id
+     * @param workPlace
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/updateCompany")
+    @ResponseBody
+    public String updateCompany( WorkPlace workPlace ) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        if ( workPlace.getWname() == null ) {
+            map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
+            return JSON.toJSONString( map );
+        }
+        int result  = adminService.updateCompany( workPlace );
+        if(result > 0) {
+            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT );
+        }
+        return JSON.toJSONString( map );
+    }
+    /**
      * 添加一个分类
      * @param classify
      * @param fatherid
@@ -292,6 +335,50 @@ public class AdminController {
             return JSON.toJSONString(map);
         }
 
+    }
+
+    /**
+     * 删除分类信息和子分类
+     * @param cyid
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/delClassify")
+    @ResponseBody
+    public String delClassify ( int cyid ) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        int result = adminService.delClassify( cyid );
+        if(result > 0) {
+            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_DEL );
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
+        }
+        return JSON.toJSONString( map );
+    }
+
+    /**
+     * 修改一个分类
+     * @param classify
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/updateClassify")
+    @ResponseBody
+    public String updateClassify( Classify classify  ) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        if(classify.getCyaddress() != null || classify.getCyfather() != 0 || classify.getCyname() != null ) {
+            map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
+            return JSON.toJSONString( map );
+        }
+        int result = adminService.updateClassify( classify );
+        if(result > 0) {
+            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT );
+        }
+        return JSON.toJSONString( map );
     }
 //    /**
 //     * 根据id返回角色和权限信息
@@ -336,6 +423,42 @@ public class AdminController {
             map.put( StatusUtils.statecode, StatusUtils.FAILURE_INSERT );
         }
         return JSON.toJSONString(map);
+    }
+
+    /**
+     * 删除密级
+     * @param lid
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/delLevelInfo")
+    @ResponseBody
+    public String delLevelInfo( int lid ) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        if( adminService.delLevelInfo( lid ) > 0 ) {
+            map.put(StatusUtils.statecode , StatusUtils.SUCCESS_DEL );
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
+        }
+        return JSON.toJSONString( map );
+    }
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/updateLevelInfo")
+    @ResponseBody
+    public String updateLevelInfo( Level level ) throws  Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        if( level.getLname() == null ) {
+            map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
+            return JSON.toJSONString( map );
+        }
+        int result = adminService.updateLevelInfo( level );
+        if(result > 0) {
+            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT );
+        }
+        return JSON.toJSONString( map );
     }
 
     /**
