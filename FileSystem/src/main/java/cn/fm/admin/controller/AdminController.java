@@ -325,7 +325,7 @@ public class AdminController {
     @RequestMapping(value = "/addClassify/{fatherid}")
     @ResponseBody
     public String addClassify(Classify classify ,@PathVariable int fatherid)throws Exception{
-        classify.setCyfather(fatherid);
+        classify.setCyfatherid(fatherid);
         HashMap<String,Integer> map = new HashMap<>();
         if(adminService.insertClassify(classify) != 0) {
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
@@ -368,7 +368,7 @@ public class AdminController {
     @ResponseBody
     public String updateClassify( Classify classify  ) throws Exception {
         HashMap<String,Integer> map = new HashMap<>();
-        if(classify.getCyaddress() != null || classify.getCyfather() != 0 || classify.getCyname() != null ) {
+        if(classify.getCyaddress() != null || classify.getCyfatherid() != 0 || classify.getCyname() != null ) {
             map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
             return JSON.toJSONString( map );
         }

@@ -40,8 +40,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
         Classify classify = new Classify();
         while( id != 0) {
             classify = selectClassify(id);
-            id = classify.getCyfather();
-            if(classify.getCyfather() != 0) {
+            id = classify.getCyfatherid();
+            if(classify.getCyfatherid() != 0) {
                 address.append(classify.getCyaddress() + "-");
                 classifyname.append(classify.getCyname() + "-");
 
@@ -179,9 +179,9 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
             }
 
             list.add(classify.getCyid()) ;
-            list.add(classify.getCyfather());
+            list.add(classify.getCyfatherid());
 
-            fatherid = classify.getCyfather();
+            fatherid = classify.getCyfatherid();
             while (fatherid != 0){
                 try {
                     classify = selectClassify(fatherid);
@@ -189,7 +189,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
                     e.printStackTrace();
                 }
                 if(classify != null) {
-                    fatherid = classify.getCyfather();
+                    fatherid = classify.getCyfatherid();
                 }
                 if(fatherid != 0)
                 {
@@ -259,8 +259,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
           Classify classify = new Classify();
           while (id != 0) {
               classify = selectClassify(id);
-              id = classify.getCyfather();
-              if (classify.getCyfather() != 0) {
+              id = classify.getCyfatherid();
+              if (classify.getCyfatherid() != 0) {
                   address.append(classify.getCyaddress() + "-");
                   classifyname.append(classify.getCyname() + "-");
 

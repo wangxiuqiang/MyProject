@@ -8,7 +8,7 @@ public class Classify {
 
     private int cyid;
     private String cyname;
-    private int cyfather;
+    private int cyfatherid;
     private String cyaddress;
 
     public int getCyid() {
@@ -27,12 +27,12 @@ public class Classify {
         this.cyname = cyname;
     }
 
-    public int getCyfather() {
-        return cyfather;
+    public int getCyfatherid() {
+        return cyfatherid;
     }
 
-    public void setCyfather(int cyfather) {
-        this.cyfather = cyfather;
+    public void setCyfatherid(int cyfatherid) {
+        this.cyfatherid = cyfatherid;
     }
 
     public String getCyaddress() {

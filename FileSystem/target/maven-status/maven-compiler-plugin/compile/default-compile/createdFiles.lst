@@ -9,6 +9,7 @@ cn/fm/utils/CheckImgServlet.class
 cn/fm/utils/MailUtils.class
 cn/fm/utils/MailUtils$1.class
 cn/fm/vo/CompanyFileExtends.class
+cn/fm/pojo/Fingerprint.class
 cn/fm/user/dao/UserRegMapper.class
 cn/fm/utils/MD5Utils.class
 cn/fm/user/service/UserCompanyFileService.class
@@ -40,6 +41,7 @@ cn/fm/utils/MysqlBackupUtils.class
 cn/fm/admin/service/AdminService.class
 cn/fm/user/controller/UserGetFileController.class
 cn/fm/user/service/UserGetFileService.class
+cn/fm/vo/FingerUser.class
 cn/fm/pojo/CompanyFile.class
 cn/fm/admin/controller/AdminController.class
 cn/fm/pojo/Borrow.class

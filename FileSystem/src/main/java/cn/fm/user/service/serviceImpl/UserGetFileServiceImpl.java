@@ -57,8 +57,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
             /**
              * 最上层的分类的父分类id为0
              */
-            id = classify.getCyfather();
-            if(classify.getCyfather() != 0) {
+            id = classify.getCyfatherid();
+            if(classify.getCyfatherid() != 0) {
                 address.append(classify.getCyaddress() + "-");
                 classifyname.append(classify.getCyname() + "-");
 
@@ -125,9 +125,9 @@ public class UserGetFileServiceImpl implements UserGetFileService{
             }
 
             list.add(classify.getCyid()) ;
-            list.add(classify.getCyfather());
+            list.add(classify.getCyfatherid());
 
-            fatherid = classify.getCyfather();
+            fatherid = classify.getCyfatherid();
             while (fatherid != 0){
                 try {
                     classify = selectClassify(fatherid);
@@ -135,7 +135,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
                     e.printStackTrace();
                 }
                 if(classify != null) {
-                    fatherid = classify.getCyfather();
+                    fatherid = classify.getCyfatherid();
                 }
                 if(fatherid != 0)
                 {
@@ -267,8 +267,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
                /**
                 * 最上层的分类的父分类id为0
                 */
-               id = classify.getCyfather();
-               if (classify.getCyfather() != 0) {
+               id = classify.getCyfatherid();
+               if (classify.getCyfatherid() != 0) {
                    address.append(classify.getCyaddress() + "-");
                    classifyname.append(classify.getCyname() + "-");
 

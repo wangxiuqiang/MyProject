@@ -28,7 +28,7 @@ wname varchar(30) NOT NULL
 create table classify(
 cyid int primary key auto_increment,
 cyname varchar(30) NOT NULL,
-cyfather int ,
+cyfatherid int ,
 cyaddress varchar(50) 
 );
 
