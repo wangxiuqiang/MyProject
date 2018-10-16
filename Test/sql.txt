@@ -1,0 +1,15 @@
+create database queryAndSave;
+use queryAndSave;
+
+create table fileInSystem (
+id int primary key auto_increment,
+name varchar(30) not null ,
+fileurl varchar(100) ,
+path varchar(100),
+introduce text
+);
+
+create table admin(
+name varchar(30) primary key,
+passwd varchar(256)
+);
