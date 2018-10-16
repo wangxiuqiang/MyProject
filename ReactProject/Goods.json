@@ -1,0 +1,13 @@
+[
+    {"id":1,"title" : "糖果", "img" : "good1_icon"  , "price": 115 , "intro": "糖类"},
+    {"id":2,"title" : "饼干", "img" : "good2_icon" , "price": 125 , "intro": "饼干"},
+    {"id":3,"title" : "喜之郎", "img" : "good3_icon"  , "price": 135 , "intro": "喜之郎"},
+    {"id":4,"title" : "薯片", "img" : "good4_icon" , "price": 145, "intro": "薯片"},
+    {"id":5,"title" : "火腿", "img" : "good5_icon"  , "price": 155 , "intro": "火腿"},
+    {"id":6,"title" : "零食", "img" : "good6_icon" , "price": 165 , "intro": "零食"},
+    {"id":7,"title" : "饼干", "img" : "good7_icon"  , "price": 175 , "intro": "饼干"},
+    {"id":8,"title" : "方便面", "img" : "good8_icon" , "price": 185 , "intro": "方便面"},
+    {"id":9,"title" : "曲奇", "img" : "good9_icon"  , "price": 195 , "intro": "曲奇"},
+    {"id":10,"title" : "狗粮", "img" : "good10_icon", "price": 105 , "intro": "狗粮"}
+   
+]
