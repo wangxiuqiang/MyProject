@@ -1,0 +1,12 @@
+[
+    
+    {"id":21,"title" : "戴尔系列1","img" : "computer1", "price": 5115 , "intro": "戴尔系列"},
+    {"id":22,"title" : "戴尔系列2","img" : "computer2", "price": 5125 , "intro": "戴尔系列"},
+    {"id":23,"title" : "戴尔系列3","img" : "computer3", "price": 5135 , "intro": "戴尔系列"},
+    {"id":24,"title" : "戴尔系列4","img" : "computer4", "price": 5145 , "intro": "戴尔系列"},
+    {"id":25,"title" : "戴尔系列5","img" : "computer5", "price": 5155 , "intro": "戴尔系列"},
+    {"id":26,"title" : "戴尔系列6","img" : "computer6", "price": 5165 , "intro": "戴尔系列"},
+    {"id":27,"title" : "戴尔系列7","img" : "computer7", "price": 5175 , "intro": "戴尔系列"},
+    {"id":28,"title" : "戴尔系列8","img" : "computer8", "price": 5185 , "intro": "戴尔系列"},
+    {"id":29,"title" : "戴尔系列9","img" : "computer9", "price": 5195 , "intro": "戴尔系列"}  
+]

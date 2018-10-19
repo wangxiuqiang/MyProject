@@ -16,8 +16,12 @@ import {
   Image,
 } from 'react-native';
 import {Navigator} from 'react-native-deprecated-custom-components';
+import TabNavigator from 'react-native-tab-navigator';
 
 import CartShow from './CartShow';
+import OrderShow from './OrderShow';
+import GoodClassify from './GoodClassify';
+import my from './my';
 /**
  * 获取设备屏幕的宽和高
  */
@@ -30,6 +34,8 @@ var data = require('./Goods.json');
  * 写一个数组用来克服,本地图片不能使用变量来添加的问题,,笨方法
  */
 var num =[];
+// const img_arr = [require('./image/good1_icon.jpg'),require('./image/good2_icon.jpg'),require('./image/good3_icon.jpg'),
+// require('./image/good4_icon.jpg'),require('./image/good5_icon.jpg')]
 const img_arr = [require('./image/good1_icon.jpg'),require('./image/good2_icon.jpg'),require('./image/good3_icon.jpg'),
 require('./image/good4_icon.jpg'),require('./image/good5_icon.jpg'),require('./image/good6_icon.jpg'),
 require('./image/good7_icon.jpg'),require('./image/good8_icon.jpg'),require('./image/good9_icon.jpg'),require('./image/good10_icon.jpg')]
@@ -50,6 +56,7 @@ export default class GoodsShow extends Component {
         this.state = {
             //将json中的数据导入进来
             dataSource: ds.cloneWithRows(data),
+            selectedTab: 'GoodsShow'
         }
     }
 //     title标题
@@ -69,12 +76,21 @@ export default class GoodsShow extends Component {
 
     render() {
         num = [0,1,2,3,4,5,6,7,8,9];
+        // //复制一个数组到新的数组 ,如果数组为空 那么就不能这样
+        // cart = this.props.cart;
+
+        if(this.props.cart !== [] ) { 
+            //复制一个数组到新的数组 
+           cart = this.props.cart.concat();
+        }
+    cart = this.props.cart;
+
         return (
-            <View>
+            <View style={styles.container}>
                  <ToolbarAndroid 
                    style={styles.toolbar}
                    navIcon={require('./image/back_icon.png')} 
-                   title='返回'
+                   title='零食商品'
                 //    subtitle='商品列表'
                 actions={[{title: '商品列表' },
                 {title: '订单列表'} ,
@@ -92,12 +108,83 @@ export default class GoodsShow extends Component {
                   */
                  renderRow={this.renderRow.bind(this)} 
                  
-                  />
-
-               
+                  ></ListView>
+                
+                <TabNavigator >
+                <TabNavigator.Item
+                        selected={this.state.selectedTab === 'GoodClassify'}
+                        title="首页"
+                        //选中时的title的样式
+                        selectedTitleStyle={{color:"#007aff"}}//设置tab标题颜色
+                        renderIcon={() => <Image style={styles.icon} source={require('./icon/index20.jpg')} />}
+                        renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./icon/index20.jpg')} />}//设置图标选中颜色
+                        // badgeText="1"
+                        onPress={() => this._navigateClassify(cart)}>
+                        <Text></Text>
+                    </TabNavigator.Item>
+                    <TabNavigator.Item
+                        selected={this.state.selectedTab === 'CartShow'}
+                        title="购物车"
+                        //选中时的title的样式
+                        selectedTitleStyle={{color:"#007aff"}}//设置tab标题颜色
+                        renderIcon={() => <Image style={styles.icon} source={require('./icon/cart20px.jpg')} />}
+                        renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./icon/index20.jpg')} />}//设置图标选中颜色
+                        // badgeText="1"
+                        onPress={() => this._navigate2(cart)}>
+                        <Text></Text>
+                    </TabNavigator.Item>
+                    <TabNavigator.Item
+                        selected={this.state.selectedTab === 'OrderShow'}
+                        title="订单"
+                        //选中时的title的样式
+                        selectedTitleStyle={{color:"#007aff"}}//设置tab标题颜色
+                        renderIcon={() => <Image style={styles.icon} source={require('./icon/order20.jpg')} />}
+                        renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./icon/order20.jpg')} />}//设置图标选中颜色
+                        // badgeText="1"
+                        onPress={() => this._navigate1(cart)}>
+                       <Text></Text>
+                    </TabNavigator.Item>
+                    <TabNavigator.Item
+                        selected={this.state.selectedTab === 'my'}
+                        title="我的"
+                        //选中时的title的样式
+                        selectedTitleStyle={{color:"#007aff"}}//设置tab标题颜色
+                        renderIcon={() => <Image style={styles.icon} source={require('./icon/wode20.jpg')} />}
+                        renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./icon/wode20.jpg')} />}//设置图标选中颜色
+                        // badgeText="1"
+                        onPress={() => this._navigate3(cart)}>
+                        <Text></Text>
+                    </TabNavigator.Item>
+                </TabNavigator>
+                
             </View>
         );
     } 
+    _navigate3(cart,type = 'Normal') {
+        /**
+         * 前面的是名称,后面的是要显示的值,一定要用Alert.alert的格式,并且 要导入Alert
+         */
+        
+            this.props.navigator.push({
+              component: my,
+              passProps: {
+                cart:cart
+              },
+              type: type
+            })
+          }
+    _navigateClassify(cart,type = 'Normal') {
+        /**
+         * 前面的是名称,后面的是要显示的值,一定要用Alert.alert的格式,并且 要导入Alert
+         */
+            this.props.navigator.push({
+              component: GoodClassify,
+              passProps: {
+                cart:cart
+              },
+              type: type
+            })
+          }
     // 返回一个Item
     renderRow(rowData){
         
@@ -135,6 +222,7 @@ export default class GoodsShow extends Component {
                      </TouchableOpacity>
                     </View>
                 </View>
+               
             </View>
         );
     }
@@ -212,7 +300,7 @@ export default class GoodsShow extends Component {
              * 前面的是名称,后面的是要显示的值,一定要用Alert.alert的格式,并且 要导入Alert
              */
                 this.props.navigator.push({
-                  component: CartShow,
+                  component: OrderShow,
                   passProps: {
                     cart:cart
                   },
@@ -256,5 +344,9 @@ const styles = StyleSheet.create ({
         width:80,
         height:20,
     },
+    icon:{
+        width:20,
+        height:20
+      }
 
 }); 

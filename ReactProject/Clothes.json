@@ -1,0 +1,11 @@
+[
+    {"id":11,"title" : "卫衣", "img" : "clothes1"  , "price": 115 , "intro": "卫衣"},
+    {"id":12,"title" : "T恤", "img" : "clothes2" , "price": 125 , "intro":  "T恤"},
+    {"id":13,"title" : "牛仔裤", "img" : "clothes3"  , "price": 135 , "intro":"牛仔裤"},
+    {"id":14,"title" : "风衣", "img" : "clothes4" , "price": 145, "intro":  "风衣"},
+    {"id":15,"title" : "袜子", "img" : "clothes5"  , "price": 155 , "intro": "袜子"},
+    {"id":16,"title" : "厚衣服", "img" : "clothes6" , "price": 165 , "intro": "厚衣服"},
+    {"id":17,"title" : "西服", "img" : "clothes7"  , "price": 175 , "intro": "西服"},
+    {"id":18,"title" : "衬衫", "img" : "clothes8" , "price": 185 , "intro":  "衬衫"},
+    {"id":19,"title" : "外套", "img" : "clothes9"  , "price": 195 , "intro": "外套"}  
+]

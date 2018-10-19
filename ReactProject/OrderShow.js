@@ -16,16 +16,19 @@ import {
   Image,
 } from 'react-native';
 import {Navigator} from 'react-native-deprecated-custom-components';
+import TabNavigator from 'react-native-tab-navigator';
 // import {Dimensions} from 'react-native';
 /**
  * 导入另一个js文件 ,用来实现页面的跳转
  */
 import GoodsShow from './GoodsShow';
 import CartShow from './CartShow';
+import GoodClassify from './GoodClassify';
+import my from './my';
 /**
  * 从json文件中获取数据
  */
-var data = require('./Goods.json');
+var data = require('./All.json');
 /**
  * 创建一个数组
  */
@@ -36,13 +39,26 @@ var dataPart = new Array();
 
 const img_arr = [require('./image/good1_icon.jpg'),require('./image/good2_icon.jpg'),require('./image/good3_icon.jpg'),
 require('./image/good4_icon.jpg'),require('./image/good5_icon.jpg'),require('./image/good6_icon.jpg'),
-require('./image/good7_icon.jpg'),require('./image/good8_icon.jpg'),require('./image/good9_icon.jpg'),require('./image/good10_icon.jpg')]
+require('./image/good7_icon.jpg'),require('./image/good8_icon.jpg'),require('./image/good9_icon.jpg'),require('./image/good10_icon.jpg'),
+require('./clothes/clothes1.jpg'),require('./clothes/clothes2.jpg'),require('./clothes/clothes3.jpg'),
+require('./clothes/clothes4.jpg'),require('./clothes/clothes5.jpg'),require('./clothes/clothes6.jpg'),
+require('./clothes/clothes7.jpg'),require('./clothes/clothes8.jpg'),require('./clothes/clothes9.jpg'),
+require('./computerImage/computer1.jpg'),require('./computerImage/computer2.jpg'),require('./computerImage/computer3.jpg'),
+require('./computerImage/computer4.jpg'),require('./computerImage/computer5.jpg'),require('./computerImage/computer6.jpg'),
+require('./computerImage/computer7.jpg'),require('./computerImage/computer8.jpg'),require('./computerImage/computer9.jpg'),
+require('./shoeImage/shoe1.jpg'),require('./shoeImage/shoe2.jpg'),require('./shoeImage/shoe3.jpg'),
+require('./shoeImage/shoe4.jpg'),require('./shoeImage/shoe5.jpg'),require('./shoeImage/shoe6.jpg'),
+require('./shoeImage/shoe7.jpg'),require('./shoeImage/shoe8.jpg'),require('./shoeImage/shoe9.jpg')]
 /**
  * 总钱数
  */
 var money = 0;
 
 var cartNew = new Array();
+/**
+ * 用来表示这个订单是第一次进来
+ */
+var flag = 0;
 /**
  * 获取设备屏幕的宽和高
  */
@@ -59,23 +75,30 @@ export default class OrderShow extends Component {
            dataPart.push( data[this.props.cart[i] - 1] );
        }
        
-       for( var i = 0; i < this.props.cart.length; i++ ){
-             money = money+dataPart[i].price;
-       }
+      
+           if( flag !==  this.props.cart.length) {
+                for( var i = 0; i < this.props.cart.length; i++ ){
+                     money = money+dataPart[i].price; 
+                }
+                flag = this.props.cart.length;
+           }
+            
+      
         var ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
         this.state = {
             dataSource: ds.cloneWithRows(dataPart),
+            selectedTab: 'OrderShow',
         }
     }
     render() {
         if(this.props.cart.length != 0) {
          return( 
-             <View>
+             <View style={styles.container}>
                  <View>
                   <ToolbarAndroid 
                    style={styles.toolbar}
                    navIcon={require('./image/back_icon.png')} 
-                   title='返回'
+                   title='订单'
                 //    subtitle='商品列表'
                 actions={[{title: '商品列表' },
                 {title: '订单列表'} ,
@@ -113,16 +136,23 @@ export default class OrderShow extends Component {
                         </Text>
                     </TouchableOpacity>
                 </View>
+
+             <TabNavigator>
+                {this.tabNavigator('GoodClassify', require('./icon/index20.jpg') , '首页',0)}
+                {this.tabNavigator('CartShow', require('./icon/cart20px.jpg'), '购物车',2)}
+                {this.tabNavigator('OrderShow', require('./icon/order20.jpg'),'订单',1)}
+                {this.tabNavigator('my', require('./icon/wode20.jpg') , '我的',3)}
+            </TabNavigator>
              </View>
             
          );
         }else {
           return (
-              <View>
+              <View style={styles.container}>
                     <ToolbarAndroid 
                    style={[styles.toolbar]}
                    navIcon={require('./image/back_icon.png')} 
-                   title='返回'
+                   title='订单'
                 //    subtitle='商品列表'
                 actions={[{title: '商品列表' },
                 {title: '订单列表'} ,
@@ -138,18 +168,58 @@ export default class OrderShow extends Component {
                 好像走错地方了*********
             </Text>
             </View>
+            <TabNavigator>
+                {this.tabNavigator('GoodClassify', require('./icon/index20.jpg') , '首页',0)}
+                {this.tabNavigator('CartShow', require('./icon/cart20px.jpg'), '购物车',2)}
+                {this.tabNavigator('OrderShow', require('./icon/order20.jpg') ,'订单',1)}
+                {this.tabNavigator('my', require('./icon/wode20.jpg') , '我的',3)}
+
+            </TabNavigator>
+            
             </View>
           );
         }
     }
+
+    tabNavigator(selectTable , iconUrl , title , index ) {
+        return (
+
+                <TabNavigator.Item
+                        selected={this.state.selectedTab === selectTable }
+                        title={title}
+                        //选中时的title的样式
+                        selectedTitleStyle={{color:"#007aff"}}//设置tab标题颜色
+                        renderIcon={() => <Image style={styles.icon} source={iconUrl} />}
+                        renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={ iconUrl } />}//设置图标选中颜色
+                        // badgeText="1"
+                        onPress={() => this.toolBaronActionSelected(index)}>
+                        <Text></Text>
+                    </TabNavigator.Item>
+        );
+    }
+    _navigateClassify(cart,type = 'Normal') {
+        /**
+         * 前面的是名称,后面的是要显示的值,一定要用Alert.alert的格式,并且 要导入Alert
+         */
+            this.props.navigator.push({
+              component: GoodClassify,
+              passProps: {
+                cart:cart
+              },
+              type: type
+            })
+          }
     success(money) {
         var num = this.props.cart.length;
         for(var i = 0; i < num ; i++ ){
             dataPart.pop();
             this.props.cart.pop();
         }
+       
         Alert.alert("支付成功",money + '');
-        this._navigate0();
+        money = 0;
+        var cart = [];
+        this._navigateClassify(cart);
     }
      // 返回一个Item
      renderRow(rowData){
@@ -183,6 +253,9 @@ export default class OrderShow extends Component {
         if(position == 1) {
              this._navigate1(this.props.cart);
         }
+        if( position === 3) {
+            this._navigate3(this.props.cart);
+        }
    }
   
    /**
@@ -213,6 +286,19 @@ export default class OrderShow extends Component {
          type: type
        })
      }
+     _navigate3(cart,type = 'Normal') {
+        /**
+         * 前面的是名称,后面的是要显示的值,一定要用Alert.alert的格式,并且 要导入Alert
+         */
+        
+            this.props.navigator.push({
+              component: my,
+              passProps: {
+                cart:cart
+              },
+              type: type
+            })
+          }
      _navigate0(cart,type = 'Normal') {
        /**
         * 前面的是名称,后面的是要显示的值,一定要用Alert.alert的格式,并且 要导入Alert
@@ -235,7 +321,7 @@ export default class OrderShow extends Component {
             * 前面的是名称,后面的是要显示的值,一定要用Alert.alert的格式,并且 要导入Alert
             */
                this.props.navigator.push({
-                 component: CartShow,
+                 component: OrderShow,
                  passProps: {
                    cart:cart
                  },
