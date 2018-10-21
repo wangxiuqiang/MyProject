@@ -37,8 +37,8 @@ export default class Test extends Component {
                         title="首页"
                         //选中时的title的样式
                         selectedTitleStyle={{color:"#007aff"}}//设置tab标题颜色
-                        renderIcon={() => <Image style={styles.icon} source={require('./icon/index20.jpg')} />}
-                        renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./icon/index20.jpg')} />}//设置图标选中颜色
+                        renderIcon={() => <Image style={styles.icon} source={require('./res/icon/index20.jpg')} />}
+                        renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./res/icon/index20.jpg')} />}//设置图标选中颜色
                         // badgeText="1"
                         onPress={() => this.setState({ selectedTab: 'GoodsShow' })}>
                         <Text>123</Text>
@@ -48,8 +48,8 @@ export default class Test extends Component {
                         title="购物车"
                         //选中时的title的样式
                         selectedTitleStyle={{color:"#007aff"}}//设置tab标题颜色
-                        renderIcon={() => <Image style={styles.icon} source={require('./icon/cart20px.jpg')} />}
-                        renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./icon/index20.jpg')} />}//设置图标选中颜色
+                        renderIcon={() => <Image style={styles.icon} source={require('./res/icon/cart20px.jpg')} />}
+                        renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'#007aff'}]} source={require('./res/icon/index20.jpg')} />}//设置图标选中颜色
                         // badgeText="1"
                         onPress={() => this.setState({ selectedTab: 'CartShow' })}>
                        <Text>123</Text>

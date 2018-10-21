@@ -42,18 +42,18 @@ var cartNew = new Array();
 /**
  * 写一个数组用来克服,本地图片不能使用变量来添加的问题,,笨方法
 */
-const img_arr = [require('./image/good1_icon.jpg'),require('./image/good2_icon.jpg'),require('./image/good3_icon.jpg'),
-require('./image/good4_icon.jpg'),require('./image/good5_icon.jpg'),require('./image/good6_icon.jpg'),
-require('./image/good7_icon.jpg'),require('./image/good8_icon.jpg'),require('./image/good9_icon.jpg'),require('./image/good10_icon.jpg'),
-require('./clothes/clothes1.jpg'),require('./clothes/clothes2.jpg'),require('./clothes/clothes3.jpg'),
-require('./clothes/clothes4.jpg'),require('./clothes/clothes5.jpg'),require('./clothes/clothes6.jpg'),
-require('./clothes/clothes7.jpg'),require('./clothes/clothes8.jpg'),require('./clothes/clothes9.jpg'),
-require('./computerImage/computer1.jpg'),require('./computerImage/computer2.jpg'),require('./computerImage/computer3.jpg'),
-require('./computerImage/computer4.jpg'),require('./computerImage/computer5.jpg'),require('./computerImage/computer6.jpg'),
-require('./computerImage/computer7.jpg'),require('./computerImage/computer8.jpg'),require('./computerImage/computer9.jpg'),
-require('./shoeImage/shoe1.jpg'),require('./shoeImage/shoe2.jpg'),require('./shoeImage/shoe3.jpg'),
-require('./shoeImage/shoe4.jpg'),require('./shoeImage/shoe5.jpg'),require('./shoeImage/shoe6.jpg'),
-require('./shoeImage/shoe7.jpg'),require('./shoeImage/shoe8.jpg'),require('./shoeImage/shoe9.jpg')]
+const img_arr = [require('./res/image/good1_icon.jpg'),require('./res/image/good2_icon.jpg'),require('./res/image/good3_icon.jpg'),
+require('./res/image/good4_icon.jpg'),require('./res/image/good5_icon.jpg'),require('./res/image/good6_icon.jpg'),
+require('./res/image/good7_icon.jpg'),require('./res/image/good8_icon.jpg'),require('./res/image/good9_icon.jpg'),require('./res/image/good10_icon.jpg'),
+require('./res/clothes/clothes1.jpg'),require('./res/clothes/clothes2.jpg'),require('./res/clothes/clothes3.jpg'),
+require('./res/clothes/clothes4.jpg'),require('./res/clothes/clothes5.jpg'),require('./res/clothes/clothes6.jpg'),
+require('./res/clothes/clothes7.jpg'),require('./res/clothes/clothes8.jpg'),require('./res/clothes/clothes9.jpg'),
+require('./res/computerImage/computer1.jpg'),require('./res/computerImage/computer2.jpg'),require('./res/computerImage/computer3.jpg'),
+require('./res/computerImage/computer4.jpg'),require('./res/computerImage/computer5.jpg'),require('./res/computerImage/computer6.jpg'),
+require('./res/computerImage/computer7.jpg'),require('./res/computerImage/computer8.jpg'),require('./res/computerImage/computer9.jpg'),
+require('./res/shoeImage/shoe1.jpg'),require('./res/shoeImage/shoe2.jpg'),require('./res/shoeImage/shoe3.jpg'),
+require('./res/shoeImage/shoe4.jpg'),require('./res/shoeImage/shoe5.jpg'),require('./res/shoeImage/shoe6.jpg'),
+require('./res/shoeImage/shoe7.jpg'),require('./res/shoeImage/shoe8.jpg'),require('./res/shoeImage/shoe9.jpg')]
 
 export default class CartShow extends Component {
     constructor(props) {
@@ -87,7 +87,7 @@ export default class CartShow extends Component {
         //         <View>
         //         <ToolbarAndroid 
         //            style={styles.toolbar}
-        //            navIcon={require('./image/back_icon.png')} 
+        //            navIcon={require('./res/image/back_icon.png')} 
         //            title='返回'
         //         //    subtitle='商品列表'
                 
@@ -108,7 +108,7 @@ export default class CartShow extends Component {
                 <View>
                   <ToolbarAndroid 
                    style={styles.toolbar}
-                   navIcon={require('./image/back_icon.png')} 
+                   navIcon={require('./res/image/back_icon.png')} 
                    title='购物车'
                 //    subtitle='商品列表'
                 actions={[{title: '商品列表' },
@@ -145,10 +145,10 @@ export default class CartShow extends Component {
                     </TouchableOpacity>
                 </View>
                  <TabNavigator>
-                {this.tabNavigator1('GoodClassify', require('./icon/index20.jpg') , '首页',0)}
-                {this.tabNavigator1('CartShow', require('./icon/cart20px.jpg'), '购物车',2)}
-                {this.tabNavigator1('OrderShow', require('./icon/order20.jpg'),'订单',1)}
-                {this.tabNavigator1('my', require('./icon/wode20.jpg') , '我的')}
+                {this.tabNavigator1('GoodClassify', require('./res/icon/index20.jpg') , '首页',0)}
+                {this.tabNavigator1('CartShow', require('./res/icon/cart20px.jpg'), '购物车',2)}
+                {this.tabNavigator1('OrderShow', require('./res/icon/order20.jpg'),'订单',1)}
+                {this.tabNavigator1('my', require('./res/icon/wode20.jpg') , '我的')}
             </TabNavigator>
              </View>
             
@@ -158,7 +158,7 @@ export default class CartShow extends Component {
                 <View  style={styles.container}>
                     <ToolbarAndroid 
                    style={[styles.toolbar]}
-                   navIcon={require('./image/back_icon.png')} 
+                   navIcon={require('./res/image/back_icon.png')} 
                    title='购物车'
                 //    subtitle='商品列表'
                 actions={[{title: '商品列表' },
@@ -176,10 +176,10 @@ export default class CartShow extends Component {
             </View>
            
              <TabNavigator>
-                {this.tabNavigator1('GoodClassify', require('./icon/index20.jpg') , '首页',0)}
-                {this.tabNavigator1('CartShow', require('./icon/cart20px.jpg'), '购物车',2)}
-                {this.tabNavigator1('OrderShow', require('./icon/order20.jpg'),'订单',1)}
-                {this.tabNavigator1('my', require('./icon/wode20.jpg') , '我的',3)}
+                {this.tabNavigator1('GoodClassify', require('./res/icon/index20.jpg') , '首页',0)}
+                {this.tabNavigator1('CartShow', require('./res/icon/cart20px.jpg'), '购物车',2)}
+                {this.tabNavigator1('OrderShow', require('./res/icon/order20.jpg'),'订单',1)}
+                {this.tabNavigator1('my', require('./res/icon/wode20.jpg') , '我的',3)}
             </TabNavigator>
             </View>
             );
