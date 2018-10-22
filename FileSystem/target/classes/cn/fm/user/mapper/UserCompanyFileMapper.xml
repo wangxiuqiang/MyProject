@@ -17,7 +17,7 @@
     </insert>
 
     <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
-        select cyid,cyname,cyfather,cyaddress from classify where cyid =#{value}
+        select cyid,cyname,cyfatherid,cyaddress from classify where cyid =#{value}
     </select>
 
     <select id="selectCompanyFileById" parameterType="int" resultType="cn.fm.pojo.CompanyFile">
@@ -117,25 +117,25 @@
         where cfid  = #{cfid}
     </update>
 
-    <select id="selectCompanyFileByTwoOrMore" resultType="cn.fm.pojo.CompanyFile" parameterType="cn.fm.pojo.CompanyFile">
+    <select id="selectCompanyFileByTwoOrMore" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
         from companyFile
         <where>
-            <if test="cffontid != null">
-                cffontid=#{cffontid}
+            <if test="companyFile.cffontid != null">
+                cffontid=#{companyFile.cffontid}
             </if>
-            <if test="cflanguage != null" >
-              and  cflanguage = #{cflanguage}
+            <if test="companyFile.cflanguage != null" >
+              and  cflanguage = #{companyFile.cflanguage}
             </if>
-            <if test="cfname != null">
-                AND  cfname like concat(concat('%',#{cfname}), '%')
+            <if test="companyFile.cfname != null">
+                AND  cfname like concat(concat('%',#{companyFile.cfname}), '%')
             </if>
-            <if test="cfclassifyid != 0" >
-               AND cfclassifyid = #{cfclassifyid}
+            <if test="companyFile.cfclassifyid != 0" >
+               AND cfclassifyid = #{companyFile.cfclassifyid}
             </if>
-            <if test="cfdate != null">
-                AND cfdate cfdate &gt;= #{date} and cfdate &lt;= #{endtime}
+            <if test="companyFile.cfdate != null">
+                AND cfdate cfdate &gt;= #{companyFile.cfdate} and cfdate &lt;= #{endtime}
             </if>
             AND state=1
         </where>

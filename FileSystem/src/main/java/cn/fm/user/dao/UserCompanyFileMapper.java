@@ -65,7 +65,7 @@ public interface UserCompanyFileMapper {
          * @return
          * @throws Exception
          */
-        public List<CompanyFile> selectCompanyFileByDateTime(String date , String endtime ) throws Exception;
+        public List<CompanyFile> selectCompanyFileByDateTime(@Param(value = "date") String date ,@Param(value = "endtime") String endtime ) throws Exception;
 
         /**
          *根据文号查询
@@ -99,6 +99,6 @@ public interface UserCompanyFileMapper {
         /**
          * 多项组合查询
          */
-        public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile , String endtime) throws Exception;
+        public List<CompanyFile> selectCompanyFileByTwoOrMore(@Param(value = "companyFile") CompanyFile companyFile ,@Param(value = "endtime") String endtime) throws Exception;
 
 }

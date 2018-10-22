@@ -129,7 +129,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
-                && companyFile.getCfdate() == null && companyFile.getCffontid() == null){
+                && companyFile.getCfdate() == null && companyFile.getCffontid() != null){
 
            return selectCompanyFileByFontid(companyFile.getCffontid());
 

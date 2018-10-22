@@ -32,10 +32,10 @@ cyfatherid int ,
 cyaddress varchar(50) 
 );
 
-insert into classify(cyname,cyfather,cyaddress) values("A类",0,"一楼");
-insert into classify(cyname,cyfather,cyaddress) values("A1类",1,"101室");
-insert into classify(cyname,cyfather,cyaddress) values("A11类",2,"A柜");
-insert into classify(cyname,cyfather,cyaddress) values("A111类",3,"15箱");
+insert into classify(cyname,cyfatherid,cyaddress) values("A类",0,"一楼");
+insert into classify(cyname,cyfatherid,cyaddress) values("A1类",1,"101室");
+insert into classify(cyname,cyfatherid,cyaddress) values("A11类",2,"A柜");
+insert into classify(cyname,cyfatherid,cyaddress) values("A111类",3,"15箱");
 
 create table getFile(
 gfid int primary key auto_increment,

@@ -17,7 +17,7 @@
       </insert>
 
       <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
-          select cyid,cyname,cyfather,cyaddress from classify WHERE cyid = #{value}
+          select cyid,cyname,cyfatherid,cyaddress from classify WHERE cyid = #{value}
       </select>
 
     <select id="selectGetFileById" parameterType="int" resultType="cn.fm.pojo.GetFile">
