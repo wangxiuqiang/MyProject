@@ -135,7 +135,7 @@
                AND cfclassifyid = #{companyFile.cfclassifyid}
             </if>
             <if test="companyFile.cfdate != null">
-                AND cfdate cfdate &gt;= #{companyFile.cfdate} and cfdate &lt;= #{endtime}
+                AND cfdate &gt;= #{companyFile.cfdate} and cfdate &lt;= #{endtime}
             </if>
             AND state=1
         </where>

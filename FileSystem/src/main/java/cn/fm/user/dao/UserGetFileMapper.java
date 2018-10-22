@@ -99,7 +99,7 @@ public interface UserGetFileMapper {
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile ,@Param(value = "endtime") String endtime ) throws Exception;
+    public List<GetFile> selectGetFileByTwoAndMore(@Param(value = "getFile") GetFile getFile ,@Param(value = "endtime") String endtime ) throws Exception;
 
     /**
      * 通过 查询是不是有借阅信息，决定是不是删除

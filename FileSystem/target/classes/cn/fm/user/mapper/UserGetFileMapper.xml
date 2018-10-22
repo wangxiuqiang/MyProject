@@ -58,27 +58,27 @@
     </select>
 
     <!--多项查询-->
-    <select id="selectGetFileByTwoAndMore" parameterType="cn.fm.pojo.GetFile" resultType="cn.fm.pojo.GetFile">
+    <select id="selectGetFileByTwoAndMore" resultType="cn.fm.pojo.GetFile">
         select
         <include refid="Base_Columns_List" />
         from getFile
         <where>
 
-            <if test="gfclassifyid != 0">
-                 gfclassifyid = #{gfclassifyid}
+            <if test="getFile.gfclassifyid != 0">
+                 gfclassifyid = #{getFile.gfclassifyid}
             </if>
-            <if test="gfnumber != 0">
-                and gfnumber = #{gfnumber}
+            <if test="getFile.gfnumber != 0">
+                and gfnumber = #{getFile.gfnumber}
             </if>
-            <if test="gfcompany != null">
-                and gfcompany = #{gfcompany}
+            <if test="getFile.gfcompany != null">
+                and gfcompany = #{getFile.gfcompany}
             </if>
-            <if test="gfname != null">
-                and gfname like concat(concat('%',#{gfname}), '%')
+            <if test="getFile.gfname != null">
+                and gfname like concat(concat('%',#{getFile.gfname}), '%')
             </if>
 
-            <if test="gfdatetime != null">
-                and gfdatetime &gt;= #{gfdatetime} and gfdatetime &lt;= #{endtime}
+            <if test="getFile.gfdatetime != null">
+                and gfdatetime &gt;= #{getFile.gfdatetime} and gfdatetime &lt;= #{endtime}
             </if>
             and state=1
         </where>
