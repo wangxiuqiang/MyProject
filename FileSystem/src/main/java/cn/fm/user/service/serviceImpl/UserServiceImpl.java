@@ -394,7 +394,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectcfisBorrow(cfid);
     }
     public int[] selectgfisBorrow(@Param(value = "gfid") int[] gfid) throws Exception{
-        return userMapper.selectcfisBorrow(gfid);
+        return userMapper.selectgfisBorrow(gfid);
     }
 
     /**
