@@ -6,11 +6,13 @@ import cn.fm.user.service.UserService;
 import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.PassWordHelper;
 import cn.fm.utils.StatusUtils;
+import cn.fm.utils.UploadUtils;
 import cn.fm.vo.UserExtend;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.machinezoo.sourceafis.FingerprintTemplate;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.Logical;
@@ -21,7 +23,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -481,19 +486,19 @@ public class AdminController {
     }
 
     /**
-     * 录入指纹信息
+     * 录入指纹信息 ,fid  指纹id
      */
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/addFingerInfo")
     @ResponseBody
-    public String addFingerInfo(int uid , int fid, String finger ) throws Exception {
+    public String addFingerInfo(int uid , int fid, MultipartFile finger ) throws Exception {
         HashMap<String,Integer> map = new HashMap<>();
-        if(finger != null) {
-            Fingerprint fingerprint = new Fingerprint();
-            fingerprint.setFid(fid);
-            fingerprint.setUid(uid);
-            fingerprint.setFinger(finger);
-            int result = adminService.addFingerInfo( fingerprint );
+
+        if( !finger.isEmpty() ) {
+            //获取图片存放在服务器的路径
+            String bmpFilePath = UploadUtils.upload( finger );
+
+            int result = adminService.addFingerInfo( uid , fid , bmpFilePath );
             if(result > 0 ) {
                 map.put(StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
             } else {
@@ -534,13 +539,14 @@ public class AdminController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/compareFP")
     @ResponseBody
-    public String compareFP( String finger ) throws Exception {
+    public String compareFP(MultipartFile finger) throws Exception {
         HashMap< String , Integer > map = new HashMap<>();
-        if( finger == null) {
+        if( finger.isEmpty() ) {
             map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
             return JSON.toJSONString( map );
         }
-        User  user = adminService.selectAllFingerInfoAndCompare( finger );
+        String filePath = UploadUtils.upload( finger );
+        User  user = adminService.selectAllFingerInfoAndCompare(  filePath );
         if( user != null ) {
             return JSON.toJSONString( user );
         } else {

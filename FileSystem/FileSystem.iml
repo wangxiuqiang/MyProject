@@ -96,6 +96,14 @@
     <orderEntry type="library" name="Maven: com.machinezoo.noexception:noexception:1.3.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.mhshams:jnbis:2.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.sanselan:sanselan:0.97-incubator" level="project" />
-    <orderEntry type="library" name="Maven: ZKFingerReader:ZKFingerReader:1.0" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/main/webapp/lib/ZKFingerReader.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

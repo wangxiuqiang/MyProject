@@ -207,11 +207,11 @@ public interface AdminService {
     public List<Level> selectAllLevel() throws Exception;
     /**
      * 添加指纹信息
-     * @param fingerprint
+     * @param uid
      * @return
      * @throws Exception
      */
-    public int addFingerInfo(Fingerprint fingerprint) throws Exception;
+    public int addFingerInfo(int uid ,int fid , String bmpFilePath) throws Exception;
     /**
      * 根据用户id删除指纹信息
      * @param uid

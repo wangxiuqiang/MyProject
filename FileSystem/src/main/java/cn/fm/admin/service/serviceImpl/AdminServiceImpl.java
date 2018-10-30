@@ -7,6 +7,7 @@ import cn.fm.user.dao.UserCompanyFileMapper;
 import cn.fm.user.dao.UserGetFileMapper;
 import cn.fm.user.dao.UserMapper;
 import cn.fm.utils.MailUtils;
+import cn.fm.utils.RmFileUtils;
 import cn.fm.vo.UserExtend;
 import com.machinezoo.sourceafis.FingerprintMatcher;
 import com.machinezoo.sourceafis.FingerprintTemplate;
@@ -14,6 +15,8 @@ import com.zkteco.biometric.FingerprintSensorEx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -414,12 +417,23 @@ public class AdminServiceImpl implements AdminService{
 
     /**
      * 添加指纹信息
-     * @param fingerprint
+     * @param uid
      * @return
      * @throws Exception
      */
     @Override
-    public int addFingerInfo(Fingerprint fingerprint) throws Exception{
+    public int addFingerInfo(int uid ,int fid , String  bmpFilePath ) throws Exception{
+        byte[] image2 = Files.readAllBytes(Paths.get( bmpFilePath ));
+        FingerprintTemplate template2 = new FingerprintTemplate()
+                .dpi(500)
+                .create(image2);
+        String json2 = template2.serialize();
+        Fingerprint fingerprint = new Fingerprint();
+        fingerprint.setFid(fid);
+        fingerprint.setUid(uid);
+        fingerprint.setFinger( json2 );
+        //删除文件
+        RmFileUtils.rmFile();
         return adminMapper.addFingerInfo(fingerprint);
     }
     /**
@@ -430,6 +444,7 @@ public class AdminServiceImpl implements AdminService{
      */
     @Override
     public int delFingerInfoByUid( int[] uid ) throws Exception {
+
         return adminMapper.delFingerInfoByUid(uid);
     }
     /**
@@ -438,28 +453,27 @@ public class AdminServiceImpl implements AdminService{
      * @throws Exception
      */
     @Override
-    public User selectAllFingerInfoAndCompare( String finger) throws Exception{
+    public User selectAllFingerInfoAndCompare( String imageWhere ) throws Exception{
         List<Fingerprint> lists = new ArrayList<>();
         //用来将分数最高的指纹信息记录下来
         Fingerprint fingerprint = null;
-        //两个二进制数组用来比较
-        byte[] fptemplate = new byte[2048];
-        byte[] compareTemplate = new byte[2048];
+
         double maxScore = 0;
         /**
-         * 将base64的字符串转为二进制数组,放在 第二个参数中 ,如下的compareTemplate ,
-         * 第三个参数 是而二进制数组的长度
+         * 将bmp取出来进行录入
          */
-        FingerprintSensorEx.Base64ToBlob( finger , compareTemplate , compareTemplate.length );
-        //将二进制数组转为一个指纹模板类
-        FingerprintTemplate probe = new FingerprintTemplate().dpi(500).create(compareTemplate );
-        //定义一个用来比较的matcher
+        byte[] image = Files.readAllBytes(Paths.get( imageWhere ));
+        FingerprintTemplate probe = new FingerprintTemplate()
+                .dpi(500)
+                .create(image);
         FingerprintMatcher matcher = new FingerprintMatcher().index(probe);
+        //获取数据库中的指纹数据
         lists = adminMapper.selectAllFingerInfo();
         for(Fingerprint list : lists ) {
-            FingerprintSensorEx.Base64ToBlob( list.getFinger() , fptemplate , fptemplate.length );
-            //将二进制的数组转为一个指纹模板类
-            FingerprintTemplate candidate = new FingerprintTemplate().dpi(500).create( fptemplate );
+
+            //将json数据格式转换为一个指纹模板
+            FingerprintTemplate candidate = new FingerprintTemplate().deserialize( list.getFinger() );
+            //比较获取分数
             double score = matcher.match(candidate);
             if(score > maxScore) {
                 maxScore = score;
@@ -467,11 +481,12 @@ public class AdminServiceImpl implements AdminService{
             }
         }
         /**
-         * 如果分数>=80 表示这个人可以使用,
+         * 如果分数>=300 表示这个人可以使用,
          */
-        if( maxScore >= 80 ) {
-            User user = adminMapper.findWorkerById( fingerprint.getUid() );
-            return user;
+        RmFileUtils.rmFile();
+        if( maxScore >=300 ) {
+            return  adminMapper.findWorkerById( fingerprint.getUid() );
+
         }
         return null;
     }

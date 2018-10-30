@@ -346,11 +346,11 @@
             <artifactId>sourceafis</artifactId>
             <version>3.4.0</version>
         </dependency>
-        <dependency>
-            <groupId>ZKFingerReader</groupId>
-            <artifactId>ZKFingerReader</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>ZKFingerReader</groupId>-->
+            <!--<artifactId>ZKFingerReader</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 
