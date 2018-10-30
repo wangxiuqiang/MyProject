@@ -71,5 +71,7 @@ public class StatusUtils {
     public static final int TIME_IN = 16;
 
     public static final int SUCCESS_LOGOUT = -3;
+    //OCR识别失败
+    public static final  int FAILURE_OCR = -5;
 }
 

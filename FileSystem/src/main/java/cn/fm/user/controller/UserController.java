@@ -3,15 +3,9 @@ package cn.fm.user.controller;
  * 用户设置密码和 数据库备份
  */
 
-import cn.fm.pojo.Borrow;
-import cn.fm.pojo.Classify;
-import cn.fm.pojo.GetFile;
-import cn.fm.pojo.User;
+import cn.fm.pojo.*;
 import cn.fm.user.service.UserService;
-import cn.fm.utils.DateToStringUtils;
-import cn.fm.utils.MysqlBackupUtils;
-import cn.fm.utils.MysqlRecoverUtils;
-import cn.fm.utils.StatusUtils;
+import cn.fm.utils.*;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
 import cn.fm.vo.UserExtend;
@@ -557,6 +551,32 @@ public class UserController {
             return JSON.toJSONString(map);
         }
 
+    }
+    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    @RequestMapping(value = "/returnOcrInfo/{type}")
+    @ResponseBody
+    public String returnOcrInfo ( MultipartFile file , @PathVariable int type ) throws Exception {
+        String path = UploadUtils.upload(file);
+        HashMap<String , Integer > map = new HashMap<>();
+        if (path == null ) {
+            map.put(StatusUtils.statecode , StatusUtils.IS_NULL );
+            return JSON.toJSONString( map );
+        }
+        int flag = OCRHelper.convertFile(path);
+        if( flag == 0 ) {
+            //type == 1 表示这是companyFile type == 2 表示这个是GetFile
+            if( type == 1) {
+               CompanyFile companyFile = OCRHelper.ocrCompanyFile( path );
+               return JSON.toJSONString( companyFile );
+            }
+            if (type == 2 ) {
+                GetFile getFile = OCRHelper.ocrGetFile( path );
+                return JSON.toJSONString( getFile );
+            }
+        }
+
+        map.put( StatusUtils.statecode, StatusUtils.FAILURE_OCR );
+        return JSON.toJSONString( map );
     }
 
 }
