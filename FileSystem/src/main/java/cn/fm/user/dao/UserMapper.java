@@ -9,6 +9,13 @@ import java.util.List;
 
 public interface UserMapper {
     /**
+     * 检查是不是激活过了
+     * @param code
+     * @return
+     * @throws Exception
+     */
+    public int selectState( @Param( value = "code") String code ) throws  Exception;
+    /**
      * 用于设置用户的密码
      */
     public int updateUserpwd(String upwd,String code) throws Exception;

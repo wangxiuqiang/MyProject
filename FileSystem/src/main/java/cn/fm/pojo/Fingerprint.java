@@ -2,7 +2,7 @@ package cn.fm.pojo;
 
 public class Fingerprint {
     private int uid;
-    private int fid;
+
     private String finger;
 
     public String getFinger() {
@@ -21,13 +21,7 @@ public class Fingerprint {
         this.uid = uid;
     }
 
-    public int getFid() {
-        return fid;
-    }
 
-    public void setFid(int fid) {
-        this.fid = fid;
-    }
 
 
 }

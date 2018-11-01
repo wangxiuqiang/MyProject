@@ -304,14 +304,15 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     }
 
     /**
-     *根据id删除单行数据
+     *根据id删除单行数据 ,就是将标记位进行修改
      */
     public int deleteCompanyFileById(int[] cfid) throws Exception{
 
         for(int i = 0; i < cfid.length; i++) {
-            List<Borrow> list = userCompanyFileMapper.selectCFhasBorrowInfo(cfid[i]);
+            List<Borrow> list = new ArrayList<>();
+            list = userCompanyFileMapper.selectCFhasBorrowInfo(cfid[i]);
             //如果不为空 就删除 借阅信息
-            if(list == null && list.size() > 0) {
+            if(list != null && list.size() > 0) {
                 deleteCompanyFileBorrowInfo(cfid[i]);
             }
         }
@@ -319,7 +320,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
         return userCompanyFileMapper.deleteCompanyFileById(cfid);
     }
     /**
-     * 同时删除这个文件留下的借阅信息
+     * 同时删除这个文件留下的借阅信息 , 就是将标记为进行修改
      */
     @Override
     public int deleteCompanyFileBorrowInfo(int cfid) throws Exception{

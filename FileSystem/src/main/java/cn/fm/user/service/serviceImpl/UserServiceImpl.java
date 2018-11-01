@@ -34,6 +34,12 @@ public class UserServiceImpl implements UserService {
     UserCompanyFileMapper userCompanyFileMapper;
     @Autowired
     UserGetFileMapper userGetFileMapper;
+
+    @Override
+    public int selectState(String code) throws Exception {
+        return userMapper.selectState( code );
+    }
+
     /**
      * 设置密码
      * @param upwd

@@ -211,7 +211,7 @@ public interface AdminService {
      * @return
      * @throws Exception
      */
-    public int addFingerInfo(int uid ,int fid , String bmpFilePath) throws Exception;
+    public int addFingerInfo(int uid , String bmpFilePath) throws Exception;
     /**
      * 根据用户id删除指纹信息
      * @param uid

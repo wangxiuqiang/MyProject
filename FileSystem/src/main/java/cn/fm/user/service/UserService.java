@@ -12,6 +12,13 @@ import java.util.List;
 
 public interface UserService {
     /**
+     * 检查是不是激活过了
+     * @param code
+     * @return
+     * @throws Exception
+     */
+    public int selectState( String code ) throws  Exception;
+    /**
      * 设置密码
      */
     public int updateUserpwd(String upwd,String code) throws Exception;

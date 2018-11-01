@@ -73,5 +73,8 @@ public class StatusUtils {
     public static final int SUCCESS_LOGOUT = -3;
     //OCR识别失败
     public static final  int FAILURE_OCR = -5;
+    //已经激活
+    public static final int ALREADY_REG = -6;
+    public static final int NEED_REG = 17;
 }
 

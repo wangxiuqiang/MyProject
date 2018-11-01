@@ -11,7 +11,7 @@ import cn.fm.utils.RmFileUtils;
 import cn.fm.vo.UserExtend;
 import com.machinezoo.sourceafis.FingerprintMatcher;
 import com.machinezoo.sourceafis.FingerprintTemplate;
-import com.zkteco.biometric.FingerprintSensorEx;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,12 +65,13 @@ public class AdminServiceImpl implements AdminService{
         user.setCode(UUID.randomUUID().toString());
         MailUtils.sendMail(user.getCode(),user.getUemail(),user.getUname());
 
-       int uid = adminMapper.addUser(user);
+
 //       System.out.println(uid);
 //       System.out.println(user.getUid());
 //        System.out.println(user.getRid());
-       int result =  adminMapper.addUser_Role(user.getUid(),user.getRid());
-        if(result != 0 && uid != 0) {
+       int result = adminMapper.addUser(user) + adminMapper.addUser_Role(user.getUid(),user.getRid());
+       int uid = user.getUid();
+       if(result != 0 && uid != 0) {
             return uid;
         } else {
            return 0;
@@ -287,7 +288,13 @@ public class AdminServiceImpl implements AdminService{
      */
     @Override
     public int insertClassify(Classify classify) throws Exception{
-        return adminMapper.insertClassify(classify);
+        int result = adminMapper.insertClassify(classify);
+        if( result == 1) {
+            return classify.getCyid();
+        }else {
+            return 0;
+        }
+
     }
 
     /**
@@ -422,18 +429,18 @@ public class AdminServiceImpl implements AdminService{
      * @throws Exception
      */
     @Override
-    public int addFingerInfo(int uid ,int fid , String  bmpFilePath ) throws Exception{
+    public int addFingerInfo(int uid  , String  bmpFilePath ) throws Exception{
         byte[] image2 = Files.readAllBytes(Paths.get( bmpFilePath ));
         FingerprintTemplate template2 = new FingerprintTemplate()
                 .dpi(500)
                 .create(image2);
         String json2 = template2.serialize();
+        System.out.println( json2 );
         Fingerprint fingerprint = new Fingerprint();
-        fingerprint.setFid(fid);
+
         fingerprint.setUid(uid);
         fingerprint.setFinger( json2 );
-        //删除文件
-        RmFileUtils.rmFile();
+
         return adminMapper.addFingerInfo(fingerprint);
     }
     /**

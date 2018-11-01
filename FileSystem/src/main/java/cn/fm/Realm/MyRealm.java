@@ -42,7 +42,7 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 //        获取token中的信息
          String email  = (String)token.getPrincipal();
-         System.out.println(email + "-----------------------------------------");
+//         System.out.println(email + "-----------------------------------------");
 // 从数据库中获取相应的内容
         try {
           user  = adminService.findUserByEmail(email);

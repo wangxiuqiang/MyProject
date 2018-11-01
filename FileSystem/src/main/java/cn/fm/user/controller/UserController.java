@@ -85,6 +85,29 @@ public class UserController {
     }
 
     /**
+     * 查看是不是激活完成了
+     * @param code
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/checkState")
+    @ResponseBody
+    public String checkState(String code ) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        if( code == null ) {
+            map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
+            return JSON.toJSONString( map );
+        }
+        int result = userService.selectState( code );
+        if( result != 0 )  {
+            map.put( StatusUtils.statecode , StatusUtils.ALREADY_REG );
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.NEED_REG ) ;
+        }
+        return JSON.toJSONString( map );
+    }
+
+    /**
      * 发送激活的code 和设置密码
      */
 
@@ -556,7 +579,7 @@ public class UserController {
     @RequestMapping(value = "/returnOcrInfo/{type}")
     @ResponseBody
     public String returnOcrInfo ( MultipartFile file , @PathVariable int type ) throws Exception {
-        String path = UploadUtils.upload(file);
+        String path = UploadUtils.upload(file , 1);
         HashMap<String , Integer > map = new HashMap<>();
         if (path == null ) {
             map.put(StatusUtils.statecode , StatusUtils.IS_NULL );

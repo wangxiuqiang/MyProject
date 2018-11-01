@@ -324,7 +324,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
         for(int i = 0; i < id.length; i++) {
             List<Borrow> list = userGetFileMapper.selectGFhasBorrowInfo(id[i]);
             //如果不为空 就删除 借阅信息
-            if(list == null && list.size() > 0) {
+            if(list != null && list.size() > 0) {
                 deleteGetFileBorrowInfo(id[i]);
             }
         }

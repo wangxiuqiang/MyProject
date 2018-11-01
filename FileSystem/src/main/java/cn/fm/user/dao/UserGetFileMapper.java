@@ -62,7 +62,7 @@ public interface UserGetFileMapper {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByDateTime(@Param(value = "datetime") String datetime ,@Param("endtime") String endtime) throws Exception;
+    public List<GetFile> selectGetFileByDateTime(@Param(value = "gfdatetime") String datetime ,@Param("endtime") String endtime) throws Exception;
 
     /**
      *根据文号查询

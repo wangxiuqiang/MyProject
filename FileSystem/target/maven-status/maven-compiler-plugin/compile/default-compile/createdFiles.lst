@@ -11,10 +11,12 @@ cn/fm/utils/MailUtils$1.class
 cn/fm/vo/CompanyFileExtends.class
 cn/fm/pojo/Fingerprint.class
 cn/fm/user/dao/UserRegMapper.class
+cn/fm/utils/FingerUtils.class
 cn/fm/utils/MD5Utils.class
 cn/fm/user/service/UserCompanyFileService.class
 cn/fm/admin/controller/LoginController.class
 cn/fm/vo/BorrowGFExtends.class
+cn/fm/utils/OCRHelper.class
 cn/fm/pojo/Role.class
 cn/fm/pojo/Classify.class
 cn/fm/user/dao/UserGetFileMapper.class
@@ -29,6 +31,7 @@ cn/fm/pojo/User.class
 cn/fm/pojo/Permission.class
 cn/fm/admin/dao/AdminMapper.class
 cn/fm/user/dao/UserCompanyFileMapper.class
+cn/fm/utils/RmFileUtils.class
 cn/fm/user/service/serviceImpl/UserRegServiceImpl.class
 cn/fm/vo/BorrowCFExtends.class
 cn/fm/user/dao/UserMapper.class
@@ -38,6 +41,7 @@ cn/fm/Realm/MyRealm.class
 cn/fm/user/controller/UserCompanyFileController.class
 cn/fm/pojo/WorkPlace.class
 cn/fm/utils/MysqlBackupUtils.class
+cn/fm/utils/UploadUtils.class
 cn/fm/admin/service/AdminService.class
 cn/fm/user/controller/UserGetFileController.class
 cn/fm/user/service/UserGetFileService.class

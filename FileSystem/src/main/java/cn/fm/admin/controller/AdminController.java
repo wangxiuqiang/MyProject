@@ -3,10 +3,7 @@ package cn.fm.admin.controller;
 import cn.fm.admin.service.AdminService;
 import cn.fm.pojo.*;
 import cn.fm.user.service.UserService;
-import cn.fm.utils.DateToStringUtils;
-import cn.fm.utils.PassWordHelper;
-import cn.fm.utils.StatusUtils;
-import cn.fm.utils.UploadUtils;
+import cn.fm.utils.*;
 import cn.fm.vo.UserExtend;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -332,8 +329,10 @@ public class AdminController {
     public String addClassify(Classify classify ,@PathVariable int fatherid)throws Exception{
         classify.setCyfatherid(fatherid);
         HashMap<String,Integer> map = new HashMap<>();
-        if(adminService.insertClassify(classify) != 0) {
+        int id = adminService.insertClassify( classify );
+        if(id != 0) {
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+            map.put( "cyid" , id );
             return JSON.toJSONString(map);
         }else {
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
@@ -491,16 +490,18 @@ public class AdminController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/addFingerInfo")
     @ResponseBody
-    public String addFingerInfo(int uid , int fid, MultipartFile finger ) throws Exception {
+    public String addFingerInfo(int uid ,  MultipartFile finger ) throws Exception {
         HashMap<String,Integer> map = new HashMap<>();
-
+        System.out.println( finger.getOriginalFilename() );
         if( !finger.isEmpty() ) {
             //获取图片存放在服务器的路径
-            String bmpFilePath = UploadUtils.upload( finger );
-
-            int result = adminService.addFingerInfo( uid , fid , bmpFilePath );
+            String bmpFilePath = UploadUtils.upload( finger , 0);
+            System.out.println( bmpFilePath );
+            int result = adminService.addFingerInfo( uid ,  bmpFilePath );
             if(result > 0 ) {
                 map.put(StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
+                //删除文件
+                RmFileUtils.rmFile();
             } else {
                 map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT );
             }
@@ -545,7 +546,7 @@ public class AdminController {
             map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
             return JSON.toJSONString( map );
         }
-        String filePath = UploadUtils.upload( finger );
+        String filePath = UploadUtils.upload( finger , 0 );
         User  user = adminService.selectAllFingerInfoAndCompare(  filePath );
         if( user != null ) {
             return JSON.toJSONString( user );

@@ -16,7 +16,7 @@
     <select id="findUserByEmail" parameterType="String" resultType="cn.fm.pojo.User">
         select uid,uemail,upwd,state from user where uemail = #{uemail}
     </select>
-    <insert id="addUser" parameterType="cn.fm.vo.UserExtend"  >
+    <insert id="addUser" parameterType="cn.fm.vo.UserExtend" >
         insert into user(uname,ucompany,uemail,uupdatetime,code,ifAdmin )
         values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code},#{ifAdmin})
         <selectKey keyProperty="uid" resultType="java.lang.Integer" order="AFTER">
@@ -160,8 +160,10 @@
         where wid = #{wid}
     </update>
     <!--添加分类 -->
-    <insert id="insertClassify" parameterType="cn.fm.pojo.Classify">
+    <insert id="insertClassify" parameterType="cn.fm.pojo.Classify"  useGeneratedKeys="true" keyProperty="cyid">
+
         insert into classify(cyname,cyfatherid,cyaddress) VALUES (#{cyname},#{cyfatherid},#{cyaddress})
+
     </insert>
     <!--删除分类-->
     <delete id="delClassify" parameterType="int" >
@@ -207,7 +209,7 @@
 
     <!--添加指纹信息到数据库-->
     <insert parameterType="cn.fm.pojo.Fingerprint" id="addFingerInfo" >
-        insert into finger(uid,fid,finger) VALUES (#{uid} , #{fid},#{finger} )
+        insert into fingerprint(uid,finger) VALUES (#{uid} ,#{finger} )
     </insert>
     <!--根据用户id删除指纹信息-->
     <delete id="delFingerInfoByUid" parameterType="int" >
@@ -218,7 +220,7 @@
     </delete>
     <!--从数据库中取出所有的指纹信息进行比较-->
     <select id="selectAllFingerInfo" resultType="cn.fm.pojo.Fingerprint">
-        select uid,fid,finger from fingerprint;
+        select uid,finger from fingerprint;
     </select>
 
 

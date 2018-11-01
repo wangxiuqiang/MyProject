@@ -9,13 +9,17 @@
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/MysqlRecoverUtils.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/DateToStringUtils.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/User.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/RmFileUtils.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/OCRHelper.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/dao/UserGetFileMapper.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/UserRegService.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/controller/AdminAddUserController.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/controller/UserController.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/FingerUtils.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/StatusUtils.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/Classify.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/controller/UserRegController.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/TestOCR.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/service/serviceImpl/AdminServiceImpl.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/Fingerprint.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/Level.java
@@ -40,6 +44,7 @@
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/UserService.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/controller/UserCompanyFileController.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/serviceImpl/UserCompanyFileServiceImpl.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/UploadUtils.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/UserGetFileService.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/serviceImpl/UserRegServiceImpl.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/MailUtils.java
