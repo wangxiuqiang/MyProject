@@ -7,14 +7,14 @@ uid int primary key auto_increment,
 uname varchar(30) ,
 uemail varchar(30) ,
 upwd varchar(128) ,
-state int default 0,
+state int default 1,
 uupdatetime varchar(23) ,
 code varchar(50) NOT NULL,
 ucompany varchar(30),
 ifAdmin int
 );
-insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("123","admin","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813",1,1,"2018",1);
-insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("123","user","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813","1",1,"2018",0);
+insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("王富贵","test@test.com","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813","1",1,"2018",1);
+insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("朗明","langming@langming.com","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813","1",1,"2018",0);
 
 create table workPlace (
 wid int primary key auto_increment,
@@ -52,30 +52,32 @@ gfnumber int not null,
 gfcountuse int default 1,
 type int default 2,
 isborrow int default 1,
+back int default 0,
 state int default 1,
+
 foreign key(gfclassifyid) references classify(cyid)
 );
 
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第一份文件","第一单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱");
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第2份文件","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第3份文件","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第4份文件","第二单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第5份文件","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第6份文件","第一单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第7份文件","第二单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第8份文件","第一单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第9份文件","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第10份文件","第一单位",4,"2015-02-15",1,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第一1份文件","第一单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱");
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第21份文件","第一单位",4,"2013-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第31份文件","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第41份文件","第二单位",4,"2014-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第51份文件","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第61份文件","第一单位",4,"2019-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第71份文件","第二单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第81份文件","第一单位",4,"2025-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第91份文件","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
-insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第11份文件","第一单位",4,"2045-02-15",1,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("关于公司知识文档的命名规范","第一单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱");
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第二次实训要求","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("关于落实第三次会议的文件","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("15年财务报表","第二单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("会议记录","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("关于内部人员管理","第一单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("在第三次会议上的问题总结","第二单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("下发到地方的政策报告","第一单位",4,"2015-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("项目计划书","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("项目的可执行化文档","第一单位",4,"2015-02-15",1,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("项目的需求说明书","第一单位",4,"2015-02-15",1,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱");
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("项目的概要设计","第一单位",4,"2013-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("第三次项目的设计","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("项目的风险分析报告","第二单位",4,"2014-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("对项目风险报告的回执","第二单位",4,"2015-02-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("安徒生童话第三卷","第一单位",4,"2019-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("一千零一夜的故事总集","第二单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("你没看过的豌豆笑传","第一单位",4,"2025-02-15",2 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("新乌龙院第三卷","第一单位",4,"2015-03-15",1 ,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
+insert into getFile(gfname,gfcompany,gfclassifyid,gfdatetime,gfnumber,gfclassifyname,gfaddress) values("这是一封未知的信","第一单位",4,"2045-02-15",1,"A类-A1类-A11类-A111类","一楼-101室-A柜-15箱" );
 
 
 create table companyFile (
@@ -96,18 +98,20 @@ cfclassifyname varchar(100),
 type int default 1,
 isborrow int default 1,
 state int default 1,
+waitborrow int default 0,
+destory int default 1,
 foreign key(cfclassifyid) references classify(cyid)
 );
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第一份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第2份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第3份单位文件","2016-08-06","王小二","李二牛","楚留香","1",20,"16","China","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第4份单位文件","2016-07-06","王小二","李二牛","楚留香","2",20,"12","China","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第5份单位文件","2016-08-06","王小二","李二牛","楚留香","2",20,"16","China","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第6份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"12","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第7份单位文件","2016-07-06","王小二","李二牛","楚留香","2",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第8份单位文件","2016-08-06","王小二","李二牛","楚留香","1",20,"12","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第9份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
-insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第10份单位文件","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("16年财务报表","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("关于内部问题的审查","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("第二次内部会议记录","2016-08-06","王小二","李二牛","楚留香","1",20,"16","China","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("三次会议总结","2016-07-06","王小二","李二牛","楚留香","2",20,"12","China","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("关于内部人员的分配","2016-08-06","王小二","李二牛","楚留香","2",20,"16","China","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("人事调动部署","2016-07-06","王小二","李二牛","楚留香","1",20,"12","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("关于第三份保密协议的书面","2016-07-06","王小二","李二牛","楚留香","2",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("在第二次会议上的记录","2016-08-06","王小二","李二牛","楚留香","1",20,"12","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("关于部门政策的实施落实","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
+insert into companyFile(cfname,cfdate,cfeditor,cfaccept,cfsend,cflevel,cfnumber,cffontid,cflanguage,cfaddress,cfclassifyid,cfclassifyname) values("阐述和总结","2016-07-06","王小二","李二牛","楚留香","1",20,"16","English","一楼-101室-A柜-15箱",4,"A类-A1类-A11类-A111类");
 
 create table role(
 rid int primary key auto_increment,
@@ -176,17 +180,23 @@ insert into role_permission(rid,pid) values(2,8);
 
 
 create table borrow_getFile (
+wid int,
 uid int ,
 fileid int,
+givetime varchar(30),
 borrowtime varchar(30) ,
+shouleback varchar(30),
 backtime varchar(30),
 state int default 1
 );
 
 create table borrow_companyFile (
+wid int,
 uid int ,
 fileid int,
+givetime varchar(30),
 borrowtime varchar(30)  ,
+shouleback varchar(30),
 backtime varchar(30),
 state int default 1
 );

@@ -101,4 +101,17 @@ public interface UserCompanyFileMapper {
          */
         public List<CompanyFile> selectCompanyFileByTwoOrMore(@Param(value = "companyFile") CompanyFile companyFile ,@Param(value = "endtime") String endtime) throws Exception;
 
+        /**
+         * 查看被删除的发文
+         */
+        public List<CompanyFile> selectTheCFileIsDel() throws Exception;
+
+
+        /**
+         * 销毁一个文件
+         * @param cfid
+         * @return
+         * @throws Exception
+         */
+        public int delCompanyFileDestroy( @Param( value = "cfid") int cfid) throws Exception;
 }

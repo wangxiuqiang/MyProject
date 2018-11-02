@@ -326,4 +326,22 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     public int deleteCompanyFileBorrowInfo(int cfid) throws Exception{
         return userCompanyFileMapper.deleteCompanyFileBorrowInfo(cfid);
     }
+    /**
+     * 查看被删除的发文
+     */
+    @Override
+    public List<CompanyFile> selectTheCFileIsDel() throws Exception {
+        return userCompanyFileMapper.selectTheCFileIsDel();
+    }
+
+
+    /**
+     * 销毁一个文件
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    public int delCompanyFileDestroy(  int cfid) throws Exception {
+        return userCompanyFileMapper.delCompanyFileDestroy( cfid );
+    }
 }

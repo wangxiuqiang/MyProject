@@ -63,7 +63,8 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public int addUser(UserExtend user) throws Exception {
         user.setCode(UUID.randomUUID().toString());
-        MailUtils.sendMail(user.getCode(),user.getUemail(),user.getUname());
+        //发送邮件
+//        MailUtils.sendMail(user.getCode(),user.getUemail(),user.getUname());
 
 
 //       System.out.println(uid);

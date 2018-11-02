@@ -161,4 +161,15 @@
            fileid=#{cfid}
        </where>
    </update>
+    <!--查看被删除的文件-->
+    <select id="selectTheCFileIsDel" resultType="cn.fm.pojo.CompanyFile" >
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile where state = 0
+    </select>
+
+    <!--销毁一个文件-->
+    <update id="delCompanyFileDestroy" parameterType="java.lang.Integer" >
+        UPDATE companyFile SET destroy = 0 where cfid = #{cfid}
+    </update>
 </mapper>

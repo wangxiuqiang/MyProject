@@ -97,4 +97,17 @@ public interface UserCompanyFileService {
      * 同时删除这个文件留下的借阅信息
      */
     public int deleteCompanyFileBorrowInfo(int cfid) throws Exception;
+    /**
+     * 查看被删除的发文
+     */
+    public List<CompanyFile> selectTheCFileIsDel() throws Exception;
+
+
+    /**
+     * 销毁一个文件
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    public int delCompanyFileDestroy( int cfid) throws Exception;
 }

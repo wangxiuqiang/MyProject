@@ -184,4 +184,41 @@ public class UserGetFileController {
 
         }
     }
+
+    /**
+     * 查看被删除的发文
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = {"admin"} )
+    @RequestMapping(value = "/checkDelectGFile")
+    @ResponseBody
+    public String checkDelectGFile() throws  Exception {
+        List<GetFile> getFiles =  userGetFileService.selectTheGFileIsDel();
+        if( getFiles != null && getFiles.size() > 0 ) {
+            return JSON.toJSONString( getFiles );
+        }else {
+            HashMap<String , Integer > map = new HashMap<>();
+            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_FIND );
+            return JSON.toJSONString( map );
+        }
+    }
+/**
+ * 清退一个收文
+ */
+    @RequiresRoles(value = {"admin"} )
+    @RequestMapping(value = "/backGetFile")
+    @ResponseBody
+    public String backGetFile(int gfid ) throws Exception {
+        HashMap<String ,Integer > map = new HashMap<>();
+         int result = userGetFileService.delGetFileBack( gfid ) ;
+         if( result > 0) {
+             map.put( StatusUtils.statecode ,StatusUtils.SUCCESS_DEL );
+         } else {
+             map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
+         }
+
+
+         return JSON.toJSONString( map );
+    }
 }

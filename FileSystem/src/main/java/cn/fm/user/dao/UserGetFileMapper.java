@@ -108,5 +108,16 @@ public interface UserGetFileMapper {
      * @throws Exception
      */
     public List<Borrow> selectGFhasBorrowInfo(int id) throws Exception;
+    /**
+     * 查看被删除的收文
+     */
+    public List<GetFile> selectTheGFileIsDel() throws Exception;
 
+    /**
+     * 清退一个文件
+     * @param gfid
+     * @return
+     * @throws Exception
+     */
+    public int delGetFileBack( @Param( value = "gfid") int gfid) throws Exception;
 }

@@ -339,4 +339,23 @@ public class UserGetFileServiceImpl implements UserGetFileService{
         return userGetFileMapper.deleteGetFileBorrowInfo(gfid);
     }
 
+    /**
+     * 查看被删除的收文
+     */
+    @Override
+    public List<GetFile> selectTheGFileIsDel() throws Exception {
+        return userGetFileMapper.selectTheGFileIsDel();
+    }
+
+    /**
+     * 清退一个文件
+     * @param gfid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int delGetFileBack(int gfid) throws Exception{
+        return userGetFileMapper.delGetFileBack( gfid );
+    }
+
 }

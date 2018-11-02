@@ -182,5 +182,43 @@ public class UserCompanyFileController {
 
     }
 
+    /**
+     * 查看被删除的发文
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = {"admin"} )
+    @RequestMapping(value = "/checkDelectCFile")
+    @ResponseBody
+    public String checkDelectCFile() throws  Exception {
+        List<CompanyFile> companyFiles =  userCompanyFileService.selectTheCFileIsDel();
+        if( companyFiles != null && companyFiles.size() > 0 ) {
+            return JSON.toJSONString( companyFiles );
+        }else {
+            HashMap<String , Integer > map = new HashMap<>();
+            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_FIND );
+            return JSON.toJSONString( map );
+        }
+    }
+
+    /**
+     * 标记一个文件为销毁状态
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = {"admin"} )
+    @RequestMapping(value = "/destroyCompanyFile")
+    @ResponseBody
+    public String destroyCompanyFile( int cfid) throws  Exception {
+        HashMap<String , Integer > map = new HashMap<>();
+        int result = userCompanyFileService.delCompanyFileDestroy( cfid );
+        if(result > 0 ) {
+            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_DEL );
+        }else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
+        }
+        return JSON.toJSONString( map );
+    }
 
 }

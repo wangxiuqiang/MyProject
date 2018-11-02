@@ -575,7 +575,7 @@ public class UserController {
         }
 
     }
-    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    @RequiresRoles(value = {"admin"} )
     @RequestMapping(value = "/returnOcrInfo/{type}")
     @ResponseBody
     public String returnOcrInfo ( MultipartFile file , @PathVariable int type ) throws Exception {
@@ -601,5 +601,7 @@ public class UserController {
         map.put( StatusUtils.statecode, StatusUtils.FAILURE_OCR );
         return JSON.toJSONString( map );
     }
+
+
 
 }
