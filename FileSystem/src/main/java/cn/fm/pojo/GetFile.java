@@ -48,6 +48,15 @@ public class GetFile {
     private int state;
 //清退字段
     private int back;
+    private int waitborrow;
+
+    public int getWaitborrow() {
+        return waitborrow;
+    }
+
+    public void setWaitborrow(int waitborrow) {
+        this.waitborrow = waitborrow;
+    }
 
     public String getGffrom() {
         return gffrom;

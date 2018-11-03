@@ -134,4 +134,11 @@ public interface UserMapper {
     public int[] selectcfWaitBorrow( @Param(value = "uid")  int uid ) throws Exception;
     public int[] selectgfWaitBorrow( @Param(value = "uid")  int uid ) throws Exception;
 
+    /**
+     * 查找借出的文件,以便后面进行比较
+     * @return
+     * @throws Exception
+     */
+    public List<Borrow> selectgfIsPassTime () throws Exception;
+    public List<Borrow> selectcfIsPassTime () throws Exception;
 }

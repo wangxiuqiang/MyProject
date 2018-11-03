@@ -102,5 +102,11 @@ public interface UserService {
      */
     public List<CompanyFile> selectcfWaitBorrow(int uid ) throws Exception;
     public List<GetFile> selectgfWaitBorrow(int uid ) throws Exception;
-
+    /**
+     * 查找借出的文件,以便后面进行比较
+     * @return
+     * @throws Exception
+     */
+    public List<BorrowCFExtends> selectcfIsPassTime () throws Exception;
+    public List<BorrowGFExtends> selectgfIsPassTime () throws Exception;
 }

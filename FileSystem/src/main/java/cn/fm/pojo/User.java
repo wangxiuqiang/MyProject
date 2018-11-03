@@ -4,7 +4,6 @@ import javax.validation.constraints.NotNull;
 
 public class User {
     private int  uid;
-
     private String uname;
     private String upwd;
     private String ucompany;

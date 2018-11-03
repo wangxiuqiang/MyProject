@@ -5,14 +5,14 @@
 <mapper namespace="cn.fm.user.dao.UserGetFileMapper">
 
     <sql id="Base_Columns_List">
-        gfid,gfname , gfidea, gfloader,gfclassifyid
-         ,gfcompany, gfresult, gfclassifyname,gfaddress,gfdatetime,gfnumber,type,isborrow
+        gfid,gfname , gfidea, gfloader,gffrom,gftime ,gflevel,waitborrow,back,
+         ,gfcompany, gfresult, gfdatetime,gfnumber,type,isborrow,gfpartnumber
     </sql>
 
       <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile" >
-          insert into getFile(gfname,gfclassifyid,gfclassifyname,gfaddress,gfdatetime,gfnumber,
-          gfidea,gfresult,gfloader,gfcompany) values(#{gfname},
-          #{gfclassifyid} ,#{gfclassifyname},#{gfaddress},#{gfdatetime},#{gfnumber},#{gfidea},
+          insert into getFile(gfname,gfdatetime,gfnumber,gffrom,gftime,gflevel,gfpartnumber
+          gfidea,gfresult,gfloader,gfcompany) values(#{gfname},#{gfdatetime},#{gfnumber},
+          #{gffrom} ,#{gftime},#{gflevel},#{gfpartnumber},#{gfidea},
           #{gfresult}, #{gfloader},#{gfcompany})
       </insert>
 
@@ -63,12 +63,8 @@
         <include refid="Base_Columns_List" />
         from getFile
         <where>
-
-            <if test="getFile.gfclassifyid != 0">
-                 gfclassifyid = #{getFile.gfclassifyid}
-            </if>
             <if test="getFile.gfnumber != 0">
-                and gfnumber = #{getFile.gfnumber}
+                 gfnumber = #{getFile.gfnumber}
             </if>
             <if test="getFile.gfcompany != null">
                 and gfcompany = #{getFile.gfcompany}
@@ -114,15 +110,27 @@
         <if test="gfresult != null" >
             gfresult = #{gfresult},
         </if>
-        <if test="gfclassifyid != 0">
-            gfclassifyid = #{gfclassifyid},
-        </if>
-        <if test="gfclassifyname != null" >
-            gfclassifyname = #{gfclassifyname},
-        </if>
-        <if test="gfaddress != null" >
-            gfaddress = #{gfaddress},
-        </if>
+            <if test="gffrom != null" >
+                gffrom = #{gffrom},
+            </if>
+            <if test="gflevel != null" >
+                gflevel = #{gflevel},
+            </if>
+            <if test="gftime != null" >
+                gftime = #{gftime},
+            </if>
+            <if test="gfpartnumber != null" >
+                gfpartnumber = #{gfpartnumber},
+            </if>
+        <!--<if test="gfclassifyid != 0">-->
+            <!--gfclassifyid = #{gfclassifyid},-->
+        <!--</if>-->
+        <!--<if test="gfclassifyname != null" >-->
+            <!--gfclassifyname = #{gfclassifyname},-->
+        <!--</if>-->
+        <!--<if test="gfaddress != null" >-->
+            <!--gfaddress = #{gfaddress},-->
+        <!--</if>-->
 
         <if test="gfdatetime != null" >
             gfdatetime = #{gfdatetime},

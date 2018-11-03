@@ -103,6 +103,7 @@ public class UserServiceImpl implements UserService {
             borrow.setUid(uid);
             borrow.setFileid(cfid);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
+        //设置为24小时之后为归还日期
         borrow.setShouldback( dateAddToTomorrow() );
             //添加文件的借出状态,更新借阅表的borrowtime
             int res = userMapper.insertBorrowcfInfo(borrow);
@@ -134,6 +135,7 @@ public class UserServiceImpl implements UserService {
             borrow.setUid(uid);
             borrow.setFileid(gfid);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
+            //设置为24小时之后为归还日期
         borrow.setShouldback( dateAddToTomorrow() );
             int r = userMapper.insertBorrowgfInfo(borrow);
             if(r == 0) {
@@ -221,6 +223,8 @@ public class UserServiceImpl implements UserService {
                     bgfe.setUser(user);
                     bgfe.setGetFile(gf);
                     bgfe.setBorrowtime(n.getBorrowtime());
+                    bgfe.setGivetime( n.getGivetime() );
+                    bgfe.setSholdback( n.getBacktime() );
                     bgfe.setBacktime(n.getBacktime());
                     if(flag == 0) {
                         bgf.add(bgfe);
@@ -251,6 +255,8 @@ public class UserServiceImpl implements UserService {
                 bgfe.setUser(user);
                 bgfe.setGetFile(gf);
                 bgfe.setBorrowtime(n.getBorrowtime());
+                bgfe.setGivetime( n.getGivetime() );
+                bgfe.setSholdback( n.getBacktime() );
                 bgfe.setBacktime(n.getBacktime());
                 if(flag == 0) {
                     bgf.add(bgfe);
@@ -325,6 +331,7 @@ public class UserServiceImpl implements UserService {
                 return -5;
             }
         }
+        //先更新将文件的改了 ,在修改借阅表的字段
         if( userMapper.updateCompanyFileBack(fileid) != 0){
             if(userMapper.updatecfBackTime(fileid) != 0) {
                 return 1;
@@ -388,7 +395,7 @@ public class UserServiceImpl implements UserService {
 //        Classify classify = userGetFileMapper.selectClassify(fatherid);
 //        classify.setCyid(0);
 //        classify.setCyname("0");
-//        classify.setCyfather(0);
+//        classify.setCyfatherid(0);
         List<Classify> classifies = userMapper.selectClassifyByFatherId(fatherid);
 //        classifies.add(classify);
         return classifies;
@@ -421,10 +428,10 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
 
-    public int selectcfisBorrow(@Param(value = "cfid") int cfid) throws Exception{
+    public int selectcfisBorrow( int cfid) throws Exception{
         return userMapper.selectcfisBorrow(cfid);
     }
-    public int selectgfisBorrow(@Param(value = "gfid") int gfid) throws Exception{
+    public int selectgfisBorrow(int gfid) throws Exception{
         return userMapper.selectgfisBorrow(gfid);
     }
 
@@ -515,5 +522,88 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
-
+    /**
+     * 查找借出的文件,然后进行比较,比较完之后将超时的文件的信息和用户的信息封装在一起输出,
+     * 可以先进行排序,让一样的文件在一块
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<BorrowCFExtends> selectcfIsPassTime () throws Exception{
+        //获取了没有归还的文件
+        List<Borrow> borrows = userMapper.selectcfIsPassTime();
+        //设置一个新的borrow来存放超时的借阅信息
+        List<Borrow> newBorrows = new ArrayList<>();
+        //String用来获取应该归还的日期
+        String shouldback = "";
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+        for (Borrow borrow : borrows) {
+            shouldback = borrow.getShouldback();
+            System.currentTimeMillis();
+            date = sdf.parse( shouldback );
+            //通过系统时间去减掉应该还的时间,如果 >= 0 表示超时了,就将这些添加到新的List中
+            long time = ( System.currentTimeMillis() - date.getTime() ) ;
+            if( time >= 0 ) {
+                newBorrows.add( borrow );
+            }
+        }
+        //然后根据文件id和用户id获取需要的文件和用户信息 ,存放到扩展类里面
+        List<BorrowCFExtends> bcf = new ArrayList<BorrowCFExtends>();
+        newBorrows.forEach( n -> {
+            try {
+                User user = adminMapper.findWorkerById( n.getUid() );
+                CompanyFile companyFile = userCompanyFileMapper.selectCompanyFileById( n.getFileid() );
+                BorrowCFExtends borrowCFExtend = new BorrowCFExtends();
+                borrowCFExtend.setUser( user );
+                borrowCFExtend.setCompanyFile( companyFile );
+                borrowCFExtend.setSholdback( n.getShouldback() );
+                borrowCFExtend.setBorrowtime( n.getBorrowtime() );
+                borrowCFExtend.setGivetime( n.getGivetime());
+                bcf.add( borrowCFExtend );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return bcf;
+    }
+    @Override
+    public List<BorrowGFExtends> selectgfIsPassTime () throws Exception{
+        //获取了没有归还的文件
+        List<Borrow> borrows = userMapper.selectgfIsPassTime();
+        //设置一个新的borrow来存放超时的借阅信息
+        List<Borrow> newBorrows = new ArrayList<>();
+        //String用来获取应该归还的日期
+        String shouldback = "";
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+        for (Borrow borrow : borrows) {
+            shouldback = borrow.getShouldback();
+            System.currentTimeMillis();
+            date = sdf.parse( shouldback );
+            //通过系统时间去减掉应该还的时间,如果 >= 0 表示超时了,就将这些添加到新的List中
+            long time = ( System.currentTimeMillis() - date.getTime() ) ;
+            if( time >= 0 ) {
+                newBorrows.add( borrow );
+            }
+        }
+        //然后根据文件id和用户id获取需要的文件和用户信息 ,存放到扩展类里面
+        List<BorrowGFExtends> bgf = new ArrayList<BorrowGFExtends>();
+        newBorrows.forEach( n -> {
+            try {
+                User user = adminMapper.findWorkerById( n.getUid() );
+                GetFile getFile = userGetFileMapper.selectGetFileById( n.getFileid() );
+                BorrowGFExtends borrowGFExtend = new BorrowGFExtends();
+                borrowGFExtend.setUser( user );
+                borrowGFExtend.setGetFile( getFile );
+                borrowGFExtend.setSholdback( n.getShouldback() );
+                borrowGFExtend.setBorrowtime( n.getBorrowtime() );
+                borrowGFExtend.setGivetime( n.getGivetime());
+                bgf.add( borrowGFExtend );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return bgf;
+    }
 }

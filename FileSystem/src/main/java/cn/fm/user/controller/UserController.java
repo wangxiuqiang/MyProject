@@ -16,6 +16,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.machinezoo.sourceafis.FingerprintTemplate;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -414,7 +415,10 @@ public class UserController {
     }
 
     /**
-     * 更新借阅归还时间
+     * 更新借阅归还时间,归还文件,再还之前,根据指纹找到需要的这个单位借阅的内容,这个是
+     * 先进行文件字段的更新,然后将借阅表进行更新,所以说这是最后一步的更新,首先需要获取指纹,用指纹在进行
+     * 获取到用户的id,进一步获取到用户的wid,这样,如果是uid不一样,但是wid一样也可以实现归还
+     *
      */
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updatecfBackTime")
@@ -724,6 +728,35 @@ public class UserController {
 
         map.put( StatusUtils.statecode, StatusUtils.FAILURE_OCR );
         return JSON.toJSONString( map );
+    }
+
+    /**
+     * 查看超时的接口
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = {"admin"} )
+    @RequestMapping(value = "/selectFileIsPassTime/{type}")
+    @ResponseBody
+    public String selectFileIsPassTime(@PathVariable int type ) throws Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+       if( type == 1 ) {
+           List<BorrowCFExtends> bcfs = userService.selectcfIsPassTime();
+           if( bcfs != null && bcfs.size() > 0 ) {
+               return JSON.toJSONString( bcfs );
+           }else {
+               map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+               return JSON.toJSONString( map );
+           }
+       }else {
+           List<BorrowGFExtends> bgfs = userService.selectgfIsPassTime();
+           if( bgfs != null && bgfs.size() > 0 ) {
+               return JSON.toJSONString( bgfs );
+           }else {
+               map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+               return JSON.toJSONString( map );
+           }
+       }
     }
 
 

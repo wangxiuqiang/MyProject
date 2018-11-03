@@ -165,9 +165,10 @@ public class UserCompanyFileController {
             return JSON.toJSONString(StatusUtils.IS_NULL);
         }
         //判断是不是有 还没有归还的
-        int cfisborrow[] =userService.selectcfisBorrow(cfids);
-        for(int i = 0; i < cfisborrow.length;i++) {
-            if(cfisborrow[i] == 2) {
+
+        for(int i = 0; i < cfids.length;i++) {
+            int cfisborrow =userService.selectcfisBorrow(cfids[i]);
+            if(cfisborrow == 2) {
                 map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
                 return JSON.toJSONString(map);
             }
