@@ -59,7 +59,7 @@ public interface UserGetFileService {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByClassifyId(int classifyid) throws Exception;
+//    public List<GetFile> selectGetFileByClassifyId(int classifyid) throws Exception;
 
     /**
      * 根据录入时间查询文件信息

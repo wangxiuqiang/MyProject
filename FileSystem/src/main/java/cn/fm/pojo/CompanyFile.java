@@ -38,6 +38,25 @@ public class CompanyFile {
 //    @NotNull(message = "{companyfile.classifyname.isnull}")
     private String cfclassifyname;
     private int state;
+//等待被借阅 ,
+    private int waitborrow;
+    private int destory;
+
+    public int getWaitborrow() {
+        return waitborrow;
+    }
+
+    public void setWaitborrow(int waitborrow) {
+        this.waitborrow = waitborrow;
+    }
+
+    public int getDestory() {
+        return destory;
+    }
+
+    public void setDestory(int destory) {
+        this.destory = destory;
+    }
 
     public int getState() {
         return state;

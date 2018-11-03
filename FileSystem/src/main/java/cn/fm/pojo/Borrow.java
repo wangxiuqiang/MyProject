@@ -6,6 +6,33 @@ public class Borrow {
     private String borrowtime;
     private String backtime;
     private int state;
+    private String givetime;
+    private String shouldback;
+//    private int wid;
+
+    public String getGivetime() {
+        return givetime;
+    }
+
+    public void setGivetime(String givetime) {
+        this.givetime = givetime;
+    }
+
+    public String getShouldback() {
+        return shouldback;
+    }
+
+    public void setShouldback(String shouldback) {
+        this.shouldback = shouldback;
+    }
+//
+//    public int getWid() {
+//        return wid;
+//    }
+//
+//    public void setWid(int wid) {
+//        this.wid = wid;
+//    }
 
     public int getState() {
         return state;

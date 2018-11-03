@@ -17,6 +17,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -69,65 +70,84 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectUserId(name);
     }
 
+    public String dateAddToTomorrow() throws Exception {
+        long time = System.currentTimeMillis();
+        long timeTomorrow = 24 * 60 * 60 * 1000;
+        time = time + timeTomorrow;
+        Date date = new Date();
+        date.setTime( time );
+        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+        return sdf.format( date );
+
+    }
     /**
-     * 添加借阅信息,同时在这里修改文件的状态
+     * 添加借阅信息,同时在这里修改文件的状态,同时修改待领取字段的状态,只改了cf 没有改 gf
      * @param uid,cfid
      * @return
      * @throws Exception
      */
     @Override
-    public int insertBorrowcfInfo(int uid,int[] cfid) throws Exception{
+    public int insertBorrowcfInfo(int uid,int cfid) throws Exception{
 
         Borrow borrow = new Borrow();
 
         //查看这些文件是不是被借了,如果被借了就返回 - 5
-        int[] isBorrow = userMapper.selectcfisBorrow(cfid);
-        for(int j = 0; j < isBorrow.length; j++){
-            if(isBorrow[j] == 2) {
-                return -5;
-            }
+        int isBorrow = userMapper.selectcfisBorrow(cfid);
+        if( isBorrow == 2) {
+            return -5;
+        }
+//        for(int j = 0; j < isBorrow.length; j++){
+//            if(isBorrow[j] == 2) {
+//                return -5;
+//            }
             borrow.setUid(uid);
-            borrow.setFileid(cfid[j]);
+            borrow.setFileid(cfid);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
-            //添加文件的借出状态
+        borrow.setShouldback( dateAddToTomorrow() );
+            //添加文件的借出状态,更新借阅表的borrowtime
             int res = userMapper.insertBorrowcfInfo(borrow);
-            if(res == 0) {
+
+            if(res == 0 ) {
                 return -4;
             }
-            //设置文件被借出
-            int re = userMapper.updateCompanyFileIsBorrow(cfid[j]);
+            //设置文件被借出 ,更新文件的字段 isborrow waitborrow
+            int re = userMapper.updateCompanyFileIsBorrow(cfid);
             if(re == 0) {
                 return -4;
             }
-        }
+//        }
         return  1;
     }
     @Override
-    public int insertBorrowgfInfo(int uid,int[] gfid) throws Exception{
+    public int insertBorrowgfInfo(int uid,int gfid) throws Exception{
         Borrow borrow = new Borrow();
 
         //查看这些文件是不是被借了,如果被借了就返回 - 5
-        int[] isBorrow = userMapper.selectgfisBorrow(gfid);
-        for(int j = 0; j < isBorrow.length; j++){
-            if(isBorrow[j] == 2) {
-                return -5;
-            }
+        int isBorrow = userMapper.selectgfisBorrow(gfid);
+//        for(int j = 0; j < isBorrow.length; j++){
+//            if(isBorrow[j] == 2) {
+//                return -5;
+//            }
+        if( isBorrow == 2) {
+            return -5;
+        }
             borrow.setUid(uid);
-            borrow.setFileid(gfid[j]);
+            borrow.setFileid(gfid);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
+        borrow.setShouldback( dateAddToTomorrow() );
             int r = userMapper.insertBorrowgfInfo(borrow);
             if(r == 0) {
                 return -4;
             }
-           int re = userMapper.updateGetFileIsBorrow(gfid[j]);
+           int re = userMapper.updateGetFileIsBorrow(gfid);
             if(re == 0) {
                 return -4;
             }
-        }
+//        }
         return  1;
     }
 /**
- *  查询一个用户所有的借阅出去的文件
+ *  查询一个用户所有的借阅出去的文件 ,如果flag = 0 表示所有的借阅信息, fflag = 1 表示没有还的,flag = 2表示还了的.
  */
     @Override
     public List<BorrowCFExtends> selectBorrowcfInfo(int uid,int flag) throws Exception{
@@ -296,10 +316,12 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int updatecfBackTime(int[] fileid) throws Exception{
-        int[] isborrow = userMapper.selectcfisBorrow(fileid);
-        for(int i = 0;i < isborrow.length; i++) {
+        //如果还多个文件, 就先从这些里面查找是不是用文件已经还了,如果没有的话,在进行归还
+        //归还原则:根据数组的长度一个个找出来进行判断
+        for(int i = 0;i < fileid.length; i++) {
             //没有被借出 ,表明 传输的有错误 ,  返回一个-5 ,表示  不对
-            if(isborrow[i] != 2) {
+             int isborrow = userMapper.selectcfisBorrow(fileid[i]);
+            if( isborrow != 2) {
                 return -5;
             }
         }
@@ -318,10 +340,12 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public int updategfBackTime(int[] fileid) throws Exception{
-        int[] isborrow = userMapper.selectgfisBorrow(fileid);
-        for(int i = 0;i < isborrow.length; i++) {
+        //如果还多个文件, 就先从这些里面查找是不是用文件已经还了,如果没有的话,在进行归还
+        //归还原则:根据数组的长度一个个找出来进行判断
+        for(int i = 0;i < fileid.length; i++) {
             //没有被借出 ,表明 传输的有错误 ,  返回一个-5 ,表示  不对
-            if(isborrow[i] != 2) {
+            int isborrow = userMapper.selectgfisBorrow(fileid[i]);
+            if(isborrow != 2) {
                 return -5;
             }
         }
@@ -396,10 +420,11 @@ public class UserServiceImpl implements UserService {
      * @return
      * @throws Exception
      */
-    public int[] selectcfisBorrow(@Param(value = "cfid") int[] cfid) throws Exception{
+
+    public int selectcfisBorrow(@Param(value = "cfid") int cfid) throws Exception{
         return userMapper.selectcfisBorrow(cfid);
     }
-    public int[] selectgfisBorrow(@Param(value = "gfid") int[] gfid) throws Exception{
+    public int selectgfisBorrow(@Param(value = "gfid") int gfid) throws Exception{
         return userMapper.selectgfisBorrow(gfid);
     }
 
@@ -449,6 +474,46 @@ public class UserServiceImpl implements UserService {
             }
         });
         return bgf;
+    }
+
+    /**
+     * 根据用户id查找没有领取的文件
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<CompanyFile> selectcfWaitBorrow(   int uid ) throws Exception{
+        int fileids[] = userMapper.selectcfWaitBorrow( uid ) ;
+        List<CompanyFile> companyFiles = new ArrayList<>();
+        for( int i = 0; i < fileids.length; i++ ) {
+            CompanyFile companyFile = userCompanyFileMapper.selectCompanyFileById( fileids[i] );
+            if(companyFile != null ) {
+                companyFiles.add(  companyFile );
+            }
+
+        }
+        if( companyFiles.size() > 0 ) {
+            return companyFiles;
+        }
+        return null;
+    }
+    @Override
+    public List<GetFile> selectgfWaitBorrow(   int uid ) throws Exception{
+        int fileids[] = userMapper.selectgfWaitBorrow( uid ) ;
+        List<GetFile> getFiles = new ArrayList<>();
+        for( int i = 0; i < fileids.length; i++ ) {
+            GetFile getFile = userGetFileMapper.selectGetFileById( fileids[i] );
+            if(getFile != null ) {
+                getFiles.add(  getFile );
+            }
+
+        }
+
+        if( getFiles.size() > 0 ) {
+            return getFiles;
+        }
+        return null;
     }
 
 }

@@ -5,16 +5,16 @@ use filesystem;
 create table user( 
 uid int primary key auto_increment,
 uname varchar(30) ,
-uemail varchar(30) ,
 upwd varchar(128) ,
 state int default 1,
 uupdatetime varchar(23) ,
-code varchar(50) NOT NULL,
-ucompany varchar(30),
+ucompany int,
+uphone varchar(11),
+unumber varchar(12),
 ifAdmin int
 );
-insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("王富贵","test@test.com","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813","1",1,"2018",1);
-insert into user(uname,uemail,upwd,code,state,uupdatetime,ifAdmin) values("朗明","langming@langming.com","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813","1",1,"2018",0);
+insert into user(uname,upwd,state,uupdatetime,ifAdmin) values("王富贵","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813",,1,"2018",1);
+insert into user(uname,upwd,state,uupdatetime,ifAdmin) values("朗明","2682a22ff44e75313f73c7d9d9985d56810d6cc91f1eeaf76dc8dab14393f813",1,"2018",0);
 
 create table workPlace (
 wid int primary key auto_increment,
@@ -42,19 +42,22 @@ gfid int primary key auto_increment,
 gfname varchar(50) NOT NULL,
 gfidea text,
 gfloader text,
+gffrom varchar(20),
 gfcompany varchar(50),
 gfresult varchar(20),
-gfclassifyid int ,
-gfclassifyname varchar(100),
+#gfclassifyid int ,
+#gfclassifyname varchar(100),
 gfaddress varchar(50) ,
 gfdatetime varchar(30),
 gfnumber int not null,
+gftime varchar(3),
 gfcountuse int default 1,
+gfpartnumber varchar(20),
 type int default 2,
 isborrow int default 1,
 back int default 0,
 state int default 1,
-
+gfwid int ,
 foreign key(gfclassifyid) references classify(cyid)
 );
 

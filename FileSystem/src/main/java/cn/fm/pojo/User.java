@@ -10,9 +10,38 @@ public class User {
     private String ucompany;
     private String uupdatetime;
     private int state;
-    private String uemail;
-    private String code;
+    private String uphone;
+    private String unumber;
+    private int wid;
+
+//    private String uemail;
+//    private String code;
     private int ifAdmin;
+
+    public int getWid() {
+        return wid;
+    }
+
+    public void setWid(int wid) {
+        this.wid = wid;
+    }
+
+    public String getUphone() {
+        return uphone;
+    }
+
+    public void setUphone(String uphone) {
+        this.uphone = uphone;
+    }
+
+    public String getUnumber() {
+        return unumber;
+    }
+
+    public void setUnumber(String unumber) {
+        this.unumber = unumber;
+    }
+
     public int getIfAdmin() {
         return ifAdmin;
     }
@@ -69,19 +98,19 @@ public class User {
         this.state = state;
     }
 
-    public String getUemail() {
-        return uemail;
-    }
+//    public String getUemail() {
+//        return uemail;
+//    }
+//
+//    public void setUemail(String uemail) {
+//        this.uemail = uemail;
+//    }
 
-    public void setUemail(String uemail) {
-        this.uemail = uemail;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
+//    public String getCode() {
+//        return code;
+//    }
+//
+//    public void setCode(String code) {
+//        this.code = code;
+//    }
 }

@@ -104,8 +104,8 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
-    public int[] selectcfisBorrow(@Param(value = "cfid") int[] cfid) throws Exception;
-    public int[] selectgfisBorrow(@Param(value = "gfid") int[] gfid) throws Exception;
+    public int selectcfisBorrow(@Param(value = "cfid") int cfid) throws Exception;
+    public int selectgfisBorrow(@Param(value = "gfid") int gfid) throws Exception;
 
     /**
      * 查最顶层的分类
@@ -124,4 +124,14 @@ public interface UserMapper {
      * 根据code 查找用户了录入时间
      */
     public String selectUserupdatetime(@Param(value = "code") String code) throws Exception;
+
+    /**
+     * 根据用户id查找没有领取的文件
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public int[] selectcfWaitBorrow( @Param(value = "uid")  int uid ) throws Exception;
+    public int[] selectgfWaitBorrow( @Param(value = "uid")  int uid ) throws Exception;
+
 }

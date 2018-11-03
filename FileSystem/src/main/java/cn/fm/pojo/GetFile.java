@@ -23,13 +23,20 @@ public class GetFile {
     private String gfname;
     private String gfidea;
     private String gfloader;
+    //来文单位
+    private String gffrom;
+    //保密密级
+    private String gflevel;
+    //保密期限
+    private String gettime;
     @NotNull(message = "{getfile.company.isnull}")
+    //承办单位
     private String gfcompany;
     private String gfresult;
-    private int gfclassifyid;
+//    private int gfclassifyid;
 //    @NotNull(message = "{getfile.classifyname.isnull}")
-    private String gfclassifyname;
-    private String gfaddress;
+//    private String gfclassifyname;
+//    private String gfaddress;
     private String gfdatetime;
     @NotNull(message = "{getfile.number.isnull}")
     private int gfnumber;
@@ -39,7 +46,40 @@ public class GetFile {
     private int isborrow;
     //是否删除
     private int state;
+//清退字段
+    private int back;
 
+    public String getGffrom() {
+        return gffrom;
+    }
+
+    public void setGffrom(String gffrom) {
+        this.gffrom = gffrom;
+    }
+
+    public String getGflevel() {
+        return gflevel;
+    }
+
+    public void setGflevel(String gflevel) {
+        this.gflevel = gflevel;
+    }
+
+    public String getGettime() {
+        return gettime;
+    }
+
+    public void setGettime(String gettime) {
+        this.gettime = gettime;
+    }
+
+    public int getBack() {
+        return back;
+    }
+
+    public void setBack(int back) {
+        this.back = back;
+    }
     /**
      * 所在的分类的所有id地址
      */
@@ -71,22 +111,22 @@ public class GetFile {
         this.state = state;
     }
 
-    @Override
-    public String toString() {
-        return "GetFile{" +
-                "gfid=" + gfid +
-                ", gfname='" + gfname + '\'' +
-                ", gfidea='" + gfidea + '\'' +
-                ", gfloader='" + gfloader + '\'' +
-                ", gfcompany='" + gfcompany + '\'' +
-                ", gfresult='" + gfresult + '\'' +
-                ", gfclassifyid=" + gfclassifyid +
-                ", gfclassifyname='" + gfclassifyname + '\'' +
-                ", gfaddress='" + gfaddress + '\'' +
-                ", gfdatetime='" + gfdatetime + '\'' +
-                ", gfnumber=" + gfnumber +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "GetFile{" +
+//                "gfid=" + gfid +
+//                ", gfname='" + gfname + '\'' +
+//                ", gfidea='" + gfidea + '\'' +
+//                ", gfloader='" + gfloader + '\'' +
+//                ", gfcompany='" + gfcompany + '\'' +
+//                ", gfresult='" + gfresult + '\'' +
+//                ", gfclassifyid=" + gfclassifyid +
+//                ", gfclassifyname='" + gfclassifyname + '\'' +
+//                ", gfaddress='" + gfaddress + '\'' +
+//                ", gfdatetime='" + gfdatetime + '\'' +
+//                ", gfnumber=" + gfnumber +
+//                '}';
+//    }
 
 
     public int getGfnumber() {
@@ -144,30 +184,30 @@ public class GetFile {
     public void setGfresult(String gfresult) {
         this.gfresult = gfresult;
     }
-
-    public int getGfclassifyid() {
-        return gfclassifyid;
-    }
-
-    public void setGfclassifyid(int gfclassifyid) {
-        this.gfclassifyid = gfclassifyid;
-    }
-
-    public String getGfclassifyname() {
-        return gfclassifyname;
-    }
-
-    public void setGfclassifyname(String gfclassifyname) {
-        this.gfclassifyname = gfclassifyname;
-    }
-
-    public String getGfaddress() {
-        return gfaddress;
-    }
-
-    public void setGfaddress(String gfaddress) {
-        this.gfaddress = gfaddress;
-    }
+//
+//    public int getGfclassifyid() {
+//        return gfclassifyid;
+//    }
+//
+//    public void setGfclassifyid(int gfclassifyid) {
+//        this.gfclassifyid = gfclassifyid;
+//    }
+//
+//    public String getGfclassifyname() {
+//        return gfclassifyname;
+//    }
+//
+//    public void setGfclassifyname(String gfclassifyname) {
+//        this.gfclassifyname = gfclassifyname;
+//    }
+//
+//    public String getGfaddress() {
+//        return gfaddress;
+//    }
+//
+//    public void setGfaddress(String gfaddress) {
+//        this.gfaddress = gfaddress;
+//    }
 
     public String getGfdatetime() {
         return gfdatetime;

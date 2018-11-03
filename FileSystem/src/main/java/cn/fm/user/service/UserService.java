@@ -1,8 +1,6 @@
 package cn.fm.user.service;
 
-import cn.fm.pojo.Borrow;
-import cn.fm.pojo.Classify;
-import cn.fm.pojo.User;
+import cn.fm.pojo.*;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
 import cn.fm.vo.UserExtend;
@@ -33,8 +31,8 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    public int insertBorrowcfInfo(int uid,int[] cfid) throws Exception;
-    public int insertBorrowgfInfo(int uid,int[] gfid) throws Exception;
+    public int insertBorrowcfInfo(int uid,int cfid) throws Exception;
+    public int insertBorrowgfInfo(int uid,int gfid) throws Exception;
     /**
      * 更新归还时间  ,同时在这里面完成对文件状态的改变
      */
@@ -82,8 +80,8 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    public int[] selectcfisBorrow( int[] cfid) throws Exception;
-    public int[] selectgfisBorrow( int[] gfid) throws Exception;
+    public int selectcfisBorrow( int cfid) throws Exception;
+    public int selectgfisBorrow( int gfid) throws Exception;
 
     /**
      * 根据传入的开始时间和终止时间查询 没有归还的文件信息, 范围查询,并通过这里面的用户id和文件id去查询用户和文件信息
@@ -94,5 +92,15 @@ public interface UserService {
      */
     public List<BorrowCFExtends> selectBorrowcfByborrowtime(  String starttime ,  String endtime ) throws Exception;
     public List<BorrowGFExtends> selectBorrowgfByborrowtime( String starttime ,  String endtime ) throws Exception;
+
+
+    /**
+     * 根据用户id查找没有领取的文件
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public List<CompanyFile> selectcfWaitBorrow(int uid ) throws Exception;
+    public List<GetFile> selectgfWaitBorrow(int uid ) throws Exception;
 
 }

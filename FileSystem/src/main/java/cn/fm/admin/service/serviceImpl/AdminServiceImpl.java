@@ -161,7 +161,6 @@ public class AdminServiceImpl implements AdminService{
         UserExtend ue = new UserExtend();
         ue.setUid(user.getUid());
         ue.setState(user.getState());
-        ue.setUemail(user.getUemail());
         ue.setUname(user.getUname());
         ue.setUupdatetime(user.getUupdatetime());
         ue.setUcompany(user.getUcompany());

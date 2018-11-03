@@ -64,7 +64,7 @@ public class UserGetFileController {
     public String findTypeFiles(@PathVariable Integer page , GetFile getFile, String endtime) throws Exception {
         System.out.println(getFile);
         if(getFile.getGfnumber() != 0 || (getFile.getGfdatetime() != null && endtime != null) || getFile.getGfcompany() != null
-                || getFile.getGfclassifyid() != 0 || getFile.getGfname() != null) {
+                || getFile.getGfname() != null) {
             PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
             List<GetFile> getFiles = userGetFileService.findTypeFiles(getFile,endtime);
@@ -149,9 +149,10 @@ public class UserGetFileController {
             return JSON.toJSONString(map);
         }
         //判断是不是有 还没有归还的
-        int gfisborrow[] =userService.selectgfisBorrow(gfids);
-        for(int i = 0; i < gfisborrow.length;i++) {
-            if(gfisborrow[i] == 2) {
+
+        for(int i = 0; i < gfids.length;i++) {
+            int gfisborrow =userService.selectgfisBorrow(gfids[i]);
+            if(gfisborrow == 2) {
                 map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
                 return JSON.toJSONString(map);
             }

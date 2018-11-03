@@ -6,7 +6,8 @@
 
     <sql id="Base_Columns_List">
         cfid,cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
-        cfsend,cflevel,cffontid,cfnumber,cflanguage ,cfloader,type,isborrow
+        cfsend,cflevel,cffontid,cfnumber,cflanguage ,cfloader,type,isborrow,waitborrow,
+        destroy
     </sql>
 
     <insert id="insertCompanyFile" parameterType="cn.fm.pojo.CompanyFile" >

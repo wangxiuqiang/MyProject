@@ -12,6 +12,24 @@ public class BorrowCFExtends {
     private CompanyFile companyFile;
     private String backtime;
     private String borrowtime;
+    private String sholdback;
+    private String givetime;
+
+    public String getSholdback() {
+        return sholdback;
+    }
+
+    public void setSholdback(String sholdback) {
+        this.sholdback = sholdback;
+    }
+
+    public String getGivetime() {
+        return givetime;
+    }
+
+    public void setGivetime(String givetime) {
+        this.givetime = givetime;
+    }
 
     public User getUser() {
         return user;

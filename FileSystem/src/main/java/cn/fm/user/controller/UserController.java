@@ -3,6 +3,8 @@ package cn.fm.user.controller;
  * 用户设置密码和 数据库备份
  */
 
+import cn.fm.admin.service.AdminService;
+import cn.fm.admin.service.serviceImpl.AdminServiceImpl;
 import cn.fm.pojo.*;
 import cn.fm.user.service.UserService;
 import cn.fm.utils.*;
@@ -13,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.machinezoo.sourceafis.FingerprintTemplate;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
@@ -26,6 +29,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -226,27 +231,146 @@ public class UserController {
     }
 
     /**
-     * 录入 借阅信息
+     * 在录入指纹的时候弹出的信息,查看是不是有没有归还的文件
+     * @param finger
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/beforeAddBorrowcfInfo")
+    @ResponseBody
+    public String beforeAddBorrowcfInfo( MultipartFile finger ) throws Exception {
+
+        HashMap<String,Integer> map = new HashMap<>();
+        //通过指纹找uid
+        //首先将这个指纹文件保存,获取文件的名字
+        String name = UploadUtils.upload( finger , 0);
+//        //将文件读成二进制数组,
+//        byte[] image = Files.readAllBytes(Paths.get(name));
+//        //将文件做成比较的模板
+//        FingerprintTemplate template = new FingerprintTemplate()
+//                .dpi(500)
+//                .create(image);
+//
+        //从数据库中取出数据
+        AdminService adminService = new AdminServiceImpl();
+        User user = adminService.selectAllFingerInfoAndCompare(name);
+        if( user != null ) {
+            //根据用户去找他是不是用其他借阅的信息 ,1表示没有归还的
+           List<BorrowCFExtends> cfExtends = userService.selectBorrowcfInfo( user.getUid() , 1 );
+           if( cfExtends != null && cfExtends.size() > 0 ) {
+               return JSON.toJSONString( cfExtends );
+           }else {
+               map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+               return JSON.toJSONString( map );
+           }
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.NO_ROLE_PERMISSION );
+            return JSON.toJSONString( map );
+        }
+    }
+    /**
+     * 在录入指纹的时候弹出的信息,查看是不是有没有归还的文件
+     * @param finger
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/beforeAddBorrowgfInfo")
+    @ResponseBody
+    public String beforeAddBorrowgfInfo( MultipartFile finger ) throws Exception {
+
+        HashMap<String,Integer> map = new HashMap<>();
+        //通过指纹找uid
+        //首先将这个指纹文件保存,获取文件的名字
+        String name = UploadUtils.upload( finger , 0);
+//        //将文件读成二进制数组,
+//        byte[] image = Files.readAllBytes(Paths.get(name));
+//        //将文件做成比较的模板
+//        FingerprintTemplate template = new FingerprintTemplate()
+//                .dpi(500)
+//                .create(image);
+//
+        //从数据库中取出数据
+        AdminService adminService = new AdminServiceImpl();
+        User user = adminService.selectAllFingerInfoAndCompare( name );
+        if( user != null ) {
+            //根据用户去找他是不是用其他借阅的信息 ,1表示没有归还的
+            List<BorrowGFExtends> gfExtends = userService.selectBorrowgfInfo( user.getUid() , 1 );
+            if( gfExtends != null && gfExtends.size() > 0 ) {
+                return JSON.toJSONString( gfExtends );
+            }else {
+                map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+                return JSON.toJSONString( map );
+            }
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.NO_ROLE_PERMISSION );
+            return JSON.toJSONString( map );
+        }
+    }
+
+    /**
+     * 根据用户的id查看 待领取的文件
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/showcfWaitBorrow")
+    @ResponseBody
+    public String showcfWaitBorrow( int uid ) throws  Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        List<CompanyFile> companyFiles = userService.selectcfWaitBorrow( uid );
+        if( companyFiles != null && companyFiles.size() > 0 ) {
+            return JSON.toJSONString( companyFiles );
+        }
+        map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+        return JSON.toJSONString( map );
+
+    }
+
+    /**
+     * 根据用户的id查看 待领取的文件
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/showgfWaitBorrow")
+    @ResponseBody
+    public String showgfWaitBorrow( int uid ) throws  Exception {
+        HashMap<String,Integer> map = new HashMap<>();
+        List<GetFile> getFiles = userService.selectgfWaitBorrow( uid );
+        if( getFiles != null && getFiles.size() > 0 ) {
+            return JSON.toJSONString( getFiles );
+        }
+        map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+        return JSON.toJSONString( map );
+
+    }
+    /**
+     *  将uid和fid穿过来进行借阅
      *
      * @param uid
      * @param cfid
+     *
      * @return
      * @throws Exception
      */
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/insertBorrowcfInfo")
     @ResponseBody
-    public String insertBorrowcfInfo(int uid,
-                                     String cfid) throws Exception {
+    public String insertBorrowcfInfo( int uid, int cfid ) throws Exception {
        // System.out.println("------------------" + cfid +"--------------------------");
         HashMap<String,Integer> map = new HashMap<>();
-        String[] cfidStrings = cfid.split(",");
-        int[] cfids = new int[cfidStrings.length];
-        int i = 0;
-        for( i = 0; i <cfids.length ; i++) {
-            cfids[i] = Integer.parseInt(cfidStrings[i]);
-        }
-        int result = userService.insertBorrowcfInfo(uid, cfids);
+
+//        String[] cfidStrings = cfid.split(",");
+//        int[] cfids = new int[cfidStrings.length];
+//        int i = 0;
+//        for( i = 0; i <cfids.length ; i++) {
+//            cfids[i] = Integer.parseInt(cfidStrings[i]);
+//        }
+        int result = userService.insertBorrowcfInfo(uid, cfid);
         if (result == -5) {
             map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
             return JSON.toJSONString(map);
@@ -265,16 +389,16 @@ public class UserController {
     @RequestMapping(value = "/insertBorrowgfInfo")
     @ResponseBody
     public String insertBorrowgfInfo( int uid,
-                                      String gfid) throws Exception {
+                                      int gfid) throws Exception {
       //  System.out.println("------------------" + gfid +"--------------------------");
         HashMap<String,Integer> map = new HashMap<>();
-        String[] gfidStrings = gfid.split(",");
-        int[] gfids = new int[gfidStrings.length];
-        int i = 0;
-        for( i = 0; i <gfids.length ; i++) {
-            gfids[i] = Integer.parseInt(gfidStrings[i]);
-        }
-        int result = userService.insertBorrowgfInfo(uid, gfids);
+//        String[] gfidStrings = gfid.split(",");
+//        int[] gfids = new int[gfidStrings.length];
+//        int i = 0;
+//        for( i = 0; i <gfids.length ; i++) {
+//            gfids[i] = Integer.parseInt(gfidStrings[i]);
+//        }
+        int result = userService.insertBorrowgfInfo(uid, gfid);
         if (result == -5) {
             map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
             return JSON.toJSONString(map);

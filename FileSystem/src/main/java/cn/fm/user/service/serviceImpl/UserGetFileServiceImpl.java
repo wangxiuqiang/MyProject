@@ -48,58 +48,58 @@ public class UserGetFileServiceImpl implements UserGetFileService{
          * 设置变量,让变量来完成字符串的拼接
          * 记录一开始的分类id
          */
-        StringBuffer address = new StringBuffer();
-        StringBuffer classifyname = new StringBuffer();
-        int id = getFile.getGfclassifyid();
-        System.out.println(id);
-        while( id != 0) {
-            Classify classify = this.selectClassify(id);
-            /**
-             * 最上层的分类的父分类id为0
-             */
-            id = classify.getCyfatherid();
-            if(classify.getCyfatherid() != 0) {
-                address.append(classify.getCyaddress() + "-");
-                classifyname.append(classify.getCyname() + "-");
+//        StringBuffer address = new StringBuffer();
+//        StringBuffer classifyname = new StringBuffer();
+//        int id = getFile.getGfclassifyid();
+//        System.out.println(id);
+//        while( id != 0) {
+//            Classify classify = this.selectClassify(id);
+//            /**
+//             * 最上层的分类的父分类id为0
+//             */
+//            id = classify.getCyfatherid();
+//            if(classify.getCyfatherid() != 0) {
+//                address.append(classify.getCyaddress() + "-");
+//                classifyname.append(classify.getCyname() + "-");
+//
+//            }else {
+//                address.append(classify.getCyaddress());
+//                classifyname.append(classify.getCyname());
+//
+//            }
+//        }
+//
+//        System.out.println(address);
+//        System.out.println(classifyname);
+//        /**
+//         * 因为取分类名是从后取的,,所以应该把address和classifyname ,反过来
+//         */
+//        //临时变量
+//        String addressTime =  address.toString();
+//        String[] splits = addressTime.split("-");
+//        address.delete(0,address.length());
+//        for( int i = splits.length - 1; i >= 0; i--)  {
+//            if(i != 0) {
+//                address.append(splits[i] + "-");
+//            }else {
+//                address.append(splits[i]);
+//            }
+//        }
+//
+//        String classifynameTime =  classifyname.toString();  //临时变量
+//        String[] splits2 = classifynameTime.split("-");
+//        classifyname.delete(0,classifyname.length());
+//        for( int i = splits2.length - 1; i >= 0; i--)  {
+//            if(i != 0) {
+//
+//                classifyname.append(splits2[i] + "-");
+//            }else {
+//                classifyname.append(splits2[i]);
+//            }
+//        }
 
-            }else {
-                address.append(classify.getCyaddress());
-                classifyname.append(classify.getCyname());
-
-            }
-        }
-
-        System.out.println(address);
-        System.out.println(classifyname);
-        /**
-         * 因为取分类名是从后取的,,所以应该把address和classifyname ,反过来
-         */
-        //临时变量
-        String addressTime =  address.toString();
-        String[] splits = addressTime.split("-");
-        address.delete(0,address.length());
-        for( int i = splits.length - 1; i >= 0; i--)  {
-            if(i != 0) {
-                address.append(splits[i] + "-");
-            }else {
-                address.append(splits[i]);
-            }
-        }
-
-        String classifynameTime =  classifyname.toString();  //临时变量
-        String[] splits2 = classifynameTime.split("-");
-        classifyname.delete(0,classifyname.length());
-        for( int i = splits2.length - 1; i >= 0; i--)  {
-            if(i != 0) {
-
-                classifyname.append(splits2[i] + "-");
-            }else {
-                classifyname.append(splits2[i]);
-            }
-        }
-
-        getFile.setGfaddress(address.toString());
-        getFile.setGfclassifyname(classifyname.toString());
+//        getFile.setGfaddress(address.toString());
+//        getFile.setGfclassifyname(classifyname.toString());
 
 //        System.out.println(getFile.getGfaddress());
 //        System.out.println(getFile.getGfclassifyname());
@@ -107,46 +107,46 @@ public class UserGetFileServiceImpl implements UserGetFileService{
         return userGetFileMapper.insertGetFile(getFile);
     }
     /**
-     * 用来返回文件的所有的父分类的id和自己的id
+     * 用来返回文件的所有的父分类的id和自己的id,将所有的分类id存放起来的一个函数
      * @param cgs
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectAllClassifyId(List<GetFile> cgs) throws Exception {
-        List<Integer> list = new ArrayList<Integer>();
-        cgs.forEach(n -> {
-            list.clear();
-            int fatherid = 1;
-            Classify classify = new Classify();
-            try {
-                classify = selectClassify(n.getGfclassifyid());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            list.add(classify.getCyid()) ;
-            list.add(classify.getCyfatherid());
-
-            fatherid = classify.getCyfatherid();
-            while (fatherid != 0){
-                try {
-                    classify = selectClassify(fatherid);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if(classify != null) {
-                    fatherid = classify.getCyfatherid();
-                }
-                if(fatherid != 0)
-                {
-                    list.add(fatherid);
-                }
-            }
-            n.setClassifies(list);
-
-        });
-        return cgs;
-    }
+//    public List<GetFile> selectAllClassifyId(List<GetFile> cgs) throws Exception {
+//        List<Integer> list = new ArrayList<Integer>();
+//        cgs.forEach(n -> {
+//            list.clear();
+//            int fatherid = 1;
+//            Classify classify = new Classify();
+//            try {
+//                classify = selectClassify(n.getGfclassifyid());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            list.add(classify.getCyid()) ;
+//            list.add(classify.getCyfatherid());
+//
+//            fatherid = classify.getCyfatherid();
+//            while (fatherid != 0){
+//                try {
+//                    classify = selectClassify(fatherid);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                if(classify != null) {
+//                    fatherid = classify.getCyfatherid();
+//                }
+//                if(fatherid != 0)
+//                {
+//                    list.add(fatherid);
+//                }
+//            }
+//            n.setClassifies(list);
+//
+//        });
+//        return cgs;
+//    }
 
     /**
      * 根据单项 或多项查收文信息
@@ -161,30 +161,32 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      */
     @Override
     public List<GetFile> findTypeFiles(GetFile getFile , String endtime ) throws Exception {
-
-        if(getFile.getGfname() != null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
+//&& getFile.getGfclassifyid() == 0
+        if(getFile.getGfname() != null  && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
             return   selectGetFileByName(getFile.getGfname());
 
 
-        }else if(getFile.getGfname() == null && getFile.getGfclassifyid() != 0 && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
-            return selectGetFileByClassifyId(getFile.getGfclassifyid());
-
-
-        }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() != null
+        }
+//        else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
+//                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
+//            return selectGetFileByClassifyId(getFile.getGfclassifyid());
+//
+//
+//        }
+        else if(getFile.getGfname() == null  && getFile.getGfcompany() != null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
             return selectGetFileByCompany(getFile.getGfcompany());
 
-        }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
+        }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() != null && endtime !=null && getFile.getGfnumber() == 0) {
 
             return selectGetFileByDateTime(getFile.getGfdatetime() ,endtime);
-        }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
+        }else if(getFile.getGfname() == null && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() != 0){
            return  selectGetFileByNumber(getFile.getGfnumber());
 
-        }else if(getFile.getGfname() == null && getFile.getGfclassifyid() == 0 && getFile.getGfcompany() == null
+        }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0){
              return  null;
         }else {
@@ -195,27 +197,32 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 
     @Override
     public List<GetFile> selectGetFileByName(String gfname) throws Exception {
-        return selectAllClassifyId(userGetFileMapper.selectGetFileByName(gfname));
+        return userGetFileMapper.selectGetFileByName( gfname );
+//        return selectAllClassifyId(userGetFileMapper.selectGetFileByName(gfname));
     }
 
     @Override
     public List<GetFile> selectGetFileByCompany(String gfcompany) throws Exception {
-        return selectAllClassifyId(userGetFileMapper.selectGetFileByCompany(gfcompany));
+        return userGetFileMapper.selectGetFileByCompany(gfcompany);
+//        return selectAllClassifyId(userGetFileMapper.selectGetFileByCompany(gfcompany));
     }
 
-    @Override
-    public List<GetFile> selectGetFileByClassifyId(int classifyid) throws Exception {
-        return selectAllClassifyId(userGetFileMapper.selectGetFileByClassifyId(classifyid));
-    }
+//    @Override
+//    public List<GetFile> selectGetFileByClassifyId(int classifyid) throws Exception {
+////        return selectAllClassifyId(userGetFileMapper.selectGetFileByClassifyId(classifyid));
+//
+//    }
 
     @Override
     public List<GetFile> selectGetFileByDateTime(String datetime, String endtime ) throws Exception {
-        return selectAllClassifyId(userGetFileMapper.selectGetFileByDateTime(datetime , endtime ));
+//        return selectAllClassifyId(userGetFileMapper.selectGetFileByDateTime(datetime , endtime ));
+    return userGetFileMapper.selectGetFileByDateTime( datetime , endtime );
     }
 
     @Override
     public List<GetFile> selectGetFileByNumber(int num) throws Exception {
-        return selectAllClassifyId(userGetFileMapper.selectGetFileByNumber(num));
+//        return selectAllClassifyId(userGetFileMapper.selectGetFileByNumber(num));
+        return userGetFileMapper.selectGetFileByNumber( num );
     }
     /**
      * 根据id找文件
@@ -235,7 +242,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      */
     @Override
     public List<GetFile> selectAllGetFile() throws Exception {
-        return selectAllClassifyId(userGetFileMapper.selectAllGetFile());
+//        return selectAllClassifyId(userGetFileMapper.selectAllGetFile());
+        return userGetFileMapper.selectAllGetFile();
     }
     /**
      * 通过两个或以上进行查询
@@ -257,27 +265,27 @@ public class UserGetFileServiceImpl implements UserGetFileService{
          * 设置变量,让变量来完成字符串的拼接
          * 记录一开始的分类id
          */
-       if(file.getGfclassifyid() != 0) {
-           StringBuffer address = new StringBuffer();
-           StringBuffer classifyname = new StringBuffer();
-           int id = file.getGfclassifyid();
-//        System.out.println(id);
-           while (id != 0) {
-               Classify classify = this.selectClassify(id);
-               /**
-                * 最上层的分类的父分类id为0
-                */
-               id = classify.getCyfatherid();
-               if (classify.getCyfatherid() != 0) {
-                   address.append(classify.getCyaddress() + "-");
-                   classifyname.append(classify.getCyname() + "-");
-
-               } else {
-                   address.append(classify.getCyaddress());
-                   classifyname.append(classify.getCyname());
-
-               }
-           }
+//       if(file.getGfclassifyid() != 0) {
+//           StringBuffer address = new StringBuffer();
+//           StringBuffer classifyname = new StringBuffer();
+//           int id = file.getGfclassifyid();
+////        System.out.println(id);
+//           while (id != 0) {
+//               Classify classify = this.selectClassify(id);
+//               /**
+//                * 最上层的分类的父分类id为0
+//                */
+//               id = classify.getCyfatherid();
+//               if (classify.getCyfatherid() != 0) {
+//                   address.append(classify.getCyaddress() + "-");
+//                   classifyname.append(classify.getCyname() + "-");
+//
+//               } else {
+//                   address.append(classify.getCyaddress());
+//                   classifyname.append(classify.getCyname());
+//
+//               }
+//           }
 
 //        System.out.println(address);
 //        System.out.println(classifyname);
@@ -285,32 +293,32 @@ public class UserGetFileServiceImpl implements UserGetFileService{
             * 因为取分类名是从后取的,,所以应该把address和classifyname ,反过来
             */
            //临时变量
-           String addressTime = address.toString();
-           String[] splits = addressTime.split("-");
-           address.delete(0, address.length());
-           for (int i = splits.length - 1; i >= 0; i--) {
-               if (i != 0) {
-                   address.append(splits[i] + "-");
-               } else {
-                   address.append(splits[i]);
-               }
-           }
-
-           String classifynameTime = classifyname.toString();  //临时变量
-           String[] splits2 = classifynameTime.split("-");
-           classifyname.delete(0, classifyname.length());
-           for (int i = splits2.length - 1; i >= 0; i--) {
-               if (i != 0) {
-
-                   classifyname.append(splits2[i] + "-");
-               } else {
-                   classifyname.append(splits2[i]);
-               }
-           }
-
-           file.setGfaddress(address.toString());
-           file.setGfclassifyname(classifyname.toString());
-       }
+//           String addressTime = address.toString();
+//           String[] splits = addressTime.split("-");
+//           address.delete(0, address.length());
+//           for (int i = splits.length - 1; i >= 0; i--) {
+//               if (i != 0) {
+//                   address.append(splits[i] + "-");
+//               } else {
+//                   address.append(splits[i]);
+//               }
+//           }
+//
+//           String classifynameTime = classifyname.toString();  //临时变量
+//           String[] splits2 = classifynameTime.split("-");
+//           classifyname.delete(0, classifyname.length());
+//           for (int i = splits2.length - 1; i >= 0; i--) {
+//               if (i != 0) {
+//
+//                   classifyname.append(splits2[i] + "-");
+//               } else {
+//                   classifyname.append(splits2[i]);
+//               }
+//           }
+//
+//           file.setGfaddress(address.toString());
+//           file.setGfclassifyname(classifyname.toString());
+//       }
         return userGetFileMapper.updateGetFileById(file);
     }
     /**
