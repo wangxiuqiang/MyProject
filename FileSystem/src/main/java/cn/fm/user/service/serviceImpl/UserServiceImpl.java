@@ -611,6 +611,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 整合下面的四个方法 ,预分配
      */
+    @Override
     public int addBorrowInfo( Borrow borrow , int type  ) throws Exception{
         int result = 0;
         if( type == 2) {
