@@ -222,6 +222,23 @@ public class UserCompanyFileController {
         return JSON.toJSONString( map );
     }
 
+    /**
+     * 清退一个收文
+     */
+    @RequiresRoles(value = {"admin"} )
+    @RequestMapping(value = "/backCompanyFile")
+    @ResponseBody
+    public String backGetFile(int cfid ) throws Exception {
+        HashMap<String ,Integer > map = new HashMap<>();
+        int result = userCompanyFileService.delCompanyFileBack( cfid ) ;
+        if( result > 0) {
+            map.put( StatusUtils.statecode ,StatusUtils.SUCCESS_DEL );
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
+        }
 
+
+        return JSON.toJSONString( map );
+    }
 
 }

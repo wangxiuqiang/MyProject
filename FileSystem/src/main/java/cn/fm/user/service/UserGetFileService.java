@@ -110,10 +110,10 @@ public interface UserGetFileService {
      */
     public List<GetFile> selectTheGFileIsDel() throws Exception;
     /**
-     * 清退一个文件
+     * 清退一个文件,更新清退日期
      * @param gfid
      * @return
      * @throws Exception
      */
-    public int delGetFileBack(  int gfid) throws Exception;
+    public int delGetFileBack(  int gfid  ) throws Exception;
 }

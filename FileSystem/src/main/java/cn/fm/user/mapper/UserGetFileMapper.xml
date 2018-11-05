@@ -170,7 +170,7 @@
         from companyFile where state = 0
     </select>
     <!--清退一个文件-->
-    <update id="delGetFileBack" parameterType="java.lang.Integer" >
-        UPDATE getFile SET back = 1 where gfid = #{gfid}
+    <update id="delGetFileBack" >
+        UPDATE getFile SET back = 1 , backDate = #{backDate} where gfid = #{gfid}
     </update>
 </mapper>

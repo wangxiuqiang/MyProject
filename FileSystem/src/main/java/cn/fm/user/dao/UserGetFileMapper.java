@@ -119,5 +119,5 @@ public interface UserGetFileMapper {
      * @return
      * @throws Exception
      */
-    public int delGetFileBack( @Param( value = "gfid") int gfid) throws Exception;
+    public int delGetFileBack( @Param( value = "gfid") int gfid , @Param(value = "backDate") String backDate ) throws Exception;
 }

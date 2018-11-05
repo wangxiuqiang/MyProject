@@ -362,8 +362,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @throws Exception
      */
     @Override
-    public int delGetFileBack(int gfid) throws Exception{
-        return userGetFileMapper.delGetFileBack( gfid );
+    public int delGetFileBack(int gfid ) throws Exception{
+        return userGetFileMapper.delGetFileBack( gfid ,DateToStringUtils.dataTostring() );
     }
 
 }

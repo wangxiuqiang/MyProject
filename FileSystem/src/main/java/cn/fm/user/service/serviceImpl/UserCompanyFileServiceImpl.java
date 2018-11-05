@@ -6,6 +6,7 @@ import cn.fm.pojo.CompanyFile;
 import cn.fm.user.dao.UserCompanyFileMapper;
 import cn.fm.user.service.UserCompanyFileService;
 import cn.fm.user.service.UserService;
+import cn.fm.utils.DateToStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -343,5 +344,16 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      */
     public int delCompanyFileDestroy(  int cfid) throws Exception {
         return userCompanyFileMapper.delCompanyFileDestroy( cfid );
+    }
+
+    /**
+     * 清退一个文件 ,更新清退日期
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int delCompanyFileBack(int cfid  ) throws Exception{
+        return userCompanyFileMapper.delCompanyFileBack( cfid  , DateToStringUtils.dataTostring() );
     }
 }

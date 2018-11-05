@@ -41,6 +41,35 @@ public class CompanyFile {
 //等待被借阅 ,
     private int waitborrow;
     private int destory;
+    //清退字段
+    private int back;
+    //销毁日期和清退日期
+    private String destoryDate;
+    private String backDate;
+
+    public int getBack() {
+        return back;
+    }
+
+    public void setBack(int back) {
+        this.back = back;
+    }
+
+    public String getDestoryDate() {
+        return destoryDate;
+    }
+
+    public void setDestoryDate(String destoryDate) {
+        this.destoryDate = destoryDate;
+    }
+
+    public String getBackDate() {
+        return backDate;
+    }
+
+    public void setBackDate(String backDate) {
+        this.backDate = backDate;
+    }
 
     public int getWaitborrow() {
         return waitborrow;

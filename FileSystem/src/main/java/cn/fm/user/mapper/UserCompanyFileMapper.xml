@@ -173,4 +173,9 @@
     <update id="delCompanyFileDestroy" parameterType="java.lang.Integer" >
         UPDATE companyFile SET destroy = 0 where cfid = #{cfid}
     </update>
+    <!--清退一个文件 修改清退文件的日期-->
+    <update id="delCompanyFileBack" >
+        UPDATE companyFile SET back = 1,bactDate=#{backDate} where cfid = #{cfid}
+    </update>
+
 </mapper>
