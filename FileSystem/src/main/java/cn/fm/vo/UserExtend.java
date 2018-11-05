@@ -12,7 +12,6 @@ public class UserExtend {
     private String ucompany;
     private String uupdatetime;
     private int state;
-    @NotNull(message = "{user.email.isnull}")
     private String uemail;
     private String code;
 

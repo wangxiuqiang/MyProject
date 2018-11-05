@@ -232,7 +232,8 @@ public class UserController {
     }
 
     /**
-     * 在录入指纹的时候弹出的信息,查看是不是有没有归还的文件
+     * 在录入指纹的时候弹出的信息,查看是不是有没有归还的文件,,可以用这个来实现获取id和wid的情况,正好是显示没有归还的信息
+     * 用来归还,取走文件
      * @param finger
      * @return
      * @throws Exception
@@ -271,7 +272,7 @@ public class UserController {
         }
     }
     /**
-     * 在录入指纹的时候弹出的信息,查看是不是有没有归还的文件
+     * 在录入指纹的时候弹出的信息,查看是不是有没有归还的文件,返回了文件的id
      * @param finger
      * @return
      * @throws Exception
@@ -311,7 +312,7 @@ public class UserController {
     }
 
     /**
-     * 根据用户的id查看 待领取的文件
+     * 根据用户的id查看 ,待领取的文件
      * @param uid
      * @return
      * @throws Exception
@@ -331,7 +332,7 @@ public class UserController {
     }
 
     /**
-     * 根据用户的id查看 待领取的文件
+     * 根据用户的id查看 待领取的文件,
      * @param uid
      * @return
      * @throws Exception
@@ -417,7 +418,9 @@ public class UserController {
     /**
      * 更新借阅归还时间,归还文件,再还之前,根据指纹找到需要的这个单位借阅的内容,这个是
      * 先进行文件字段的更新,然后将借阅表进行更新,所以说这是最后一步的更新,首先需要获取指纹,用指纹在进行
-     * 获取到用户的id,进一步获取到用户的wid,这样,如果是uid不一样,但是wid一样也可以实现归还
+     * 获取到用户的id,进一步获取到用户的wid,这样,如果是uid不一样,但是wid一样也可以实现归还,一次一份文件只能借一个人,
+     * 用cfid归还的话,直接找cfid并且backtime = null的就可以了,因为通过指纹的检查,会找到没有归还的文件,直接选择然后返回id就可以啦
+     *
      *
      */
     @RequiresRoles(value = "admin")
@@ -759,6 +762,27 @@ public class UserController {
        }
     }
 
+    /**
+     * 预分配接口,将文件的待借阅标记修改为1, 然后将待借阅的信息,uid,wid,fileid ,givetime写入借阅表中
+     * @param type
+     * @param borrow
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = {"admin"} )
+    @RequestMapping(value = "/insertWaitBorrowInfo/{type}")
+    @ResponseBody
+    public String insertWaitBorrowInfo( @PathVariable int type , Borrow borrow) throws Exception {
+        HashMap<String , Integer> map = new HashMap<>();
+        int result = userService.addBorrowInfo( borrow , type );
+        if( result > 0 ){
+            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
+        } else {
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT );
+        }
+        return  JSON.toJSONString( map );
+
+    }
 
 
 }

@@ -109,4 +109,26 @@ public interface UserService {
      */
     public List<BorrowCFExtends> selectcfIsPassTime () throws Exception;
     public List<BorrowGFExtends> selectgfIsPassTime () throws Exception;
+
+    /**
+     * 整合下面的四个方法 ,预分配
+     */
+    public int addBorrowInfo( Borrow borrow , int type  ) throws Exception;
+    /**
+     * 下面的四个方法是预分配接口调用的
+     * 更新文件的待借阅标记,默认为0 表示没有被分配, 1表示已经分配
+     * @return
+     * @throws Exception
+     */
+    public int updatecfWaitBorrow(int cfid) throws Exception;
+    public int updategfWaitBorrow( int gfid ) throws Exception;
+
+    /**
+     * 预分配的接口实现将预分配的文件信息录入
+     * @param borrow
+     * @return
+     * @throws Exception
+     */
+    public int insertgfWaitBorrowInfo( Borrow borrow ) throws  Exception;
+    public int insertcfWaitBorrowInfo( Borrow borrow ) throws  Exception;
 }

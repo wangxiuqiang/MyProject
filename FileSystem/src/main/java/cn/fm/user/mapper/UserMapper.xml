@@ -165,4 +165,18 @@
         SELECT wid , uid,fileid,shouldback from borrow_getFile where backtime=null
     </select>
 
+    <!--待分配接口的文件,修改文件的waitborrow-->
+    <update id="updatecfWaitBorrow" parameterType="java.lang.Integer" >
+        update companyFile set waitborrow = 1 where cfid = #{value}
+    </update>
+    <update id="updategfWaitBorrow" parameterType="java.lang.Integer" >
+        update getFile set waitborrow = 1 where gfid = #{value}
+    </update>
+    <!--待分配接口 录入借阅信息-->
+    <insert id="insertcfWaitBorrowInfo" parameterType="cn.fm.pojo.Borrow">
+        insert into borrow_companyFile(wid,uid,fileid,givetime) VALUES (#{wid},#{uid} ,#{fileid}, #{givetime})
+    </insert>
+    <insert id="insertgfWaitBorrowInfo" parameterType="cn.fm.pojo.Borrow">
+        insert into borrow_getFile(wid,uid,fileid,givetime) VALUES (#{wid},#{uid} ,#{fileid}, #{givetime})
+    </insert>
 </mapper>

@@ -606,4 +606,52 @@ public class UserServiceImpl implements UserService {
         });
         return bgf;
     }
+
+
+    /**
+     * 整合下面的四个方法 ,预分配
+     */
+    public int addBorrowInfo( Borrow borrow , int type  ) throws Exception{
+        int result = 0;
+        if( type == 2) {
+            //收文
+            result = updategfWaitBorrow( borrow.getFileid() );
+            result += insertgfWaitBorrowInfo( borrow );
+            return result;
+        } else {
+            result = updatecfWaitBorrow( borrow.getFileid() );
+            result += insertcfWaitBorrowInfo( borrow );
+            return result;
+        }
+    }
+    /**
+     * 下面的四个方法是预分配接口调用的
+     * 更新文件的待借阅标记,默认为0 表示没有被分配, 1表示已经分配
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int updatecfWaitBorrow(int cfid ) throws Exception{
+        return userMapper.updatecfWaitBorrow(cfid);
+    }
+    @Override
+    public int updategfWaitBorrow( int gfid ) throws Exception{
+        return userMapper.updategfWaitBorrow(gfid);
+
+    }
+
+    /**
+     * 预分配的接口实现将预分配的文件信息录入
+     * @param borrow
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int insertgfWaitBorrowInfo( Borrow borrow ) throws  Exception{
+        return userMapper.insertgfWaitBorrowInfo( borrow );
+    }
+    @Override
+    public int insertcfWaitBorrowInfo( Borrow borrow ) throws  Exception{
+        return userMapper.insertcfWaitBorrowInfo( borrow );
+    }
 }

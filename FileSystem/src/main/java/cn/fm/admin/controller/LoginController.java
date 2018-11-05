@@ -42,7 +42,7 @@ public class LoginController {
                 System.out.println(objectError.getDefaultMessage());
             }
         }
-        System.out.println(user.getUemail()+ "----------------" +user.getUpwd());
+//        System.out.println(user.getUemail()+ "----------------" +user.getUpwd());
         /**
          * 用户登录
          */

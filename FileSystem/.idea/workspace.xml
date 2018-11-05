@@ -24,18 +24,18 @@
       <file leaf-file-name="sql2.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sql2.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="183" column="8" lean-forward="false" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="8" />
+            <state relative-caret-position="648">
+              <caret line="208" column="5" lean-forward="false" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="420" column="6" lean-forward="false" selection-start-line="420" selection-start-column="6" selection-end-line="420" selection-end-column="6" />
+            <state relative-caret-position="302">
+              <caret line="765" column="68" lean-forward="false" selection-start-line="765" selection-start-column="68" selection-end-line="765" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -44,149 +44,109 @@
       <file leaf-file-name="UserMapper.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserMapper.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="63" column="32" lean-forward="false" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="32" />
+            <state relative-caret-position="536">
+              <caret line="169" column="66" lean-forward="false" selection-start-line="169" selection-start-column="61" selection-end-line="169" selection-end-column="66" />
               <folding>
-                <element signature="e#3323#3327#0" expanded="true" />
-                <element signature="e#3355#3359#0" expanded="true" />
-                <element signature="e#3640#3644#0" expanded="true" />
-                <element signature="e#3672#3676#0" expanded="true" />
-                <marker date="1541251546282" expanded="true" signature="315:358" ph="select state... user" />
-                <marker date="1541251546282" expanded="true" signature="416:478" ph="update user " />
-                <marker date="1541251546282" expanded="true" signature="998:1042" ph="update borro... " />
-                <marker date="1541251546282" expanded="true" signature="998:1172" ph="update borro... " />
-                <marker date="1541251546282" expanded="true" signature="1299:1351" ph="insert into borrow_getFile... " />
-                <marker date="1541251546282" expanded="true" signature="1299:1470" ph="update borro... " />
-                <marker date="1541251546282" expanded="true" signature="1611:1685" ph="update compa... " />
-                <marker date="1541251546282" expanded="true" signature="2073:2140" ph="update getFi... " />
-                <marker date="1541251546282" expanded="true" signature="3203:3307" ph="select uid,f... borrow_companyFile" />
-                <marker date="1541251546282" expanded="true" signature="3203:3373" ph="select uid,f... borrow_companyFile" />
-                <marker date="1541251546282" expanded="true" signature="3524:3624" ph="select uid,f... borrow_getFile" />
-                <marker date="1541251546282" expanded="true" signature="3524:3690" ph="select uid,f... borrow_getFile" />
-                <marker date="1541251546282" expanded="true" signature="4609:4731" ph="select uid,f... borrow_companyFile" />
-                <marker date="1541251546282" expanded="true" signature="4864:4982" ph="select uid,f... borrow_getFile" />
-                <marker date="1541251546282" expanded="true" signature="5104:5328" ph="select isbor... getFile" />
-                <marker date="1541251546282" expanded="true" signature="5425:5635" ph="select isbor... companyFile" />
-                <marker date="1541251546282" expanded="true" signature="5765:5828" ph="select cyid,... classify" />
-                <marker date="1541251546282" expanded="true" signature="5979:6052" ph="select cyid,... classify" />
-                <marker date="1541251546282" expanded="true" signature="6197:6246" ph="select uupda... user" />
-                <marker date="1541251546282" expanded="true" signature="6411:6487" ph="select filei... borrow_companyFile" />
-                <marker date="1541251546282" expanded="true" signature="6651:6723" ph="select filei... borrow_getFile" />
-                <marker date="1541251546282" expanded="true" signature="6869:6945" ph="SELECT uid,f... borrow_companyFile" />
-                <marker date="1541251546282" expanded="true" signature="7097:7171" ph="SELECT uid,f... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="315:358" ph="select state... user" />
+                <marker date="1541385234513" expanded="true" signature="416:478" ph="update user " />
+                <marker date="1541385234513" expanded="true" signature="998:1042" ph="update borro... " />
+                <marker date="1541385234513" expanded="true" signature="998:1172" ph="update borro... " />
+                <marker date="1541385234513" expanded="true" signature="1299:1351" ph="insert into borrow_getFile... " />
+                <marker date="1541385234513" expanded="true" signature="1299:1470" ph="update borro... " />
+                <marker date="1541385234513" expanded="true" signature="1611:1685" ph="update compa... " />
+                <marker date="1541385234513" expanded="true" signature="2073:2140" ph="update getFi... " />
+                <marker date="1541385234513" expanded="true" signature="3203:3307" ph="select uid,f... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="3203:3373" ph="select uid,f... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="3524:3624" ph="select uid,f... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="3524:3690" ph="select uid,f... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="4609:4731" ph="select uid,f... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="4864:4982" ph="select uid,f... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="5104:5328" ph="select isbor... getFile" />
+                <marker date="1541385234513" expanded="true" signature="5425:5635" ph="select isbor... companyFile" />
+                <marker date="1541385234513" expanded="true" signature="5765:5828" ph="select cyid,... classify" />
+                <marker date="1541385234513" expanded="true" signature="5979:6052" ph="select cyid,... classify" />
+                <marker date="1541385234513" expanded="true" signature="6197:6246" ph="select uupda... user" />
+                <marker date="1541385234513" expanded="true" signature="6411:6487" ph="select filei... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="6651:6723" ph="select filei... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="6869:6945" ph="SELECT uid,f... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="7097:7171" ph="SELECT uid,f... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="7303:7339" ph="update compa... " />
+                <marker date="1541385234513" expanded="true" signature="7303:7362" ph="update compa... " />
+                <marker date="1541385234513" expanded="true" signature="7457:7512" ph="update getFi... " />
+                <marker date="1541385234513" expanded="true" signature="7634:7664" ph="insert into borrowcompanyFile... " />
+                <marker date="1541385234513" expanded="true" signature="7634:7736" ph="insert into borrow_companyFile... " />
+                <marker date="1541385234513" expanded="true" signature="7834:7932" ph="insert into borrow_getFile... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/mapper/AdminMapper.xml">
+      <file leaf-file-name="UserMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="88" column="18" lean-forward="true" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
-              <folding>
-                <marker date="1541250756735" expanded="true" signature="684:747" ph="select uid,u... user" />
-                <marker date="1541250756735" expanded="true" signature="843:1006" ph="insert into user... " />
-                <marker date="1541250756735" expanded="true" signature="1102:1125" ph="select LAST_... " />
-                <marker date="1541250756735" expanded="true" signature="1242:1295" ph="insert into user_roles... " />
-                <marker date="1541250756735" expanded="true" signature="1591:1623" ph="select wid ,... workPlace" />
-                <marker date="1541250756735" expanded="true" signature="1768:1816" ph="select uemai... user" />
-                <marker date="1541250756735" expanded="true" signature="1902:1970" ph="select uid,u... user" />
-                <marker date="1541250756735" expanded="true" signature="2056:2142" ph="select uid,u... user" />
-                <marker date="1541250756735" expanded="true" signature="2697:3219" ph="update user " />
-                <marker date="1541250756735" expanded="true" signature="3315:3368" ph="update user_... " />
-                <marker date="1541250756735" expanded="true" signature="3484:3526" ph="SELECT pid,p... permission" />
-                <marker date="1541250756735" expanded="true" signature="3631:3667" ph="SELECT rid,r... role" />
-                <marker date="1541250756735" expanded="true" signature="3784:3829" ph="select rid f... user_roles" />
-                <marker date="1541250756735" expanded="true" signature="5391:5437" ph="insert into workPlace... " />
-                <marker date="1541250756735" expanded="true" signature="5528:5568" ph="delete from " />
-                <marker date="1541250756735" expanded="true" signature="5679:5841" ph="update workP... " />
-                <marker date="1541250756735" expanded="true" signature="5995:6090" ph="insert into classify... " />
-                <marker date="1541250756735" expanded="true" signature="6015:6090" ph="(cyname,cyfa... " />
-                <marker date="1541250756735" expanded="true" signature="6181:6222" ph="delete from " />
-                <marker date="1541250756735" expanded="true" signature="6334:6387" ph="delete from " />
-                <marker date="1541250756735" expanded="true" signature="6496:6867" ph="update class... " />
-                <marker date="1541250756735" expanded="true" signature="6962:7003" ph="insert into level... " />
-                <marker date="1541250756735" expanded="true" signature="7094:7130" ph="delete from " />
-                <marker date="1541250756735" expanded="true" signature="7237:7289" ph="update level... " />
-                <marker date="1541250756735" expanded="true" signature="7394:7421" ph="select lid,l... level" />
-                <marker date="1541250756735" expanded="true" signature="7539:7602" ph="insert into finger... " />
-                <marker date="1541250756735" expanded="true" signature="7985:8019" ph="select uid,f... fingerprint" />
-              </folding>
+            <state relative-caret-position="558">
+              <caret line="151" column="44" lean-forward="false" selection-start-line="151" selection-start-column="44" selection-end-line="151" selection-end-column="44" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserCompanyFileMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserCompanyFileMapper.xml">
+      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-172">
-              <caret line="145" column="40" lean-forward="false" selection-start-line="145" selection-start-column="22" selection-end-line="145" selection-end-column="40" />
-              <folding>
-                <marker date="1541235917101" expanded="true" signature="540:885" ph="insert into companyFile... " />
-                <marker date="1541235917101" expanded="true" signature="1010:1084" ph="select cyid,... classify" />
-                <marker date="1541235917101" expanded="true" signature="1204:1314" ph="select from companyFile" />
-                <marker date="1541235917101" expanded="true" signature="1449:1590" ph="select from companyFile" />
-                <marker date="1541235917101" expanded="true" signature="1733:1852" ph="select from companyFile" />
-                <marker date="1541235917101" expanded="true" signature="1992:2136" ph="select from companyFile" />
-                <marker date="1541235917101" expanded="true" signature="2273:2388" ph="select from companyFile" />
-                <marker date="1541235917101" expanded="true" signature="2527:2632" ph="select from companyFile" />
-                <marker date="1541235917101" expanded="true" signature="2748:2839" ph="select from companyFile" />
-                <marker date="1541235917101" expanded="true" signature="2960:4276" ph="update compa... " />
-                <marker date="1541235917101" expanded="true" signature="5341:5394" ph="select * fro... borrow_companyFile" />
-                <marker date="1541235917101" expanded="true" signature="6005:6098" ph="select from companyFile" />
-                <marker date="1541235917101" expanded="true" signature="6215:6270" ph="UPDATE compa... " />
-              </folding>
+            <state relative-caret-position="646">
+              <caret line="123" column="44" lean-forward="false" selection-start-line="123" selection-start-column="44" selection-end-line="123" selection-end-column="44" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserGetFileMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserGetFileMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-692">
-              <caret line="122" column="28" lean-forward="false" selection-start-line="122" selection-start-column="28" selection-end-line="122" selection-end-column="28" />
-              <folding>
-                <marker date="1541251239397" expanded="true" signature="501:790" ph="insert into getFile... " />
-                <marker date="1541251239397" expanded="true" signature="920:995" ph="select cyid,... classify" />
-                <marker date="1541251239397" expanded="true" signature="1109:1215" ph="select from getFile" />
-                <marker date="1541251239397" expanded="true" signature="1344:1483" ph="select from getFile" />
-                <marker date="1541251239397" expanded="true" signature="1615:1728" ph="select from getFile" />
-                <marker date="1541251239397" expanded="true" signature="1863:1979" ph="select from getFile" />
-                <marker date="1541251239397" expanded="true" signature="2111:2264" ph="select from getFile" />
-                <marker date="1541251239397" expanded="true" signature="2394:2505" ph="select from getFile" />
-                <marker date="1541251239397" expanded="true" signature="3394:3482" ph="select from getFile" />
-                <marker date="1541251239397" expanded="true" signature="3591:5108" ph="update getFi... " />
-                <marker date="1541251239397" expanded="true" signature="5252:5299" ph="select * fro... borrow_getFile" />
-                <marker date="1541251239397" expanded="true" signature="5828:5921" ph="select from companyFile" />
-                <marker date="1541251239397" expanded="true" signature="6030:6078" ph="UPDATE getFi... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/pojo/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-              <folding>
-                <element signature="e#427#428#0" expanded="true" />
-                <element signature="e#453#454#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="333" column="20" lean-forward="false" selection-start-line="333" selection-start-column="20" selection-end-line="333" selection-end-column="20" />
-              <folding>
-                <element signature="e#18629#18646#0" expanded="true" />
-                <element signature="e#20346#20363#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="492">
+              <caret line="621" column="60" lean-forward="false" selection-start-line="621" selection-start-column="60" selection-end-line="621" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/AdminController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1012">
+              <caret line="70" column="40" lean-forward="false" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/service/serviceImpl/AdminServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1276">
+              <caret line="78" column="9" lean-forward="false" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/LoginController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="55" column="38" lean-forward="false" selection-start-line="53" selection-start-column="7" selection-end-line="55" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MyRealm.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/Realm/MyRealm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="23" column="31" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -217,7 +177,6 @@
       <find>selectgfis</find>
       <find>insertClass</find>
       <find>reg</find>
-      <find>addU</find>
       <find>借阅</find>
       <find>Compare</find>
       <find>selectbo</find>
@@ -228,6 +187,7 @@
       <find>date</find>
       <find>fileid</find>
       <find>updatecfBackTime</find>
+      <find>addU</find>
     </findStrings>
     <replaceStrings>
       <replace>c</replace>
@@ -248,7 +208,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/Level.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/MysqlBackupUtils.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/vo/FingerUser.java" />
@@ -261,7 +220,6 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/OCRHelper.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/html/index.html" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/Realm/MyRealm.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/spring/spring-config.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/UploadUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/Fingerprint.java" />
@@ -280,7 +238,6 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserRegService.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserRegServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/admin/service/serviceImpl/AdminServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/vo/UserExtend.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/vo/BorrowCFExtends.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/vo/BorrowGFExtends.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserGetFileServiceImpl.java" />
@@ -288,16 +245,19 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserGetFileController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserCompanyFileMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/GetFile.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserCompanyFileController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserService.java" />
-        <option value="$PROJECT_DIR$/sql2.txt" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/admin/mapper/AdminMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserGetFileMapper.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/vo/UserExtend.java" />
+        <option value="$PROJECT_DIR$/sql2.txt" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserServiceImpl.java" />
       </list>
     </option>
   </component>
@@ -348,10 +308,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="631" />
-    <option name="y" value="255" />
-    <option name="width" value="660" />
-    <option name="height" value="1076" />
+    <option name="x" value="46" />
+    <option name="y" value="-11" />
+    <option name="width" value="1321" />
+    <option name="height" value="780" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -369,6 +329,8 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -572,6 +534,13 @@
               <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -580,14 +549,12 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="html" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -597,7 +564,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/UserGetFileService.java&#10;mave&#9;ACTION&#9;ActivateMavenProjectsToolWindow" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -957,14 +924,17 @@
       <workItem from="1541140264807" duration="5674000" />
       <workItem from="1541227537568" duration="9940000" />
       <workItem from="1541244576710" duration="7163000" />
+      <workItem from="1541293330307" duration="4683000" />
+      <workItem from="1541382136856" duration="3907000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="500305000" />
+    <option name="totallyTimeSpent" value="508895000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="631" y="255" width="1321" height="780" extended-state="6" />
+    <frame x="46" y="-11" width="1875" height="1092" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25356415" sideWeight="0.50186867" order="7" side_tool="true" content_ui="tabs" />
@@ -982,11 +952,11 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35234216" sideWeight="0.49813133" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35234216" sideWeight="0.49813133" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22971949" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22957821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1014,21 +984,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/html/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="7" lean-forward="false" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/Realm/MyRealm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="45" column="7" lean-forward="false" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/vo/FingerUser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -1065,15 +1020,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="231" column="40" lean-forward="false" selection-start-line="231" selection-start-column="29" selection-end-line="231" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-552">
-          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1137,14 +1083,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="70" column="37" lean-forward="true" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/StatusUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="888">
@@ -1157,7 +1095,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2552">
           <caret line="121" column="82" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="121" selection-end-column="82" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1187,14 +1124,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="229" column="20" lean-forward="false" selection-start-line="229" selection-start-column="20" selection-end-line="229" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/UploadUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="492">
@@ -1215,7 +1144,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="6" column="73" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1224,16 +1152,6 @@
         <state relative-caret-position="264">
           <caret line="13" column="14" lean-forward="true" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/service/serviceImpl/AdminServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="487" column="13" lean-forward="true" selection-start-line="487" selection-start-column="13" selection-end-line="487" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1254,24 +1172,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/vo/UserExtend.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="18" />
-          <folding>
-            <element signature="e#1231#1232#0" expanded="false" />
-            <element signature="e#1262#1263#0" expanded="false" />
-            <element signature="e#1310#1311#0" expanded="false" />
-            <element signature="e#1350#1351#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserRegServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
           <caret line="22" column="15" lean-forward="true" selection-start-line="22" selection-start-column="15" selection-end-line="22" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1279,7 +1183,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="780">
           <caret line="226" column="16" lean-forward="false" selection-start-line="226" selection-start-column="16" selection-end-line="226" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1287,7 +1190,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="62" column="0" lean-forward="true" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1295,9 +1197,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <marker date="1541233578664" expanded="false" signature="3453:3462" ph="&lt;~&gt;" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1305,7 +1204,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
           <caret line="112" column="1" lean-forward="false" selection-start-line="112" selection-start-column="1" selection-end-line="112" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1314,19 +1212,11 @@
         <state relative-caret-position="220">
           <caret line="60" column="27" lean-forward="false" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="27" />
           <folding>
-            <element signature="e#1139#1140#0" expanded="true" />
-            <element signature="e#1172#1173#0" expanded="true" />
-            <element signature="e#1221#1222#0" expanded="true" />
-            <element signature="e#1265#1266#0" expanded="true" />
+            <element signature="e#1139#1140#0" expanded="false" />
+            <element signature="e#1172#1173#0" expanded="false" />
+            <element signature="e#1221#1222#0" expanded="false" />
+            <element signature="e#1265#1266#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="136" column="3" lean-forward="false" selection-start-line="136" selection-start-column="3" selection-end-line="142" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1334,9 +1224,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1539074164149" expanded="true" signature="256:318" ph="update user " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1368,132 +1255,43 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2729">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sql2.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="183" column="8" lean-forward="false" selection-start-line="183" selection-start-column="8" selection-end-line="183" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/pojo/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-          <folding>
-            <element signature="e#427#428#0" expanded="true" />
-            <element signature="e#453#454#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserGetFileMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-692">
+        <state relative-caret-position="2684">
           <caret line="122" column="28" lean-forward="false" selection-start-line="122" selection-start-column="28" selection-end-line="122" selection-end-column="28" />
-          <folding>
-            <marker date="1541251239397" expanded="true" signature="501:790" ph="insert into getFile... " />
-            <marker date="1541251239397" expanded="true" signature="920:995" ph="select cyid,... classify" />
-            <marker date="1541251239397" expanded="true" signature="1109:1215" ph="select from getFile" />
-            <marker date="1541251239397" expanded="true" signature="1344:1483" ph="select from getFile" />
-            <marker date="1541251239397" expanded="true" signature="1615:1728" ph="select from getFile" />
-            <marker date="1541251239397" expanded="true" signature="1863:1979" ph="select from getFile" />
-            <marker date="1541251239397" expanded="true" signature="2111:2264" ph="select from getFile" />
-            <marker date="1541251239397" expanded="true" signature="2394:2505" ph="select from getFile" />
-            <marker date="1541251239397" expanded="true" signature="3394:3482" ph="select from getFile" />
-            <marker date="1541251239397" expanded="true" signature="3591:5108" ph="update getFi... " />
-            <marker date="1541251239397" expanded="true" signature="5252:5299" ph="select * fro... borrow_getFile" />
-            <marker date="1541251239397" expanded="true" signature="5828:5921" ph="select from companyFile" />
-            <marker date="1541251239397" expanded="true" signature="6030:6078" ph="UPDATE getFi... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="44" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserCompanyFileMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-172">
+        <state relative-caret-position="3190">
           <caret line="145" column="40" lean-forward="false" selection-start-line="145" selection-start-column="22" selection-end-line="145" selection-end-column="40" />
-          <folding>
-            <marker date="1541235917101" expanded="true" signature="540:885" ph="insert into companyFile... " />
-            <marker date="1541235917101" expanded="true" signature="1010:1084" ph="select cyid,... classify" />
-            <marker date="1541235917101" expanded="true" signature="1204:1314" ph="select from companyFile" />
-            <marker date="1541235917101" expanded="true" signature="1449:1590" ph="select from companyFile" />
-            <marker date="1541235917101" expanded="true" signature="1733:1852" ph="select from companyFile" />
-            <marker date="1541235917101" expanded="true" signature="1992:2136" ph="select from companyFile" />
-            <marker date="1541235917101" expanded="true" signature="2273:2388" ph="select from companyFile" />
-            <marker date="1541235917101" expanded="true" signature="2527:2632" ph="select from companyFile" />
-            <marker date="1541235917101" expanded="true" signature="2748:2839" ph="select from companyFile" />
-            <marker date="1541235917101" expanded="true" signature="2960:4276" ph="update compa... " />
-            <marker date="1541235917101" expanded="true" signature="5341:5394" ph="select * fro... borrow_companyFile" />
-            <marker date="1541235917101" expanded="true" signature="6005:6098" ph="select from companyFile" />
-            <marker date="1541235917101" expanded="true" signature="6215:6270" ph="UPDATE compa... " />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="333" column="20" lean-forward="false" selection-start-line="333" selection-start-column="20" selection-end-line="333" selection-end-column="20" />
-          <folding>
-            <element signature="e#18629#18646#0" expanded="true" />
-            <element signature="e#20346#20363#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="540">
+          <caret line="425" column="24" lean-forward="false" selection-start-line="406" selection-start-column="7" selection-end-line="425" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserMapper.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="63" column="32" lean-forward="false" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="32" />
-          <folding>
-            <element signature="e#3323#3327#0" expanded="true" />
-            <element signature="e#3355#3359#0" expanded="true" />
-            <element signature="e#3640#3644#0" expanded="true" />
-            <element signature="e#3672#3676#0" expanded="true" />
-            <marker date="1541251546282" expanded="true" signature="315:358" ph="select state... user" />
-            <marker date="1541251546282" expanded="true" signature="416:478" ph="update user " />
-            <marker date="1541251546282" expanded="true" signature="998:1042" ph="update borro... " />
-            <marker date="1541251546282" expanded="true" signature="998:1172" ph="update borro... " />
-            <marker date="1541251546282" expanded="true" signature="1299:1351" ph="insert into borrow_getFile... " />
-            <marker date="1541251546282" expanded="true" signature="1299:1470" ph="update borro... " />
-            <marker date="1541251546282" expanded="true" signature="1611:1685" ph="update compa... " />
-            <marker date="1541251546282" expanded="true" signature="2073:2140" ph="update getFi... " />
-            <marker date="1541251546282" expanded="true" signature="3203:3307" ph="select uid,f... borrow_companyFile" />
-            <marker date="1541251546282" expanded="true" signature="3203:3373" ph="select uid,f... borrow_companyFile" />
-            <marker date="1541251546282" expanded="true" signature="3524:3624" ph="select uid,f... borrow_getFile" />
-            <marker date="1541251546282" expanded="true" signature="3524:3690" ph="select uid,f... borrow_getFile" />
-            <marker date="1541251546282" expanded="true" signature="4609:4731" ph="select uid,f... borrow_companyFile" />
-            <marker date="1541251546282" expanded="true" signature="4864:4982" ph="select uid,f... borrow_getFile" />
-            <marker date="1541251546282" expanded="true" signature="5104:5328" ph="select isbor... getFile" />
-            <marker date="1541251546282" expanded="true" signature="5425:5635" ph="select isbor... companyFile" />
-            <marker date="1541251546282" expanded="true" signature="5765:5828" ph="select cyid,... classify" />
-            <marker date="1541251546282" expanded="true" signature="5979:6052" ph="select cyid,... classify" />
-            <marker date="1541251546282" expanded="true" signature="6197:6246" ph="select uupda... user" />
-            <marker date="1541251546282" expanded="true" signature="6411:6487" ph="select filei... borrow_companyFile" />
-            <marker date="1541251546282" expanded="true" signature="6651:6723" ph="select filei... borrow_getFile" />
-            <marker date="1541251546282" expanded="true" signature="6869:6945" ph="SELECT uid,f... borrow_companyFile" />
-            <marker date="1541251546282" expanded="true" signature="7097:7171" ph="SELECT uid,f... borrow_getFile" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/mapper/AdminMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="88" column="18" lean-forward="true" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="48" />
           <folding>
             <marker date="1541250756735" expanded="true" signature="684:747" ph="select uid,u... user" />
             <marker date="1541250756735" expanded="true" signature="843:1006" ph="insert into user... " />
@@ -1526,10 +1324,133 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/pojo/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1298">
+          <caret line="99" column="0" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding>
+            <element signature="e#1821#1822#0" expanded="true" />
+            <element signature="e#1850#1851#0" expanded="true" />
+            <element signature="e#1894#1895#0" expanded="true" />
+            <element signature="e#1930#1931#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/vo/UserExtend.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/service/serviceImpl/AdminServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1276">
+          <caret line="78" column="9" lean-forward="false" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1012">
+          <caret line="70" column="40" lean-forward="false" selection-start-line="70" selection-start-column="33" selection-end-line="70" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/Realm/MyRealm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="23" column="31" lean-forward="false" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="55" column="38" lean-forward="false" selection-start-line="53" selection-start-column="7" selection-end-line="55" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="420" column="6" lean-forward="false" selection-start-line="420" selection-start-column="6" selection-end-line="420" selection-end-column="6" />
+        <state relative-caret-position="302">
+          <caret line="765" column="68" lean-forward="false" selection-start-line="765" selection-start-column="68" selection-end-line="765" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sql2.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="208" column="5" lean-forward="false" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="169" column="66" lean-forward="false" selection-start-line="169" selection-start-column="61" selection-end-line="169" selection-end-column="66" />
+          <folding>
+            <marker date="1541385234513" expanded="true" signature="315:358" ph="select state... user" />
+            <marker date="1541385234513" expanded="true" signature="416:478" ph="update user " />
+            <marker date="1541385234513" expanded="true" signature="998:1042" ph="update borro... " />
+            <marker date="1541385234513" expanded="true" signature="998:1172" ph="update borro... " />
+            <marker date="1541385234513" expanded="true" signature="1299:1351" ph="insert into borrow_getFile... " />
+            <marker date="1541385234513" expanded="true" signature="1299:1470" ph="update borro... " />
+            <marker date="1541385234513" expanded="true" signature="1611:1685" ph="update compa... " />
+            <marker date="1541385234513" expanded="true" signature="2073:2140" ph="update getFi... " />
+            <marker date="1541385234513" expanded="true" signature="3203:3307" ph="select uid,f... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="3203:3373" ph="select uid,f... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="3524:3624" ph="select uid,f... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="3524:3690" ph="select uid,f... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="4609:4731" ph="select uid,f... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="4864:4982" ph="select uid,f... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="5104:5328" ph="select isbor... getFile" />
+            <marker date="1541385234513" expanded="true" signature="5425:5635" ph="select isbor... companyFile" />
+            <marker date="1541385234513" expanded="true" signature="5765:5828" ph="select cyid,... classify" />
+            <marker date="1541385234513" expanded="true" signature="5979:6052" ph="select cyid,... classify" />
+            <marker date="1541385234513" expanded="true" signature="6197:6246" ph="select uupda... user" />
+            <marker date="1541385234513" expanded="true" signature="6411:6487" ph="select filei... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="6651:6723" ph="select filei... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="6869:6945" ph="SELECT uid,f... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="7097:7171" ph="SELECT uid,f... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="7303:7339" ph="update compa... " />
+            <marker date="1541385234513" expanded="true" signature="7303:7362" ph="update compa... " />
+            <marker date="1541385234513" expanded="true" signature="7457:7512" ph="update getFi... " />
+            <marker date="1541385234513" expanded="true" signature="7634:7664" ph="insert into borrowcompanyFile... " />
+            <marker date="1541385234513" expanded="true" signature="7634:7736" ph="insert into borrow_companyFile... " />
+            <marker date="1541385234513" expanded="true" signature="7834:7932" ph="insert into borrow_getFile... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="151" column="44" lean-forward="false" selection-start-line="151" selection-start-column="44" selection-end-line="151" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="123" column="44" lean-forward="false" selection-start-line="123" selection-start-column="44" selection-end-line="123" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="621" column="60" lean-forward="false" selection-start-line="621" selection-start-column="60" selection-end-line="621" selection-end-column="60" />
           <folding />
         </state>
       </provider>

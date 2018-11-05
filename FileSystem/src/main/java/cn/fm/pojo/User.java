@@ -13,7 +13,7 @@ public class User {
     private String unumber;
     private int wid;
 
-//    private String uemail;
+    private String uemail;
 //    private String code;
     private int ifAdmin;
 
@@ -97,13 +97,13 @@ public class User {
         this.state = state;
     }
 
-//    public String getUemail() {
-//        return uemail;
-//    }
-//
-//    public void setUemail(String uemail) {
-//        this.uemail = uemail;
-//    }
+    public String getUemail() {
+        return uemail;
+    }
+
+    public void setUemail(String uemail) {
+        this.uemail = uemail;
+    }
 
 //    public String getCode() {
 //        return code;
