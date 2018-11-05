@@ -320,9 +320,9 @@ public class UserController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/showcfWaitBorrow")
     @ResponseBody
-    public String showcfWaitBorrow( int uid ) throws  Exception {
+    public String showcfWaitBorrow( int uid , int wid) throws  Exception {
         HashMap<String,Integer> map = new HashMap<>();
-        List<CompanyFile> companyFiles = userService.selectcfWaitBorrow( uid );
+        List<CompanyFile> companyFiles = userService.selectcfWaitBorrow( uid , wid );
         if( companyFiles != null && companyFiles.size() > 0 ) {
             return JSON.toJSONString( companyFiles );
         }
@@ -340,9 +340,9 @@ public class UserController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/showgfWaitBorrow")
     @ResponseBody
-    public String showgfWaitBorrow( int uid ) throws  Exception {
+    public String showgfWaitBorrow( int uid , int wid ) throws  Exception {
         HashMap<String,Integer> map = new HashMap<>();
-        List<GetFile> getFiles = userService.selectgfWaitBorrow( uid );
+        List<GetFile> getFiles = userService.selectgfWaitBorrow( uid , wid );
         if( getFiles != null && getFiles.size() > 0 ) {
             return JSON.toJSONString( getFiles );
         }
@@ -362,7 +362,7 @@ public class UserController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/insertBorrowcfInfo")
     @ResponseBody
-    public String insertBorrowcfInfo( int uid, int cfid ) throws Exception {
+    public String insertBorrowcfInfo( int uid, int cfid , int wid ) throws Exception {
        // System.out.println("------------------" + cfid +"--------------------------");
         HashMap<String,Integer> map = new HashMap<>();
 
@@ -372,7 +372,7 @@ public class UserController {
 //        for( i = 0; i <cfids.length ; i++) {
 //            cfids[i] = Integer.parseInt(cfidStrings[i]);
 //        }
-        int result = userService.insertBorrowcfInfo(uid, cfid);
+        int result = userService.insertBorrowcfInfo(uid, cfid ,wid);
         if (result == -5) {
             map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
             return JSON.toJSONString(map);
@@ -391,7 +391,7 @@ public class UserController {
     @RequestMapping(value = "/insertBorrowgfInfo")
     @ResponseBody
     public String insertBorrowgfInfo( int uid,
-                                      int gfid) throws Exception {
+                                      int gfid , int wid ) throws Exception {
       //  System.out.println("------------------" + gfid +"--------------------------");
         HashMap<String,Integer> map = new HashMap<>();
 //        String[] gfidStrings = gfid.split(",");
@@ -400,7 +400,7 @@ public class UserController {
 //        for( i = 0; i <gfids.length ; i++) {
 //            gfids[i] = Integer.parseInt(gfidStrings[i]);
 //        }
-        int result = userService.insertBorrowgfInfo(uid, gfid);
+        int result = userService.insertBorrowgfInfo(uid, gfid ,wid);
         if (result == -5) {
             map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
             return JSON.toJSONString(map);
@@ -639,6 +639,11 @@ public class UserController {
         return JSON.toJSONString(map);
     }
 
+    /**
+     * 查看自己的用户信息
+     * @return
+     * @throws Exception
+     */
     @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
     @RequestMapping(value = "/selectMyself")
     @ResponseBody
@@ -706,6 +711,14 @@ public class UserController {
         }
 
     }
+
+    /**
+     * 返回ocr读取的数据
+     * @param file
+     * @param type
+     * @return
+     * @throws Exception
+     */
     @RequiresRoles(value = {"admin"} )
     @RequestMapping(value = "/returnOcrInfo/{type}")
     @ResponseBody

@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
     @Override
-    public int insertBorrowcfInfo(int uid,int cfid) throws Exception{
+    public int insertBorrowcfInfo(int uid,int cfid , int wid) throws Exception{
 
         Borrow borrow = new Borrow();
 
@@ -101,6 +101,7 @@ public class UserServiceImpl implements UserService {
 //                return -5;
 //            }
             borrow.setUid(uid);
+        borrow.setWid(wid);
             borrow.setFileid(cfid);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
         //设置为24小时之后为归还日期
@@ -120,7 +121,7 @@ public class UserServiceImpl implements UserService {
         return  1;
     }
     @Override
-    public int insertBorrowgfInfo(int uid,int gfid) throws Exception{
+    public int insertBorrowgfInfo(int uid,int gfid ,int wid) throws Exception{
         Borrow borrow = new Borrow();
 
         //查看这些文件是不是被借了,如果被借了就返回 - 5
@@ -132,15 +133,18 @@ public class UserServiceImpl implements UserService {
         if( isBorrow == 2) {
             return -5;
         }
-            borrow.setUid(uid);
+        borrow.setWid(wid);
+        borrow.setUid(uid);
             borrow.setFileid(gfid);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
             //设置为24小时之后为归还日期
         borrow.setShouldback( dateAddToTomorrow() );
+        //修改借阅表
             int r = userMapper.insertBorrowgfInfo(borrow);
             if(r == 0) {
                 return -4;
             }
+            //修改文件表,文件信息
            int re = userMapper.updateGetFileIsBorrow(gfid);
             if(re == 0) {
                 return -4;
@@ -490,8 +494,8 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
     @Override
-    public List<CompanyFile> selectcfWaitBorrow(   int uid ) throws Exception{
-        int fileids[] = userMapper.selectcfWaitBorrow( uid ) ;
+    public List<CompanyFile> selectcfWaitBorrow(   int uid, int wid  ) throws Exception{
+        int fileids[] = userMapper.selectcfWaitBorrow(  wid ) ;
         List<CompanyFile> companyFiles = new ArrayList<>();
         for( int i = 0; i < fileids.length; i++ ) {
             CompanyFile companyFile = userCompanyFileMapper.selectCompanyFileById( fileids[i] );
@@ -506,8 +510,8 @@ public class UserServiceImpl implements UserService {
         return null;
     }
     @Override
-    public List<GetFile> selectgfWaitBorrow(   int uid ) throws Exception{
-        int fileids[] = userMapper.selectgfWaitBorrow( uid ) ;
+    public List<GetFile> selectgfWaitBorrow(   int uid , int wid ) throws Exception{
+        int fileids[] = userMapper.selectgfWaitBorrow(  wid ) ;
         List<GetFile> getFiles = new ArrayList<>();
         for( int i = 0; i < fileids.length; i++ ) {
             GetFile getFile = userGetFileMapper.selectGetFileById( fileids[i] );

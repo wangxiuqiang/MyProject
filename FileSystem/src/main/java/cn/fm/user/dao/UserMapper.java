@@ -127,12 +127,12 @@ public interface UserMapper {
 
     /**
      * 根据用户id查找没有领取的文件
-     * @param uid
+     * @param wid
      * @return
      * @throws Exception
      */
-    public int[] selectcfWaitBorrow( @Param(value = "uid")  int uid ) throws Exception;
-    public int[] selectgfWaitBorrow( @Param(value = "uid")  int uid ) throws Exception;
+    public int[] selectcfWaitBorrow( @Param( value = "wid") int wid ) throws Exception;
+    public int[] selectgfWaitBorrow(  @Param( value = "wid") int wid ) throws Exception;
 
     /**
      * 查找借出的文件,以便后面进行比较

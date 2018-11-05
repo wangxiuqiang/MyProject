@@ -22,15 +22,15 @@
     </select>
 
 
-    <!--添加借阅信息 ,同步更新需要归还的时间-->
+    <!--添加借阅信息 ,同步更新需要归还的时间 和领取人-->
     <update id="insertBorrowcfInfo" parameterType="cn.fm.pojo.Borrow" >
-        update borrow_companyFile set borrowtime = #{borrowtime} , shouldback = #{shuldback} where uid = #{uid} and fileid = #{fileid} and borrowtime=null
+        update borrow_companyFile set borrowtime = #{borrowtime} , shouldback = #{shuldback} , uid = #{uid} where wid = #{wid} and fileid = #{fileid} and borrowtime=null
         and shouldback=null
     </update>
 
-    <!--添加借阅信息 ,同步更新需要归还的时间-->
+    <!--添加借阅信息 ,同步更新需要归还的时间 ,和领取人-->
     <update id="insertBorrowgfInfo" parameterType="cn.fm.pojo.Borrow" >
-        update borrow_getFile set borrowtime = #{borrowtime} , shouldback = #{shuldback}  where uid = #{uid} and fileid = #{fileid} and borrowtime=null
+        update borrow_getFile set borrowtime = #{borrowtime} , shouldback = #{shuldback},uid = #{uid}  where wid = #{wid} and fileid = #{fileid} and borrowtime=null
         and shouldback=null
     </update>
 
@@ -149,11 +149,11 @@
 
     <!--根据id查找待领取的文件信息,就是借阅时间为null的-->
     <select id="selectcfWaitBorrow" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        select fileid from borrow_companyFile where uid = #{uid} and borrowtime=null
+        select fileid from borrow_companyFile where wid = #{wid} and borrowtime=null
     </select>
     <!--根据id查找待领取的文件信息,就是借阅时间为null的-->
     <select id="selectgfWaitBorrow" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        select fileid from borrow_getFile where uid = #{uid} and borrowtime=null
+        select fileid from borrow_getFile where wid = #{wid} and borrowtime=null
     </select>
 <!--用来查找借出文件 , 查找没有归还的文件 的uid和fileid 以及 shouldback时间-->
    <select id="selectcfIsPassTime" resultType="cn.fm.pojo.Borrow" >
@@ -174,9 +174,9 @@
     </update>
     <!--待分配接口 录入借阅信息-->
     <insert id="insertcfWaitBorrowInfo" parameterType="cn.fm.pojo.Borrow">
-        insert into borrow_companyFile(wid,uid,fileid,givetime) VALUES (#{wid},#{uid} ,#{fileid}, #{givetime})
+        insert into borrow_companyFile(wid,fileid,givetime) VALUES (#{wid},#{fileid}, #{givetime})
     </insert>
     <insert id="insertgfWaitBorrowInfo" parameterType="cn.fm.pojo.Borrow">
-        insert into borrow_getFile(wid,uid,fileid,givetime) VALUES (#{wid},#{uid} ,#{fileid}, #{givetime})
+        insert into borrow_getFile(wid,fileid,givetime) VALUES (#{wid},#{fileid}, #{givetime})
     </insert>
 </mapper>

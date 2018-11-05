@@ -8,7 +8,7 @@ public class Borrow {
     private int state;
     private String givetime;
     private String shouldback;
-//    private int wid;
+    private int wid;
 
     public String getGivetime() {
         return givetime;
@@ -25,14 +25,14 @@ public class Borrow {
     public void setShouldback(String shouldback) {
         this.shouldback = shouldback;
     }
-//
-//    public int getWid() {
-//        return wid;
-//    }
-//
-//    public void setWid(int wid) {
-//        this.wid = wid;
-//    }
+
+    public int getWid() {
+        return wid;
+    }
+
+    public void setWid(int wid) {
+        this.wid = wid;
+    }
 
     public int getState() {
         return state;
