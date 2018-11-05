@@ -113,7 +113,7 @@ public interface UserCompanyFileMapper {
          * @return
          * @throws Exception
          */
-        public int delCompanyFileDestroy( @Param( value = "cfid") int cfid) throws Exception;
+        public int delCompanyFileDestroy( @Param( value = "cfid") int cfid , @Param(value = "destroyDate") String destroyDate) throws Exception;
 
         /**
          * 清退一个文件

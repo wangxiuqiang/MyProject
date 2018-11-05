@@ -343,7 +343,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      * @throws Exception
      */
     public int delCompanyFileDestroy(  int cfid) throws Exception {
-        return userCompanyFileMapper.delCompanyFileDestroy( cfid );
+        return userCompanyFileMapper.delCompanyFileDestroy( cfid , DateToStringUtils.dataTostring() );
     }
 
     /**

@@ -31,16 +31,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserServiceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="912">
-              <caret line="613" column="13" lean-forward="false" selection-start-line="613" selection-start-column="13" selection-end-line="613" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UserCompanyFileService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserCompanyFileService.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -73,12 +63,111 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserCompanyFileServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserCompanyFileServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserCompanyFileServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="26" column="24" lean-forward="true" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
+            <state relative-caret-position="478">
+              <caret line="345" column="45" lean-forward="true" selection-start-line="345" selection-start-column="45" selection-end-line="345" selection-end-column="45" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserCompanyFileMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserCompanyFileMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="115" column="114" lean-forward="false" selection-start-line="115" selection-start-column="114" selection-end-line="115" selection-end-column="114" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserCompanyFileMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserCompanyFileMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="16" column="65" lean-forward="false" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="65" />
+              <folding>
+                <marker date="1541401391557" expanded="true" signature="566:911" ph="insert into companyFile... " />
+                <marker date="1541401391557" expanded="true" signature="1035:1109" ph="select cyid,... classify" />
+                <marker date="1541401391557" expanded="true" signature="1229:1339" ph="select from companyFile" />
+                <marker date="1541401391557" expanded="true" signature="1474:1615" ph="select from companyFile" />
+                <marker date="1541401391557" expanded="true" signature="1758:1877" ph="select from companyFile" />
+                <marker date="1541401391557" expanded="true" signature="2017:2161" ph="select from companyFile" />
+                <marker date="1541401391557" expanded="true" signature="2298:2413" ph="select from companyFile" />
+                <marker date="1541401391557" expanded="true" signature="2552:2657" ph="select from companyFile" />
+                <marker date="1541401391557" expanded="true" signature="2773:2864" ph="select from companyFile" />
+                <marker date="1541401391557" expanded="true" signature="2985:4301" ph="update compa... " />
+                <marker date="1541401391557" expanded="true" signature="5366:5419" ph="select * fro... borrow_companyFile" />
+                <marker date="1541401391557" expanded="true" signature="6030:6123" ph="select from companyFile" />
+                <marker date="1541401391557" expanded="true" signature="6240:6326" ph="UPDATE compa... " />
+                <marker date="1541401391557" expanded="true" signature="6415:6488" ph="UPDATE compa... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserGetFileMapper.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserGetFileMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="756">
+              <caret line="173" column="61" lean-forward="false" selection-start-line="173" selection-start-column="61" selection-end-line="173" selection-end-column="61" />
+              <folding>
+                <marker date="1541389541345" expanded="true" signature="501:790" ph="insert into getFile... " />
+                <marker date="1541389541345" expanded="true" signature="920:995" ph="select cyid,... classify" />
+                <marker date="1541389541345" expanded="true" signature="1109:1215" ph="select from getFile" />
+                <marker date="1541389541345" expanded="true" signature="1344:1483" ph="select from getFile" />
+                <marker date="1541389541345" expanded="true" signature="1615:1728" ph="select from getFile" />
+                <marker date="1541389541345" expanded="true" signature="1863:1979" ph="select from getFile" />
+                <marker date="1541389541345" expanded="true" signature="2111:2264" ph="select from getFile" />
+                <marker date="1541389541345" expanded="true" signature="2394:2505" ph="select from getFile" />
+                <marker date="1541389541345" expanded="true" signature="3394:3482" ph="select from getFile" />
+                <marker date="1541389541345" expanded="true" signature="3591:5108" ph="update getFi... " />
+                <marker date="1541389541345" expanded="true" signature="5252:5299" ph="select * fro... borrow_getFile" />
+                <marker date="1541389541345" expanded="true" signature="5828:5921" ph="select from companyFile" />
+                <marker date="1541389541345" expanded="true" signature="5996:6069" ph="UPDATE getFi... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserMapper.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="169" column="66" lean-forward="false" selection-start-line="169" selection-start-column="61" selection-end-line="169" selection-end-column="66" />
+              <folding>
+                <marker date="1541385234513" expanded="true" signature="315:358" ph="select state... user" />
+                <marker date="1541385234513" expanded="true" signature="416:478" ph="update user " />
+                <marker date="1541385234513" expanded="true" signature="998:1042" ph="update borro... " />
+                <marker date="1541385234513" expanded="true" signature="998:1172" ph="update borro... " />
+                <marker date="1541385234513" expanded="true" signature="1299:1351" ph="insert into borrow_getFile... " />
+                <marker date="1541385234513" expanded="true" signature="1299:1470" ph="update borro... " />
+                <marker date="1541385234513" expanded="true" signature="1611:1685" ph="update compa... " />
+                <marker date="1541385234513" expanded="true" signature="2073:2140" ph="update getFi... " />
+                <marker date="1541385234513" expanded="true" signature="3203:3307" ph="select uid,f... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="3203:3373" ph="select uid,f... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="3524:3624" ph="select uid,f... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="3524:3690" ph="select uid,f... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="4609:4731" ph="select uid,f... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="4864:4982" ph="select uid,f... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="5104:5328" ph="select isbor... getFile" />
+                <marker date="1541385234513" expanded="true" signature="5425:5635" ph="select isbor... companyFile" />
+                <marker date="1541385234513" expanded="true" signature="5765:5828" ph="select cyid,... classify" />
+                <marker date="1541385234513" expanded="true" signature="5979:6052" ph="select cyid,... classify" />
+                <marker date="1541385234513" expanded="true" signature="6197:6246" ph="select uupda... user" />
+                <marker date="1541385234513" expanded="true" signature="6411:6487" ph="select filei... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="6651:6723" ph="select filei... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="6869:6945" ph="SELECT uid,f... borrow_companyFile" />
+                <marker date="1541385234513" expanded="true" signature="7097:7171" ph="SELECT uid,f... borrow_getFile" />
+                <marker date="1541385234513" expanded="true" signature="7303:7339" ph="update compa... " />
+                <marker date="1541385234513" expanded="true" signature="7303:7362" ph="update compa... " />
+                <marker date="1541385234513" expanded="true" signature="7457:7512" ph="update getFi... " />
+                <marker date="1541385234513" expanded="true" signature="7634:7664" ph="insert into borrowcompanyFile... " />
+                <marker date="1541385234513" expanded="true" signature="7634:7736" ph="insert into borrow_companyFile... " />
+                <marker date="1541385234513" expanded="true" signature="7834:7932" ph="insert into borrow_getFile... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,36 +177,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
               <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserGetFileController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserGetFileController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="212" column="39" lean-forward="false" selection-start-line="212" selection-start-column="39" selection-end-line="212" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="123" column="44" lean-forward="false" selection-start-line="123" selection-start-column="44" selection-end-line="123" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserRegService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserRegService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="6" column="73" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -221,15 +280,15 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/CompanyFile.java" />
         <option value="$PROJECT_DIR$/sql2.txt" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserCompanyFileController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserCompanyFileMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserGetFileMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserGetFileMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserCompanyFileMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserGetFileController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserCompanyFileService.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/UserGetFileService.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserGetFileServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserCompanyFileServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserCompanyFileMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserCompanyFileMapper.xml" />
       </list>
     </option>
   </component>
@@ -897,16 +956,15 @@
       <workItem from="1541227537568" duration="9940000" />
       <workItem from="1541244576710" duration="7163000" />
       <workItem from="1541293330307" duration="4683000" />
-      <workItem from="1541382136856" duration="6670000" />
+      <workItem from="1541382136856" duration="7701000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="511658000" />
+    <option name="totallyTimeSpent" value="512689000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="46" y="-11" width="1875" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25356415" sideWeight="0.50186867" order="7" side_tool="true" content_ui="tabs" />
@@ -928,7 +986,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35234216" sideWeight="0.49813133" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22957821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22957821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1128,6 +1186,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1539074164149" expanded="true" signature="256:318" ph="update user " />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1196,10 +1257,10 @@
         <state relative-caret-position="1298">
           <caret line="99" column="0" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
           <folding>
-            <element signature="e#1821#1822#0" expanded="true" />
-            <element signature="e#1850#1851#0" expanded="true" />
-            <element signature="e#1894#1895#0" expanded="true" />
-            <element signature="e#1930#1931#0" expanded="true" />
+            <element signature="e#1821#1822#0" expanded="false" />
+            <element signature="e#1850#1851#0" expanded="false" />
+            <element signature="e#1894#1895#0" expanded="false" />
+            <element signature="e#1930#1931#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1241,44 +1302,6 @@
         <state relative-caret-position="594">
           <caret line="55" column="38" lean-forward="false" selection-start-line="53" selection-start-column="7" selection-end-line="55" selection-end-column="38" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="169" column="66" lean-forward="false" selection-start-line="169" selection-start-column="61" selection-end-line="169" selection-end-column="66" />
-          <folding>
-            <marker date="1541385234513" expanded="true" signature="315:358" ph="select state... user" />
-            <marker date="1541385234513" expanded="true" signature="416:478" ph="update user " />
-            <marker date="1541385234513" expanded="true" signature="998:1042" ph="update borro... " />
-            <marker date="1541385234513" expanded="true" signature="998:1172" ph="update borro... " />
-            <marker date="1541385234513" expanded="true" signature="1299:1351" ph="insert into borrow_getFile... " />
-            <marker date="1541385234513" expanded="true" signature="1299:1470" ph="update borro... " />
-            <marker date="1541385234513" expanded="true" signature="1611:1685" ph="update compa... " />
-            <marker date="1541385234513" expanded="true" signature="2073:2140" ph="update getFi... " />
-            <marker date="1541385234513" expanded="true" signature="3203:3307" ph="select uid,f... borrow_companyFile" />
-            <marker date="1541385234513" expanded="true" signature="3203:3373" ph="select uid,f... borrow_companyFile" />
-            <marker date="1541385234513" expanded="true" signature="3524:3624" ph="select uid,f... borrow_getFile" />
-            <marker date="1541385234513" expanded="true" signature="3524:3690" ph="select uid,f... borrow_getFile" />
-            <marker date="1541385234513" expanded="true" signature="4609:4731" ph="select uid,f... borrow_companyFile" />
-            <marker date="1541385234513" expanded="true" signature="4864:4982" ph="select uid,f... borrow_getFile" />
-            <marker date="1541385234513" expanded="true" signature="5104:5328" ph="select isbor... getFile" />
-            <marker date="1541385234513" expanded="true" signature="5425:5635" ph="select isbor... companyFile" />
-            <marker date="1541385234513" expanded="true" signature="5765:5828" ph="select cyid,... classify" />
-            <marker date="1541385234513" expanded="true" signature="5979:6052" ph="select cyid,... classify" />
-            <marker date="1541385234513" expanded="true" signature="6197:6246" ph="select uupda... user" />
-            <marker date="1541385234513" expanded="true" signature="6411:6487" ph="select filei... borrow_companyFile" />
-            <marker date="1541385234513" expanded="true" signature="6651:6723" ph="select filei... borrow_getFile" />
-            <marker date="1541385234513" expanded="true" signature="6869:6945" ph="SELECT uid,f... borrow_companyFile" />
-            <marker date="1541385234513" expanded="true" signature="7097:7171" ph="SELECT uid,f... borrow_getFile" />
-            <marker date="1541385234513" expanded="true" signature="7303:7339" ph="update compa... " />
-            <marker date="1541385234513" expanded="true" signature="7303:7362" ph="update compa... " />
-            <marker date="1541385234513" expanded="true" signature="7457:7512" ph="update getFi... " />
-            <marker date="1541385234513" expanded="true" signature="7634:7664" ph="insert into borrowcompanyFile... " />
-            <marker date="1541385234513" expanded="true" signature="7634:7736" ph="insert into borrow_companyFile... " />
-            <marker date="1541385234513" expanded="true" signature="7834:7932" ph="insert into borrow_getFile... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1335,64 +1358,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserCompanyFileMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="123" column="117" lean-forward="false" selection-start-line="123" selection-start-column="117" selection-end-line="123" selection-end-column="117" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserGetFileMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
           <caret line="121" column="109" lean-forward="false" selection-start-line="121" selection-start-column="109" selection-end-line="121" selection-end-column="109" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserCompanyFileMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="712">
-          <caret line="176" column="36" lean-forward="false" selection-start-line="176" selection-start-column="36" selection-end-line="176" selection-end-column="36" />
-          <folding>
-            <marker date="1541389541329" expanded="true" signature="540:885" ph="insert into companyFile... " />
-            <marker date="1541389541329" expanded="true" signature="1010:1084" ph="select cyid,... classify" />
-            <marker date="1541389541329" expanded="true" signature="1204:1314" ph="select from companyFile" />
-            <marker date="1541389541329" expanded="true" signature="1449:1590" ph="select from companyFile" />
-            <marker date="1541389541329" expanded="true" signature="1733:1852" ph="select from companyFile" />
-            <marker date="1541389541329" expanded="true" signature="1992:2136" ph="select from companyFile" />
-            <marker date="1541389541329" expanded="true" signature="2273:2388" ph="select from companyFile" />
-            <marker date="1541389541329" expanded="true" signature="2527:2632" ph="select from companyFile" />
-            <marker date="1541389541329" expanded="true" signature="2748:2839" ph="select from companyFile" />
-            <marker date="1541389541329" expanded="true" signature="2960:4276" ph="update compa... " />
-            <marker date="1541389541329" expanded="true" signature="5341:5394" ph="select * fro... borrow_companyFile" />
-            <marker date="1541389541329" expanded="true" signature="6005:6098" ph="select from companyFile" />
-            <marker date="1541389541329" expanded="true" signature="6215:6270" ph="UPDATE compa... " />
-            <marker date="1541389541329" expanded="true" signature="6359:6432" ph="UPDATE compa... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserGetFileMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="173" column="61" lean-forward="false" selection-start-line="173" selection-start-column="61" selection-end-line="173" selection-end-column="61" />
-          <folding>
-            <marker date="1541389541345" expanded="true" signature="501:790" ph="insert into getFile... " />
-            <marker date="1541389541345" expanded="true" signature="920:995" ph="select cyid,... classify" />
-            <marker date="1541389541345" expanded="true" signature="1109:1215" ph="select from getFile" />
-            <marker date="1541389541345" expanded="true" signature="1344:1483" ph="select from getFile" />
-            <marker date="1541389541345" expanded="true" signature="1615:1728" ph="select from getFile" />
-            <marker date="1541389541345" expanded="true" signature="1863:1979" ph="select from getFile" />
-            <marker date="1541389541345" expanded="true" signature="2111:2264" ph="select from getFile" />
-            <marker date="1541389541345" expanded="true" signature="2394:2505" ph="select from getFile" />
-            <marker date="1541389541345" expanded="true" signature="3394:3482" ph="select from getFile" />
-            <marker date="1541389541345" expanded="true" signature="3591:5108" ph="update getFi... " />
-            <marker date="1541389541345" expanded="true" signature="5252:5299" ph="select * fro... borrow_getFile" />
-            <marker date="1541389541345" expanded="true" signature="5828:5921" ph="select from companyFile" />
-            <marker date="1541389541345" expanded="true" signature="5996:6069" ph="UPDATE getFi... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1472,9 +1442,100 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserCompanyFileServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="26" column="24" lean-forward="true" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
+        <state relative-caret-position="478">
+          <caret line="345" column="45" lean-forward="true" selection-start-line="345" selection-start-column="45" selection-end-line="345" selection-end-column="45" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/dao/UserCompanyFileMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="115" column="114" lean-forward="false" selection-start-line="115" selection-start-column="114" selection-end-line="115" selection-end-column="114" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserCompanyFileMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="16" column="65" lean-forward="false" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="65" />
+          <folding>
+            <marker date="1541401391557" expanded="true" signature="566:911" ph="insert into companyFile... " />
+            <marker date="1541401391557" expanded="true" signature="1035:1109" ph="select cyid,... classify" />
+            <marker date="1541401391557" expanded="true" signature="1229:1339" ph="select from companyFile" />
+            <marker date="1541401391557" expanded="true" signature="1474:1615" ph="select from companyFile" />
+            <marker date="1541401391557" expanded="true" signature="1758:1877" ph="select from companyFile" />
+            <marker date="1541401391557" expanded="true" signature="2017:2161" ph="select from companyFile" />
+            <marker date="1541401391557" expanded="true" signature="2298:2413" ph="select from companyFile" />
+            <marker date="1541401391557" expanded="true" signature="2552:2657" ph="select from companyFile" />
+            <marker date="1541401391557" expanded="true" signature="2773:2864" ph="select from companyFile" />
+            <marker date="1541401391557" expanded="true" signature="2985:4301" ph="update compa... " />
+            <marker date="1541401391557" expanded="true" signature="5366:5419" ph="select * fro... borrow_companyFile" />
+            <marker date="1541401391557" expanded="true" signature="6030:6123" ph="select from companyFile" />
+            <marker date="1541401391557" expanded="true" signature="6240:6326" ph="UPDATE compa... " />
+            <marker date="1541401391557" expanded="true" signature="6415:6488" ph="UPDATE compa... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserGetFileMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="173" column="61" lean-forward="false" selection-start-line="173" selection-start-column="61" selection-end-line="173" selection-end-column="61" />
+          <folding>
+            <marker date="1541389541345" expanded="true" signature="501:790" ph="insert into getFile... " />
+            <marker date="1541389541345" expanded="true" signature="920:995" ph="select cyid,... classify" />
+            <marker date="1541389541345" expanded="true" signature="1109:1215" ph="select from getFile" />
+            <marker date="1541389541345" expanded="true" signature="1344:1483" ph="select from getFile" />
+            <marker date="1541389541345" expanded="true" signature="1615:1728" ph="select from getFile" />
+            <marker date="1541389541345" expanded="true" signature="1863:1979" ph="select from getFile" />
+            <marker date="1541389541345" expanded="true" signature="2111:2264" ph="select from getFile" />
+            <marker date="1541389541345" expanded="true" signature="2394:2505" ph="select from getFile" />
+            <marker date="1541389541345" expanded="true" signature="3394:3482" ph="select from getFile" />
+            <marker date="1541389541345" expanded="true" signature="3591:5108" ph="update getFi... " />
+            <marker date="1541389541345" expanded="true" signature="5252:5299" ph="select * fro... borrow_getFile" />
+            <marker date="1541389541345" expanded="true" signature="5828:5921" ph="select from companyFile" />
+            <marker date="1541389541345" expanded="true" signature="5996:6069" ph="UPDATE getFi... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="169" column="66" lean-forward="false" selection-start-line="169" selection-start-column="61" selection-end-line="169" selection-end-column="66" />
+          <folding>
+            <marker date="1541385234513" expanded="true" signature="315:358" ph="select state... user" />
+            <marker date="1541385234513" expanded="true" signature="416:478" ph="update user " />
+            <marker date="1541385234513" expanded="true" signature="998:1042" ph="update borro... " />
+            <marker date="1541385234513" expanded="true" signature="998:1172" ph="update borro... " />
+            <marker date="1541385234513" expanded="true" signature="1299:1351" ph="insert into borrow_getFile... " />
+            <marker date="1541385234513" expanded="true" signature="1299:1470" ph="update borro... " />
+            <marker date="1541385234513" expanded="true" signature="1611:1685" ph="update compa... " />
+            <marker date="1541385234513" expanded="true" signature="2073:2140" ph="update getFi... " />
+            <marker date="1541385234513" expanded="true" signature="3203:3307" ph="select uid,f... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="3203:3373" ph="select uid,f... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="3524:3624" ph="select uid,f... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="3524:3690" ph="select uid,f... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="4609:4731" ph="select uid,f... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="4864:4982" ph="select uid,f... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="5104:5328" ph="select isbor... getFile" />
+            <marker date="1541385234513" expanded="true" signature="5425:5635" ph="select isbor... companyFile" />
+            <marker date="1541385234513" expanded="true" signature="5765:5828" ph="select cyid,... classify" />
+            <marker date="1541385234513" expanded="true" signature="5979:6052" ph="select cyid,... classify" />
+            <marker date="1541385234513" expanded="true" signature="6197:6246" ph="select uupda... user" />
+            <marker date="1541385234513" expanded="true" signature="6411:6487" ph="select filei... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="6651:6723" ph="select filei... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="6869:6945" ph="SELECT uid,f... borrow_companyFile" />
+            <marker date="1541385234513" expanded="true" signature="7097:7171" ph="SELECT uid,f... borrow_getFile" />
+            <marker date="1541385234513" expanded="true" signature="7303:7339" ph="update compa... " />
+            <marker date="1541385234513" expanded="true" signature="7303:7362" ph="update compa... " />
+            <marker date="1541385234513" expanded="true" signature="7457:7512" ph="update getFi... " />
+            <marker date="1541385234513" expanded="true" signature="7634:7664" ph="insert into borrowcompanyFile... " />
+            <marker date="1541385234513" expanded="true" signature="7634:7736" ph="insert into borrow_companyFile... " />
+            <marker date="1541385234513" expanded="true" signature="7834:7932" ph="insert into borrow_getFile... " />
+          </folding>
         </state>
       </provider>
     </entry>

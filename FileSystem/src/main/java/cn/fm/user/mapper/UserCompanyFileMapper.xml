@@ -7,14 +7,14 @@
     <sql id="Base_Columns_List">
         cfid,cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
         cfsend,cflevel,cffontid,cfnumber,cflanguage ,cfloader,type,isborrow,waitborrow,
-        destroy
+        destroy,back,backDate,destroyDate
     </sql>
 
     <insert id="insertCompanyFile" parameterType="cn.fm.pojo.CompanyFile" >
         insert into companyFile(cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
         cfsend,cflevel,cffontid,cfnumber,cflanguage,cfloader) values(#{cfname},
         #{cfclassifyid} ,#{cfclassifyname},#{cfaddress},#{cfdate},#{cfeditor},#{cfaccept},
-        #{cfsend},#{cflevel},#{cffontid},#{cfnumber},#{cflanguage},#{cfloader});
+        #{cfsend},#{cflevel},#{cffontid},#{cfnumber},#{cflanguage},#{cfloader})
     </insert>
 
     <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
@@ -171,11 +171,11 @@
 
     <!--销毁一个文件-->
     <update id="delCompanyFileDestroy" parameterType="java.lang.Integer" >
-        UPDATE companyFile SET destroy = 0 where cfid = #{cfid}
+        UPDATE companyFile SET destroy = 0 , destroyDate = #{destroyDate} where cfid = #{cfid}
     </update>
     <!--清退一个文件 修改清退文件的日期-->
     <update id="delCompanyFileBack" >
-        UPDATE companyFile SET back = 1,bactDate=#{backDate} where cfid = #{cfid}
+        UPDATE companyFile SET back = 1,backDate=#{backDate} where cfid = #{cfid}
     </update>
 
 </mapper>
