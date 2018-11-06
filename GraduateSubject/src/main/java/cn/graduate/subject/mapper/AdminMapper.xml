@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.graduate.subject.dao.LoginMapper">
+    <sql id="Subject_Base_Columns">
+        sid,sname,sintroduce
+    </sql>
+   <!--添加一个题目-->
+    <insert id="addSubject" parameterType="cn.graduate.subject.pojo.Subject" >
+        insert into subject(sname,sintroduce) VALUES (#{sname} , #{sintroduce} )
+    </insert>
+<!--根据 编号更新一个 subject-->
+    <update id="updateSubject" parameterType="cn.graduate.subject.pojo.Subject">
+        UPDATE subject
+        <set>
+            <if test="sname != null" >
+                sname = #{sname},
+            </if>
+            <if test="sintroduce != null">
+                sintroduce=#{sintroduce}
+            </if>
+        </set>
+        where sid=#{sid}
+    </update>
+    <!--根据编号删除一个题目-->
+    <delete id="delSubject" parameterType="java.lang.Integer">
+        delete FROM subject where sid=#{sid}
+    </delete>
+
+    <!--查看全部的题目-->
+    <select id="selectAllSubject" parameterType="cn.graduate.subject.pojo.Subject" >
+        select
+        <include refid="Subject_Base_Columns"/>
+        from subject
+    </select>
+
+    <!--根据编号找到一个题目-->
+    <select id="selectSubjectById" parameterType="cn.graduate.subject.pojo.Subject" >
+        select
+        <include refid="Subject_Base_Columns"/>
+        from subject
+        where sid=#{sid}
+    </select>
+
+    <!--根据名称模糊查询-->
+    <select id="selectSubjectByName" parameterType="cn.graduate.subject.pojo.Subject" >
+        select
+        <include refid="Subject_Base_Columns"/>
+        from subject
+        where sname LIKE concat(concat('%', #{sname}),'%')
+    </select>
+
+</mapper>
