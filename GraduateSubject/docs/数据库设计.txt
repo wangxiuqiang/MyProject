@@ -1,0 +1,60 @@
+create database graduate;
+
+use graduate;
+create table user (
+uid int primary key auto_increment,
+uaccount varchar(11) NOT NULL,
+uname varchar(5) NOT NULL ,
+uemail varchar(30) ,
+ucollege int,
+ugrade int ,
+upwd varchar(256),
+usex enum('男','女'),
+uage int ,
+ifAdmin int NOT NULL,
+sid int default 0, 
+pid int default 0,
+rid int default 2,
+);
+
+
+
+insert into user(uaccount,uname,ifAdmin,sid) values("12345678910","123",1,2);
+
+create table college (
+cid int primary key auto_increment,
+cname varchar(20) NOT NULL 
+);
+
+create table grade (
+gid int primary key auto_increament,
+gname varchar(20)
+);
+
+create table subject(
+sid int primary key auto_increment,
+sname varchar(30),
+sintroduce varchar(50)
+);
+
+create trigger delete_subject_userSid after delete on subject  for each row update user set sid=0 where sid=OLD.sid;
+insert into subject(sname,sintroduce) values("2","3");
+
+create table role(
+rid int primary key auto_increment,
+rname varchar(30)
+);
+
+insert into role( rname ) values("admin");
+insert into role (rname) values("user");
+
+create table progress (
+pid int primary key auto_increment,
+pone varchar(60),
+ptwo varchar(60),
+pthree varchar(60),
+pfour varchar(60),
+pfive varchar(60)
+);
+
+
