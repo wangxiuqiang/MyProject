@@ -6,6 +6,10 @@
     <sql id="Subject_Base_Columns">
         sid,sname,sintroduce
     </sql>
+    <sql id="User_Base_Columns">
+        uid,uaccount,uname,uemail,ucollege,ugrade,upwd,usex,uage,ifAdmin,sid,pid,rid
+    </sql>
+
    <!--添加一个题目-->
     <insert id="addSubject" parameterType="cn.graduate.subject.pojo.Subject" >
         insert into subject(sname,sintroduce) VALUES (#{sname} , #{sintroduce} )
@@ -49,6 +53,106 @@
         <include refid="Subject_Base_Columns"/>
         from subject
         where sname LIKE concat(concat('%', #{sname}),'%')
+    </select>
+
+    <!--添加用户信息-->
+    <insert id="addUser" parameterType="cn.graduate.subject.pojo.User" >
+        insert into user(uaccount,uname,uemail,ucollege,ugrade,uage,ifAdmin,rid,usex) VALUES(
+        #{uaccount},#{uname},#{uemail},#{ucollege},#{ugrade},#{uage},#{ifAdmin},#{rid},#{usex})
+    </insert>
+    <!--删除用户信息-->
+    <delete id="delUser" parameterType="java.lang.Integer">
+        DELETE FROM user where uid=#{uid}
+    </delete>
+
+    <!--更新一个用户信息，传入一个user对象,根据对象的属性的值判断更新不更新-->
+    <update id="updateUser" parameterType="cn.graduate.subject.pojo.User">
+        update user
+        <set>
+            <if test="uaccount != null">
+                uaccount =#{account},
+            </if>
+            <if test="uname != null">
+                uname=#{uname},
+            </if>
+            <if test="ucollege != 0">
+                ucollege = #{ucollege},
+            </if>
+            <if test="ugrade != 0">
+                ugrade=#{ugrade},
+            </if>
+            <if test="uage != 0" >
+                uage = #{uage},
+            </if>
+            <if test="usex != null">
+                usex = #{usex},
+            </if>
+            <if test="ifAdmin != 0">
+                ifAdmin =#{ifAdmin},
+            </if>
+            <if test="upwd != null">
+                upwd = #{upwd},
+            </if>
+            <if test="sid != 0">
+                sid = #{sid},
+            </if>
+            <if test="pid != 0">
+                pid = #{pid},
+            </if>
+            <if test="rid != 0">
+                rid = #{rid}
+            </if>
+        </set>
+        where uid = #{uid}
+    </update>
+<!--查找用户用的resultMap-->
+    <resultMap id="userAndSubjectMap" type="cn.graduate.subject.vo.UserAndSuject">
+        <association property="user" javaType="cn.graduate.subject.pojo.User">
+            <id property="uid" column="uid"/>
+            <result property="uname" column="uname"/>
+            <result property="uaccount" column="uaccount"/>
+            <result property="uemail" column="uemail"/>
+            <result property="ugrade" column="ugrade"/>
+            <result property="ucollege" column="ucollege"/>
+            <result property="usex" column="usex"/>
+            <result property="uage" column="uage"/>
+            <result property="sid" column="sid"/>
+            <result property="ifAdmin" column="ifAdmin"/>
+            <result property="pid" column="pid"/>
+        </association>
+        <association property="subject" javaType="cn.graduate.subject.pojo.Subject">
+            <id  column="sid" property="sid"/>
+            <result property="sname" column="sname"/>
+            <result property="sintroduct" column="sintroduce"/>
+        </association>
+    </resultMap>
+    <!--查找用户,多种查找方式,包括用id 用户名, 用户学号,用户班级,用户 专业-->
+    <select id="selectUserByMoreWays" parameterType="cn.graduate.subject.pojo.User" resultType="cn.graduate.subject.vo.UserAndSuject">
+        SELECT
+        u.uid,u.uname,u.uaccount,u.uemail,u.ugrade,u.usex,u.uage,u.ifAdmin,u.sid,u.pid
+        , u.ucollege,s.sname,s.sintroduce
+        FROM user u , subject s
+        <where>
+            <if test="uid != 0">
+                u.uid = #{uid}
+            </if>
+            <if test="uname != null">
+                and u.uname = #{uname}
+            </if>
+            <if test="uaccount != null">
+                and u.uaccount = #{uaccount}
+            </if>
+            <if test="ugrade != 0">
+                and u.ugrade = #{ugrade}
+            </if>
+            <if test="ucollege != 0">
+                and u.ucollege = #{ucollege}
+            </if>
+            <if test="sid != 0">
+                and u.sid = #{sid}
+            </if>
+            and u.sid = s.sid
+        </where>
     </select>
 
 </mapper>

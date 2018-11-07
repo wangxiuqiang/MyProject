@@ -2,7 +2,9 @@ package cn.graduate.subject.service.serviceImpl;
 
 import cn.graduate.subject.dao.AdminMapper;
 import cn.graduate.subject.pojo.Subject;
+import cn.graduate.subject.pojo.User;
 import cn.graduate.subject.service.AdminService;
+import cn.graduate.subject.vo.UserAndSuject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,5 +73,49 @@ public class AmdinServiceImpl implements AdminService{
      */
     public List<Subject> selectSubjectByName (String sname ) throws Exception{
         return adminMapperMapper.selectSubjectByName( sname );
+    }
+
+    /**
+     * 添加账户信息
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int addUser(User user ) throws Exception {
+        return adminMapperMapper.addUser( user );
+    }
+
+    /**
+     * 删除用户,根据用户的编号
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int delUser (  int uid ) throws Exception {
+        return adminMapperMapper.delUser( uid );
+    }
+
+    /**
+     * 根据用户的编号更新一个用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int updateUser( User user ) throws Exception {
+        return adminMapperMapper.updateUser( user );
+    }
+
+    /**
+     * 多种方式查询用户,
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<UserAndSuject> selectUserByMoreWays(User user ) throws Exception{
+        return adminMapperMapper.selectUserByMoreWays( user );
     }
 }

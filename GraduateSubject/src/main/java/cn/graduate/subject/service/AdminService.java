@@ -1,6 +1,8 @@
 package cn.graduate.subject.service;
 
 import cn.graduate.subject.pojo.Subject;
+import cn.graduate.subject.pojo.User;
+import cn.graduate.subject.vo.UserAndSuject;
 
 import java.util.List;
 
@@ -50,4 +52,36 @@ public interface AdminService {
      * @throws Exception
      */
     public List<Subject> selectSubjectByName (String sname ) throws Exception;
+
+    /**
+     * 添加账户信息
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    public int addUser(User user ) throws Exception ;
+
+    /**
+     * 删除用户,根据用户的编号
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public int delUser (  int uid ) throws Exception;
+
+    /**
+     * 根据用户的编号更新一个用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    public int updateUser( User user ) throws Exception;
+
+    /**
+     * 多种方式查询用户,
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    public List<UserAndSuject> selectUserByMoreWays(User user ) throws Exception;
 }

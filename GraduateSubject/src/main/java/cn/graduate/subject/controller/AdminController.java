@@ -1,8 +1,10 @@
 package cn.graduate.subject.controller;
 
 import cn.graduate.subject.pojo.Subject;
+import cn.graduate.subject.pojo.User;
 import cn.graduate.subject.service.AdminService;
 import cn.graduate.subject.utils.StatusUtils;
+import cn.graduate.subject.vo.UserAndSuject;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.pagehelper.PageHelper;
@@ -168,5 +170,103 @@ public class AdminController {
             map.put(StatusUtils.STATUSCODE, StatusUtils.FIND_FAILURE);
             return JSON.toJSONString(map);
         }
+    }
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/addUser")
+    @ResponseBody
+    @RequiresRoles(value = "admin")
+    public String addUser( User user) throws Exception {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        if( user == null ) {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.IS_NULL );
+            return JSON.toJSONString( map );
+        }
+        int result = adminService.addUser( user );
+        if( result > 0 ) {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.UPDATE_SUCCESS );
+        } else {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.UPDATE_FAILURE );
+        }
+        return JSON.toJSONString( map );
+    }
+
+    /**
+     * 删除用户 ,根据用户的编号
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/delUser")
+    @ResponseBody
+    @RequiresRoles(value = "admin")
+    public String delUser( int uid ) throws Exception {
+
+        HashMap<String, Integer> map = new HashMap<>();
+
+        int result = adminService.delUser( uid );
+        if( result > 0 ) {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.DEL_SUCCESS );
+        } else {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.DEL_FAILURE );
+        }
+        return JSON.toJSONString( map );
+    }
+
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updateUser")
+    @ResponseBody
+    @RequiresRoles(value = "admin")
+    public String updateUser( User user ) throws Exception {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        if( user == null ) {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.IS_NULL );
+            return JSON.toJSONString( map );
+        }
+        int result = adminService.updateUser( user );
+        if( result > 0 ) {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.UPDATE_SUCCESS );
+        } else {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.UPDATE_FAILURE );
+        }
+        return JSON.toJSONString( map );
+    }
+
+    /**
+     * 根据多种条件查学生信息和学生的选课信息
+     * @param user
+     * @param page
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectUser/{page}")
+    @ResponseBody
+    @RequiresRoles(value = "admin")
+    public String selectUser( User user , @PathVariable int page) throws Exception {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        if( user == null ) {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.IS_NULL );
+            return JSON.toJSONString( map );
+        }
+        //使用page插件 ,进行封装
+        PageHelper.startPage(page, StatusUtils.PAGE_SIZE);
+        List<UserAndSuject> userAndSujects = adminService.selectUserByMoreWays( user );
+
+        PageInfo<UserAndSuject> pageInfo = new PageInfo<UserAndSuject>(userAndSujects);
+
+        return JSON.toJSONString( pageInfo );
     }
 }
