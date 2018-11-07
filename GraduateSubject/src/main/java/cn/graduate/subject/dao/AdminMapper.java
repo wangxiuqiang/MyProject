@@ -56,6 +56,13 @@ public interface AdminMapper {
     public List<Subject> selectSubjectByName (@Param( value = "sname") String sname ) throws Exception;
 
     /**
+     * 在查看一个题目的时候, 查看有多少人选了
+     * @param sid
+     * @return
+     * @throws Exception
+     */
+    public int selectNumberForSuject( @Param(value = "sid") int sid ) throws Exception;
+    /**
      * 添加账户信息
      * @param user
      * @return

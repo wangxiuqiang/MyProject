@@ -4,6 +4,15 @@ public class Subject {
     private int sid;
     private String sname;
     private String sintroduce;
+    //选择这个题目的人数
+    private int count;
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public int getSid() {
         return sid;

@@ -54,6 +54,10 @@
         from subject
         where sname LIKE concat(concat('%', #{sname}),'%')
     </select>
+    <!--根据课程编号在查看课程的时候,查看这哥课程被选择的人的数量-->
+    <select id="selectNumberForSuject" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(1) from user where sid = #{sid}
+    </select>
 
     <!--添加用户信息-->
     <insert id="addUser" parameterType="cn.graduate.subject.pojo.User" >
@@ -137,7 +141,7 @@
                 u.uid = #{uid}
             </if>
             <if test="uname != null">
-                and u.uname = #{uname}
+                and u.uname LIKE concat(concat('%', #{uname}),'%')
             </if>
             <if test="uaccount != null">
                 and u.uaccount = #{uaccount}

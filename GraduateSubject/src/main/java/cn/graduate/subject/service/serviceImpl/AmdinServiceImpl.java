@@ -52,7 +52,21 @@ public class AmdinServiceImpl implements AdminService{
      * @throws Exception
      */
     public List<Subject> selectAllSubject() throws Exception{
-        return adminMapperMapper.selectAllSubject();
+
+        List<Subject> subjects = adminMapperMapper.selectAllSubject();
+        /**
+         * 获取选这门课的人数,然后添加进去
+         */
+        subjects.forEach( n -> {
+            int count = 0;
+            try {
+                count = adminMapperMapper.selectNumberForSuject( n.getSid() );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            n.setCount( count );
+        });
+        return subjects;
     }
 
     /**
@@ -62,7 +76,10 @@ public class AmdinServiceImpl implements AdminService{
      * @throws Exception
      */
     public Subject selectSubjectById(  int sid ) throws Exception{
-        return adminMapperMapper.selectSubjectById( sid );
+        Subject subject = adminMapperMapper.selectSubjectById( sid );
+        int count = adminMapperMapper.selectNumberForSuject( sid );
+        subject.setCount( count );
+        return subject;
     }
 
     /**
@@ -72,9 +89,31 @@ public class AmdinServiceImpl implements AdminService{
      * @throws Exception
      */
     public List<Subject> selectSubjectByName (String sname ) throws Exception{
-        return adminMapperMapper.selectSubjectByName( sname );
+        List<Subject> subjects = adminMapperMapper.selectSubjectByName( sname );
+        /**
+         * 获取选这门课的人数,然后添加进去
+         */
+        subjects.forEach( n -> {
+            int count = 0;
+            try {
+                count = adminMapperMapper.selectNumberForSuject( n.getSid() );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            n.setCount( count );
+        });
+        return subjects;
     }
-
+    /**
+     * 在查看一个题目的时候, 查看有多少人选了
+     * @param sid
+     * @return
+     * @throws Exception
+     */
+//    @Override
+//    public int selectNumberForSuject(  int sid ) throws Exception{
+//        return adminMapperMapper.selectNumberForSuject( sid );
+//    }
     /**
      * 添加账户信息
      * @param user
