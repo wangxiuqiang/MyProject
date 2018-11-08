@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,7 +109,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/selectAllSubject/{page}")
     @ResponseBody
-    @RequiresRoles(value = "admin")
+    @RequiresRoles(value = {"admin","user"} , logical = Logical.OR )
     public String selectAllSubject(@PathVariable int page) throws Exception {
         PageHelper.startPage(page, StatusUtils.PAGE_SIZE);
 
@@ -127,7 +128,7 @@ public class AdminController {
     }
 
     /**
-     * 根据编号查找制定的一个文件
+     * 根据编号查找指定的一个题目
      *
      * @param sid
      * @return
@@ -135,7 +136,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/selectSubjectById")
     @ResponseBody
-    @RequiresRoles(value = "admin")
+    @RequiresRoles(value = {"admin","user"} , logical = Logical.OR )
     public String selectSubjectById(int sid) throws Exception {
 
         Subject subject = adminService.selectSubjectById(sid);
@@ -157,7 +158,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/selectSubjectByName/{page}")
     @ResponseBody
-    @RequiresRoles(value = "admin")
+    @RequiresRoles(value = {"admin","user"} , logical = Logical.OR )
     public String selectSubjectByName(String sname, @PathVariable int page) throws Exception {
 //使用page插件 ,进行封装
         PageHelper.startPage(page, StatusUtils.PAGE_SIZE);

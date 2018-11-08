@@ -65,7 +65,7 @@
         <!--默认为false ,如果是false的话,就是后者登录的可以把前者踢出-->
         <property name="kickoutAfter" value="false"/>
         <property name="maxSession" value="1"/>
-        <property name="kickoutUrl" value="/login?kickout=1"/>
+        <property name="kickoutUrl" value="/index"/>
     </bean>
     <!-- Shiro过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

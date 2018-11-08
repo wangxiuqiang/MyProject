@@ -40,5 +40,12 @@ public class LoginController {
 
     }
 
+    @RequestMapping(value = "/index")
+    @ResponseBody
+    public String index() throws Exception {
+
+        return "index";
+
+    }
 
 }

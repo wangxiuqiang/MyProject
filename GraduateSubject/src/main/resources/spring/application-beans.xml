@@ -18,6 +18,5 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
 
 
     <bean id="user" class="cn.graduate.subject.pojo.User">
-
     </bean>
 </beans>
