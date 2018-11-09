@@ -5,7 +5,7 @@
          version="3.0">
 
   <display-name>Archetype Created Web Application</display-name>
-   shiro过滤器定义
+   <!--shiro过滤器定义-->
   <filter>
     <filter-name>shiroFilter</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

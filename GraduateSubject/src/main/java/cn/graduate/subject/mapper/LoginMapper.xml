@@ -5,7 +5,7 @@
 <mapper namespace="cn.graduate.subject.dao.LoginMapper">
     <!--根据传过来的用户的信息查找用户,如果有就返回用户的信息,-->
     <select id="selectUser" resultType="cn.graduate.subject.pojo.User">
-        select rid , uaccount , upwd  from user where uaccount = #{account}
+        select rid , uaccount , upwd  from user where uaccount = #{uaccount}
     </select>
 <!--查找权限信息-->
     <select id="selectRole" resultType="java.lang.String" parameterType="java.lang.Integer">

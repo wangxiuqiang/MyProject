@@ -3,81 +3,101 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- 会话ID生成器 -->
-    <!--<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>-->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
 
-    <!--&lt;!&ndash; 会话Cookie模板 &ndash;&gt;-->
-    <!--<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">-->
-        <!--<constructor-arg value="sid"/>-->
-        <!--<property name="httpOnly" value="true"/>-->
-        <!--&lt;!&ndash;cookie 过期时间,单位为秒,  如果是-1 那么关闭浏览器就过期cookie&ndash;&gt;-->
-        <!--<property name="maxAge" value="180000"/>-->
-    <!--</bean>-->
-    <!--&lt;!&ndash; 会话验证调度器 &ndash;&gt;-->
-    <!--<bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">-->
-        <!--&lt;!&ndash;验证的间隔时间是30分钟, 单位毫秒&ndash;&gt;-->
-        <!--<property name="interval" value="1800000"/>-->
-        <!--&lt;!&ndash;使用哪个会话管理器&ndash;&gt;-->
-        <!--<property name="sessionManager" ref="sessionManager"/>-->
-    <!--</bean>-->
-    <!--&lt;!&ndash; 会话管理器 &ndash;&gt;-->
-    <!--<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">-->
-        <!--<property name="globalSessionTimeout" value="1800000"/>-->
-        <!--<property name="deleteInvalidSessions" value="true"/>-->
-        <!--<property name="sessionValidationSchedulerEnabled" value="true"/>-->
-        <!--<property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>-->
-        <!--<property name="sessionIdCookieEnabled" value="true"/>-->
-        <!--<property name="sessionIdCookie" ref="sessionIdCookie"/>-->
-    <!--</bean>-->
-    <!--&lt;!&ndash; 自定义Realm &ndash;&gt;-->
-    <!--<bean id="myRealm" class="cn.graduate.subject.Realm.MyRealm">-->
-        <!--<property name="credentialsMatcher" ref="credentialsMather"/>-->
-    <!--</bean>-->
-    <!--&lt;!&ndash;配置密码验证的规则&ndash;&gt;-->
-    <!--<bean id="credentialsMather" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">-->
-        <!--<property name="hashAlgorithmName" value="SHA-256"/>-->
-        <!--<property name="hashIterations" value="3"/>-->
-        <!--<property name="storedCredentialsHexEncoded" value="true"/>-->
-    <!--</bean>-->
-    <!--&lt;!&ndash; 安全管理器 &ndash;&gt;-->
-    <!--<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">-->
-        <!--&lt;!&ndash;配置自定义的realm&ndash;&gt;-->
-        <!--<property name="realm" ref="myRealm"/>-->
-        <!--&lt;!&ndash;配置一个Session管理器&ndash;&gt;-->
-        <!--<property name="sessionManager" ref="sessionManager" />-->
-    <!--</bean>-->
+    <!-- 会话Cookie模板 -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <!--cookie 过期时间,单位为秒,  如果是-1 那么关闭浏览器就过期cookie-->
+        <property name="maxAge" value="180000"/>
+    </bean>
+    <!-- 会话验证调度器 -->
+    <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
+        <!--验证的间隔时间是30分钟, 单位毫秒-->
+        <property name="interval" value="1800000"/>
+        <!--使用哪个会话管理器-->
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+    <!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    </bean>
+    <!-- 自定义Realm -->
+    <bean id="myRealm" class="cn.graduate.subject.Realm.MyRealm">
+        <property name="credentialsMatcher" ref="credentialsMather"/>
+    </bean>
+    <!--配置密码验证的规则-->
+    <bean id="credentialsMather" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="SHA-256"/>
+        <property name="hashIterations" value="3"/>
+        <property name="storedCredentialsHexEncoded" value="true"/>
+    </bean>
+    <!-- 安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--配置自定义的realm-->
+        <property name="realm" ref="myRealm"/>
+        <!--配置一个Session管理器-->
+        <property name="sessionManager" ref="sessionManager" />
+    </bean>
+    <bean id="kickoutSessionControlFilter"
+          class="cn.graduate.subject.filter.KickoutSessionControlFilter">
+        <!--<property name="cacheManager" ref="cacheManager"/>-->
+        <property name="sessionManager" ref="sessionManager"/>
+        <!--默认为false ,如果是false的话,就是后者登录的可以把前者踢出-->
+        <property name="kickoutAfter" value="false"/>
+        <property name="maxSession" value="1"/>
+        <property name="kickoutUrl" value="/index"/>
+    </bean>
+    <!-- Shiro过滤器 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- Shiro的核心安全接口,这个属性是必须的 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 身份认证失败，则跳转到登录页面的配置 ,默认是/login.jsp-->
+        <property name="loginUrl" value="/login"/>
+        <!-- 权限认证失败，则跳转到指定页面 -->
+        <property name="unauthorizedUrl" value="/authcFailure"/>
+        <property name="filters">
+            <util:map>
+                <!--开启登录数的检查-->
+                <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
+            </util:map>
+        </property>
+         <!--Shiro连接约束配置,即过滤链的定义-->
+        <property name="filterChainDefinitions">
+            <value>
+                /userLogin=anon
+                /login=anon
+                /admin/**=authc
+                /user/**=authc
+            </value>
+        </property>
+    </bean>
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 生命周期管理器-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
-    <!--&lt;!&ndash; Shiro过滤器 &ndash;&gt;-->
-    <!--<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">-->
-        <!--&lt;!&ndash; Shiro的核心安全接口,这个属性是必须的 &ndash;&gt;-->
-        <!--<property name="securityManager" ref="securityManager"/>-->
-        <!--&lt;!&ndash;&lt;!&ndash; 身份认证失败，则跳转到登录页面的配置 ,默认是/login.jsp&ndash;&gt;&ndash;&gt;-->
-        <!--&lt;!&ndash;<property name="loginUrl" value="/loginFailure"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;&lt;!&ndash; 权限认证失败，则跳转到指定页面 &ndash;&gt;&ndash;&gt;-->
-        <!--&lt;!&ndash;<property name="unauthorizedUrl" value="/authcFailure"/>&ndash;&gt;-->
-        <!--&lt;!&ndash; Shiro连接约束配置,即过滤链的定义 &ndash;&gt;-->
-        <!--&lt;!&ndash;<property name="filterChainDefinitions">&ndash;&gt;-->
-            <!--&lt;!&ndash;<value>&ndash;&gt;-->
-                <!--&lt;!&ndash;/login=anon&ndash;&gt;-->
-                <!--&lt;!&ndash;/**/**=authc&ndash;&gt;-->
-            <!--&lt;!&ndash;</value>&ndash;&gt;-->
-        <!--&lt;!&ndash;</property>&ndash;&gt;-->
-    <!--</bean>-->
-
-    <!--&lt;!&ndash; 保证实现了Shiro内部lifecycle函数的bean执行 生命周期管理器&ndash;&gt;-->
-    <!--<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>-->
-
-    <!--&lt;!&ndash; 开启Shiro注解 &ndash;&gt;-->
-    <!--&lt;!&ndash;<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>&ndash;&gt;-->
-    <!--<aop:config proxy-target-class="true"></aop:config>-->
-    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
-        <!--<property name="securityManager" ref="securityManager"/>-->
-    <!--</bean>-->
+    <!-- 开启Shiro注解 -->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>-->
+    <aop:config proxy-target-class="true"></aop:config>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 </beans>

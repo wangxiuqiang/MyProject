@@ -21,8 +21,8 @@ public class MyRealm extends AuthorizingRealm {
     @Autowired
     LoginService loginService;
 
-    @Autowired
-    User user;
+    User  user = null;
+
     /**
      * 根据用户的principle 获取用户信息
      * @param principals
@@ -31,6 +31,7 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+
         try {
             //获取用户的角色
             simpleAuthorizationInfo.setRoles( loginService.selectRole( user.getRid() ) );
@@ -52,14 +53,19 @@ public class MyRealm extends AuthorizingRealm {
         String account = (String) token.getPrincipal();
 
         try {
-            user = loginService.selectUser( account );
+           user = loginService.selectUser( account );
         } catch ( Exception e) {
             e.printStackTrace();
         }
-        if( user.getUname() == null ) {
+        if( user == null ) {
             throw new UnknownAccountException();
         }
         PassWordHelper pwh = new PassWordHelper();
+        try {
+            user.setUpwd( pwh.SHA256( user.getUpwd() ) );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUaccount() , user.getUpwd() ,
                 ByteSource.Util.bytes( pwh.getSalt() ) ,
                 getName() );
