@@ -1,5 +1,7 @@
 package cn.graduate.subject.controller;
 
+import cn.graduate.subject.pojo.College;
+import cn.graduate.subject.pojo.Grade;
 import cn.graduate.subject.pojo.Subject;
 import cn.graduate.subject.pojo.User;
 import cn.graduate.subject.service.AdminService;
@@ -270,4 +272,40 @@ public class AdminController {
 
         return JSON.toJSONString( pageInfo );
     }
+
+    /**
+     * 根据学院的cid来查找  班级的内容,用来做联动
+     */
+    @RequestMapping(value = "/selectGradeByCid")
+    @ResponseBody
+    @RequiresRoles(value = "admin")
+    public String selectGradeByCid( int cid ) throws Exception {
+        HashMap<String, Integer> map = new HashMap<>();
+        List<Grade> grades = adminService.selectGradeByCid( cid );
+        if(grades != null && grades.size() > 0 ) {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.FIND_FAILURE );
+            return JSON.toJSONString( map );
+        }
+        return JSON.toJSONString( grades );
+    }
+
+    /**
+     * 查找所有的专业
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/selectCollege")
+    @ResponseBody
+    @RequiresRoles(value = "admin")
+    public String selectCollege(  ) throws Exception {
+        HashMap<String, Integer> map = new HashMap<>();
+        List<College> colleges = adminService.selectCollege();
+        if(colleges != null && colleges.size() > 0 ) {
+            map.put( StatusUtils.STATUSCODE , StatusUtils.FIND_FAILURE );
+            return JSON.toJSONString( map );
+        }
+        return JSON.toJSONString( colleges );
+    }
+
+
 }

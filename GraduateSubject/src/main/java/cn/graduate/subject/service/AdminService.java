@@ -1,5 +1,7 @@
 package cn.graduate.subject.service;
 
+import cn.graduate.subject.pojo.College;
+import cn.graduate.subject.pojo.Grade;
 import cn.graduate.subject.pojo.Subject;
 import cn.graduate.subject.pojo.User;
 import cn.graduate.subject.vo.UserAndSuject;
@@ -90,4 +92,29 @@ public interface AdminService {
      * @throws Exception
      */
     public List<UserAndSuject> selectUserByMoreWays(User user ) throws Exception;
+
+    /**
+     * 根据cid查找班级
+     * @param cid
+     * @return
+     * @throws Exception
+     */
+    public List<Grade> selectGradeByCid( int cid ) throws Exception;
+
+    /**
+     * 根据gid查找专业
+     */
+    public College selectCollegeByCid( int cid ) throws Exception;
+    /**
+     * 根据gid 查找专业
+     */
+    public Grade selectGradeByGid(  int gid ) throws Exception;
+    /**
+     * 查找所有的专业
+     *
+     * @return
+     * @throws Exception
+     */
+
+    public List<College> selectCollege() throws Exception;
 }

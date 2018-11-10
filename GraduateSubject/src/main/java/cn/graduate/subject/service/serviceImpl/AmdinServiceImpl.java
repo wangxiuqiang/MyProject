@@ -1,6 +1,8 @@
 package cn.graduate.subject.service.serviceImpl;
 
 import cn.graduate.subject.dao.AdminMapper;
+import cn.graduate.subject.pojo.College;
+import cn.graduate.subject.pojo.Grade;
 import cn.graduate.subject.pojo.Subject;
 import cn.graduate.subject.pojo.User;
 import cn.graduate.subject.service.AdminService;
@@ -121,7 +123,7 @@ public class AmdinServiceImpl implements AdminService{
      * @throws Exception
      */
     @Override
-    public int addUser(User user ) throws Exception {
+    public int addUser( User user ) throws Exception {
         return adminMapperMapper.addUser( user );
     }
 
@@ -155,6 +157,54 @@ public class AmdinServiceImpl implements AdminService{
      */
     @Override
     public List<UserAndSuject> selectUserByMoreWays(User user ) throws Exception{
-        return adminMapperMapper.selectUserByMoreWays( user );
+        List<UserAndSuject> userAndSujects = adminMapperMapper.selectUserByMoreWays( user );
+        userAndSujects.forEach( n -> {
+            try {
+                College college = adminMapperMapper.selectCollegeByCid( n.getUser().getUcollege());
+                Grade grade = adminMapperMapper.selectGradeByGid( n.getUser().getUgrage() );
+                n.setCollege(college);
+                n.setGrade( grade );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return userAndSujects;
+    }
+
+    /**
+     * 根据cid查找班级
+     * @param cid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Grade> selectGradeByCid(int cid ) throws Exception {
+        return adminMapperMapper.selectGradeByCid( cid );
+    }
+
+    /**
+     * 根据gid查找专业
+     */
+    @Override
+    public College selectCollegeByCid(int cid ) throws Exception {
+        return adminMapperMapper.selectCollegeByCid( cid );
+    }
+    /**
+     * 根据gid 查找专业
+     */
+    @Override
+    public Grade selectGradeByGid(  int gid ) throws Exception {
+        return adminMapperMapper.selectGradeByGid( gid );
+    }
+
+    /**
+     * 查找所有的专业
+     *
+     * @return
+     * @throws Exception
+     */
+@Override
+    public List<College> selectCollege() throws Exception{
+        return adminMapperMapper.selectCollege() ;
     }
 }

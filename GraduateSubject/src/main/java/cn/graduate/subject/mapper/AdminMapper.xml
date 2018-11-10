@@ -159,4 +159,19 @@
         </where>
     </select>
 
+    <select id="selectGradeByCid" parameterType="java.lang.Integer" resultType="cn.graduate.subject.pojo.Grade">
+         select gid,gname from grade where cid = #{cid}
+    </select>
+
+    <select id="selectCollegeByCid" resultType="cn.graduate.subject.pojo.College" parameterType="java.lang.Integer">
+        select cname,cid from college where cid=#{cid}
+    </select>
+<!--查找所有的专业-->
+    <select id="selectCollege" resultType="cn.graduate.subject.pojo.College" parameterType="java.lang.Integer">
+        select cname,cid from college
+    </select>
+
+    <select id="selectGradeByGid" resultType="cn.graduate.subject.pojo.Grade" parameterType="java.lang.Integer">
+        select gname,gid from grade where gid=#{gid}
+    </select>
 </mapper>

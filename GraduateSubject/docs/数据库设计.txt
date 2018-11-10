@@ -14,12 +14,13 @@ uage int ,
 ifAdmin int NOT NULL,
 sid int default 0, 
 pid int default 0,
-rid int default 2,
+rid int default 2
 );
 
 
 
-insert into user(uaccount,uname,ifAdmin,sid) values("12345678910","123",1,2);
+insert into user(uaccount,uname,ifAdmin,rid) values("12345678910","123",1,1);
+insert into user(uaccount,uname,ifAdmin,rid) values("12345678910","admin",1,1);
 
 create table college (
 cid int primary key auto_increment,
@@ -46,7 +47,7 @@ rname varchar(30)
 );
 
 insert into role( rname ) values("admin");
-insert into role (rname) values("user");
+insert into role ( rname ) values("user");
 
 create table progress (
 pid int primary key auto_increment,

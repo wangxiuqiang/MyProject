@@ -1,5 +1,7 @@
 package cn.graduate.subject.dao;
 
+import cn.graduate.subject.pojo.College;
+import cn.graduate.subject.pojo.Grade;
 import cn.graduate.subject.pojo.Subject;
 import cn.graduate.subject.pojo.User;
 import cn.graduate.subject.vo.UserAndSuject;
@@ -93,4 +95,30 @@ public interface AdminMapper {
      * @throws Exception
      */
     public List<UserAndSuject> selectUserByMoreWays( User user ) throws Exception;
+
+    /**
+     * 根据cid查找班级
+     * @param cid
+     * @return
+     * @throws Exception
+     */
+    public List<Grade> selectGradeByCid(@Param(value = "cid") int cid ) throws Exception;
+
+    /**
+     * 根据gid查找专业
+     */
+    public College selectCollegeByCid(@Param(value = "cid") int cid ) throws Exception;
+    /**
+     * 根据gid 查找专业
+     */
+    public Grade selectGradeByGid( @Param( value = "gid" ) int gid ) throws Exception;
+
+    /**
+     * 查找所有的专业
+     *
+     * @return
+     * @throws Exception
+     */
+
+    public List<College> selectCollege() throws Exception;
 }
