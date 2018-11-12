@@ -3,10 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fm.user.dao.UserGetFileMapper">
-
     <sql id="Base_Columns_List">
-        gfid,gfname , gfidea, gfloader,gffrom,gftime ,gflevel,waitborrow,back,
-         ,gfcompany, gfresult, gfdatetime,gfnumber,type,isborrow,gfpartnumber
+        gfid,gfname , gfidea, gfloader,gffrom,gettime ,gflevel,waitborrow,back,
+         ,gfcompany, gfresult, gfdatetime,gfnumber,type,isborrow,gfpartnumber,gfpersonRead,state,backDate
     </sql>
 
       <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile" >

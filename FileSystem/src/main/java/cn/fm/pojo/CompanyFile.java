@@ -17,29 +17,43 @@ public class CompanyFile {
     private int cfid;
     @NotNull(message = "{companyfile.name.isnull}")
     private String cfname;
+    //录入日期
     private String cfdate;
     @NotNull(message = "{companyfile.accept.isnull}")
+    //主送
     private String cfaccept;
     @NotNull(message = "{companyfile.editor.isnull}")
+    //文件拟稿
     private String cfeditor;
     @NotNull(message = "{companyfile.send.isnull}")
+    //签发人
     private String cfsend;
     @NotNull(message = "{companyfile.level.isnull}")
+    //文件密级
     private String cflevel;
+    //保密期限
+    private String leveltime;
     private String cfloader;
     @NotNull(message = "{companyfile.number.isnull}")
+//    份数
     private int cfnumber;
     @NotNull(message = "{companyfile.fontid.isnull}")
+    //文件字号
     private String cffontid;
     @NotNull(message = "{companyfile.language.isnull}")
+    //文种
     private String cflanguage;
     private String cfaddress;
     private int cfclassifyid;
 //    @NotNull(message = "{companyfile.classifyname.isnull}")
     private String cfclassifyname;
+    /**
+     * 是不是被删除
+     */
     private int state;
 //等待被借阅 ,
     private int waitborrow;
+    //是否销毁
     private int destory;
     //清退字段
     private int back;
@@ -93,6 +107,14 @@ public class CompanyFile {
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getLeveltime() {
+        return leveltime;
+    }
+
+    public void setLeveltime(String leveltime) {
+        this.leveltime = leveltime;
     }
 
     /**

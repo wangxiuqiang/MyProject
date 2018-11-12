@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GetFile {
 
-    /**
+    /**共19个字段
      * 用来区分两种文件 此文件type = 2
      */
     private int type;
@@ -17,6 +17,7 @@ public class GetFile {
     public void setType(int type) {
         this.type = type;
     }
+
 
     private int gfid;
     @NotNull(message = "{getfile.name.isnull}")
@@ -32,6 +33,10 @@ public class GetFile {
     @NotNull(message = "{getfile.company.isnull}")
     //承办单位
     private String gfcompany;
+    //份号,文件字号
+    private String gfpartnumber;
+    //传阅人
+    private String gfpersonRead;
     private String gfresult;
 //    private int gfclassifyid;
 //    @NotNull(message = "{getfile.classifyname.isnull}")
@@ -39,7 +44,8 @@ public class GetFile {
 //    private String gfaddress;
     private String gfdatetime;
     @NotNull(message = "{getfile.number.isnull}")
-    private int gfnumber;
+    //收文号
+    private String gfnumber;
     /**
      * 是不是借出
      */
@@ -48,7 +54,10 @@ public class GetFile {
     private int state;
 //清退字段
     private int back;
+    //等待被领取
     private int waitborrow;
+    //清退时间
+    private String backDate;
 
     public int getWaitborrow() {
         return waitborrow;
@@ -60,6 +69,30 @@ public class GetFile {
 
     public String getGffrom() {
         return gffrom;
+    }
+
+    public String getGfpartnumber() {
+        return gfpartnumber;
+    }
+
+    public void setGfpartnumber(String gfpartnumber) {
+        this.gfpartnumber = gfpartnumber;
+    }
+
+    public String getGfpersonRead() {
+        return gfpersonRead;
+    }
+
+    public void setGfpersonRead(String gfpersonRead) {
+        this.gfpersonRead = gfpersonRead;
+    }
+
+    public String getBackDate() {
+        return backDate;
+    }
+
+    public void setBackDate(String backDate) {
+        this.backDate = backDate;
     }
 
     public void setGffrom(String gffrom) {
@@ -89,21 +122,21 @@ public class GetFile {
     public void setBack(int back) {
         this.back = back;
     }
-    /**
-     * 所在的分类的所有id地址
-     */
-    /**
-     * 用来 返回自己的分类和全部父类id
-     * */
-    private List<Integer> classifies;
-
-    public List<Integer> getClassifies() {
-        return classifies;
-    }
-
-    public void setClassifies(List<Integer> classifies) {
-        this.classifies = classifies;
-    }
+//    /**
+//     * 所在的分类的所有id地址
+//     */
+//    /**
+//     * 用来 返回自己的分类和全部父类id
+//     * */
+//    private List<Integer> classifies;
+//
+//    public List<Integer> getClassifies() {
+//        return classifies;
+//    }
+//
+//    public void setClassifies(List<Integer> classifies) {
+//        this.classifies = classifies;
+//    }
     public int getIsborrow() {
         return isborrow;
     }
@@ -138,11 +171,11 @@ public class GetFile {
 //    }
 
 
-    public int getGfnumber() {
+    public String getGfnumber() {
         return gfnumber;
     }
 
-    public void setGfnumber(int gfnumber) {
+    public void setGfnumber(String gfnumber) {
         this.gfnumber = gfnumber;
     }
 

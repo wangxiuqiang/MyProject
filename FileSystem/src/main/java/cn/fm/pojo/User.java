@@ -12,10 +12,18 @@ public class User {
     private String uphone;
     private String unumber;
     private int wid;
-
-    private String uemail;
+    private String uworkname;
+    private String uaccount;
 //    private String code;
     private int ifAdmin;
+
+    public String getUworkname() {
+        return uworkname;
+    }
+
+    public void setUworkname(String uworkname) {
+        this.uworkname = uworkname;
+    }
 
     public int getWid() {
         return wid;
@@ -97,15 +105,15 @@ public class User {
         this.state = state;
     }
 
-    public String getUemail() {
-        return uemail;
+    public String getUaccount() {
+        return uaccount;
     }
 
-    public void setUemail(String uemail) {
-        this.uemail = uemail;
+    public void setUaccount(String uaccount) {
+        this.uaccount = uaccount;
     }
 
-//    public String getCode() {
+    //    public String getCode() {
 //        return code;
 //    }
 //
