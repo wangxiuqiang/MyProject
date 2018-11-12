@@ -29,6 +29,7 @@ cname varchar(20) NOT NULL
 
 create table grade (
 gid int primary key auto_increament,
+cid int , 
 gname varchar(20)
 );
 

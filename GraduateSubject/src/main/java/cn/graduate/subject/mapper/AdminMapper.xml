@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.graduate.subject.dao.LoginMapper">
+<mapper namespace="cn.graduate.subject.dao.AdminMapper">
     <sql id="Subject_Base_Columns">
         sid,sname,sintroduce
     </sql>
@@ -33,14 +33,14 @@
     </delete>
 
     <!--查看全部的题目-->
-    <select id="selectAllSubject" parameterType="cn.graduate.subject.pojo.Subject" >
+    <select id="selectAllSubject" resultType="cn.graduate.subject.pojo.Subject" >
         select
         <include refid="Subject_Base_Columns"/>
         from subject
     </select>
 
     <!--根据编号找到一个题目-->
-    <select id="selectSubjectById" parameterType="cn.graduate.subject.pojo.Subject" >
+    <select id="selectSubjectById" resultType="cn.graduate.subject.pojo.Subject" parameterType="java.lang.Integer">
         select
         <include refid="Subject_Base_Columns"/>
         from subject
@@ -48,7 +48,7 @@
     </select>
 
     <!--根据名称模糊查询-->
-    <select id="selectSubjectByName" parameterType="cn.graduate.subject.pojo.Subject" >
+    <select id="selectSubjectByName" resultType="cn.graduate.subject.pojo.Subject" parameterType="java.lang.Integer">
         select
         <include refid="Subject_Base_Columns"/>
         from subject
@@ -131,7 +131,7 @@
         </association>
     </resultMap>
     <!--查找用户,多种查找方式,包括用id 用户名, 用户学号,用户班级,用户 专业-->
-    <select id="selectUserByMoreWays" parameterType="cn.graduate.subject.pojo.User" resultType="cn.graduate.subject.vo.UserAndSuject">
+    <select id="selectUserByMoreWays" parameterType="cn.graduate.subject.pojo.User" resultMap="userAndSubjectMap">
         SELECT
         u.uid,u.uname,u.uaccount,u.uemail,u.ugrade,u.usex,u.uage,u.ifAdmin,u.sid,u.pid
         , u.ucollege,s.sname,s.sintroduce

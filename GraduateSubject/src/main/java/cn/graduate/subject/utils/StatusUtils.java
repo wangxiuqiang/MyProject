@@ -3,7 +3,7 @@ package cn.graduate.subject.utils;
 public class StatusUtils {
 
     public final static String STATUSCODE = "statuscode";
-    public final static int NO_PERMISSION = 0;
+        public final static int NO_PERMISSION = 0;
     public final static int LOGIN_SUCCESS = 1;
     public final static int LOGIN_FAILURE = -1;
     public final static int FIND_SUCCESS = 2;

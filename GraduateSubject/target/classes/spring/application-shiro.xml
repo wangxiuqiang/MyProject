@@ -20,7 +20,7 @@
 
     <!-- 会话Cookie模板 -->
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
-        <constructor-arg value="sid"/>
+        <constructor-arg name="name" value="graduate.session.id"/>
         <property name="httpOnly" value="true"/>
         <!--cookie 过期时间,单位为秒,  如果是-1 那么关闭浏览器就过期cookie-->
         <property name="maxAge" value="180000"/>
@@ -58,38 +58,38 @@
         <!--配置一个Session管理器-->
         <property name="sessionManager" ref="sessionManager" />
     </bean>
-    <bean id="kickoutSessionControlFilter"
-          class="cn.graduate.subject.filter.KickoutSessionControlFilter">
-        <!--<property name="cacheManager" ref="cacheManager"/>-->
-        <property name="sessionManager" ref="sessionManager"/>
-        <!--默认为false ,如果是false的话,就是后者登录的可以把前者踢出-->
-        <property name="kickoutAfter" value="false"/>
-        <property name="maxSession" value="1"/>
-        <property name="kickoutUrl" value="/index"/>
-    </bean>
+    <!--<bean id="kickoutSessionControlFilter"-->
+          <!--class="cn.graduate.subject.filter.KickoutSessionControlFilter">-->
+        <!--&lt;!&ndash;<property name="cacheManager" ref="cacheManager"/>&ndash;&gt;-->
+        <!--<property name="sessionManager" ref="sessionManager"/>-->
+        <!--&lt;!&ndash;默认为false ,如果是false的话,就是后者登录的可以把前者踢出&ndash;&gt;-->
+        <!--<property name="kickoutAfter" value="false"/>-->
+        <!--<property name="maxSession" value="1"/>-->
+        <!--<property name="kickoutUrl" value="/index"/>-->
+    <!--</bean>-->
     <!-- Shiro过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
         <property name="securityManager" ref="securityManager"/>
-        <!-- 身份认证失败，则跳转到登录页面的配置 ,默认是/login.jsp-->
-        <property name="loginUrl" value="/login"/>
-        <!-- 权限认证失败，则跳转到指定页面 -->
-        <property name="unauthorizedUrl" value="/authcFailure"/>
-        <property name="filters">
-            <util:map>
-                <!--开启登录数的检查-->
-                <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
-            </util:map>
-        </property>
+        <!--&lt;!&ndash; 身份认证失败，则跳转到登录页面的配置 ,默认是/login.jsp&ndash;&gt;-->
+        <!--<property name="loginUrl" value="/login"/>-->
+        <!--&lt;!&ndash; 权限认证失败，则跳转到指定页面 &ndash;&gt;-->
+        <!--<property name="unauthorizedUrl" value="/authcFailure"/>-->
+        <!--<property name="filters">-->
+            <!--<util:map>-->
+                <!--&lt;!&ndash;开启登录数的检查&ndash;&gt;-->
+                <!--<entry key="kickout" value-ref="kickoutSessionControlFilter"/>-->
+            <!--</util:map>-->
+        <!--</property>-->
          <!--Shiro连接约束配置,即过滤链的定义-->
-        <property name="filterChainDefinitions">
-            <value>
-                /userLogin=anon
-                /login=anon
-                /admin/**=authc
-                /user/**=authc
-            </value>
-        </property>
+        <!--<property name="filterChainDefinitions">-->
+            <!--<value>-->
+                <!--/userLogin=anon-->
+                <!--&lt;!&ndash;/login=anon&ndash;&gt;-->
+                <!--/admin/**=authc-->
+                <!--/user/**=authc-->
+            <!--</value>-->
+        <!--</property>-->
     </bean>
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 生命周期管理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>

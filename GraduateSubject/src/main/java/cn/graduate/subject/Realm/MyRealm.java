@@ -63,6 +63,7 @@ public class MyRealm extends AuthorizingRealm {
         PassWordHelper pwh = new PassWordHelper();
         try {
             user.setUpwd( pwh.SHA256( user.getUpwd() ) );
+            System.out.println( user.getUpwd() );
         } catch (Exception e) {
             e.printStackTrace();
         }
