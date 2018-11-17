@@ -117,4 +117,11 @@ public interface AdminService {
      */
 
     public List<College> selectCollege() throws Exception;
+
+    /***
+     * 发送邮件
+     * @param content
+     * @throws Exception
+     */
+    public void selectAndsendEmail( String content ,String uaccount ) throws Exception;
 }

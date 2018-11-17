@@ -17,4 +17,10 @@
         update user set sid = 0 where uid = #{uid}
     </update>
 
+
+    <!--更新邮箱,将邮箱写进数据库-->
+    <update id="updateEmail" parameterType="java.lang.String" >
+        update user SET uemail= #{uemail} where uaccount = #{uaccount}
+    </update>
+
 </mapper>

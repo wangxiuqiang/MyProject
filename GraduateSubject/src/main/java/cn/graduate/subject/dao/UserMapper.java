@@ -28,4 +28,6 @@ public interface UserMapper {
      * @throws Exception
      */
     public int delSubjectForSelf ( @Param(value = "uid" ) int uid ) throws Exception;
+
+    public int updateEmail(@Param(value = "uemail") String uemail , @Param(value = "uaccount") String uaccount) throws Exception;
  }

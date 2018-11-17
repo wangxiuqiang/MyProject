@@ -58,6 +58,13 @@ public interface AdminMapper {
     public List<Subject> selectSubjectByName (@Param( value = "sname") String sname ) throws Exception;
 
     /**
+     * 查找全部用户的或者单个用户的邮箱
+     * @param uaccount
+     * @return
+     * @throws Exception
+     */
+    public List<String> selectEmail( @Param( value = "uaccount") String uaccount) throws Exception;
+    /**
      * 在查看一个题目的时候, 查看有多少人选了
      * @param sid
      * @return

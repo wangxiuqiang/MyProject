@@ -52,14 +52,14 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
     </bean>
 
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 生命周期管理器-->
-    <!--<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
-    <!--&lt;!&ndash; 开启Shiro注解 &ndash;&gt;-->
-    <!--&lt;!&ndash;<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>&ndash;&gt;-->
-    <!--<aop:config proxy-target-class="true"></aop:config>-->
-    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
-        <!--<property name="securityManager" ref="securityManager"/>-->
-    <!--</bean>-->
+    <!-- 开启Shiro注解 -->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>-->
+    <aop:config proxy-target-class="true"></aop:config>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 
 
     <!--设置跨域请求-->

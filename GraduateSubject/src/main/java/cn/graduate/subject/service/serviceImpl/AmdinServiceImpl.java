@@ -6,6 +6,7 @@ import cn.graduate.subject.pojo.Grade;
 import cn.graduate.subject.pojo.Subject;
 import cn.graduate.subject.pojo.User;
 import cn.graduate.subject.service.AdminService;
+import cn.graduate.subject.utils.MailUtils;
 import cn.graduate.subject.vo.UserAndSuject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.List;
 public class AmdinServiceImpl implements AdminService{
 
     @Autowired
-    AdminMapper adminMapperMapper;
+    AdminMapper adminMapper;
     /**
      * 添加一个题目
      * @param subject
@@ -25,7 +26,7 @@ public class AmdinServiceImpl implements AdminService{
      */
     @Override
     public int addSubject(Subject subject) throws Exception {
-        return adminMapperMapper.addSubject( subject );
+        return adminMapper.addSubject( subject );
     }
 
     /**
@@ -35,7 +36,7 @@ public class AmdinServiceImpl implements AdminService{
      * @throws Exception
      */
     public int updateSubject ( Subject subject ) throws Exception{
-        return adminMapperMapper.updateSubject( subject );
+        return adminMapper.updateSubject( subject );
     }
 
     /**
@@ -45,7 +46,7 @@ public class AmdinServiceImpl implements AdminService{
      * @throws Exception
      */
     public int delSubject(int sid )throws Exception{
-        return adminMapperMapper.delSubject( sid );
+        return adminMapper.delSubject( sid );
     }
 
     /**
@@ -55,14 +56,14 @@ public class AmdinServiceImpl implements AdminService{
      */
     public List<Subject> selectAllSubject() throws Exception{
 
-        List<Subject> subjects = adminMapperMapper.selectAllSubject();
+        List<Subject> subjects = adminMapper.selectAllSubject();
         /**
          * 获取选这门课的人数,然后添加进去
          */
         subjects.forEach( n -> {
             int count = 0;
             try {
-                count = adminMapperMapper.selectNumberForSuject( n.getSid() );
+                count = adminMapper.selectNumberForSuject( n.getSid() );
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -78,8 +79,8 @@ public class AmdinServiceImpl implements AdminService{
      * @throws Exception
      */
     public Subject selectSubjectById(  int sid ) throws Exception{
-        Subject subject = adminMapperMapper.selectSubjectById( sid );
-        int count = adminMapperMapper.selectNumberForSuject( sid );
+        Subject subject = adminMapper.selectSubjectById( sid );
+        int count = adminMapper.selectNumberForSuject( sid );
         subject.setCount( count );
         return subject;
     }
@@ -91,14 +92,14 @@ public class AmdinServiceImpl implements AdminService{
      * @throws Exception
      */
     public List<Subject> selectSubjectByName (String sname ) throws Exception{
-        List<Subject> subjects = adminMapperMapper.selectSubjectByName( sname );
+        List<Subject> subjects = adminMapper.selectSubjectByName( sname );
         /**
          * 获取选这门课的人数,然后添加进去
          */
         subjects.forEach( n -> {
             int count = 0;
             try {
-                count = adminMapperMapper.selectNumberForSuject( n.getSid() );
+                count = adminMapper.selectNumberForSuject( n.getSid() );
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -114,7 +115,7 @@ public class AmdinServiceImpl implements AdminService{
      */
 //    @Override
 //    public int selectNumberForSuject(  int sid ) throws Exception{
-//        return adminMapperMapper.selectNumberForSuject( sid );
+//        return adminMapper.selectNumberForSuject( sid );
 //    }
     /**
      * 添加账户信息
@@ -124,7 +125,7 @@ public class AmdinServiceImpl implements AdminService{
      */
     @Override
     public int addUser( User user ) throws Exception {
-        return adminMapperMapper.addUser( user );
+        return adminMapper.addUser( user );
     }
 
     /**
@@ -135,7 +136,7 @@ public class AmdinServiceImpl implements AdminService{
      */
     @Override
     public int delUser (  int uid ) throws Exception {
-        return adminMapperMapper.delUser( uid );
+        return adminMapper.delUser( uid );
     }
 
     /**
@@ -146,7 +147,7 @@ public class AmdinServiceImpl implements AdminService{
      */
     @Override
     public int updateUser( User user ) throws Exception {
-        return adminMapperMapper.updateUser( user );
+        return adminMapper.updateUser( user );
     }
 
     /**
@@ -157,11 +158,11 @@ public class AmdinServiceImpl implements AdminService{
      */
     @Override
     public List<UserAndSuject> selectUserByMoreWays(User user ) throws Exception{
-        List<UserAndSuject> userAndSujects = adminMapperMapper.selectUserByMoreWays( user );
+        List<UserAndSuject> userAndSujects = adminMapper.selectUserByMoreWays( user );
         userAndSujects.forEach( n -> {
             try {
-                College college = adminMapperMapper.selectCollegeByCid( n.getUser().getUcollege());
-                Grade grade = adminMapperMapper.selectGradeByGid( n.getUser().getUgrage() );
+                College college = adminMapper.selectCollegeByCid( n.getUser().getUcollege());
+                Grade grade = adminMapper.selectGradeByGid( n.getUser().getUgrade() );
                 n.setCollege(college);
                 n.setGrade( grade );
             } catch (Exception e) {
@@ -172,29 +173,29 @@ public class AmdinServiceImpl implements AdminService{
     }
 
     /**
-     * 根据cid查找班级
+     * 根据cid查找班级从 ,根据学院找班级
      * @param cid
      * @return
      * @throws Exception
      */
     @Override
     public List<Grade> selectGradeByCid(int cid ) throws Exception {
-        return adminMapperMapper.selectGradeByCid( cid );
+        return adminMapper.selectGradeByCid( cid );
     }
 
     /**
-     * 根据gid查找专业
+     * 根据cid查找专业
      */
     @Override
     public College selectCollegeByCid(int cid ) throws Exception {
-        return adminMapperMapper.selectCollegeByCid( cid );
+        return adminMapper.selectCollegeByCid( cid );
     }
     /**
-     * 根据gid 查找专业
+     * 根据gid 查找班级
      */
     @Override
     public Grade selectGradeByGid(  int gid ) throws Exception {
-        return adminMapperMapper.selectGradeByGid( gid );
+        return adminMapper.selectGradeByGid( gid );
     }
 
     /**
@@ -205,6 +206,30 @@ public class AmdinServiceImpl implements AdminService{
      */
 @Override
     public List<College> selectCollege() throws Exception{
-        return adminMapperMapper.selectCollege() ;
+        return adminMapper.selectCollege() ;
+    }
+
+    /***
+     * 发送邮件,如果是
+     * @param content
+     * @throws Exception
+     */
+    @Override
+    public void selectAndsendEmail( String content  , String uaccount ) throws Exception {
+        if( uaccount.equals( "" ) ) {
+            uaccount = null;
+        }
+        List<String> emails = adminMapper.selectEmail( uaccount );
+        for (String email : emails) {
+            if (email != null && uaccount==null ) {
+
+                MailUtils.sendMail(1, email , content);
+            }
+            if(email != null && uaccount != null ) {
+                MailUtils.sendMail(2, email , content);
+                break;
+            }
+        }
+
     }
 }

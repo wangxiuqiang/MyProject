@@ -14,5 +14,8 @@ public class StatusUtils {
     public final static int DEL_FAILURE = -4;
     public final static int LOGOUT = 5;
     public final static int IS_NULL = -5;
-    public final static int PAGE_SIZE = 15;
+    public final static int PAGE_SIZE = 10;
+
+    public final static int UNKNOWN_SESSION = -6;
+    public static final int CHECKIMAGE_NORIGHT = -7;
 }

@@ -2,6 +2,7 @@ package cn.graduate.subject.service;
 
 import cn.graduate.subject.pojo.Role;
 import cn.graduate.subject.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Set;
 
@@ -13,7 +14,7 @@ public interface LoginService {
      * @param
      * @return
      */
-    public User selectUser( String uaccount ) throws Exception;
+    public User selectUser( String uaccount , int ifAdmin ) throws Exception;
 
     /**
      * 查询权限信息
@@ -22,5 +23,5 @@ public interface LoginService {
      * @throws Exception
      */
 
-    public Set<String> selectRole(int rid ) throws Exception;
+    public Set<String> selectRole( int rid ) throws Exception;
 }

@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/admin" ,produces = "application/json;charset=utf-8")
 public class AdminController {
 
     @Autowired
@@ -39,7 +39,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/addSuject")
+    @RequestMapping(value = "/addSubject")
     @ResponseBody
     @RequiresRoles(value = "admin")
     public String addSubject(Subject subject) throws Exception {
@@ -65,7 +65,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/delSuject")
+    @RequestMapping(value = "/delSubject")
     @ResponseBody
     @RequiresRoles(value = "admin")
     public String delSubject(int sid) throws Exception {
@@ -87,7 +87,7 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/updateSuject")
+    @RequestMapping(value = "/updateSubject")
     @ResponseBody
     @RequiresRoles(value = "admin")
     public String updateSuject(Subject subject) throws Exception {
@@ -238,6 +238,18 @@ public class AdminController {
             map.put( StatusUtils.STATUSCODE , StatusUtils.IS_NULL );
             return JSON.toJSONString( map );
         }
+        if( user.getUname().equals("") ) {
+            user.setUname(null);
+        }
+        if( user.getUaccount().equals("") ) {
+            user.setUaccount(null);
+        }
+        if( user.getUsex().equals("") ) {
+            user.setUsex(null);
+        }
+        if( user.getUemail().equals("") ) {
+            user.setUemail(null);
+        }
         int result = adminService.updateUser( user );
         if( result > 0 ) {
             map.put( StatusUtils.STATUSCODE , StatusUtils.UPDATE_SUCCESS );
@@ -283,10 +295,10 @@ public class AdminController {
         HashMap<String, Integer> map = new HashMap<>();
         List<Grade> grades = adminService.selectGradeByCid( cid );
         if(grades != null && grades.size() > 0 ) {
-            map.put( StatusUtils.STATUSCODE , StatusUtils.FIND_FAILURE );
-            return JSON.toJSONString( map );
+            return JSON.toJSONString( grades );
         }
-        return JSON.toJSONString( grades );
+         map.put( StatusUtils.STATUSCODE , StatusUtils.FIND_FAILURE );
+        return JSON.toJSONString( map );
     }
 
     /**
@@ -301,10 +313,21 @@ public class AdminController {
         HashMap<String, Integer> map = new HashMap<>();
         List<College> colleges = adminService.selectCollege();
         if(colleges != null && colleges.size() > 0 ) {
-            map.put( StatusUtils.STATUSCODE , StatusUtils.FIND_FAILURE );
-            return JSON.toJSONString( map );
+            return JSON.toJSONString( colleges );
         }
-        return JSON.toJSONString( colleges );
+        map.put( StatusUtils.STATUSCODE , StatusUtils.FIND_FAILURE );
+        return JSON.toJSONString( map );
+    }
+
+    @RequestMapping(value = "/sendEmail")
+    @ResponseBody
+    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    public String sendEmail( String content , String uaccount ) throws Exception {
+
+        adminService.selectAndsendEmail( content , uaccount );
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put( StatusUtils.STATUSCODE , StatusUtils.FIND_SUCCESS );
+        return JSON.toJSONString( map );
     }
 
 

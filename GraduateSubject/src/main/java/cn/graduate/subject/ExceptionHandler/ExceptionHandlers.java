@@ -9,6 +9,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.session.UnknownSessionException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,24 +32,29 @@ public class ExceptionHandlers {
     HashMap<String ,Integer> map = new HashMap<>();
 
     @ExceptionHandler({UnauthenticatedException.class})
-//    @ResponseBody
-    public String no_sujectLogin(Model model) {
-//        map.clear();
-//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_LOGIN);
+    @ResponseBody
+    public String no_sujectLogin() {
+        map.clear();
+        map.put(StatusUtils.STATUSCODE,StatusUtils.LOGIN_FAILURE);
 
-//        return JSON.toJSONString(map);
-        model.addAttribute( StatusUtils.STATUSCODE , StatusUtils.LOGIN_FAILURE );
-        return "login/login";
+        return JSON.toJSONString(map);
+
     }
-
+    @ExceptionHandler({UnknownSessionException.class})
+    @ResponseBody
+    public String no_session() {
+        map.clear();
+        map.put(StatusUtils.STATUSCODE,StatusUtils.UNKNOWN_SESSION);
+        return JSON.toJSONString(map);
+    }
     @ExceptionHandler({UnauthorizedException.class})
-//    @ResponseBody
-    public String nohave_role_permission(Model model ) {
-//        map.clear();
-//        map.put(StatusUtils.statecode,StatusUtils.NO_ROLE_PERMISSION);
-//        return JSON.toJSONString(map);
-        model.addAttribute(StatusUtils.STATUSCODE , StatusUtils.NO_PERMISSION );
-        return "login/login";
+    @ResponseBody
+    public String nohave_role_permission( ) {
+        map.clear();
+        map.put(StatusUtils.STATUSCODE,StatusUtils.NO_PERMISSION);
+        return JSON.toJSONString(map);
+//        model.addAttribute(StatusUtils.STATUSCODE , StatusUtils.NO_PERMISSION );
+//        return "login/login";
     }
 
 
@@ -56,18 +62,18 @@ public class ExceptionHandlers {
      * 登录失败
      */
     @ExceptionHandler({IncorrectCredentialsException.class})
-//    @ResponseBody
-    public String pwdoremail_Failure( Model model ) {
-//        map.clear();
-//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_LOGIN);
-//        return JSON.toJSONString(map);
-        model.addAttribute(StatusUtils.STATUSCODE , StatusUtils.LOGIN_FAILURE );
-        return "login/login";
+    @ResponseBody
+    public String pwdoremail_Failure(  ) {
+        map.clear();
+        map.put(StatusUtils.STATUSCODE,StatusUtils.LOGIN_FAILURE);
+        return JSON.toJSONString(map);
+//        model.addAttribute(StatusUtils.STATUSCODE , StatusUtils.LOGIN_FAILURE );
+//        return "login/login";
     }
 
     @ExceptionHandler({UnknownAccountException.class})
     @ResponseBody
-    public String emailorpwd_Failure( Model model ) {
+    public String emailorpwd_Failure(  ) {
         map.clear();
         map.put(StatusUtils.STATUSCODE,StatusUtils.LOGIN_FAILURE);
         return JSON.toJSONString(map);

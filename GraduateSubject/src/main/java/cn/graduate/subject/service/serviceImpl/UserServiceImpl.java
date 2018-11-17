@@ -48,6 +48,17 @@ public class UserServiceImpl implements UserService {
     public int delSubjectForSelf (  int uid ) throws Exception {
         return userMapper.delSubjectForSelf( uid );
     }
+    /**
+     * 更新邮箱到数据库
+     * @param uemail
+     * @param uaccount
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int updateEmail( String uemail ,  String uaccount) throws Exception {
+        return userMapper.updateEmail(uemail,uaccount);
+    }
 
 
 

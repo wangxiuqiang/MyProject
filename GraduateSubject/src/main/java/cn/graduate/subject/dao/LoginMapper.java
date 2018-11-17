@@ -13,7 +13,7 @@ public interface LoginMapper {
      * @param
      * @return
      */
-    public User selectUser(@Param( value = "uaccount" ) String uaccount  ) throws Exception;
+    public User selectUser(@Param( value = "uaccount" ) String uaccount ,  @Param(value = "ifAdmin") int ifAdmin ) throws Exception;
 
     /**
      * 查询权限信息

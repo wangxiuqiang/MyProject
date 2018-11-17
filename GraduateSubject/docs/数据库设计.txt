@@ -17,21 +17,26 @@ pid int default 0,
 rid int default 2
 );
 
+insert into user(uaccount,uage,uname,ucollege,ugrade,rid,sid,usex,ifAdmin ,upwd ) values("1",19,"我是谁",1,1,2,1,"男",2,123);
 
-
-insert into user(uaccount,uname,ifAdmin,rid) values("12345678910","123",1,1);
-insert into user(uaccount,uname,ifAdmin,rid) values("12345678910","admin",1,1);
+insert into user(uaccount,uname,ifAdmin,rid,upwd) values("12345678910","admin",1,1,"123");
 
 create table college (
 cid int primary key auto_increment,
 cname varchar(20) NOT NULL 
 );
+insert into college(cname) values("化学与化工学院");
+insert into college(cname) values("计算机科学与技术学院");
+
 
 create table grade (
-gid int primary key auto_increament,
+gid int primary key auto_increment,
 cid int , 
 gname varchar(20)
 );
+insert into grade(cid,gname) values(2,"软件工程");
+insert into grade(cid,gname) values(2,"计算机科学与技术");
+insert into grade(cid,gname) values(2,"通信技术");
 
 create table subject(
 sid int primary key auto_increment,
@@ -40,8 +45,42 @@ sintroduce varchar(50)
 );
 
 create trigger delete_subject_userSid after delete on subject  for each row update user set sid=0 where sid=OLD.sid;
-insert into subject(sname,sintroduce) values("2","3");
-
+insert into subject(sname,sintroduce) values("课程1","这是课程1的介绍");
+insert into subject(sname,sintroduce) values("课程2","这是课程2的介绍");
+insert into subject(sname,sintroduce) values("课程3","这是课程3的介绍");
+insert into subject(sname,sintroduce) values("课程4","这是课程4的介绍");
+insert into subject(sname,sintroduce) values("课程5","这是课程5的介绍");
+insert into subject(sname,sintroduce) values("课程6","这是课程6的介绍");
+insert into subject(sname,sintroduce) values("课程7","这是课程7的介绍");
+insert into subject(sname,sintroduce) values("课程8","这是课程8的介绍");
+insert into subject(sname,sintroduce) values("课程9","这是课程9的介绍");
+insert into subject(sname,sintroduce) values("课程10","这是课程10的介绍");
+insert into subject(sname,sintroduce) values("课程11","这是课程11的介绍");
+insert into subject(sname,sintroduce) values("课程12","这是课程12的介绍");
+insert into subject(sname,sintroduce) values("课程13","这是课程13的介绍");
+insert into subject(sname,sintroduce) values("课程14","这是课程14的介绍");
+insert into subject(sname,sintroduce) values("课程15","这是课程15的介绍");
+insert into subject(sname,sintroduce) values("课程16","这是课程16的介绍");
+insert into subject(sname,sintroduce) values("课程17","这是课程17的介绍");
+insert into subject(sname,sintroduce) values("课程18","这是课程18的介绍");
+insert into subject(sname,sintroduce) values("课程19","这是课程19的介绍");
+insert into subject(sname,sintroduce) values("课程20","这是课程20的介绍");
+insert into subject(sname,sintroduce) values("课程21","这是课程21的介绍");
+insert into subject(sname,sintroduce) values("课程22","这是课程22的介绍");
+insert into subject(sname,sintroduce) values("课程23","这是课程23的介绍");
+insert into subject(sname,sintroduce) values("课程24","这是课程24的介绍");
+insert into subject(sname,sintroduce) values("课程25","这是课程25的介绍");
+insert into subject(sname,sintroduce) values("课程26","这是课程26的介绍");
+insert into subject(sname,sintroduce) values("课程27","这是课程27的介绍");
+insert into subject(sname,sintroduce) values("课程28","这是课程28的介绍");
+insert into subject(sname,sintroduce) values("课程29","这是课程29的介绍");
+insert into subject(sname,sintroduce) values("课程30","这是课程30的介绍");
+insert into subject(sname,sintroduce) values("课程31","这是课程31的介绍");
+insert into subject(sname,sintroduce) values("课程32","这是课程32的介绍");
+insert into subject(sname,sintroduce) values("课程33","这是课程33的介绍");
+insert into subject(sname,sintroduce) values("课程34","这是课程34的介绍");
+insert into subject(sname,sintroduce) values("课程35","这是课程35的介绍");
+insert into subject(sname,sintroduce) values("课程36","这是课程36的介绍");
 create table role(
 rid int primary key auto_increment,
 rname varchar(30)

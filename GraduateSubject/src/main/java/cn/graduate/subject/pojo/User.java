@@ -1,5 +1,7 @@
 package cn.graduate.subject.pojo;
 
+import java.util.HashMap;
+
 public class User {
     private int uid;
     private int sid;//选题的编号
@@ -7,7 +9,7 @@ public class User {
     private int rid;//权限id;
     private int uage; //年龄
     private int ucollege; // 专业id
-    private int ugrage; //班级id
+    private int ugrade; //班级id
     private int ifAdmin;
 
     private String uaccount;//学号账号,用来登录
@@ -15,6 +17,24 @@ public class User {
     private String uemail;
     private String usex; //只有男 女俩个值
     private String upwd;
+    private int statuscode;
+
+    public int getStatuscode() {
+        return statuscode;
+    }
+
+    public void setStatuscode(int statuscode) {
+        this.statuscode = statuscode;
+    }
+    //    private HashMap<String,Integer> map;
+//
+//    public HashMap<String, Integer> getMap() {
+//        return map;
+//    }
+
+//    public void setMap(HashMap<String, Integer> map) {
+//        this.map = map;
+//    }
 
     public int getUid() {
         return uid;
@@ -64,12 +84,12 @@ public class User {
         this.ucollege = ucollege;
     }
 
-    public int getUgrage() {
-        return ugrage;
+    public int getUgrade() {
+        return ugrade;
     }
 
-    public void setUgrage(int ugrage) {
-        this.ugrage = ugrage;
+    public void setUgrade(int ugrdge) {
+        this.ugrade = ugrdge;
     }
 
     public int getIfAdmin() {
@@ -119,4 +139,6 @@ public class User {
     public void setUpwd(String upwd) {
         this.upwd = upwd;
     }
+
+
 }

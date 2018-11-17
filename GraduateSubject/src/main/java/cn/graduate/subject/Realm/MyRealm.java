@@ -18,10 +18,12 @@ import java.util.Set;
 
 public class MyRealm extends AuthorizingRealm {
 
+    public static int ifAdmin;
+
     @Autowired
     LoginService loginService;
 
-    User  user = null;
+   public static User  user = null;
 
     /**
      * 根据用户的principle 获取用户信息
@@ -34,11 +36,12 @@ public class MyRealm extends AuthorizingRealm {
 
         try {
             //获取用户的角色
+            System.out.println( user.getRid() + "-----" + loginService.selectRole( user.getRid() ) );
             simpleAuthorizationInfo.setRoles( loginService.selectRole( user.getRid() ) );
         } catch ( Exception e ) {
             e.printStackTrace();
         }
-        return null;
+        return simpleAuthorizationInfo;
     }
 
     /**
@@ -53,7 +56,7 @@ public class MyRealm extends AuthorizingRealm {
         String account = (String) token.getPrincipal();
 
         try {
-           user = loginService.selectUser( account );
+           user = loginService.selectUser( account ,ifAdmin);
         } catch ( Exception e) {
             e.printStackTrace();
         }

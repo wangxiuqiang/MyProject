@@ -70,14 +70,14 @@
   </servlet-mapping>
 
   <!--  图片验证码的servlet-->
-  <!--<servlet>-->
-  <!--<servlet-name>checkImg</servlet-name>-->
-  <!--<servlet-class>cn.ssm.utils.CheckImgServlet</servlet-class>-->
-  <!--</servlet>-->
-  <!--<servlet-mapping>-->
-  <!--<servlet-name>checkImg</servlet-name>-->
-  <!--<url-pattern>/checkImage</url-pattern>-->
-  <!--</servlet-mapping>-->
+  <servlet>
+  <servlet-name>checkImg</servlet-name>
+  <servlet-class>cn.graduate.subject.utils.CheckImgServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>checkImg</servlet-name>
+  <url-pattern>/checkImage</url-pattern>
+  </servlet-mapping>
 
   <!--&lt;!&ndash;自定义的filter自动登录过滤器&ndash;&gt;-->
   <!--<filter>-->

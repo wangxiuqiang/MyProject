@@ -1,7 +1,10 @@
 package cn.graduate.subject.pojo;
 
+import javax.validation.constraints.NotNull;
+
 public class Subject {
     private int sid;
+    @NotNull
     private String sname;
     private String sintroduce;
     //选择这个题目的人数

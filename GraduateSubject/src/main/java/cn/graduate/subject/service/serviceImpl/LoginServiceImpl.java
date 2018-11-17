@@ -21,8 +21,8 @@ public class LoginServiceImpl implements LoginService {
      *
      * @return
      */
-    public User selectUser(String uaccount ) throws Exception {
-        return loginMapper.selectUser( uaccount );
+    public User selectUser(String uaccount  , int ifAdmin ) throws Exception {
+        return loginMapper.selectUser( uaccount ,ifAdmin );
     }
 
     /**

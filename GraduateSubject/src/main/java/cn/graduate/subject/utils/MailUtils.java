@@ -9,8 +9,8 @@ import java.util.Properties;
 
 
 public class MailUtils {
-
-    public static void sendMail(String code,String email,String uname) throws Exception {
+    //state 用来判断是谁发的邮件  1表示 管理员发给学生的邮件, 其他的表示学生修改密码
+    public static void sendMail(int state,String email,String content) throws Exception {
         Properties prop = new Properties();
         prop.setProperty("mail.host","smtp.163.com");
         prop.setProperty("mail.smtp.auth","true");
@@ -26,7 +26,7 @@ public class MailUtils {
                 return new PasswordAuthentication("wangxiuqianga@163.com","251698wodewxqWXQ");
             }
         };
-       String uname1 = "*" + uname.substring(1);
+//       String uname1 = "*" + uname.substring(1);
 
         Session session = Session.getInstance(prop,authenticator);
 
@@ -40,10 +40,17 @@ public class MailUtils {
         /**message.setRecipient(type,address) 前面的type有三种 TO 发送给谁
          ， CC  ：抄送给谁 , BCC : 暗送给谁*/
 //设置邮件主题
-        message.setSubject("请激活");
+        if( state == 1 ) {
+            message.setSubject("通知");
+        } else if( state == 2 ){
+            message.setSubject("修改密码");
+        } else {
+            message.setSubject("绑定邮箱");
+        }
+
 //设置文件正文
       //  String content = "<a href='http://localhost:8080/user/activecode?code="+code+"'>点击激活</a>";
-        String content = "<a href='http://39.106.191.144/worker/activecode?activecode="+code+"'>" + uname1 + ",主管使用您的邮箱进行登录,确认则点击激活</a>";
+//        String content = "<a href='http://39.106.191.144/worker/activecode?activecode="+code+"'>" + uname1 + ",主管使用您的邮箱进行登录,确认则点击激活</a>";
         message.setContent(content,"text/html;charset=UTF-8");
         Transport.send(message);
     }
