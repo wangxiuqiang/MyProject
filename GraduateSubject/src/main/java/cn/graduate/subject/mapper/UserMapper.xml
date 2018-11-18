@@ -22,5 +22,12 @@
     <update id="updateEmail" parameterType="java.lang.String" >
         update user SET uemail= #{uemail} where uaccount = #{uaccount}
     </update>
-
+    <!--根据学号查找邮件-->
+    <select id="selectEmailByUaccount" parameterType="java.lang.String" resultType="java.lang.String">
+        select uemail from use where uaccount =  #{uaccount}
+    </select>
+   <!--根据学号修改初始化的密码-->
+    <update id="updateUpwdForBegin" parameterType="java.lang.String">
+        UPDATE user set upwd="123456" where uaccount=#{uaccount}
+    </update>
 </mapper>

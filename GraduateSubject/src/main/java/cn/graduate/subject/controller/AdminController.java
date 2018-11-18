@@ -268,7 +268,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/selectUser/{page}")
     @ResponseBody
-    @RequiresRoles(value = "admin")
+    @RequiresRoles(value = {"admin","user"} , logical = Logical.OR )
     public String selectUser( User user , @PathVariable int page) throws Exception {
         HashMap<String, Integer> map = new HashMap<>();
 
@@ -290,7 +290,8 @@ public class AdminController {
      */
     @RequestMapping(value = "/selectGradeByCid")
     @ResponseBody
-    @RequiresRoles(value = "admin")
+    @RequiresRoles(value = {"admin","user"} , logical = Logical.OR )
+
     public String selectGradeByCid( int cid ) throws Exception {
         HashMap<String, Integer> map = new HashMap<>();
         List<Grade> grades = adminService.selectGradeByCid( cid );
@@ -308,7 +309,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/selectCollege")
     @ResponseBody
-    @RequiresRoles(value = "admin")
+    @RequiresRoles(value = {"admin","user"} , logical = Logical.OR )
     public String selectCollege(  ) throws Exception {
         HashMap<String, Integer> map = new HashMap<>();
         List<College> colleges = adminService.selectCollege();

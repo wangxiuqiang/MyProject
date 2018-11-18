@@ -35,4 +35,11 @@ public interface UserService {
      */
     public int updateEmail( String uemail ,  String uaccount) throws Exception;
 
+    /**
+     * 通过学号查出邮箱并将密码改为初始化
+     * @param uaccount
+     * @return
+     * @throws Exception
+     */
+    public String selectEmailAndUpdateUpwd( String uaccount ) throws Exception;
 }

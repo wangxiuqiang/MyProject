@@ -60,6 +60,24 @@ public class UserServiceImpl implements UserService {
         return userMapper.updateEmail(uemail,uaccount);
     }
 
+    /**
+     * 通过学号查出邮箱并将密码改为初始化
+     * @param uaccount
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public String selectEmailAndUpdateUpwd( String uaccount ) throws Exception{
+        String email = userMapper.selectEmailByUaccount( uaccount );
+        if( email != null ) {
+            int result = userMapper.updateUpwdForBegin( uaccount );
+            if ( result > 0 ) {
+                return email;
+            }
+            return null;
+        }
+        return null;
+    }
 
 
 }

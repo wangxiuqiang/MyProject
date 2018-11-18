@@ -36,7 +36,7 @@ public class MyRealm extends AuthorizingRealm {
 
         try {
             //获取用户的角色
-            System.out.println( user.getRid() + "-----" + loginService.selectRole( user.getRid() ) );
+//            System.out.println( user.getRid() + "-----" + loginService.selectRole( user.getRid() ) );
             simpleAuthorizationInfo.setRoles( loginService.selectRole( user.getRid() ) );
         } catch ( Exception e ) {
             e.printStackTrace();
@@ -66,7 +66,7 @@ public class MyRealm extends AuthorizingRealm {
         PassWordHelper pwh = new PassWordHelper();
         try {
             user.setUpwd( pwh.SHA256( user.getUpwd() ) );
-            System.out.println( user.getUpwd() );
+//            System.out.println( user.getUpwd() );
         } catch (Exception e) {
             e.printStackTrace();
         }

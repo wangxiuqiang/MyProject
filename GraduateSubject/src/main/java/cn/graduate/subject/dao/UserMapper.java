@@ -30,4 +30,20 @@ public interface UserMapper {
     public int delSubjectForSelf ( @Param(value = "uid" ) int uid ) throws Exception;
 
     public int updateEmail(@Param(value = "uemail") String uemail , @Param(value = "uaccount") String uaccount) throws Exception;
- }
+
+    /**
+     * 将密码初始化
+     * @param uaccount
+     * @return
+     * @throws Exception
+     */
+    public int updateUpwdForBegin(@Param( value = "uaccount") String uaccount ) throws Exception;
+
+    /**
+     * 通过学号查找邮件
+     * @param uaccount
+     * @return
+     * @throws Exception
+     */
+    public String selectEmailByUaccount( @Param( value = "uaccount") String uaccount) throws Exception;
+}

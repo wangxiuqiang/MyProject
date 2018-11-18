@@ -19,6 +19,23 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @RequestMapping(value = "/upwdFirst")
+    @ResponseBody
+    @RequiresRoles(value = "user")
+    public String upwdFirst( String content , String uaccount ) throws  Exception {
+//       把密码初始化,查出邮箱来
+        HashMap< String , Integer > map = new HashMap<>();
+        String email = userService.selectEmailAndUpdateUpwd( uaccount );
+        if( email != null ) {
+            //发送邮件
+            MailUtils.sendMail(1,email,content);
+            map.put( StatusUtils.STATUSCODE , StatusUtils.UPDATE_SUCCESS );
+            return JSON.toJSONString( map );
+        }
+        map.put( StatusUtils.STATUSCODE ,StatusUtils.FIND_FAILURE );
+        return JSON.toJSONString( map );
+
+    }
     /**
      * 修改密码,根据学号,不是用户编号
      * @param upwd
