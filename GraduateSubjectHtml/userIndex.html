@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生界面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="./layui/css/layui.css" media="all">
+    <script src="./js/jquery-3.3.1.min.js"></script>
+
+    <script src="./layui/layui.js" charset="utf-8"></script>
+</head>
+<body>
+<div>
+    <div>
+
+
+        <ul class="layui-nav layui-bg-blue">
+            <li class="layui-nav-item">毕业设计选题系统</li>
+            <li class="layui-nav-item layui-this"><a href="javascript:void(0)" onclick="selectAllSubjectForUser(1)">查询选课信息</a></li>
+            <li class="layui-nav-item"><a href="javascript:void(0)" onclick="selectSelf()">查看自己的选课信息</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">提交进度</a>
+
+            </li>
+            <li class="layui-nav-item"><a href="javascript:void(0)" onclick="emailHtml()">绑定邮箱</a></li>
+
+            <li class="layui-nav-item" lay-unselect="" style="position: absolute; right: 50px;">
+                <a id="userName" href="javascript:void(0);"><img src="//t.cn/RCzsdCq" class="layui-nav-img"  ></a>
+
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:void (0);" onclick="updateUpwdBefore()">修改信息</a></dd>
+
+                    <dd><a href="javascript:void (0);" onclick="logout()">退出</a></dd>
+                </dl>
+            </li>
+
+        </ul>
+    </div>
+    <div id="middle" style="position: absolute; border: 1px solid red; left: 200px; height: 590px; width: 900px;">
+
+    </div>
+    <div>
+        <input type="hidden" id="uid" />
+        <input type="hidden" id="uaccount" />
+        <input type="hidden" id="uemail" />
+    </div>
+</div>
+
+
+<script>
+
+    layui.use('element', function () {
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+    });
+
+
+    layui.use('form', function () {
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        form.render();
+//        form.render('select' ,'test'); //刷新select选择框渲染
+    });
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+
+    window.onload = function () {
+        $("#userName").text( GetQueryString( "uname" ) );
+//        alert($("#userName").text());
+        $("#uaccount").val( GetQueryString( "uaccount" ) );
+        $("#uid").val( GetQueryString( "uid" ) );
+        $("#uemail").val( GetQueryString( "uemail" ) );
+    }
+</script>
+<script src="./js/adminIndex.js"></script>
+<script src="./js/ajaxUtils.js"></script>
+<script src="./js/userIndex.js"></script>
+</body>
+</html>
