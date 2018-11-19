@@ -6,7 +6,7 @@
     
     <!--用户修改个人信息 ,就是修改密码,只提供密码的修改,根据学号改密码-->
     <update id="updatePwd" parameterType="java.lang.String">
-        update from user upwd = #{upwd} where uaccount=#{uaccount}
+        update  user set upwd = #{upwd} where uaccount=#{uaccount}
     </update>
     <!--添加选课-->
     <update id="addSubjectForSelf" parameterType="java.lang.Integer" >
@@ -30,4 +30,56 @@
     <update id="updateUpwdForBegin" parameterType="java.lang.String">
         UPDATE user set upwd="123456" where uaccount=#{uaccount}
     </update>
-</mapper>
+    <!--提交进度-->
+    <insert id="addProgress" parameterType="cn.graduate.subject.pojo.Progress" >
+        <selectKey keyProperty="pid" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        INSERT  into progress( pone
+        <!--<if test="flag == 1">-->
+            <!--pone-->
+        <!--</if>-->
+        <!--<if test="flag == 2">-->
+            <!--ptwo-->
+        <!--</if>-->
+        <!--<if test="flag == 3">-->
+            <!--pthree-->
+        <!--</if>-->
+        <!--<if test="flag == 4">-->
+            <!--pfour-->
+        <!--</if>-->
+        <!--<if test="flag == 5">-->
+            <!--pfive-->
+        <!--</if>-->
+        ) VALUES ( #{pone} )
+    </insert>
+    <!--将pid录入到用户的界面中-->
+    <update id="insertUserPid" parameterType="java.lang.Integer" >
+        UPDATE user SET pid=#{pid} where uid=#{uid}
+    </update>
+    <!--更新进度-->
+    <update id="updateProgress" parameterType="cn.graduate.subject.pojo.Progress">
+        update progress
+        <set>
+            <if test="ptwo != null">
+            ptwo =#{ptwo}
+            </if>
+            <if test="pthree != null">
+            pthree=#{pthree}
+            </if>
+            <if test="pfour != null">
+            pfour=#{pfour}
+            </if>
+            <if test="pfive != null">
+            pfive=#{pfive}
+            </if>
+        </set>
+    where pid = #{pid}
+    </update>
+
+    <!--根据pid 查找进度-->
+    <select id="selectProgressByPid" parameterType="java.lang.Integer" resultType="cn.graduate.subject.pojo.Progress">
+        select * from progress where pid = #{pid}
+    </select>
+
+ </mapper>

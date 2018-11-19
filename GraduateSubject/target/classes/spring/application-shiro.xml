@@ -3,12 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- 会话ID生成器 -->
     <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
@@ -20,6 +21,8 @@
         <!--cookie 过期时间,单位为秒,  如果是-1 那么关闭浏览器就过期cookie-->
         <property name="maxAge" value="-1"/>
     </bean>
+<!--rememberME cookie-->
+
     <!--<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">-->
         <!--<constructor-arg value="rememberMe"/>-->
         <!--<property name="httpOnly" value="true"/>-->
@@ -28,7 +31,7 @@
     <!--sessionIdCookie：maxAge=-1表示浏览器关闭时失效此Cookie；-->
 
     <!--rememberMeCookie：即记住我的Cookie，保存时长30天；-->
-
+    <!-- rememberMe管理器 -->
     <!--<bean id="rememberMeManager"-->
           <!--class="org.apache.shiro.web.mgt.CookieRememberMeManager">-->
         <!--<property name="cipherKey" value="-->
@@ -70,7 +73,16 @@
         <!--设置securityManager安全管理器的rememberMeManager；-->
         <!--<property name="rememberMeManager" ref="rememberMeManager"/>-->
     </bean>
+    <!--并发人数控制-->
+    <bean id="kickoutSessionControlFilter"
+          class="cn.graduate.subject.utils.KickoutSessionControlFilter">
+        <!--<property name="cacheManager" ref="cacheManager"/>-->
+        <property name="sessionManager" ref="sessionManager"/>
 
+        <property name="kickoutAfter" value="false"/>
+        <property name="maxSession" value="1"/>
+        <property name="kickoutUrl" value="/login?kickout=1"/>
+    </bean>
     <!-- Shiro过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <!-- Shiro的核心安全接口,这个属性是必须的 -->
@@ -79,6 +91,11 @@
         <!--<property name="loginUrl" value="/loginFailure"/>-->
         <!--&lt;!&ndash; 权限认证失败，则跳转到指定页面 &ndash;&gt;-->
         <!--<property name="unauthorizedUrl" value="/authcFailure"/>-->
+        <property name="filters">
+            <util:map>
+                <entry key="kickout" value-ref="kickoutSessionControlFilter"/>
+            </util:map>
+        </property>
         <!-- Shiro连接约束配置,即过滤链的定义 -->
         <property name="filterChainDefinitions">
         <value>

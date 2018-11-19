@@ -1,6 +1,7 @@
 package cn.graduate.subject.service.serviceImpl;
 
 import cn.graduate.subject.dao.UserMapper;
+import cn.graduate.subject.pojo.Progress;
 import cn.graduate.subject.service.UserService;
 import cn.graduate.subject.utils.PassWordHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,5 +80,48 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /**
+     * 添加一个进度到数据库
+     * @param pone
+     * @return
+     * @throws Exception
+     */
+    public int addProgress(  String pone , int uid ) throws Exception {
+        Progress progress = new Progress();
+        progress.setPone(pone);
+        int result = userMapper.addProgress( progress );
+        if( result > 0 ) {
+            return    insertUserPid( progress.getPid() , uid );
+        } else {
+            return 0;
+        }
 
+    }
+
+    /**
+     * 同时将pid写到user中,保证学生和自己的id相对应
+     * @param pid
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public int insertUserPid( int pid , int uid ) throws Exception {
+        return userMapper.insertUserPid( pid , uid );
+    }
+
+    /**
+     * 更新一个新的进程
+     * @param progress
+     * @return
+     * @throws Exception
+     */
+    public int updateProgress(Progress progress ) throws Exception {
+         return userMapper.updateProgress( progress );
+    }
+    /**
+     * 根据pid查找一个学生的进程
+     */
+    public Progress selectProgressByPid( int pid ) throws Exception {
+        return userMapper.selectProgressByPid( pid );
+    }
 }

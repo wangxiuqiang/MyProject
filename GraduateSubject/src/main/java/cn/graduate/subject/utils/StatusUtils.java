@@ -18,4 +18,6 @@ public class StatusUtils {
 
     public final static int UNKNOWN_SESSION = -6;
     public static final int CHECKIMAGE_NORIGHT = -7;
+    public static final int UPLOAD_SUCCESS = 8;
+    public static final int UPLOAD_FAILURE = -8;
 }

@@ -45,6 +45,7 @@ sintroduce varchar(50)
 );
 
 create trigger delete_subject_userSid after delete on subject  for each row update user set sid=0 where sid=OLD.sid;
+
 insert into subject(sname,sintroduce) values("课程1","这是课程1的介绍");
 insert into subject(sname,sintroduce) values("课程2","这是课程2的介绍");
 insert into subject(sname,sintroduce) values("课程3","这是课程3的介绍");

@@ -1,5 +1,6 @@
 package cn.graduate.subject.dao;
 
+import cn.graduate.subject.pojo.Progress;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -46,4 +47,33 @@ public interface UserMapper {
      * @throws Exception
      */
     public String selectEmailByUaccount( @Param( value = "uaccount") String uaccount) throws Exception;
+
+    /**
+     * 添加一个进度到数据库
+     * @param progress
+     * @return
+     * @throws Exception
+     */
+    public int addProgress( Progress progress  ) throws Exception;
+
+    /**
+     * 同时将pid写到user中,保证学生和自己的id相对应
+     * @param pid
+     * @param uid
+     * @return
+     * @throws Exception
+     */
+    public int insertUserPid( @Param( value = "pid") int pid ,@Param(value = "uid") int uid ) throws Exception;
+
+    /**
+     * 更新一个新的进程
+     * @param progress
+     * @return
+     * @throws Exception
+     */
+    public int updateProgress( Progress progress ) throws Exception;
+    /**
+     * 根据pid查找一个学生的进程
+     */
+    public Progress selectProgressByPid( @Param( value = "pid") int pid ) throws Exception;
 }
