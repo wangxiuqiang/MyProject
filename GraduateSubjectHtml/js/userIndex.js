@@ -7,21 +7,21 @@ function updateUpwdBefore() {
         "<div class=\"layui-form-item\" style=\"margin-top:29px; margin-left: 28px;\">\n" +
         "        <label class=\"layui-form-label\">旧密码:</label>\n" +
         "        <div class=\"layui-input-inline\" >\n" +
-        "            <input  id='oldPwd' type=\"text\" name=\"oldPwd\" lay-verify=\"required\" placeholder=\"请输入密码\" autocomplete=\"off\"\n" +
+        "            <input  id='oldPwd' type=\"password\" name=\"oldPwd\" lay-verify=\"required\" placeholder=\"请输入密码\" autocomplete=\"off\"\n" +
         "                   class=\"layui-input\" value=''>\n" +
         "        </div>\n" +
         "    </div>\n" +
         "<div class=\"layui-form-item\" style=\"margin-top:29px; margin-left: 28px;\">\n" +
         "        <label class=\"layui-form-label\">新密码:</label>\n" +
         "        <div class=\"layui-input-inline\" >\n" +
-        "            <input  id='newPwd' type=\"text\" name=\"newPwd\" lay-verify=\"required\" placeholder=\"请输入密码\" autocomplete=\"off\"\n" +
+        "            <input  id='newPwd' type=\"password\" name=\"newPwd\" lay-verify=\"required\" placeholder=\"请输入密码\" autocomplete=\"off\"\n" +
         "                   class=\"layui-input\" >\n" +
         "        </div>\n" +
         "    </div>\n" +
         "    <div class=\"layui-form-item\" style=\"margin-top:29px; margin-left: 28px;\">\n" +
         "        <label class=\"layui-form-label\">确认密码:</label>\n" +
         "        <div class=\"layui-input-inline\">\n" +
-        "            <input  id=\"checkPwd\" type=\"text\" name=\"checkPwd\" placeholder=\"请输入确认密码\" autocomplete=\"off\" class=\"layui-input\" " +
+        "            <input  id=\"checkPwd\" type=\"password\" name=\"checkPwd\" placeholder=\"请输入确认密码\" autocomplete=\"off\" class=\"layui-input\" " +
         ">\n" +
         "<label><a href='javascript:void(0);' onclick='emailToUpdateUpwd()' >忘记密码?</a> </label>"+
         "        </div>\n"  +
@@ -49,7 +49,7 @@ function updataUpwdFinsih() {
         return;
     }
 
-    if( $("#newPwd").val() != $("#checkPwd") ) {
+    if( $("#newPwd").val() != $("#checkPwd").val()) {
         alert("两次密码输入不一致");
         return;
     }
@@ -358,4 +358,120 @@ function selectSelf() {
 
 
     }
+}
+function uploadFile() {
+    $("#middle").empty();
+    var text = ["需求分析" ,"概要设计","详细设计","报告总结","项目成果"];
+    $("#middle").append("   <div id='formDiv' class=\"layui-form\">\n" +
+        "                <table class=\"layui-table\">\n" +
+        "                    <colgroup>\n" +
+        "                        <col width=\"20\">\n" +
+        "                        <col width=\"90\">\n" +
+        "                        <col width=''>\n" +
+        "                        <col width='90'>\n" +
+        "                    </colgroup>\n" +
+        "                    <thead>\n" +
+        "                    <tr>\n" +
+        "                        <th>序号</th>\n" +
+        "                        <th>进度</th>\n" +
+        "                        <!--<th></th>-->\n" +
+        "                        <th>文件上传</th>\n" +
+        "                        <th>状态</th>\n" +
+        "                    </tr>\n" +
+        "                    </thead>\n" +
+        "                    <tbody id=\"tbody\">\n" +
+
+        "                    </tbody>\n" +
+        "                </table>\n" +
+        "            </div>");
+    for( var i = 0; i < 5 ;i++) {
+        $("#tbody").append('<tr><td>' +  (i+1) +'</td> <td>'+ text[i] +'  </td> <td id="buttonUpload' + i +'"></td><td id="status' + (i+1) +'"></td> </tr>')
+        $("#buttonUpload"+ i +"").append('<div class="layui-upload">\n' +
+            '  <input type="file" class="layui-btn layui-btn-normal" id="file' + (i+1) + '" multiple="multiple" >选择文件</input>\n' +
+            '  <button type="button" class="layui-btn" id=fileUpload'+ (i+1) +' onclick="uploadFileFinish('+ (i+1) +')" >开始上传</button>\n' +
+            // '  <button type="button" class="layui-btn"  onclick="selectProgress()" >123</button>\n' +
+            '</div>');
+}
+    selectProgress();
+
+}
+
+
+function uploadFileFinish(i) {
+
+    // if( i == 1 ) {
+        var formData = new FormData();
+        var files = $("#file"+i+"").prop('files');
+        formData.append("file" , files[0]);
+        formData.append("uaccount", $("#uaccount").val());
+        formData.append("uname", $("#userName").val());
+        formData.append("i", i );
+        formData.append("uid" , $("#uid").val());
+        formData.append("pid" , $("#pid").val());
+
+        var url = "http://127.0.0.1:8099/user/uploadFile";
+        ajaxUtils(url,formData,findCode ,true);
+    // } else {
+    //     var formData = new FormData();
+    //     var files = $("#file"+i+"").prop('files');
+    //     formData.append("file" , files[0]);
+    //     formData.append("uid" , $("#uid").val());
+    // }
+
+
+}
+
+
+function selectProgress() {
+    var formData = new FormData();
+    formData.append("pid" , $("#pid").val());
+    var url = "http://127.0.0.1:8099/user/selectProgress";
+    ajaxUtils(url , formData , back , true);
+    function back(data) {
+        var result = findCode( data );
+        if (result == 1) {
+            if( data.pone != undefined ) {
+                $("#status1").text("已完成");
+                $("#status1").css('color','green');
+            }else  {
+                $("#status1").text("未完成");
+                $("#status1").css('color','red');
+            }
+            if( data.ptwo != undefined ) {
+                $("#status2").text("已完成");
+                $("#status2").css('color','green');
+
+            }else  {
+                $("#status2").text("未完成");
+                $("#status2").css('color','red');
+            }
+            if( data.pthree != undefined ) {
+                $("#status3").text("已完成");
+                $("#status3").css('color','green');
+            }else  {
+                $("#status3").text("未完成");
+                $("#status3").css('color','red');
+
+            }
+            if( data.pfour != undefined ) {
+                $("#status4").text("已完成");
+                $("#status4").css('color','green');
+
+            }else  {
+                $("#status4").text("未完成");
+                $("#status4").css('color','red');
+
+            }
+            if( data.pfive != undefined ) {
+                $("#status5").text("已完成");
+                $("#status5").css('color','green');
+
+            }else  {
+                $("#status5").text("未完成");
+                $("#status5").css('color','red');
+
+            }
+        }
+    }
+
 }

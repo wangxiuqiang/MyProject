@@ -36,9 +36,9 @@ function ajaxUtils(url ,formDate , back , bool) {
 //     });
 // }
 function findCode(data) {
-    var code=[0,-1,1,2,-2,3,-3,4,-4,5,-5,-6,-7];
+    var code=[0,-1,1,2,-2,3,-3,4,-4,5,-5,-6,-7 , 8 , -8];
     var status = ["没有权限","用户名活密码错误","登录成功","查找成功","查询失败","添加或更新成功","添加活更新失败","删除成功","删除失败", "退出成功" , "输入为空值","未知的会话"
-    ,"验证码不正确"];
+    ,"验证码不正确","上传成功","长传失败"];
     // alert( data.statuscode );
     // alert(data);
     // alert( data.uname );
@@ -48,9 +48,9 @@ function findCode(data) {
                 alert( status[i] ) ;
                 if( status[i] == "登录成功" ) {
                     if( data.ifAdmin == 1 ) {
-                        $(location).attr('href','adminIndex.html?uname='+ data.uname + "&uaccount=" +data.uaccount + "&uid=" + data.uid  + "&uemail=" + data.uemail);
+                        $(location).attr('href','adminIndex.html?uname='+ data.uname + "&uaccount=" +data.uaccount + "&uid=" + data.uid  + "&uemail=" + data.uemail + "&pid=" +data.pid);
                     }else {
-                        $(location).attr('href','userIndex.html?uname='+ data.uname + "&uaccount=" +data.uaccount + "&uid=" + data.uid  + "&uemail=" + data.uemail);
+                        $(location).attr('href','userIndex.html?uname='+ data.uname + "&uaccount=" +data.uaccount + "&uid=" + data.uid  + "&uemail=" + data.uemail + "&pid=" +data.pid );
 
                     }
                 }

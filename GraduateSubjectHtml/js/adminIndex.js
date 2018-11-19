@@ -447,7 +447,7 @@ function selectUser(page ,uaccount,uname,ucollege,ugrade,sid ) {
             "                        <col width='80'>\<n></n>" +
             "                    </colgroup>\n" +
             "                    <thead>\n" +
-            "                    <tr>\n" +
+            "                    <tr >\n" +
             "                        <th>序号</th>\n" +
             "                        <th>学号</th>\n" +
             "                        <!--<th></th>-->\n" +
@@ -485,7 +485,7 @@ function selectUser(page ,uaccount,uname,ucollege,ugrade,sid ) {
         var result = findCode(data);
         if( result == 1) {
             for (var i = 0; i < data.list.length; i++) {
-                $("#tbody").append('<tr id ="'+  i +'"></tr>');
+                $("#tbody").append('<tr id ="'+  i +'" onclick="selectProgressForAdmin(' + data.list[i].user.pid + ')"></tr>');
                 $("#" + i + "").append("<td>" + (i + 1) + "</td>\n" +
                     "                        <td>" + data.list[i].user.uaccount + "</td>\n" +
                     "                        <td>" + data.list[i].user.uname + "</td>\n" +
@@ -780,4 +780,62 @@ function sendEmail() {
 
     var url = "http://127.0.0.1:8099/admin/sendEmail";
     ajaxUtils(url,formData,findCode);
+}
+
+function selectProgressForAdmin(pid) {
+    if( pid == 0 ) {
+        alert("该生尚未提交任何材料");
+        return;
+    }
+    var formData = new FormData();
+    formData.append("pid" , pid);
+    var url = "http://127.0.0.1:8099/user/selectProgress";
+    ajaxUtils(url , formData , back , true);
+    function back(data) {
+        var result = findCode( data );
+        if (result == 1) {
+            if( data.pone != undefined ) {
+                $("#status1").text("已完成");
+                $("#status1").css('color','green');
+            }else  {
+                $("#status1").text("未完成");
+                $("#status1").css('color','red');
+            }
+            if( data.ptwo != undefined ) {
+                $("#status2").text("已完成");
+                $("#status2").css('color','green');
+
+            }else  {
+                $("#status2").text("未完成");
+                $("#status2").css('color','red');
+            }
+            if( data.pthree != undefined ) {
+                $("#status3").text("已完成");
+                $("#status3").css('color','green');
+            }else  {
+                $("#status3").text("未完成");
+                $("#status3").css('color','red');
+
+            }
+            if( data.pfour != undefined ) {
+                $("#status4").text("已完成");
+                $("#status4").css('color','green');
+
+            }else  {
+                $("#status4").text("未完成");
+                $("#status4").css('color','red');
+
+            }
+            if( data.pfive != undefined ) {
+                $("#status5").text("已完成");
+                $("#status5").css('color','green');
+
+            }else  {
+                $("#status5").text("未完成");
+                $("#status5").css('color','red');
+
+            }
+        }
+    }
+
 }

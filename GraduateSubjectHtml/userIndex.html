@@ -21,7 +21,7 @@
             <li class="layui-nav-item layui-this"><a href="javascript:void(0)" onclick="selectAllSubjectForUser(1)">查询选课信息</a></li>
             <li class="layui-nav-item"><a href="javascript:void(0)" onclick="selectSelf()">查看自己的选课信息</a></li>
             <li class="layui-nav-item">
-                <a href="javascript:;">提交进度</a>
+                <a href="javascript:void(0);" onclick="uploadFile()">提交进度</a>
 
             </li>
             <li class="layui-nav-item"><a href="javascript:void(0)" onclick="emailHtml()">绑定邮箱</a></li>
@@ -45,6 +45,7 @@
         <input type="hidden" id="uid" />
         <input type="hidden" id="uaccount" />
         <input type="hidden" id="uemail" />
+        <input type="hidden" id="pid" />
     </div>
 </div>
 
@@ -74,6 +75,7 @@
         $("#uaccount").val( GetQueryString( "uaccount" ) );
         $("#uid").val( GetQueryString( "uid" ) );
         $("#uemail").val( GetQueryString( "uemail" ) );
+        $("#pid").val( GetQueryString( "pid" ) );
     }
 </script>
 <script src="./js/adminIndex.js"></script>
