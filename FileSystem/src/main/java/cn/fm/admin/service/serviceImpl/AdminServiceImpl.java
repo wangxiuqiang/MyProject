@@ -62,7 +62,7 @@ public class AdminServiceImpl implements AdminService{
      */
     @Override
     public int addUser(UserExtend user) throws Exception {
-        user.setCode(UUID.randomUUID().toString());
+//        user.setCode(UUID.randomUUID().toString());
         //发送邮件
 //        MailUtils.sendMail(user.getCode(),user.getUemail(),user.getUname());
 
@@ -95,10 +95,10 @@ public class AdminServiceImpl implements AdminService{
      * @param uemail
      * @return
      */
-    @Override
-    public String selectEmailIfExist(String uemail) throws  Exception{
-        return adminMapper.selectEmailIfExist(uemail);
-    }
+//    @Override
+//    public String selectEmailIfExist(String uemail) throws  Exception{
+//        return adminMapper.selectEmailIfExist(uemail);
+//    }
 
     /**
      * 查询所有的用户
@@ -130,7 +130,7 @@ public class AdminServiceImpl implements AdminService{
         for(Role s : roles){
              stringBuffer.append(s.getRdescribe() + ",");
         }
-
+        //设置用户的权限信息
         ue.setRname(stringBuffer.toString());
         stringBuffer.delete(0,stringBuffer.length());
         for(Permission p : permissions){
@@ -161,6 +161,9 @@ public class AdminServiceImpl implements AdminService{
         UserExtend ue = new UserExtend();
         ue.setUid(user.getUid());
         ue.setState(user.getState());
+        ue.setUnumber( user.getUnumber());
+        ue.setUphone( user.getUphone() );
+        ue.setWid( user.getWid() );
         ue.setUname(user.getUname());
         ue.setUupdatetime(user.getUupdatetime());
         ue.setUcompany(user.getUcompany());

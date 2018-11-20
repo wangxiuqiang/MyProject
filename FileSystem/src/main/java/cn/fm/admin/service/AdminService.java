@@ -38,7 +38,7 @@ public interface AdminService {
     /**
      * 查找 用户是否存在
      */
-    public String  selectEmailIfExist(String uemail) throws Exception;
+//    public String  selectEmailIfExist(String uemail) throws Exception;
 
     /**
      * 查询所有的用户

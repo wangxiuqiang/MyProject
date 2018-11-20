@@ -57,7 +57,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new LockedAccountException();
         }
         PassWordHelper pwh = new PassWordHelper();
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUemail(),
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUaccount(),
                 user.getUpwd(),
                 ByteSource.Util.bytes(pwh.getSalt()),
                 getName());

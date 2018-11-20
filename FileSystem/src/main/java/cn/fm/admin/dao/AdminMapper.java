@@ -45,7 +45,7 @@ public interface AdminMapper {
      * @return
      * @throws Exception
      */
-    public String  selectEmailIfExist(String uemail) throws Exception;
+//    public String  selectEmailIfExist(String uemail) throws Exception;
 
     /**
      * 查询所有的用户

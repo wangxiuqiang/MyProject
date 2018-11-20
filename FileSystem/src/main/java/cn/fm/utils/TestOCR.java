@@ -1,72 +1,72 @@
-//package cn.fm.utils;
-//
-//import net.sourceforge.tess4j.ITesseract;
-//import net.sourceforge.tess4j.Tesseract;
-//import net.sourceforge.tess4j.TesseractException;
-//
-//import java.io.File;
-//import java.awt.Color;
-//import java.awt.image.BufferedImage;
-//import java.io.IOException;
-//import java.text.SimpleDateFormat;
-//import java.util.ArrayList;
-//import java.util.Date;
-//import java.util.List;
-//import javax.imageio.ImageIO;
-//public class TestOCR {
-//    public static void ocr(String filename) {
-//        try {
-//            File tifFile = new File(filename);
-//            ITesseract instance = new Tesseract();
-//            //指定放着库文件夹的文件夹
-//            instance.setDatapath("/usr/local/share");
-//            instance.setLanguage("chi_sim");
-//            System.out.println( tifFile.canRead() );
-//            String result = instance.doOCR(tifFile);
+package cn.fm.utils;
+
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
+
+import java.io.File;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.imageio.ImageIO;
+public class TestOCR {
+    public static void ocr(String filename) {
+        try {
+            File tifFile = new File(filename);
+            ITesseract instance = new Tesseract();
+            //指定放着库文件夹的文件夹
+            instance.setDatapath("/usr/local/share");
+            instance.setLanguage("chi_sim");
+            System.out.println( tifFile.canRead() );
+            String result = instance.doOCR(tifFile);
 //            result = result.replaceAll("、" ,"");
 //            result = result.replaceAll(" ", "");
-//            String resultSplit[] = result.split("\\n");
-//           for( int i = 0 ; i < resultSplit.length; i ++ ) {
-//               if( !resultSplit[i].equals( "" ) ) {
-//                   System.out.println("-----------------" + i + "---------------------------");
-//                   System.out.println(resultSplit[i]);
-//               }
-//           }
-//            System.out.println( "````````````````````````华丽的分割线" + "````````````````````````" );
-//
-//            System.out.println( result );
-//        } catch (TesseractException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
-//
-//
-//
-//
-//        public static void main(String[] args) throws Exception
-//        {
-//            /**
-//             * 如果是文件夹 可以使用 文件夹.listFiles()遍历里面的文件
-//             * for (File file : testDataDir.listFiles())
-//             {
-//             cleanImage(file, destDir);
-//             }
-//             */
-//
-////            File testData = new File("/home/wxq/test.jpg");//某一张图片
-////            //去噪后图片的存储地址
-////            final String destDir = testData.getParent()+"/testOCR";
-////            cleanImage(testData ,destDir);
-////            ocr("/home/wxq/test1.jpg");
-////             Date date = new Date();
-////            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-////           String  a = format.format(date);
-////             System.out.println(a);
-////           System.out.println( OCRHelper.convertFile( "/home/wxq/test.jpg"));
-//        }
-//
+            String resultSplit[] = result.split("\\n");
+           for( int i = 0 ; i < resultSplit.length; i ++ ) {
+               if( !resultSplit[i].equals( "" ) ) {
+                   System.out.println("-----------------" + i + "---------------------------");
+                   System.out.println(resultSplit[i]);
+               }
+           }
+            System.out.println( "````````````````````````华丽的分割线" + "````````````````````````" );
+
+            System.out.println( result );
+        } catch (TesseractException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
+        public static void main(String[] args) throws Exception
+        {
+            /**
+             * 如果是文件夹 可以使用 文件夹.listFiles()遍历里面的文件
+             * for (File file : testDataDir.listFiles())
+             {
+             cleanImage(file, destDir);
+             }
+             */
+
+//            File testData = new File("/home/wxq/test.jpg");//某一张图片
+//            //去噪后图片的存储地址
+//            final String destDir = testData.getParent()+"/testOCR";
+//            cleanImage(testData ,destDir);
+            ocr("/home/wxq/test1.jpg");
+//             Date date = new Date();
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//           String  a = format.format(date);
+//             System.out.println(a);
+//           System.out.println( OCRHelper.convertFile( "/home/wxq/test.jpg"));
+        }
+
 //        /**
 //         *
 //         * @param sfile
@@ -251,6 +251,6 @@
 //
 //            return threshold;
 //        }
-//
-//
-//}
+
+
+}

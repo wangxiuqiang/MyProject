@@ -163,7 +163,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     public List<GetFile> findTypeFiles(GetFile getFile , String endtime ) throws Exception {
 //&& getFile.getGfclassifyid() == 0
         if(getFile.getGfname() != null  && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
+                && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
             return   selectGetFileByName(getFile.getGfname());
 
 
@@ -175,19 +175,19 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 //
 //        }
         else if(getFile.getGfname() == null  && getFile.getGfcompany() != null
-                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
+                && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
             return selectGetFileByCompany(getFile.getGfcompany());
 
         }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() != null && endtime !=null && getFile.getGfnumber() == 0) {
+                && getFile.getGfdatetime() != null && endtime !=null && getFile.getGfnumber() == null) {
 
             return selectGetFileByDateTime(getFile.getGfdatetime() ,endtime);
         }else if(getFile.getGfname() == null && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() == null && getFile.getGfnumber() != 0){
+                && getFile.getGfdatetime() == null && getFile.getGfnumber() != null){
            return  selectGetFileByNumber(getFile.getGfnumber());
 
         }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0){
+                && getFile.getGfdatetime() == null && getFile.getGfnumber() == null){
              return  null;
         }else {
             //多项查询
@@ -220,7 +220,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     }
 
     @Override
-    public List<GetFile> selectGetFileByNumber(int num) throws Exception {
+    public List<GetFile> selectGetFileByNumber(String  num) throws Exception {
 //        return selectAllClassifyId(userGetFileMapper.selectGetFileByNumber(num));
         return userGetFileMapper.selectGetFileByNumber( num );
     }

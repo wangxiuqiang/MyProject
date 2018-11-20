@@ -101,11 +101,11 @@ public class UserServiceImpl implements UserService {
 //                return -5;
 //            }
             borrow.setUid(uid);
-        borrow.setWid(wid);
+            borrow.setWid(wid);
             borrow.setFileid(cfid);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
-        //设置为24小时之后为归还日期
-        borrow.setShouldback( dateAddToTomorrow() );
+           //设置为24小时之后为归还日期
+           borrow.setShouldback( dateAddToTomorrow() );
             //添加文件的借出状态,更新借阅表的borrowtime
             int res = userMapper.insertBorrowcfInfo(borrow);
 

@@ -64,31 +64,31 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/regbefore")
-    @ResponseBody
-    public String regbefore(String code) throws Exception {
-        HashMap<String,Integer> map = new HashMap<>();
-
-        long now = System.currentTimeMillis();
-//        从数据库找个取出时间的字符串类型数据
-        String dateString = userService.selectUserupdatetime(code);
-        Date date  = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        if(dateString == null) {
-            map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
-            return JSON.toJSONString(map);
-        }
-       date =  sdf.parse(dateString);
-       long before = date.getTime();
-
-       if((((now - before)/1000)/3600) >= 24 ) {
-           map.put(StatusUtils.statecode,StatusUtils.TIME_OUT);
-           return JSON.toJSONString(map);
-       }else {
-           map.put(StatusUtils.statecode,StatusUtils.TIME_IN);
-           return JSON.toJSONString(map);
-       }
-    }
+//    @RequestMapping(value = "/regbefore")
+//    @ResponseBody
+//    public String regbefore(String code) throws Exception {
+//        HashMap<String,Integer> map = new HashMap<>();
+//
+//        long now = System.currentTimeMillis();
+////        从数据库找个取出时间的字符串类型数据
+//        String dateString = userService.selectUserupdatetime(code);
+//        Date date  = new Date();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        if(dateString == null) {
+//            map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+//            return JSON.toJSONString(map);
+//        }
+//       date =  sdf.parse(dateString);
+//       long before = date.getTime();
+//
+//       if((((now - before)/1000)/3600) >= 24 ) {
+//           map.put(StatusUtils.statecode,StatusUtils.TIME_OUT);
+//           return JSON.toJSONString(map);
+//       }else {
+//           map.put(StatusUtils.statecode,StatusUtils.TIME_IN);
+//           return JSON.toJSONString(map);
+//       }
+//    }
 
     /**
      * 查看是不是激活完成了
@@ -96,39 +96,39 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/checkState")
-    @ResponseBody
-    public String checkState(String code ) throws Exception {
-        HashMap<String,Integer> map = new HashMap<>();
-        if( code == null ) {
-            map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
-            return JSON.toJSONString( map );
-        }
-        int result = userService.selectState( code );
-        if( result != 0 )  {
-            map.put( StatusUtils.statecode , StatusUtils.ALREADY_REG );
-        } else {
-            map.put( StatusUtils.statecode , StatusUtils.NEED_REG ) ;
-        }
-        return JSON.toJSONString( map );
-    }
+//    @RequestMapping(value = "/checkState")
+//    @ResponseBody
+//    public String checkState(String code ) throws Exception {
+//        HashMap<String,Integer> map = new HashMap<>();
+//        if( code == null ) {
+//            map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
+//            return JSON.toJSONString( map );
+//        }
+//        int result = userService.selectState( code );
+//        if( result != 0 )  {
+//            map.put( StatusUtils.statecode , StatusUtils.ALREADY_REG );
+//        } else {
+//            map.put( StatusUtils.statecode , StatusUtils.NEED_REG ) ;
+//        }
+//        return JSON.toJSONString( map );
+//    }
 
     /**
      * 发送激活的code 和设置密码
      */
 
-    @RequestMapping(value = "/reg")
-    @ResponseBody
-    public String reg( String upwd, String code) throws Exception {
-        if (userService.updateUserpwd(upwd, code) != 0) {
-            HashMap<String,Integer> map = new HashMap<>();
-            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
-            return JSON.toJSONString(map);
-        }
-        HashMap<String,Integer> map = new HashMap<>();
-        map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
-        return JSON.toJSONString(map);
-    }
+//    @RequestMapping(value = "/reg")
+//    @ResponseBody
+//    public String reg( String upwd, String code) throws Exception {
+//        if (userService.updateUserpwd(upwd, code) != 0) {
+//            HashMap<String,Integer> map = new HashMap<>();
+//            map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
+//            return JSON.toJSONString(map);
+//        }
+//        HashMap<String,Integer> map = new HashMap<>();
+//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+//        return JSON.toJSONString(map);
+//    }
 
     /**
      * 备份数据库
@@ -197,8 +197,9 @@ public class UserController {
     /**
      * 恢复数据库
      */
-    @RequiresRoles(value = {"admin"}, logical = Logical.OR)
+//    @RequiresRoles(value = {"admin"}, logical = Logical.OR)
     @RequestMapping(value = "/recoverDatabase")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String recoverDatabase(MultipartFile file) throws Exception {
 
@@ -217,8 +218,9 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
+//    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
     @RequestMapping(value = "/selectUserByName")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectUserByName(String uname) throws Exception{
         List<User> users = userService.selectUserByName(uname);
@@ -351,7 +353,7 @@ public class UserController {
 
     }
     /**
-     *  将uid和fid穿过来进行借阅
+     *  将uid和fid wid穿过来进行借阅
      *
      * @param uid
      * @param cfid
@@ -421,7 +423,7 @@ public class UserController {
      * 获取到用户的id,进一步获取到用户的wid,这样,如果是uid不一样,但是wid一样也可以实现归还,一次一份文件只能借一个人,
      * 用cfid归还的话,直接找cfid并且backtime = null的就可以了,因为通过指纹的检查,会找到没有归还的文件,直接选择然后返回id就可以啦
      *
-     *
+     *和借阅一样使用上面的一些指纹查找就可以啦
      */
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updatecfBackTime")
@@ -485,8 +487,9 @@ public class UserController {
      * 1 查借阅中的,
      * 2 已经归还的
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/selectBorrowcfInfo/{flag}/{page}")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectBorrowcfInfo(@PathVariable int flag,@PathVariable int page, int uid) throws Exception{
         HashMap<String,Integer> map = new HashMap<>();
@@ -500,8 +503,9 @@ public class UserController {
             return JSON.toJSONString(map);
         }
     }
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/selectBorrowgfInfo/{flag}/{page}")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectBorrowgfInfo(@PathVariable int flag,@PathVariable Integer page,int uid) throws Exception {
         //flag = 0 查询所有的, flag = 1 查询 在借阅中的,flag = 2 归还了的
@@ -524,8 +528,9 @@ public class UserController {
     /**
      * 根据文件id查这个文件的流向
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/selectBorrowcfInfoByFileid/{page}")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectBorrowcfInfoByFileid(@PathVariable int page, int cfid) throws Exception{
         HashMap<String,Integer> map = new HashMap<>();
@@ -539,8 +544,9 @@ public class UserController {
             return JSON.toJSONString(map);
         }
     }
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/selectBorrowgfInfoByFileid/{page}")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectBorrowgfInfoByFileid(@PathVariable Integer page,int gfid) throws Exception {
         //flag = 0 查询所有的, flag = 1 查询 在借阅中的,flag = 2 归还了的
@@ -604,8 +610,9 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
     @RequestMapping(value = "/selectClassifyBiggest")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectClassifyBiggst() throws Exception {
         List<Classify> classifies = userService.selectClassifyBiggest();
@@ -619,8 +626,9 @@ public class UserController {
     /**
      * 查找下一级的分类, 并且 打印出这些分类的总的存放地址
      */
-    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
     @RequestMapping(value = "/selectClassifyByFather/{fatherid}")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectClassifyByFather(@PathVariable int fatherid) throws Exception{
         List<Classify> classifies = userService.selectClassifyByFatherId(fatherid);
@@ -644,21 +652,21 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
-    @RequestMapping(value = "/selectMyself")
-    @ResponseBody
-    public String selectMyself() throws Exception{
-        Subject subject = SecurityUtils.getSubject();
-        String uemail = (String)subject.getPrincipal();
-//        System.out.println(uemail);
-       UserExtend ue = userService.selectMySelf(uemail);
-       if(ue != null) {
-           return  JSON.toJSONString(ue);
-       }
-        HashMap<String,Integer> map = new HashMap<>();
-        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
-        return JSON.toJSONString(map);
-    }
+//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+//    @RequestMapping(value = "/selectMyself")
+//    @ResponseBody
+//    public String selectMyself() throws Exception{
+//        Subject subject = SecurityUtils.getSubject();
+//        String uemail = (String)subject.getPrincipal();
+////        System.out.println(uemail);
+//       UserExtend ue = userService.selectMySelf(uemail);
+//       if(ue != null) {
+//           return  JSON.toJSONString(ue);
+//       }
+//        HashMap<String,Integer> map = new HashMap<>();
+//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+//        return JSON.toJSONString(map);
+//    }
 
     /**
      * 根据日期范围查询未归还的用户信息及其借阅的文件信息
@@ -667,8 +675,9 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
     @RequestMapping(value = "/selectBorrowcfByborrowtime")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectBorrowcfByborrowtime(String starttime , String endtime ) throws  Exception {
         HashMap<String , Integer > map = new HashMap<>();
@@ -693,8 +702,9 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
     @RequestMapping(value = "/selectBorrowgfByborrowtime")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectBorrowgfByborrowtime(String starttime , String endtime ) throws  Exception {
         HashMap<String , Integer > map = new HashMap<>();
@@ -747,7 +757,7 @@ public class UserController {
     }
 
     /**
-     * 查看超时的接口
+     * 查看文件借阅超时的接口
      * @return
      * @throws Exception
      */

@@ -43,9 +43,10 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
    @RequestMapping(value = "/findCompanyFiles/{page}")
    @ResponseBody
+    @RequiresRoles(value = "admin")
     public String findCompanyFiles(@PathVariable Integer page) throws Exception {
        PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
@@ -61,9 +62,11 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/findTypeCompanyFiles/{page}")
     @ResponseBody
+    @RequiresRoles(value = "admin")
+
     public String findTypeCompanyFiles( CompanyFile companyFile,@PathVariable  Integer page,String endtime ) throws Exception {
         if( companyFile.getCfname() != null || companyFile.getCfclassifyid() != 0 || companyFile.getCflanguage() != null
                 || companyFile.getCfdate() != null || companyFile.getCffontid() != null) {
@@ -84,8 +87,8 @@ public class UserCompanyFileController {
     /**
      * 根据id查找文件
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/findCompanyFileById/{cfid}")
     @ResponseBody
     public String findCompanyFileById(@PathVariable int cfid) throws Exception {
@@ -105,8 +108,9 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/infoSubCompanyFile")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String infoSubCompanyFile( @Validated CompanyFile companyFile,
                                      BindingResult bindingResult) throws Exception {
@@ -115,13 +119,13 @@ public class UserCompanyFileController {
             return JSON.toJSONString(allErrors);
         }
 
-
+        HashMap<String,Integer> map = new HashMap<>();
         if(userCompanyFileService.insertCompanyFile(companyFile) != 0 ) {
-            HashMap<String,Integer> map = new HashMap<>();
+
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
             return JSON.toJSONString(map);
         }else {
-            HashMap<String,Integer> map = new HashMap<>();
+
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
             return JSON.toJSONString(map);
         }
@@ -130,8 +134,9 @@ public class UserCompanyFileController {
     /**
      * 根据id更新  文件
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/updateSubCompanyFile")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String updateSubGetFile(CompanyFile companyFile) throws Exception {
 
@@ -149,8 +154,9 @@ public class UserCompanyFileController {
     /**
      * 根据id删除单条记录,,如果文件被借出了则不能删除文件
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delCompanyFile")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String delGetFile(String cfid) throws Exception {
         HashMap<String,Integer> map = new HashMap<>();
@@ -188,7 +194,7 @@ public class UserCompanyFileController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin"} )
+    @RequiresRoles(value = "admin" )
     @RequestMapping(value = "/checkDelectCFile")
     @ResponseBody
     public String checkDelectCFile() throws  Exception {

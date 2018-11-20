@@ -12,7 +12,7 @@ public class User {
     private String uphone;
     private String unumber;
     private int wid;
-    private String uworkname;
+    private String uworkname;//岗位
     private String uaccount;
 //    private String code;
     private int ifAdmin;

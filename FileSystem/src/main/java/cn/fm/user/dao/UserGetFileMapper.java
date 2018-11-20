@@ -67,7 +67,7 @@ public interface UserGetFileMapper {
     /**
      *根据文号查询
      */
-    public List<GetFile> selectGetFileByNumber(int num) throws Exception;
+    public List<GetFile> selectGetFileByNumber(String  num) throws Exception;
 
     /**
      * 查询全部的收文文件信息

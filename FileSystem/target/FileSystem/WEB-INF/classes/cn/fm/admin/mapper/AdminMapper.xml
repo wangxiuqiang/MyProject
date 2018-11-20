@@ -13,12 +13,12 @@
     <!--</insert>-->
 
 
-    <select id="findUserByEmail" parameterType="String" resultType="cn.fm.pojo.User">
-        select uid,uemail,upwd,state from user where uemail = #{uemail}
-    </select>
+    <!--<select id="findUserByEmail" parameterType="String" resultType="cn.fm.pojo.User">-->
+        <!--select uid,uemail,upwd,state from user where uemail = #{uemail}-->
+    <!--</select>-->
     <insert id="addUser" parameterType="cn.fm.vo.UserExtend" >
-        insert into user(uname,ucompany,uemail,uupdatetime,code,ifAdmin )
-        values(#{uname},#{ucompany},#{uemail},#{uupdatetime},#{code},#{ifAdmin})
+        insert into user(uname,ucompany,wid,uupdatetime,ifAdmin,uphone,unumber )
+        values(#{uname},#{ucompany},#{wid},#{uupdatetime},#{ifAdmin},#{uphone},#{unumber})
         <selectKey keyProperty="uid" resultType="java.lang.Integer" order="AFTER">
             select LAST_INSERT_ID()
         </selectKey>

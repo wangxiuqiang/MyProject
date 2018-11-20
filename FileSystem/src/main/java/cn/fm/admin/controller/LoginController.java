@@ -38,16 +38,17 @@ public class LoginController {
 
         if(bindingResult.hasErrors()){
             List<ObjectError> allErrors = bindingResult.getAllErrors();
-            for (ObjectError objectError:allErrors) {
-                System.out.println(objectError.getDefaultMessage());
-            }
+//            for (ObjectError objectError:allErrors) {
+//                System.out.println(objectError.getDefaultMessage());
+//            }
+            return JSON.toJSONString( allErrors );
         }
 //        System.out.println(user.getUemail()+ "----------------" +user.getUpwd());
         /**
          * 用户登录
          */
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token =  new UsernamePasswordToken(user.getUemail(),user.getUpwd());
+        UsernamePasswordToken token =  new UsernamePasswordToken(user.getUaccount(),user.getUpwd());
 
         subject.login(token);
 

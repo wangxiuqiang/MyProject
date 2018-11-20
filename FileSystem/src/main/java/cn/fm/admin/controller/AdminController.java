@@ -62,6 +62,7 @@ public class AdminController {
     @ResponseBody
     public String addUser(@Validated UserExtend user , BindingResult bindingResult) throws Exception{
         int id  = 0;
+        HashMap<String,Integer> map = new HashMap<>();
         if(bindingResult.hasErrors()) {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             return JSON.toJSONString(allErrors);
@@ -69,12 +70,11 @@ public class AdminController {
 //        System.out.println(user.getUcompany());
         user.setUupdatetime(DateToStringUtils.dataTostring());
         if(  ( id = adminService.addUser(user) ) != 0 ){
-            HashMap<String,Integer> map = new HashMap<>();
+
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_REG);
             map.put("userId" , id );
             return JSON.toJSONString(map);
         }else {
-            HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_REG);
             return JSON.toJSONString(map);
         }
@@ -108,21 +108,21 @@ public class AdminController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/selectEmail")
-    @ResponseBody
-    public String selectEmail(String uemail) throws Exception {
-        String result = adminService.selectEmailIfExist(uemail);
-         if(result != null ) {
-             HashMap<String,Integer> map = new HashMap<>();
-             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_FIND);
-             return JSON.toJSONString(map);
-         }else  {
-             HashMap<String,Integer> map = new HashMap<>();
-             map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
-             return JSON.toJSONString(map);
-         }
-
-    }
+//    @RequestMapping(value = "/selectEmail")
+//    @ResponseBody
+//    public String selectEmail(String uemail) throws Exception {
+//        String result = adminService.selectEmailIfExist(uemail);
+//         if(result != null ) {
+//             HashMap<String,Integer> map = new HashMap<>();
+//             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_FIND);
+//             return JSON.toJSONString(map);
+//         }else  {
+//             HashMap<String,Integer> map = new HashMap<>();
+//             map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+//             return JSON.toJSONString(map);
+//         }
+//
+//    }
 
     /**
      *  查找所有的用户信息
@@ -176,19 +176,19 @@ public class AdminController {
     @RequestMapping(value = "/delWorker")
     @ResponseBody
     public String delWorker(String uid) throws Exception{
-
+        HashMap<String,Integer> map = new HashMap<>();
         String[] uidstring = uid.split(",");
+        //先将传过来的信息进行数组化
         int[] uids = new int[uidstring.length];
         for (int i = 0; i < uidstring.length; i++) {
             uids[i] = Integer.parseInt(uidstring[i]);
             System.out.println(uids[i]);
         }
         if(adminService.deleteWorkerById(uids) != 0) {
-            HashMap<String,Integer> map = new HashMap<>();
+
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_DEL);
             return JSON.toJSONString(map);
         }else {
-            HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_DEL);
             return JSON.toJSONString(map);
         }

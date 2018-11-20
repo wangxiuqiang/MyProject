@@ -6,14 +6,15 @@
 
     <sql id="Base_Columns_List">
         cfid,cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
-        cfsend,cflevel,cffontid,cfnumber,cflanguage ,cfloader,type,isborrow
+        cfsend,cflevel,cffontid,cfnumber,cflanguage ,cfloader,type,isborrow,waitborrow,
+        destroy,back,backDate,destroyDate,leveltime,state
     </sql>
 
     <insert id="insertCompanyFile" parameterType="cn.fm.pojo.CompanyFile" >
         insert into companyFile(cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
-        cfsend,cflevel,cffontid,cfnumber,cflanguage,cfloader) values(#{cfname},
+        cfsend,cflevel,cffontid,cfnumber,cflanguage,cfloader , leveltime,) values(#{cfname},
         #{cfclassifyid} ,#{cfclassifyname},#{cfaddress},#{cfdate},#{cfeditor},#{cfaccept},
-        #{cfsend},#{cflevel},#{cffontid},#{cfnumber},#{cflanguage},#{cfloader});
+        #{cfsend},#{cflevel},#{cffontid},#{cfnumber},#{cflanguage},#{cfloader}, #{leveltime})
     </insert>
 
     <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
@@ -161,4 +162,20 @@
            fileid=#{cfid}
        </where>
    </update>
+    <!--查看被删除的文件-->
+    <select id="selectTheCFileIsDel" resultType="cn.fm.pojo.CompanyFile" >
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile where state = 0
+    </select>
+
+    <!--销毁一个文件-->
+    <update id="delCompanyFileDestroy" parameterType="java.lang.Integer" >
+        UPDATE companyFile SET destroy = 0 , destroyDate = #{destroyDate} where cfid = #{cfid}
+    </update>
+    <!--清退一个文件 修改清退文件的日期-->
+    <update id="delCompanyFileBack" >
+        UPDATE companyFile SET back = 1,backDate=#{backDate} where cfid = #{cfid}
+    </update>
+
 </mapper>

@@ -3,16 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fm.user.dao.UserGetFileMapper">
-
     <sql id="Base_Columns_List">
-        gfid,gfname , gfidea, gfloader,gfclassifyid
-         ,gfcompany, gfresult, gfclassifyname,gfaddress,gfdatetime,gfnumber,type,isborrow
+        gfid,gfname , gfidea, gfloader,gffrom,gettime ,gflevel,waitborrow,back,
+         ,gfcompany, gfresult, gfdatetime,gfnumber,type,isborrow,gfpartnumber,gfpersonRead,state,backDate
     </sql>
 
       <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile" >
-          insert into getFile(gfname,gfclassifyid,gfclassifyname,gfaddress,gfdatetime,gfnumber,
-          gfidea,gfresult,gfloader,gfcompany) values(#{gfname},
-          #{gfclassifyid} ,#{gfclassifyname},#{gfaddress},#{gfdatetime},#{gfnumber},#{gfidea},
+          insert into getFile(gfname,gfdatetime,gfnumber,gffrom,gftime,gflevel,gfpartnumber
+          gfidea,gfresult,gfloader,gfcompany) values(#{gfname},#{gfdatetime},#{gfnumber},
+          #{gffrom} ,#{gftime},#{gflevel},#{gfpartnumber},#{gfidea},
           #{gfresult}, #{gfloader},#{gfcompany})
       </insert>
 
@@ -51,7 +50,7 @@
         from getFile where gfdatetime &gt;= #{gfdateime} AND gfdatetime &lt;= #{endtime} and state=1
     </select>
 
-    <select id="selectGetFileByNumber" parameterType="java.lang.Integer" resultType="cn.fm.pojo.GetFile">
+    <select id="selectGetFileByNumber" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
         select
         <include refid="Base_Columns_List" />
         from getFile where gfnumber = #{value} and state=1
@@ -63,12 +62,8 @@
         <include refid="Base_Columns_List" />
         from getFile
         <where>
-
-            <if test="getFile.gfclassifyid != 0">
-                 gfclassifyid = #{getFile.gfclassifyid}
-            </if>
             <if test="getFile.gfnumber != 0">
-                and gfnumber = #{getFile.gfnumber}
+                 gfnumber = #{getFile.gfnumber}
             </if>
             <if test="getFile.gfcompany != null">
                 and gfcompany = #{getFile.gfcompany}
@@ -114,15 +109,27 @@
         <if test="gfresult != null" >
             gfresult = #{gfresult},
         </if>
-        <if test="gfclassifyid != 0">
-            gfclassifyid = #{gfclassifyid},
-        </if>
-        <if test="gfclassifyname != null" >
-            gfclassifyname = #{gfclassifyname},
-        </if>
-        <if test="gfaddress != null" >
-            gfaddress = #{gfaddress},
-        </if>
+            <if test="gffrom != null" >
+                gffrom = #{gffrom},
+            </if>
+            <if test="gflevel != null" >
+                gflevel = #{gflevel},
+            </if>
+            <if test="gftime != null" >
+                gftime = #{gftime},
+            </if>
+            <if test="gfpartnumber != null" >
+                gfpartnumber = #{gfpartnumber},
+            </if>
+        <!--<if test="gfclassifyid != 0">-->
+            <!--gfclassifyid = #{gfclassifyid},-->
+        <!--</if>-->
+        <!--<if test="gfclassifyname != null" >-->
+            <!--gfclassifyname = #{gfclassifyname},-->
+        <!--</if>-->
+        <!--<if test="gfaddress != null" >-->
+            <!--gfaddress = #{gfaddress},-->
+        <!--</if>-->
 
         <if test="gfdatetime != null" >
             gfdatetime = #{gfdatetime},
@@ -153,5 +160,16 @@
         <where>
             fileid=#{gfid}
         </where>
+    </update>
+
+    <!--查看被删除的文件-->
+    <select id="selectTheGFileIsDel" resultType="cn.fm.pojo.GetFile" >
+        select
+        <include refid="Base_Columns_List" />
+        from companyFile where state = 0
+    </select>
+    <!--清退一个文件-->
+    <update id="delGetFileBack" >
+        UPDATE getFile SET back = 1 , backDate = #{backDate} where gfid = #{gfid}
     </update>
 </mapper>

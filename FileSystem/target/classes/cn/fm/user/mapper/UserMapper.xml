@@ -22,37 +22,39 @@
     </select>
 
 
-    <!--添加借阅信息-->
-    <insert id="insertBorrowcfInfo" parameterType="cn.fm.pojo.Borrow" >
-        insert into borrow_companyFile(uid,fileid,borrowtime) VALUES (#{uid},#{fileid},#{borrowtime})
-    </insert>
+    <!--添加借阅信息 ,同步更新需要归还的时间 和领取人-->
+    <update id="insertBorrowcfInfo" parameterType="cn.fm.pojo.Borrow" >
+        update borrow_companyFile set borrowtime = #{borrowtime} , shouldback = #{shuldback} , uid = #{uid} where wid = #{wid} and fileid = #{fileid} and borrowtime=null
+        and shouldback=null
+    </update>
 
-    <!--添加借阅信息-->
-    <insert id="insertBorrowgfInfo" parameterType="cn.fm.pojo.Borrow" >
-        insert into borrow_getFile(uid,fileid,borrowtime) VALUES (#{uid},#{fileid},#{borrowtime})
-    </insert>
+    <!--添加借阅信息 ,同步更新需要归还的时间 ,和领取人-->
+    <update id="insertBorrowgfInfo" parameterType="cn.fm.pojo.Borrow" >
+        update borrow_getFile set borrowtime = #{borrowtime} , shouldback = #{shuldback},uid = #{uid}  where wid = #{wid} and fileid = #{fileid} and borrowtime=null
+        and shouldback=null
+    </update>
 
-    <!--设置文件已经被借出-->
+    <!--设置文件已经被借出 ,刷指纹领走的时候待借阅标记修改,这就是说明这个文件被借出 ,-->
     <update id="updateCompanyFileIsBorrow" parameterType="int">
-        update companyFile set isborrow = 2 where cfid = #{cfid}
+        update companyFile set isborrow = 2 , waitborrow = 0  where cfid = #{cfid}
     </update>
 
     <!--设置文件已经归还-->
     <update id="updateCompanyFileBack" parameterType="int">
-        update companyFile set isborrow = 1 where cfid IN
+        update companyFile set isborrow = 1  where cfid IN
         <foreach collection="fileid" close=")" open="(" separator="," item="id">
             #{id}
         </foreach>
     </update>
 
-    <!--设置文件已经被借出-->
+    <!--设置文件已经被借出  刷指纹领走的时候 -->
     <update id="updateGetFileIsBorrow" parameterType="int">
-        update getFile set isborrow = 2 where gfid = #{gfid}
+        update getFile set isborrow = 2 , waitborrow=0 where gfid = #{gfid}
     </update>
 
     <!--设置文件已经归还-->
     <update id="updateGetFileBack" parameterType="int">
-        update getFile set isborrow = 1 where gfid IN
+        update getFile set isborrow = 1  where gfid IN
         <foreach collection="fileid" close=")" open="(" separator="," item="id">
             #{id}
         </foreach>
@@ -74,15 +76,15 @@
 
     <!--根据时间范围 查找没有归还的文件-->
     <select id="selectBorrowcfByborrowtime" resultType="cn.fm.pojo.Borrow" parameterType="String" >
-        select uid,fileid,borrowtime,backtime from borrow_companyFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime}
+        select uid,fileid,borrowtime,backtime,shouldback,givetime from borrow_companyFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime}
     </select>
     <!--根据时间范围 查找没有归还的文件-->
     <select id="selectBorrowgfByborrowtime" resultType="cn.fm.pojo.Borrow" parameterType="String" >
-        select uid,fileid,borrowtime,backtime from borrow_getFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime}
+        select uid,fileid,borrowtime,backtime,shouldback,givetime from borrow_getFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime}
     </select>
     <!--根据用户查询借阅信息 或者查询 这一类的借阅信息-->
     <select id="selectBorrowcfById" resultType="cn.fm.pojo.Borrow" parameterType="int">
-        select uid,fileid,borrowtime,backtime from borrow_companyFile
+        select uid,fileid,borrowtime,backtime,shouldback,givetime from borrow_companyFile
         <where>
             <if test="uid != 0" >
                 uid = #{uid}
@@ -93,7 +95,7 @@
 
     <!--根据用户查询借阅信息-->
     <select id="selectBorrowgfById" resultType="cn.fm.pojo.Borrow" parameterType="int">
-        select uid,fileid,borrowtime,backtime from borrow_getFile
+        select uid,fileid,borrowtime,backtime,givetime,shouldback from borrow_getFile
         <where>
             <if test="uid != 0" >
                 uid = #{uid}
@@ -104,27 +106,28 @@
     <!--根据文件id查找这个文件的借阅历史-->
     <!--可以用来查找这个文件是不是被解阅,,是的话,不能进行删除-->
     <select id="selectBorrowcfInfoByFileid" resultType="cn.fm.pojo.Borrow" parameterType="java.lang.Integer" >
-         select uid,fileid,borrowtime,backtime from borrow_companyFile where fileid = #{fileid} and state=1
+         select wid,uid,fileid,borrowtime,backtime,givetime,shouldback from borrow_companyFile where fileid = #{fileid} and state=1
     </select>
     <select id="selectBorrowgfInfoByFileid" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Borrow">
-        select uid,fileid,borrowtime,backtime from borrow_getFile where fileid = #{fileid} and state=1
+        select wid,uid,fileid,borrowtime,backtime,givetime,shouldback from borrow_getFile where fileid = #{fileid} and state=1
     </select>
 
     <!--查看该文件是不是被借出去了,-->
     <select id="selectgfisBorrow" parameterType="int" resultType="int">
-        select isborrow from getFile where gfid IN
-        <foreach collection="gfid" item="id" separator="," open="(" close=")">
-            #{id}
-        </foreach>
+        select isborrow from getFile where gfid = #{gfid}
+        <!--IN-->
+        <!--<foreach collection="gfid" item="id" separator="," open="(" close=")">-->
+            <!--#{id}-->
+        <!--</foreach>-->
         and state=1
     </select>
 
 
     <select id="selectcfisBorrow" parameterType="int" resultType="int">
-        select isborrow from companyFile where cfid IN
-        <foreach collection="cfid" item="id" separator="," open="(" close=")">
-            #{id}
-        </foreach>
+        select isborrow from companyFile where cfid = #{cfid}
+        <!--<foreach collection="cfid" item="id" separator="," open="(" close=")">-->
+            <!--#{id}-->
+        <!--</foreach>-->
         and state=1
     </select>
 
@@ -144,4 +147,36 @@
         select uupdatetime from user where code = #{code}
     </select>
 
+    <!--根据id查找待领取的文件信息,就是借阅时间为null的-->
+    <select id="selectcfWaitBorrow" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select fileid from borrow_companyFile where wid = #{wid} and borrowtime=null
+    </select>
+    <!--根据id查找待领取的文件信息,就是借阅时间为null的-->
+    <select id="selectgfWaitBorrow" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select fileid from borrow_getFile where wid = #{wid} and borrowtime=null
+    </select>
+<!--用来查找借出文件 , 查找没有归还的文件 的uid和fileid 以及 shouldback时间-->
+   <select id="selectcfIsPassTime" resultType="cn.fm.pojo.Borrow" >
+       SELECT wid,uid,fileid,shouldback from borrow_companyFile where backtime=null
+   </select>
+
+    <!--先查找借出的文件 , 查找没有归还的文件 的uid和fileid 以及 shouldback时间-->
+    <select id="selectgfIsPassTime" resultType="cn.fm.pojo.Borrow" >
+        SELECT wid , uid,fileid,shouldback from borrow_getFile where backtime=null
+    </select>
+
+    <!--待分配接口的文件,修改文件的waitborrow-->
+    <update id="updatecfWaitBorrow" parameterType="java.lang.Integer" >
+        update companyFile set waitborrow = 1 where cfid = #{value}
+    </update>
+    <update id="updategfWaitBorrow" parameterType="java.lang.Integer" >
+        update getFile set waitborrow = 1 where gfid = #{value}
+    </update>
+    <!--待分配接口 录入借阅信息-->
+    <insert id="insertcfWaitBorrowInfo" parameterType="cn.fm.pojo.Borrow">
+        insert into borrow_companyFile(wid,fileid,givetime) VALUES (#{wid},#{fileid}, #{givetime})
+    </insert>
+    <insert id="insertgfWaitBorrowInfo" parameterType="cn.fm.pojo.Borrow">
+        insert into borrow_getFile(wid,fileid,givetime) VALUES (#{wid},#{fileid}, #{givetime})
+    </insert>
 </mapper>

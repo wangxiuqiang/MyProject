@@ -5,15 +5,27 @@ import javax.validation.constraints.Size;
 
 public class UserExtend {
 
+
+    @NotNull(message = "{user.company.isnull}")
+    private String ucompany;
+
+//    private String uemail;
+//    private String code;
+
     private int  uid;
     private String uname;
     private String upwd;
-    @NotNull(message = "{user.company.isnull}")
-    private String ucompany;
+//    private String ucompany;
     private String uupdatetime;
     private int state;
-    private String uemail;
-    private String code;
+    private String uphone;
+    private String unumber;
+    private int wid;
+    private String uworkname;
+    private String uaccount;
+    //    private String code;
+//    private int ifAdmin;
+
 
     @NotNull(message = "{user.ifadmin.isnull}")
     private int ifAdmin;
@@ -81,20 +93,61 @@ public class UserExtend {
         this.state = state;
     }
 
-    public String getUemail() {
-        return uemail;
+//    public String getUemail() {
+//        return uemail;
+//    }
+//
+//    public void setUemail(String uemail) {
+//        this.uemail = uemail;
+//    }
+//
+//    public String getCode() {
+//        return code;
+//    }
+//
+//    public void setCode(String code) {
+//        this.code = code;
+//    }
+
+
+    public String getUphone() {
+        return uphone;
     }
 
-    public void setUemail(String uemail) {
-        this.uemail = uemail;
+    public void setUphone(String uphone) {
+        this.uphone = uphone;
     }
 
-    public String getCode() {
-        return code;
+    public String getUnumber() {
+        return unumber;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setUnumber(String unumber) {
+        this.unumber = unumber;
+    }
+
+    public int getWid() {
+        return wid;
+    }
+
+    public void setWid(int wid) {
+        this.wid = wid;
+    }
+
+    public String getUworkname() {
+        return uworkname;
+    }
+
+    public void setUworkname(String uworkname) {
+        this.uworkname = uworkname;
+    }
+
+    public String getUaccount() {
+        return uaccount;
+    }
+
+    public void setUaccount(String uaccount) {
+        this.uaccount = uaccount;
     }
 
     public int getIfAdmin() {

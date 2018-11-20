@@ -58,12 +58,13 @@ public class UserGetFileController {
     /**
      * 根据单项查收文信息  或多项
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/findTypeGetFiles/{page}")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String findTypeFiles(@PathVariable Integer page , GetFile getFile, String endtime) throws Exception {
         System.out.println(getFile);
-        if(getFile.getGfnumber() != 0 || (getFile.getGfdatetime() != null && endtime != null) || getFile.getGfcompany() != null
+        if(getFile.getGfnumber() != null || (getFile.getGfdatetime() != null && endtime != null) || getFile.getGfcompany() != null
                 || getFile.getGfname() != null) {
             PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
@@ -95,8 +96,9 @@ public class UserGetFileController {
      * 查找全部的文件信息
      *
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/findGetFiles/{page}")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String findFiles(@PathVariable Integer page) throws Exception {
         PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
@@ -110,8 +112,9 @@ public class UserGetFileController {
     /**
      * 根据id更新  文件
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/updateSubGetFile")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String updateSubGetFile( GetFile getFile) throws Exception {
         if(getFile == null) {
@@ -133,8 +136,9 @@ public class UserGetFileController {
     /**
      * 根据id删除单条记录
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/delGetFile")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String delGetFile(String gfid) throws Exception {
         HashMap<String,Integer> map = new HashMap<>();
@@ -172,8 +176,9 @@ public class UserGetFileController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
+//    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/selectGetFileById/{gfid}")
+    @RequiresRoles(value = "admin")
     @ResponseBody
     public String selectGetFileById(@PathVariable int gfid) throws Exception{
         if (userGetFileService.selectGetFileById(gfid) != null) {
@@ -187,7 +192,7 @@ public class UserGetFileController {
     }
 
     /**
-     * 查看被删除的发文
+     * 查看被删除的收文
      * @return
      * @throws Exception
      */
