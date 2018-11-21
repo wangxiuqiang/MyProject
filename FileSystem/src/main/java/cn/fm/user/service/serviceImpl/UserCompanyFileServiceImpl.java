@@ -7,6 +7,8 @@ import cn.fm.user.dao.UserCompanyFileMapper;
 import cn.fm.user.service.UserCompanyFileService;
 import cn.fm.user.service.UserService;
 import cn.fm.utils.DateToStringUtils;
+import cn.fm.vo.BorrowCFExtends;
+import cn.fm.vo.CompanyFileExtends;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     @Autowired
     UserCompanyFileMapper userCompanyFileMapper;
 
-
+    @Autowired
+    UserService userService;
     /**
      * 录入信息
      * @param companyFile
@@ -104,42 +107,65 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      */
     @Override
     public List<CompanyFile> findTypeFiles(CompanyFile companyFile , String endtime ) throws Exception {
-
+        //先找到文件信息,然后根据文件的id找到文件的借阅信息,并将借阅信息写入
+        List<CompanyFile> companyFiles = new ArrayList<>();
+        //用来做返回数据
+        List<CompanyFileExtends> companyFileExtends = new ArrayList<>();
 
         if(companyFile.getCfname() != null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
-            return selectCompanyFileByName(companyFile.getCfname());
-
-
+            companyFiles = selectCompanyFileByName(companyFile.getCfname());
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() != 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
-            return selectCompanyFileByClassifyId(companyFile.getCfclassifyid());
+            companyFiles = selectCompanyFileByClassifyId(companyFile.getCfclassifyid());
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() != null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
-          return   selectCompanyFileByLanguage(companyFile.getCflanguage());
+            companyFiles = selectCompanyFileByLanguage(companyFile.getCflanguage());
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() != null && endtime != null && companyFile.getCffontid() == null) {
 
-            return selectCompanyFileByDateTime(companyFile.getCfdate() , endtime);
+            companyFiles = selectCompanyFileByDateTime(companyFile.getCfdate() , endtime);
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() != null){
 
-           return selectCompanyFileByFontid(companyFile.getCffontid());
+            companyFiles = selectCompanyFileByFontid(companyFile.getCffontid());
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null){
            return  null;
         }else {
-            return selectCompanyFileByTwoOrMore(companyFile , endtime );
+            companyFiles = selectCompanyFileByTwoOrMore(companyFile , endtime );
         }
+        /**
+         * 将 指定领取人和 实际领取人的用户名和用户编号放到文件类中
+         */
+        companyFiles.forEach( n -> {
+            try {
+                //根据文件id,获取到该文件的被借阅历史.
+                List<BorrowCFExtends> borrowCFExtends = userService.selectBorrowcfInfoByFileid( n.getCfid() );
+                for (BorrowCFExtends borrowCFExtend : borrowCFExtends) {
+                    if( borrowCFExtend.getUser() != null ) {
+                        n.setUid( borrowCFExtend.getUser().getUid() );
+                        n.setUname( borrowCFExtend.getUser().getUname() );
+                    }
+                    if( borrowCFExtend.getUserSecond() != null ) {
+                        n.setSecondUid( borrowCFExtend.getUserSecond().getUid() );
+                        n.setSecondName( borrowCFExtend.getUserSecond().getUname() );
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        return  companyFiles;
 
     }
 

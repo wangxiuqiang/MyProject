@@ -6,6 +6,46 @@ import java.util.List;
 public class CompanyFile {
 
     /**
+     * 领取人和领取人的id,以及指定领取人和他的id
+     */
+    private int uid;
+    private String uname;
+    private int secondUid;
+    private String secondName;
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public String getUname() {
+        return uname;
+    }
+
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
+
+    public int getSecondUid() {
+        return secondUid;
+    }
+
+    public void setSecondUid(int secondUid) {
+        this.secondUid = secondUid;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    /**
      * 用来区分两种文件 type = 1
      */
     private int type;

@@ -8,12 +8,23 @@ import java.util.List;
 
 public class BorrowCFExtends {
 
+    //  设定的领取人
     private User user;
     private CompanyFile companyFile;
     private String backtime;
     private String borrowtime;
     private String sholdback;
     private String givetime;
+    //真实领取人
+    private User userSecond;
+
+    public User getUserSecond() {
+        return userSecond;
+    }
+
+    public void setUserSecond(User userSecond) {
+        this.userSecond = userSecond;
+    }
 
     public String getSholdback() {
         return sholdback;

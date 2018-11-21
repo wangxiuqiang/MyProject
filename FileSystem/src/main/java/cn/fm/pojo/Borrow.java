@@ -9,6 +9,15 @@ public class Borrow {
     private String givetime;
     private String shouldback;
     private int wid;
+    private int secondUid;
+
+    public int getSecondUid() {
+        return secondUid;
+    }
+
+    public void setSecondUid(int secondUid) {
+        this.secondUid = secondUid;
+    }
 
     public String getGivetime() {
         return givetime;

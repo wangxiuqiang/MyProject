@@ -37,6 +37,10 @@ public class GetFile {
     private String gfpartnumber;
     //传阅人
     private String gfpersonRead;
+    //用来保存传阅人的用户id
+    private int[] gfpersonReadIds;
+    //用来保存传阅人的姓名
+    private String[] gfpersonReadNames;
     private String gfresult;
 //    private int gfclassifyid;
 //    @NotNull(message = "{getfile.classifyname.isnull}")
@@ -46,6 +50,7 @@ public class GetFile {
     @NotNull(message = "{getfile.number.isnull}")
     //收文号
     private String gfnumber;
+
     /**
      * 是不是借出
      */
@@ -153,6 +158,21 @@ public class GetFile {
         this.state = state;
     }
 
+    public String[] getGfpersonReadNames() {
+        return gfpersonReadNames;
+    }
+
+    public void setGfpersonReadNames(String[] gfpersonReadNames) {
+        this.gfpersonReadNames = gfpersonReadNames;
+    }
+
+    public int[] getGfpersonReadIds() {
+        return gfpersonReadIds;
+    }
+
+    public void setGfpersonReadIds(int[] gfpersonReadIds) {
+        this.gfpersonReadIds = gfpersonReadIds;
+    }
 //    @Override
 //    public String toString() {
 //        return "GetFile{" +

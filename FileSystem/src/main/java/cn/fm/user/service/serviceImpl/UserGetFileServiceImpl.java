@@ -1,9 +1,7 @@
 package cn.fm.user.service.serviceImpl;
 
-import cn.fm.pojo.Borrow;
-import cn.fm.pojo.Classify;
-import cn.fm.pojo.CompanyFile;
-import cn.fm.pojo.GetFile;
+import cn.fm.admin.dao.AdminMapper;
+import cn.fm.pojo.*;
 import cn.fm.user.dao.UserGetFileMapper;
 import cn.fm.user.service.UserGetFileService;
 import cn.fm.utils.DateToStringUtils;
@@ -22,7 +20,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     @Autowired
     UserGetFileMapper userGetFileMapper;
 
-
+    @Autowired
+    AdminMapper adminMapper;
 
     /**
      *查找分类信息
@@ -162,11 +161,10 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     @Override
     public List<GetFile> findTypeFiles(GetFile getFile , String endtime ) throws Exception {
 //&& getFile.getGfclassifyid() == 0
+        List<GetFile> getFiles = new ArrayList<>();
         if(getFile.getGfname() != null  && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
-            return   selectGetFileByName(getFile.getGfname());
-
-
+            getFiles = selectGetFileByName(getFile.getGfname());
         }
 //        else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
 //                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
@@ -176,23 +174,42 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 //        }
         else if(getFile.getGfname() == null  && getFile.getGfcompany() != null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
-            return selectGetFileByCompany(getFile.getGfcompany());
+            getFiles = selectGetFileByCompany(getFile.getGfcompany());
 
         }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() != null && endtime !=null && getFile.getGfnumber() == null) {
 
-            return selectGetFileByDateTime(getFile.getGfdatetime() ,endtime);
+            getFiles = selectGetFileByDateTime(getFile.getGfdatetime() ,endtime);
         }else if(getFile.getGfname() == null && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() != null){
-           return  selectGetFileByNumber(getFile.getGfnumber());
+           getFiles =  selectGetFileByNumber(getFile.getGfnumber());
 
         }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == null){
              return  null;
         }else {
             //多项查询
-          return selectGetFileByTwoAndMore(getFile ,endtime);
+          getFiles = selectGetFileByTwoAndMore(getFile ,endtime);
         }
+
+        getFiles.forEach( n -> {
+            //将用编号隔开的userId取出来
+            String []reads = n.getGfpersonRead().split(",");
+            if( reads != null && reads.length > 0 ) {
+                String[] names = new String[20];
+                for (int i = 0  ; i < reads.length; i++ ) {
+                    n.getGfpersonReadIds()[i] = Integer.parseInt( reads[i]);
+                    try {
+                        User user = adminMapper.findWorkerById(  n.getGfpersonReadIds()[i] );
+                        names[i] = user.getUname();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                n.setGfpersonReadNames(names);
+            }
+        });
+        return getFiles;
     }
 
     @Override
@@ -243,7 +260,27 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     @Override
     public List<GetFile> selectAllGetFile() throws Exception {
 //        return selectAllClassifyId(userGetFileMapper.selectAllGetFile());
-        return userGetFileMapper.selectAllGetFile();
+        List<GetFile> getFiles = userGetFileMapper.selectAllGetFile();
+
+        getFiles.forEach( n -> {
+            //将用编号隔开的userId取出来
+            String []reads = n.getGfpersonRead().split(",");
+            if( reads != null && reads.length > 0 ) {
+                String[] names = new String[20];
+                for (int i = 0  ; i < reads.length; i++ ) {
+                    n.getGfpersonReadIds()[i] = Integer.parseInt( reads[i]);
+                    try {
+                        User user = adminMapper.findWorkerById(  n.getGfpersonReadIds()[i] );
+                        names[i] = user.getUname();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                n.setGfpersonReadNames(names);
+            }
+        });
+
+        return getFiles;
     }
     /**
      * 通过两个或以上进行查询

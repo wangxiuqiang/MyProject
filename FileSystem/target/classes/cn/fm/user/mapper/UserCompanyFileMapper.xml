@@ -56,7 +56,7 @@
     <select id="selectCompanyFileByLanguage" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cflanguage = #{value}
+        from companyFile where cflanguage = #{value} and state = 1
     </select>
     <!--
 

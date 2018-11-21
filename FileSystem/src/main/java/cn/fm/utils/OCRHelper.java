@@ -18,7 +18,6 @@ public class OCRHelper {
         String cmd = "convert " + filename + " -scale 150% " + filename;
         Process process = Runtime.getRuntime().exec( cmd );
         return process.waitFor();
-
     }
     /**
      * 用来ocr识别之后返回一个getFile

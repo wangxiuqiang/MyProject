@@ -70,6 +70,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectUserId(name);
     }
 
+    /**
+     * 将日期延长1天
+     * @return
+     * @throws Exception
+     */
+
     public String dateAddToTomorrow() throws Exception {
         long time = System.currentTimeMillis();
         long timeTomorrow = 24 * 60 * 60 * 1000;
@@ -100,7 +106,8 @@ public class UserServiceImpl implements UserService {
 //            if(isBorrow[j] == 2) {
 //                return -5;
 //            }
-            borrow.setUid(uid);
+        //领取人的id
+            borrow.setSecondUid(uid);
             borrow.setWid(wid);
             borrow.setFileid(cfid);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
@@ -134,7 +141,8 @@ public class UserServiceImpl implements UserService {
             return -5;
         }
         borrow.setWid(wid);
-        borrow.setUid(uid);
+        //领取人的id
+        borrow.setSecondUid(uid);
             borrow.setFileid(gfid);
             borrow.setBorrowtime(DateToStringUtils.dataTostring());
             //设置为24小时之后为归还日期
@@ -167,6 +175,10 @@ public class UserServiceImpl implements UserService {
                     System.out.println(n.getUid() + "``````````````````````````````````````");
                     User user = adminMapper.findWorkerById(n.getUid());
                     bcfe.setUser(user);
+                    if( n.getSecondUid() != 0 ) {
+                        user = adminMapper.findWorkerById( n.getSecondUid() );
+                        bcfe.setUserSecond( user );
+                    }
                     bcfe.setCompanyFile(cf);
                     bcfe.setBorrowtime(n.getBorrowtime());
                     bcfe.setBacktime(n.getBacktime());
@@ -185,8 +197,8 @@ public class UserServiceImpl implements UserService {
             });
             return bcf;
         }
-        //找到用户信息
-        User user = adminMapper.findWorkerById(uid);
+
+
         //根据用户id找到借阅的文件信息
         List<Borrow> cs = userMapper.selectBorrowcfById(uid);
         List<BorrowCFExtends> bcf = new ArrayList<BorrowCFExtends>();
@@ -194,7 +206,13 @@ public class UserServiceImpl implements UserService {
             try {
                 BorrowCFExtends bcfe = new BorrowCFExtends();
                 CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(n.getFileid());
+                User user = adminMapper.findWorkerById(uid);
                 bcfe.setUser(user);
+                //找到用户信息
+                if( n.getSecondUid() != 0 ) {
+                    user = adminMapper.findWorkerById( n.getSecondUid() );
+                    bcfe.setUserSecond( user );
+                }
                 bcfe.setCompanyFile(cf);
                 bcfe.setBorrowtime(n.getBorrowtime());
                 bcfe.setBacktime(n.getBacktime());
@@ -288,12 +306,17 @@ public class UserServiceImpl implements UserService {
         CompanyFile companyFile = userCompanyFileMapper.selectCompanyFileById(fileid);
         borrows.forEach(n -> {
             try {
-                BorrowCFExtends bcf = new BorrowCFExtends();
+              BorrowCFExtends bcf = new BorrowCFExtends();
               User user = adminMapper.findWorkerById(n.getUid());
               bcf.setBacktime(n.getBacktime());
               bcf.setBorrowtime(n.getBorrowtime());
               bcf.setCompanyFile(companyFile);
               bcf.setUser(user);
+                //找到用户信息
+                if( n.getSecondUid() != 0 ) {
+                    user = adminMapper.findWorkerById( n.getSecondUid() );
+                    bcf.setUserSecond( user );
+                }
               bcfes.add(bcf);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -488,7 +511,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 根据用户id查找没有领取的文件
+     * 根据用户部门id查找没有领取的文件
      * @param uid
      * @return
      * @throws Exception
