@@ -1,9 +1,9 @@
 cn/fm/utils/MysqlRecoverUtils.class
 cn/fm/user/controller/UserController.class
 cn/fm/vo/GetFileExtends.class
+cn/fm/utils/TestOCR.class
 cn/fm/user/service/serviceImpl/UserGetFileServiceImpl.class
 cn/fm/user/service/serviceImpl/UserCompanyFileServiceImpl.class
-cn/fm/user/controller/UserRegController.class
 cn/fm/pojo/Level.class
 cn/fm/utils/CheckImgServlet.class
 cn/fm/utils/MailUtils.class
@@ -21,7 +21,6 @@ cn/fm/pojo/Role.class
 cn/fm/pojo/Classify.class
 cn/fm/user/dao/UserGetFileMapper.class
 cn/fm/admin/service/serviceImpl/AdminServiceImpl.class
-cn/fm/user/service/UserRegService.class
 cn/fm/utils/PassWordHelper.class
 cn/fm/pojo/GetFile.class
 cn/fm/user/service/UserService.class
@@ -32,7 +31,6 @@ cn/fm/pojo/Permission.class
 cn/fm/admin/dao/AdminMapper.class
 cn/fm/user/dao/UserCompanyFileMapper.class
 cn/fm/utils/RmFileUtils.class
-cn/fm/user/service/serviceImpl/UserRegServiceImpl.class
 cn/fm/vo/BorrowCFExtends.class
 cn/fm/user/dao/UserMapper.class
 cn/fm/ExceptionHandler/ExceptionHandlers.class

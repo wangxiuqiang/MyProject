@@ -431,22 +431,22 @@ public class UserServiceImpl implements UserService {
     /***
      * 根据邮箱找到自己的信息 ,包括其中的角色和权限信息
      */
-    @Override
-    public UserExtend selectMySelf(String email) throws Exception{
-
-        User user = adminMapper.findUserByEmail(email);
-        UserExtend userEd = adminService.findWorkerById(user.getUid());
-        return userEd;
-    }
+//    @Override
+//    public UserExtend selectMySelf(String email) throws Exception{
+//
+//        User user = adminMapper.findUserByEmail(email);
+//        UserExtend userEd = adminService.findWorkerById(user.getUid());
+//        return userEd;
+//    }
 
 
     /**
      * 根据code 查找用户的录入时间
      */
-    @Override
-    public String selectUserupdatetime(String code) throws Exception{
-        return userMapper.selectUserupdatetime(code);
-    }
+//    @Override
+//    public String selectUserupdatetime(String code) throws Exception{
+//        return userMapper.selectUserupdatetime(code);
+//    }
 
     /**
      * 查看是不是 被借出去了

@@ -3,13 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fm.user.dao.UserMapper">
-    <select id="selectState" resultType="java.lang.Exception" parameterType="java.lang.String">
-        select state from user where code = #{code}
-    </select>
+    <!--<select id="selectState" resultType="java.lang.Exception" parameterType="java.lang.String">-->
+        <!--select state from user where code = #{code}-->
+    <!--</select>-->
 
-    <update id="updateUserpwd"  >
-        update user set upwd = #{arg0} ,state = 1 where code = #{arg1}
-    </update>
+    <!--<update id="updateUserpwd"  >-->
+        <!--update user set upwd = #{arg0} ,state = 1 where code = #{arg1}-->
+    <!--</update>-->
     <!--根据用户的姓名 ,单位等信息,查找id-->
     <select id="selectUserId" parameterType="cn.fm.pojo.User" resultType="cn.fm.pojo.User">
         select uid,uname,ucompany,uemail,ifAdmin,uupdatetime,state from user
@@ -24,13 +24,13 @@
 
     <!--添加借阅信息 ,同步更新需要归还的时间 和领取人-->
     <update id="insertBorrowcfInfo" parameterType="cn.fm.pojo.Borrow" >
-        update borrow_companyFile set borrowtime = #{borrowtime} , shouldback = #{shuldback} , uid = #{uid} where wid = #{wid} and fileid = #{fileid} and borrowtime=null
+        update borrow_companyFile set borrowtime = #{borrowtime} , shouldback = #{shuldback} , secondUid = #{secondUid} where wid = #{wid} and fileid = #{fileid} and borrowtime=null
         and shouldback=null
     </update>
 
     <!--添加借阅信息 ,同步更新需要归还的时间 ,和领取人-->
     <update id="insertBorrowgfInfo" parameterType="cn.fm.pojo.Borrow" >
-        update borrow_getFile set borrowtime = #{borrowtime} , shouldback = #{shuldback},uid = #{uid}  where wid = #{wid} and fileid = #{fileid} and borrowtime=null
+        update borrow_getFile set borrowtime = #{borrowtime} , shouldback = #{shuldback},secondUid = #{secondUid}  where wid = #{wid} and fileid = #{fileid} and borrowtime=null
         and shouldback=null
     </update>
 
@@ -174,9 +174,9 @@
     </update>
     <!--待分配接口 录入借阅信息-->
     <insert id="insertcfWaitBorrowInfo" parameterType="cn.fm.pojo.Borrow">
-        insert into borrow_companyFile(wid,fileid,givetime) VALUES (#{wid},#{fileid}, #{givetime})
+        insert into borrow_companyFile(wid,fileid,givetime,uid) VALUES (#{wid},#{fileid}, #{givetime},#{uid})
     </insert>
     <insert id="insertgfWaitBorrowInfo" parameterType="cn.fm.pojo.Borrow">
-        insert into borrow_getFile(wid,fileid,givetime) VALUES (#{wid},#{fileid}, #{givetime})
+        insert into borrow_getFile(wid,fileid,givetime,uid) VALUES (#{wid},#{fileid}, #{givetime},#{uid})
     </insert>
 </mapper>

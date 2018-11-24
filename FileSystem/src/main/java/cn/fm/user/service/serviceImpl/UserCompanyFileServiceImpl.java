@@ -110,7 +110,7 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
         //先找到文件信息,然后根据文件的id找到文件的借阅信息,并将借阅信息写入
         List<CompanyFile> companyFiles = new ArrayList<>();
         //用来做返回数据
-        List<CompanyFileExtends> companyFileExtends = new ArrayList<>();
+//        List<CompanyFileExtends> companyFileExtends = new ArrayList<>();
 
         if(companyFile.getCfname() != null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {

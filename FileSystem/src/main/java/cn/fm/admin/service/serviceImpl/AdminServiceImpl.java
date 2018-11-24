@@ -52,8 +52,8 @@ public class AdminServiceImpl implements AdminService{
 //    }
 
     @Override
-    public User findUserByEmail(String uemail) throws Exception {
-        return adminMapper.findUserByEmail(uemail);
+    public User findUserByUaccount(String  uaccount) throws Exception {
+        return adminMapper.findUserByUaccount(uaccount);
     }
 
     /**

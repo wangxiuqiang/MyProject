@@ -4,66 +4,66 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.fm.user.dao.UserGetFileMapper">
     <sql id="Base_Columns_List">
-        gfid,gfname , gfidea, gfloader,gffrom,gettime ,gflevel,waitborrow,back,
+        gfid,gfname , gfidea, gfloader,gffrom,gettime ,gflevel,waitborrow,back
          ,gfcompany, gfresult, gfdatetime,gfnumber,type,isborrow,gfpartnumber,gfpersonRead,state,backDate
     </sql>
 
-      <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile" >
-          insert into getFile(gfname,gfdatetime,gfnumber,gffrom,gftime,gflevel,gfpartnumber
+    <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile">
+          insert into getFile(gfname,gfdatetime,gfnumber,gffrom,gettime,gflevel,gfpartnumber
           gfidea,gfresult,gfloader,gfcompany) values(#{gfname},#{gfdatetime},#{gfnumber},
           #{gffrom} ,#{gftime},#{gflevel},#{gfpartnumber},#{gfidea},
           #{gfresult}, #{gfloader},#{gfcompany})
       </insert>
 
-      <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
+    <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
           select cyid,cyname,cyfatherid,cyaddress from classify WHERE cyid = #{value}
       </select>
 
     <select id="selectGetFileById" parameterType="int" resultType="cn.fm.pojo.GetFile">
         select
-        <include refid="Base_Columns_List" />
+        <include refid="Base_Columns_List"/>
         from getFile where gfid = #{gfid} and state=1
     </select>
 
-     <select id="selectGetFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
-         select
-         <include refid="Base_Columns_List" />
-         from getFile where gfname like concat(concat('%',#{value}), '%') and state=1
-     </select>
+    <select id="selectGetFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile where gfname like concat(concat('%',#{value}), '%') and state=1
+    </select>
 
     <select id="selectGetFileByCompany" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
-         select
-         <include refid="Base_Columns_List"/>
-         from getFile where gfcompany = #{value} and state=1
-     </select>
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile where gfcompany = #{value} and state=1
+    </select>
 
     <select id="selectGetFileByClassifyId" parameterType="java.lang.Integer" resultType="cn.fm.pojo.GetFile">
         select
-         <include refid="Base_Columns_List" />
+        <include refid="Base_Columns_List"/>
         from getFile where gfclassifyid = #{value} and state=1
     </select>
 
 
     <select id="selectGetFileByDateTime" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
         select
-        <include refid="Base_Columns_List" />
+        <include refid="Base_Columns_List"/>
         from getFile where gfdatetime &gt;= #{gfdateime} AND gfdatetime &lt;= #{endtime} and state=1
     </select>
 
     <select id="selectGetFileByNumber" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
         select
-        <include refid="Base_Columns_List" />
+        <include refid="Base_Columns_List"/>
         from getFile where gfnumber = #{value} and state=1
     </select>
 
     <!--多项查询-->
     <select id="selectGetFileByTwoAndMore" resultType="cn.fm.pojo.GetFile">
         select
-        <include refid="Base_Columns_List" />
+        <include refid="Base_Columns_List"/>
         from getFile
         <where>
             <if test="getFile.gfnumber != 0">
-                 gfnumber = #{getFile.gfnumber}
+                gfnumber = #{getFile.gfnumber}
             </if>
             <if test="getFile.gfcompany != null">
                 and gfcompany = #{getFile.gfcompany}
@@ -80,68 +80,58 @@
 
 
     </select>
-   <!--
+    <!--
 
 
-  -->
+   -->
     <select id="selectAllGetFile" resultType="cn.fm.pojo.GetFile">
-         select
-         <include refid="Base_Columns_List" />
+        select
+        <include refid="Base_Columns_List"/>
         from getFile where state=1
     </select>
 
     <!--更新 -->
     <update id="updateGetFileById" parameterType="cn.fm.pojo.GetFile">
-       update getFile
+        update getFile
         <set>
-       <if test="gfname != null" >
-           gfname = #{gfname} ,
-       </if>
-        <if test="gfidea != null" >
-            gfidea = #{gfidea} ,
-        </if>
-        <if test="gfloader != null" >
-            gfloader = #{gfloader},
-        </if>
-        <if test="gfcompany != null" >
-            gfcompany = #{gfcompany},
-        </if>
-        <if test="gfresult != null" >
-            gfresult = #{gfresult},
-        </if>
-            <if test="gffrom != null" >
+            <if test="gfname != null">
+                gfname = #{gfname} ,
+            </if>
+            <if test="gfidea != null">
+                gfidea = #{gfidea} ,
+            </if>
+            <if test="gfloader != null">
+                gfloader = #{gfloader},
+            </if>
+            <if test="gfcompany != null">
+                gfcompany = #{gfcompany},
+            </if>
+            <if test="gfresult != null">
+                gfresult = #{gfresult},
+            </if>
+            <if test="gfdatetime != null">
+                gfdatetime = #{gfdatetime},
+            </if>
+            <if test="gfnumber != null">
+                gfnumber = #{gfnumber},
+            </if>
+            <if test="isborrow != 0">
+                isborrow = #{isborrow},
+            </if>
+            <if test="gffrom != null">
                 gffrom = #{gffrom},
             </if>
-            <if test="gflevel != null" >
+            <if test="gflevel != null">
                 gflevel = #{gflevel},
             </if>
-            <if test="gftime != null" >
-                gftime = #{gftime},
+            <if test="gettime != null">
+                gettime = #{gettime},
             </if>
-            <if test="gfpartnumber != null" >
-                gfpartnumber = #{gfpartnumber},
+            <if test="gfpartnumber != null">
+                gfpartnumber = #{gfpartnumber}
             </if>
-        <!--<if test="gfclassifyid != 0">-->
-            <!--gfclassifyid = #{gfclassifyid},-->
-        <!--</if>-->
-        <!--<if test="gfclassifyname != null" >-->
-            <!--gfclassifyname = #{gfclassifyname},-->
-        <!--</if>-->
-        <!--<if test="gfaddress != null" >-->
-            <!--gfaddress = #{gfaddress},-->
-        <!--</if>-->
-
-        <if test="gfdatetime != null" >
-            gfdatetime = #{gfdatetime},
-        </if>
-        <if test="gfnumber != 0" >
-            gfnumber = #{gfnumber},
-        </if>
-        <if test="isborrow != 0">
-            isborrow = #{isborrow}
-        </if>
         </set>
-       where gfid = #{gfid}
+        where gfid = #{gfid}
     </update>
 
     <!--查询这个文件的借阅信息是不是存在-->
@@ -163,13 +153,13 @@
     </update>
 
     <!--查看被删除的文件-->
-    <select id="selectTheGFileIsDel" resultType="cn.fm.pojo.GetFile" >
+    <select id="selectTheGFileIsDel" resultType="cn.fm.pojo.GetFile">
         select
-        <include refid="Base_Columns_List" />
+        <include refid="Base_Columns_List"/>
         from companyFile where state = 0
     </select>
     <!--清退一个文件-->
-    <update id="delGetFileBack" >
-        UPDATE getFile SET back = 1 , backDate = #{backDate} where gfid = #{gfid}
+    <update id="delGetFileBack">
+        UPDATE getFile SET back = 1 , backDate = #{backDate} where gfid = #{gfid} and state = 1
     </update>
 </mapper>

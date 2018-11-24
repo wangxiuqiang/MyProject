@@ -13,9 +13,9 @@
     <!--</insert>-->
 
 
-    <!--<select id="findUserByEmail" parameterType="String" resultType="cn.fm.pojo.User">-->
-        <!--select uid,uemail,upwd,state from user where uemail = #{uemail}-->
-    <!--</select>-->
+    <select id="findUserByUaccount" parameterType="String" resultType="cn.fm.pojo.User">
+        select uid,uaccount,upwd,state from user where uaccount = #{uaccount}
+    </select>
     <insert id="addUser" parameterType="cn.fm.vo.UserExtend" >
         insert into user(uname,ucompany,wid,uupdatetime,ifAdmin,uphone,unumber )
         values(#{uname},#{ucompany},#{wid},#{uupdatetime},#{ifAdmin},#{uphone},#{unumber})
@@ -32,7 +32,7 @@
          <!--insert into user_roles(uid,pid) VALUES(#{uid},#{pid})-->
     <!--</insert>-->
     <!--查找工作的单位-->
-    <select id="selectWorkPlace" resultType="cn.fm.pojo.WorkPlace">
+    <select id="selectWorkPlace" resultType="cn.fm.pojo.WorkPlace" >
         select wid ,wname from workPlace;
     </select>
     <!--查找用户是不是存在-->

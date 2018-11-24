@@ -170,12 +170,12 @@
     </select>
 
     <!--销毁一个文件-->
-    <update id="delCompanyFileDestroy" parameterType="java.lang.Integer" >
-        UPDATE companyFile SET destroy = 0 , destroyDate = #{destroyDate} where cfid = #{cfid}
+    <update id="delCompanyFileDestroy"   >
+        UPDATE companyFile SET destroy = 0 , destroyDate = #{destroyDate} where cfid = #{cfid} and state = 1
     </update>
     <!--清退一个文件 修改清退文件的日期-->
     <update id="delCompanyFileBack" >
-        UPDATE companyFile SET back = 1,backDate=#{backDate} where cfid = #{cfid}
+        UPDATE companyFile SET back = 1,backDate=#{backDate} where cfid = #{cfid} and state = 1
     </update>
 
 </mapper>

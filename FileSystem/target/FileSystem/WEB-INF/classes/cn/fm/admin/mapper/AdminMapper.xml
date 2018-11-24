@@ -13,9 +13,9 @@
     <!--</insert>-->
 
 
-    <!--<select id="findUserByEmail" parameterType="String" resultType="cn.fm.pojo.User">-->
-        <!--select uid,uemail,upwd,state from user where uemail = #{uemail}-->
-    <!--</select>-->
+    <select id="findUserByUaccount" parameterType="String" resultType="cn.fm.pojo.User">
+        select uid,uaccount,upwd,state from user where uaccount = #{uaccount}
+    </select>
     <insert id="addUser" parameterType="cn.fm.vo.UserExtend" >
         insert into user(uname,ucompany,wid,uupdatetime,ifAdmin,uphone,unumber )
         values(#{uname},#{ucompany},#{wid},#{uupdatetime},#{ifAdmin},#{uphone},#{unumber})
@@ -32,20 +32,20 @@
          <!--insert into user_roles(uid,pid) VALUES(#{uid},#{pid})-->
     <!--</insert>-->
     <!--查找工作的单位-->
-    <select id="selectWorkPlace" resultType="cn.fm.pojo.WorkPlace">
+    <select id="selectWorkPlace" resultType="cn.fm.pojo.WorkPlace" >
         select wid ,wname from workPlace;
     </select>
     <!--查找用户是不是存在-->
-    <select id="selectEmailIfExist" parameterType="java.lang.String" resultType="java.lang.String">
-        select uemail from user where uemail = #{uemail};
-    </select>
+    <!--<select id="selectEmailIfExist" parameterType="java.lang.String" resultType="java.lang.String">-->
+        <!--select uemail from user where uemail = #{uemail};-->
+    <!--</select>-->
 
     <select id="findAllWorker" resultType="cn.fm.pojo.User">
-        select uid,uname,ucompany,uupdatetime,uemail,state,ifAdmin from user
+        select uid,uname,ucompany,uupdatetime,uphone,wid,unumber,state,ifAdmin,uaccount,uworkname from user
     </select>
 
     <select id="findWorkerById" resultType="cn.fm.pojo.User">
-        select uid,uname,ucompany,uupdatetime,uemail,state,ifAdmin from user where uid = #{id}
+        select uid,uname,ucompany,uupdatetime,uphone,wid,unumber,state,ifAdmin,uaccount,uworkname from user where uid = #{id}
     </select>
 
     <update id="deleteWorkerById" parameterType="int">
@@ -67,15 +67,30 @@
             <if test="uname != null">
                 uname = #{uname} ,
             </if>
+            <if test="uaccount != null">
+                uaccount = #{uaccount} ,
+            </if>
             <if test="ucompany != null">
                 ucompany = #{ucompany},
+            </if>
+            <if test="uworkname != null">
+                uworkname = #{uworkname},
+            </if>
+            <if test="wid != 0">
+                wid = #{wid},
+            </if>
+            <if test="unumber != null">
+                unumber = #{unumber},
+            </if>
+            <if test="uphone != null">
+                uphone = #{uphone},
             </if>
             <if test="state != 0">
                 state = #{state},
             </if>
-            <if test="uemail != null">
-                uemail = #{uemail},
-            </if>
+            <!--<if test="uemail != null">-->
+                <!--uemail = #{uemail},-->
+            <!--</if>-->
             <if test="upwd != null">
                 upwd = #{upwd}
             </if>

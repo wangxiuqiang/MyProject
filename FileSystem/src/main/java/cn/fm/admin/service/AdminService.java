@@ -23,7 +23,7 @@ public interface AdminService {
      *  用于登录
      */
 
-    public User findUserByEmail(String uemail) throws Exception;
+    public User findUserByUaccount(String uaccount) throws Exception;
     /**
      * 插入一个用户
      */

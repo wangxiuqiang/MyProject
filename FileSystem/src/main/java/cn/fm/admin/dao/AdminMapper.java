@@ -23,7 +23,7 @@ public interface AdminMapper {
      * 用于登录
      */
 
-    public User findUserByEmail(String uemail) throws Exception;
+    public User findUserByUaccount( @Param(value = "uaccount") String uaccount) throws Exception;
     /**
      * 写入一个用户
      */

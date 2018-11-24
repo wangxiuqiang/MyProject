@@ -22,11 +22,11 @@ public class MyRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String email = (String) principals.getPrimaryPrincipal();
+        String uaccount = (String) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
 
         try {
-            user = adminService.findUserByEmail(email);
+            user = adminService.findUserByUaccount(uaccount);
 //            System.out.println(adminService.findPermissions(user.getUid())+"----------------------");
 //            System.out.println(adminService.findPermissions(user.getUid())+"``````````````````````");
             simpleAuthorizationInfo.setStringPermissions(adminService.findPermissions(user.getUid()));
@@ -41,11 +41,11 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 //        获取token中的信息
-         String email  = (String)token.getPrincipal();
+         String uaccount  = (String)token.getPrincipal();
 //         System.out.println(email + "-----------------------------------------");
 // 从数据库中获取相应的内容
         try {
-          user  = adminService.findUserByEmail(email);
+          user  = adminService.findUserByUaccount(uaccount);
         } catch (Exception e) {
             e.printStackTrace();
         }

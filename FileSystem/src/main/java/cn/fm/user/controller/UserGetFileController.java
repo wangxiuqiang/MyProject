@@ -122,6 +122,7 @@ public class UserGetFileController {
             map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
             return JSON.toJSONString(map);
         }
+        System.out.println( getFile.getGfid() + "------" +getFile.getGfname() );
         if(userGetFileService.updateGetFileById(getFile) != 0) {
             HashMap<String,Integer> map = new HashMap<>();
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);

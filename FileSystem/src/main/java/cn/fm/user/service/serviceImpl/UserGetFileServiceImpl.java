@@ -193,21 +193,26 @@ public class UserGetFileServiceImpl implements UserGetFileService{
         }
 
         getFiles.forEach( n -> {
-            //将用编号隔开的userId取出来
-            String []reads = n.getGfpersonRead().split(",");
-            if( reads != null && reads.length > 0 ) {
-                String[] names = new String[20];
-                for (int i = 0  ; i < reads.length; i++ ) {
-                    n.getGfpersonReadIds()[i] = Integer.parseInt( reads[i]);
-                    try {
-                        User user = adminMapper.findWorkerById(  n.getGfpersonReadIds()[i] );
-                        names[i] = user.getUname();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+            if( n.getGfpersonRead() != null ) {
+                //将用编号隔开的userId取出来
+                String []reads = n.getGfpersonRead().split(",");
+                if( reads != null && reads.length > 0 ) {
+                    int[] readIds = new int[reads.length];
+                    String[] names = new String[reads.length];
+                    for (int i = 0  ; i < reads.length; i++ ) {
+                        readIds[i] = Integer.parseInt( reads[i]);
+                        try {
+                            User user = adminMapper.findWorkerById(  readIds[i] );
+                            names[i] = user.getUname();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
+                    n.setGfpersonReadIds( readIds );
+                    n.setGfpersonReadNames(names);
                 }
-                n.setGfpersonReadNames(names);
             }
+
         });
         return getFiles;
     }
@@ -264,20 +269,26 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 
         getFiles.forEach( n -> {
             //将用编号隔开的userId取出来
-            String []reads = n.getGfpersonRead().split(",");
-            if( reads != null && reads.length > 0 ) {
-                String[] names = new String[20];
-                for (int i = 0  ; i < reads.length; i++ ) {
-                    n.getGfpersonReadIds()[i] = Integer.parseInt( reads[i]);
-                    try {
-                        User user = adminMapper.findWorkerById(  n.getGfpersonReadIds()[i] );
-                        names[i] = user.getUname();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+            if( n.getGfpersonRead() != null ) {
+                String []reads = n.getGfpersonRead().split(",");
+                if( reads != null && reads.length > 0 ) {
+                    String[] names = new String[reads.length];
+                    int[] readIds = new int[reads.length];
+                    for (int i = 0  ; i < reads.length; i++ ) {
+
+                     readIds[i] = Integer.parseInt( reads[i]);
+                        try {
+                            User user = adminMapper.findWorkerById( readIds[i] );
+                            names[i] = user.getUname();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
+                    n.setGfpersonReadIds( readIds );
+                    n.setGfpersonReadNames(names);
                 }
-                n.setGfpersonReadNames(names);
             }
+
         });
 
         return getFiles;
