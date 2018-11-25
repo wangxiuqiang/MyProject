@@ -198,7 +198,7 @@ public class UserGetFileController {
      * @throws Exception
      */
     @RequiresRoles(value = {"admin"} )
-    @RequestMapping(value = "/checkDelectGFile")
+    @RequestMapping(value = "/checkDeleteGFile")
     @ResponseBody
     public String checkDelectGFile() throws  Exception {
         List<GetFile> getFiles =  userGetFileService.selectTheGFileIsDel();

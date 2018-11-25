@@ -804,7 +804,6 @@ public class UserController {
             map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT );
         }
         return  JSON.toJSONString( map );
-
     }
 
 

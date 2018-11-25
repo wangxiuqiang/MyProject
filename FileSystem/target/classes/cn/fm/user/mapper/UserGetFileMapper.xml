@@ -9,9 +9,9 @@
     </sql>
 
     <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile">
-          insert into getFile(gfname,gfdatetime,gfnumber,gffrom,gettime,gflevel,gfpartnumber
+          insert into getFile(gfname,gfdatetime,gfnumber,gffrom,gettime,gflevel,gfpartnumber,
           gfidea,gfresult,gfloader,gfcompany) values(#{gfname},#{gfdatetime},#{gfnumber},
-          #{gffrom} ,#{gftime},#{gflevel},#{gfpartnumber},#{gfidea},
+          #{gffrom} ,#{gettime},#{gflevel},#{gfpartnumber},#{gfidea},
           #{gfresult}, #{gfloader},#{gfcompany})
       </insert>
 
@@ -156,7 +156,7 @@
     <select id="selectTheGFileIsDel" resultType="cn.fm.pojo.GetFile">
         select
         <include refid="Base_Columns_List"/>
-        from companyFile where state = 0
+        from getFile where state = 0
     </select>
     <!--清退一个文件-->
     <update id="delGetFileBack">

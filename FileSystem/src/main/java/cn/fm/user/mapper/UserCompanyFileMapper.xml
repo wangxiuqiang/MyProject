@@ -12,7 +12,7 @@
 
     <insert id="insertCompanyFile" parameterType="cn.fm.pojo.CompanyFile" >
         insert into companyFile(cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
-        cfsend,cflevel,cffontid,cfnumber,cflanguage,cfloader , leveltime,) values(#{cfname},
+        cfsend,cflevel,cffontid,cfnumber,cflanguage,cfloader , leveltime) values(#{cfname},
         #{cfclassifyid} ,#{cfclassifyname},#{cfaddress},#{cfdate},#{cfeditor},#{cfaccept},
         #{cfsend},#{cflevel},#{cffontid},#{cfnumber},#{cflanguage},#{cfloader}, #{leveltime})
     </insert>

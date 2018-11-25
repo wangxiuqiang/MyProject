@@ -167,10 +167,10 @@
 
     <!--待分配接口的文件,修改文件的waitborrow-->
     <update id="updatecfWaitBorrow" parameterType="java.lang.Integer" >
-        update companyFile set waitborrow = 1 where cfid = #{value}
+        update companyFile set waitborrow = 1 where cfid = #{gdif} and state = 1
     </update>
     <update id="updategfWaitBorrow" parameterType="java.lang.Integer" >
-        update getFile set waitborrow = 1 where gfid = #{value}
+        update getFile set waitborrow = 1 where gfid = #{gfid} and state = 1
     </update>
     <!--待分配接口 录入借阅信息-->
     <insert id="insertcfWaitBorrowInfo" parameterType="cn.fm.pojo.Borrow">

@@ -148,8 +148,8 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
-    public int updatecfWaitBorrow( int cfid ) throws Exception;
-    public int updategfWaitBorrow( int gfid ) throws Exception;
+    public int updatecfWaitBorrow(@Param(value = "cfid") int cfid ) throws Exception;
+    public int updategfWaitBorrow(@Param(value = "gfid") int gfid ) throws Exception;
 
     /**
      * 预分配的接口实现将预分配的文件信息录入

@@ -644,11 +644,18 @@ public class UserServiceImpl implements UserService {
         if( type == 2) {
             //收文
             result = updategfWaitBorrow( borrow.getFileid() );
-            result += insertgfWaitBorrowInfo( borrow );
+//            System.out.println( result );
+            if( result > 0) {
+                result = insertgfWaitBorrowInfo( borrow );
+            }
+
             return result;
         } else {
             result = updatecfWaitBorrow( borrow.getFileid() );
-            result += insertcfWaitBorrowInfo( borrow );
+//            System.out.println( result );
+            if( result > 0) {
+                result = insertcfWaitBorrowInfo( borrow );
+            }
             return result;
         }
     }
