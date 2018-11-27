@@ -159,12 +159,12 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @throws Exception
      */
     @Override
-    public List<GetFile> findTypeFiles(GetFile getFile , String endtime ) throws Exception {
+    public List<GetFile> findTypeFiles(GetFile getFile , String endtime ,int level ) throws Exception {
 //&& getFile.getGfclassifyid() == 0
         List<GetFile> getFiles = new ArrayList<>();
         if(getFile.getGfname() != null  && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
-            getFiles = selectGetFileByName(getFile.getGfname());
+            getFiles = selectGetFileByName(getFile.getGfname() ,level);
         }
 //        else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
 //                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
@@ -174,22 +174,22 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 //        }
         else if(getFile.getGfname() == null  && getFile.getGfcompany() != null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
-            getFiles = selectGetFileByCompany(getFile.getGfcompany());
+            getFiles = selectGetFileByCompany(getFile.getGfcompany() ,level);
 
         }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() != null && endtime !=null && getFile.getGfnumber() == null) {
 
-            getFiles = selectGetFileByDateTime(getFile.getGfdatetime() ,endtime);
+            getFiles = selectGetFileByDateTime(getFile.getGfdatetime() ,endtime ,level);
         }else if(getFile.getGfname() == null && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() != null){
-           getFiles =  selectGetFileByNumber(getFile.getGfnumber());
+           getFiles =  selectGetFileByNumber(getFile.getGfnumber() ,level);
 
         }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
                 && getFile.getGfdatetime() == null && getFile.getGfnumber() == null){
              return  null;
         }else {
             //多项查询
-          getFiles = selectGetFileByTwoAndMore(getFile ,endtime);
+          getFiles = selectGetFileByTwoAndMore(getFile ,endtime ,level);
         }
 
         getFiles.forEach( n -> {
@@ -218,14 +218,14 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     }
 
     @Override
-    public List<GetFile> selectGetFileByName(String gfname) throws Exception {
-        return userGetFileMapper.selectGetFileByName( gfname );
+    public List<GetFile> selectGetFileByName(String gfname ,int level) throws Exception {
+        return userGetFileMapper.selectGetFileByName(level, gfname );
 //        return selectAllClassifyId(userGetFileMapper.selectGetFileByName(gfname));
     }
 
     @Override
-    public List<GetFile> selectGetFileByCompany(String gfcompany) throws Exception {
-        return userGetFileMapper.selectGetFileByCompany(gfcompany);
+    public List<GetFile> selectGetFileByCompany(String gfcompany,int level) throws Exception {
+        return userGetFileMapper.selectGetFileByCompany(level,gfcompany);
 //        return selectAllClassifyId(userGetFileMapper.selectGetFileByCompany(gfcompany));
     }
 
@@ -236,15 +236,15 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 //    }
 
     @Override
-    public List<GetFile> selectGetFileByDateTime(String datetime, String endtime ) throws Exception {
+    public List<GetFile> selectGetFileByDateTime(String datetime, String endtime ,int level) throws Exception {
 //        return selectAllClassifyId(userGetFileMapper.selectGetFileByDateTime(datetime , endtime ));
-    return userGetFileMapper.selectGetFileByDateTime( datetime , endtime );
+    return userGetFileMapper.selectGetFileByDateTime( datetime , endtime,level );
     }
 
     @Override
-    public List<GetFile> selectGetFileByNumber(String  num) throws Exception {
+    public List<GetFile> selectGetFileByNumber(String  num,int level) throws Exception {
 //        return selectAllClassifyId(userGetFileMapper.selectGetFileByNumber(num));
-        return userGetFileMapper.selectGetFileByNumber( num );
+        return userGetFileMapper.selectGetFileByNumber( level, num );
     }
     /**
      * 根据id找文件
@@ -263,9 +263,9 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @throws Exception
      */
     @Override
-    public List<GetFile> selectAllGetFile() throws Exception {
+    public List<GetFile> selectAllGetFile( int  level ) throws Exception {
 //        return selectAllClassifyId(userGetFileMapper.selectAllGetFile());
-        List<GetFile> getFiles = userGetFileMapper.selectAllGetFile();
+        List<GetFile> getFiles = userGetFileMapper.selectAllGetFile(level);
 
         getFiles.forEach( n -> {
             //将用编号隔开的userId取出来
@@ -298,8 +298,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile , String endtime) throws Exception{
-        return userGetFileMapper.selectGetFileByTwoAndMore(getFile,endtime);
+    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile , String endtime , int level) throws Exception{
+        return userGetFileMapper.selectGetFileByTwoAndMore(getFile,endtime , level);
     }
 
     /**

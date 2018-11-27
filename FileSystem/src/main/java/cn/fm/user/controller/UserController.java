@@ -652,21 +652,21 @@ public class UserController {
      * @return
      * @throws Exception
      */
-//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
-//    @RequestMapping(value = "/selectMyself")
-//    @ResponseBody
-//    public String selectMyself() throws Exception{
-//        Subject subject = SecurityUtils.getSubject();
-//        String uemail = (String)subject.getPrincipal();
-////        System.out.println(uemail);
-//       UserExtend ue = userService.selectMySelf(uemail);
-//       if(ue != null) {
-//           return  JSON.toJSONString(ue);
-//       }
-//        HashMap<String,Integer> map = new HashMap<>();
-//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
-//        return JSON.toJSONString(map);
-//    }
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/selectMyself")
+    @ResponseBody
+    public String selectMyself() throws Exception{
+        Subject subject = SecurityUtils.getSubject();
+        String uaccount = (String)subject.getPrincipal();
+//        System.out.println(uemail);
+       UserExtend ue = userService.selectMySelf(uaccount);
+       if(ue != null) {
+           return  JSON.toJSONString(ue);
+       }
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+        return JSON.toJSONString(map);
+    }
 
     /**
      * 根据日期范围查询未归还的用户信息及其借阅的文件信息

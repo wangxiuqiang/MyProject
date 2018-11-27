@@ -29,7 +29,7 @@ public interface UserGetFileService {
     /**
      * 总的包揽下面几个查询的函数
      */
-    public List<GetFile> findTypeFiles(GetFile getFile,String endtime) throws Exception;
+    public List<GetFile> findTypeFiles(GetFile getFile,String endtime,int level) throws Exception;
 
     /**
      * 单独用名字来做模糊查询
@@ -37,7 +37,7 @@ public interface UserGetFileService {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByName(String gfname) throws Exception;
+    public List<GetFile> selectGetFileByName(String gfname,int level) throws Exception;
 
     /**
      * 根据单位来查找文件信息
@@ -45,7 +45,7 @@ public interface UserGetFileService {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByCompany(String gfcompany) throws Exception;
+    public List<GetFile> selectGetFileByCompany(String gfcompany,int level) throws Exception;
     /**
      * 根据id找文件
      * @param gfid
@@ -67,17 +67,17 @@ public interface UserGetFileService {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByDateTime(String datetime , String endtime ) throws Exception;
+    public List<GetFile> selectGetFileByDateTime(String datetime , String endtime,int level ) throws Exception;
 
     /**
      *根据文号查询
      */
-    public List<GetFile> selectGetFileByNumber(String num) throws Exception;
+    public List<GetFile> selectGetFileByNumber(String num,int level) throws Exception;
 
     /**
      * 查询全部的收文文件信息
      */
-    public List<GetFile> selectAllGetFile() throws  Exception;
+    public List<GetFile> selectAllGetFile(int level) throws  Exception;
 
 
     /**
@@ -103,7 +103,7 @@ public interface UserGetFileService {
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile , String endtime) throws Exception;
+    public List<GetFile> selectGetFileByTwoAndMore( GetFile getFile , String endtime , int level) throws Exception;
 
     /**
      * 查看被删除的收文

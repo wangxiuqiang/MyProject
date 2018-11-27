@@ -5,6 +5,7 @@ import cn.fm.pojo.Classify;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.pojo.GetFile;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public interface UserCompanyFileMapper {
          * @return
          * @throws Exception
          */
-        public List<CompanyFile> selectCompanyFileByName(String cfname) throws Exception;
+        public List<CompanyFile> selectCompanyFileByName(@Param(value = "cfname") String cfname, @Param(value = "level") int level) throws Exception;
 
         /**
          * 根据单位来查找文件信息
@@ -49,7 +50,7 @@ public interface UserCompanyFileMapper {
          * @return
          * @throws Exception
          */
-        public List<CompanyFile> selectCompanyFileByLanguage(String language) throws Exception;
+        public List<CompanyFile> selectCompanyFileByLanguage(@Param(value = "cflanguage") String language, @Param(value = "level") int level) throws Exception;
 
         /**
          * 根据最后的一个分类的id查询,因为最后的一个分类是叶子
@@ -57,7 +58,7 @@ public interface UserCompanyFileMapper {
          * @return
          * @throws Exception
          */
-        public List<CompanyFile> selectCompanyFileByClassifyId(int classifyid) throws Exception;
+        public List<CompanyFile> selectCompanyFileByClassifyId(@Param(value = "cfclassifyid") int classifyid , @Param(value = "level") int level) throws Exception;
 
         /**
          * 根据录入时间查询文件信息
@@ -65,17 +66,18 @@ public interface UserCompanyFileMapper {
          * @return
          * @throws Exception
          */
-        public List<CompanyFile> selectCompanyFileByDateTime(@Param(value = "date") String date ,@Param(value = "endtime") String endtime ) throws Exception;
+        public List<CompanyFile> selectCompanyFileByDateTime(@Param(value = "date") String date ,@Param(value = "endtime") String endtime
+                , @Param(value = "level") int level ) throws Exception;
 
         /**
          *根据文号查询
          */
-        public List<CompanyFile> selectCompanyFileByFontid(String cffontid) throws Exception;
+        public List<CompanyFile> selectCompanyFileByFontid(@Param(value = "cffontid") String cffontid, @Param(value = "level") int level) throws Exception;
 
         /**
          * 查询全部的单位制发文件文件信息
          */
-        public List<CompanyFile> selectAllCompanyFile() throws  Exception;
+        public List<CompanyFile> selectAllCompanyFile( @Param(value = "level") int level ) throws  Exception;
 
 
         /**
@@ -99,7 +101,8 @@ public interface UserCompanyFileMapper {
         /**
          * 多项组合查询
          */
-        public List<CompanyFile> selectCompanyFileByTwoOrMore(@Param(value = "companyFile") CompanyFile companyFile ,@Param(value = "endtime") String endtime) throws Exception;
+        public List<CompanyFile> selectCompanyFileByTwoOrMore(@Param(value = "companyFile") CompanyFile companyFile , @Param(value = "endtime") String endtime
+                , @Param(value = "level") int level ) throws Exception;
 
         /**
          * 查看被删除的发文
@@ -123,5 +126,12 @@ public interface UserCompanyFileMapper {
          */
         public int delCompanyFileBack( @Param( value = "cfid") int cfid ,@Param(value = "backDate") String backDate ) throws Exception;
 
+        /**
+         * 查找涉密非涉密文件
+         * @return
+         * @throws Exception
+         */
+        public List<CompanyFile> selectNOTLevelCompanyFile() throws Exception;
+        public List<CompanyFile> selectLevelCompanyFile() throws Exception;
 
 }

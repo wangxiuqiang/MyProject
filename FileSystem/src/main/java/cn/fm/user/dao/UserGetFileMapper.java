@@ -38,7 +38,7 @@ public interface UserGetFileMapper {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByName(String gfname) throws Exception;
+    public List<GetFile> selectGetFileByName(@Param( value = "level") int level,@Param( value = "gfname" ) String gfname) throws Exception;
 
     /**
      * 根据单位来查找文件信息
@@ -46,7 +46,7 @@ public interface UserGetFileMapper {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByCompany(String gfcompany) throws Exception;
+    public List<GetFile> selectGetFileByCompany(@Param( value = "level") int level,@Param( value = "gfcompany") String gfcompany) throws Exception;
 
     /**
      * 根据最后的一个分类的id查询,因为最后的一个分类是叶子
@@ -54,7 +54,7 @@ public interface UserGetFileMapper {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByClassifyId(int classifyid) throws Exception;
+//    public List<GetFile> selectGetFileByClassifyId(int classifyid) throws Exception;
 
     /**
      * 根据录入时间查询文件信息
@@ -62,17 +62,18 @@ public interface UserGetFileMapper {
      * @return
      * @throws Exception
      */
-    public List<GetFile> selectGetFileByDateTime(@Param(value = "gfdatetime") String datetime ,@Param("endtime") String endtime) throws Exception;
+    public List<GetFile> selectGetFileByDateTime(@Param(value = "gfdatetime") String datetime ,@Param("endtime") String endtime ,
+                                                 @Param( value = "level") int level ) throws Exception;
 
     /**
      *根据文号查询
      */
-    public List<GetFile> selectGetFileByNumber(String  num) throws Exception;
+    public List<GetFile> selectGetFileByNumber(@Param( value = "level") int level,@Param( value = "gfnumber") String  num) throws Exception;
 
     /**
      * 查询全部的收文文件信息
      */
-    public List<GetFile> selectAllGetFile() throws  Exception;
+    public List<GetFile> selectAllGetFile( @Param( value = "level") int level ) throws  Exception;
 
     /**
      * 根据id更新 文件
@@ -99,7 +100,8 @@ public interface UserGetFileMapper {
      * @param getFile
      * @return
      */
-    public List<GetFile> selectGetFileByTwoAndMore(@Param(value = "getFile") GetFile getFile ,@Param(value = "endtime") String endtime ) throws Exception;
+    public List<GetFile> selectGetFileByTwoAndMore(@Param(value = "getFile") GetFile getFile ,@Param(value = "endtime") String endtime
+    ,@Param( value = "level") int level) throws Exception;
 
     /**
      * 通过 查询是不是有借阅信息，决定是不是删除
@@ -120,4 +122,14 @@ public interface UserGetFileMapper {
      * @throws Exception
      */
     public int delGetFileBack( @Param( value = "gfid") int gfid , @Param(value = "backDate") String backDate ) throws Exception;
+
+//    /**
+//     * 涉密非涉密 分开查询,
+//     */
+//    //涉密
+//
+//    public List<GetFile> selectLevelGetFile() throws Exception;
+////非涉密
+//
+//    public List<GetFile> selectNOTLevelGetFile() throws Exception;
 }

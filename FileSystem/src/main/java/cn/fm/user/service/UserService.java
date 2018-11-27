@@ -66,7 +66,7 @@ public interface UserService {
     /***
      * 根据邮箱找到自己的信息
      */
-//    public UserExtend selectMySelf(String email) throws Exception;
+    public UserExtend selectMySelf(String uaccount ) throws Exception;
 
 
     /**
@@ -131,4 +131,14 @@ public interface UserService {
      */
     public int insertgfWaitBorrowInfo( Borrow borrow ) throws  Exception;
     public int insertcfWaitBorrowInfo( Borrow borrow ) throws  Exception;
+
+    /**
+     * 涉密非涉密 分开查询,
+     */
+//    //涉密
+//    public List<BorrowCFExtends> selectLevelCompanyFile() throws Exception;
+//    public List<BorrowGFExtends> selectLevelGetFile() throws Exception;
+//    //非涉密
+//    public List<BorrowCFExtends> selectNOTLevelCompanyFile() throws Exception;
+//    public List<BorrowGFExtends> selectNOTLevelGetFile() throws Exception;
 }

@@ -10,9 +10,7 @@ import cn.fm.user.service.UserService;
 import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.PassWordHelper;
 import cn.fm.utils.StatusUtils;
-import cn.fm.vo.BorrowCFExtends;
-import cn.fm.vo.BorrowGFExtends;
-import cn.fm.vo.UserExtend;
+import cn.fm.vo.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -431,13 +429,13 @@ public class UserServiceImpl implements UserService {
     /***
      * 根据邮箱找到自己的信息 ,包括其中的角色和权限信息
      */
-//    @Override
-//    public UserExtend selectMySelf(String email) throws Exception{
-//
-//        User user = adminMapper.findUserByEmail(email);
-//        UserExtend userEd = adminService.findWorkerById(user.getUid());
-//        return userEd;
-//    }
+    @Override
+    public UserExtend selectMySelf(String uaccount ) throws Exception{
+
+        User user = adminMapper.findUserByUaccount(uaccount);
+        UserExtend userEd = adminService.findWorkerById( user.getUid() );
+        return userEd;
+    }
 
 
     /**
@@ -689,4 +687,46 @@ public class UserServiceImpl implements UserService {
     public int insertcfWaitBorrowInfo( Borrow borrow ) throws  Exception{
         return userMapper.insertcfWaitBorrowInfo( borrow );
     }
+
+
+    /**
+     * 涉密非涉密 分开查询,
+     */
+
+    //涉密
+//    @Override
+//    public List<BorrowCFExtends> selectLevelCompanyFile() throws Exception{
+//        List<CompanyFile> companyFiles = userCompanyFileMapper.selectLevelCompanyFile();
+//        companyFiles.forEach( n -> {
+//            try {
+//                //根据文件id,获取到该文件的被借阅历史.
+//                List<BorrowCFExtends> borrowCFExtends = selectBorrowcfInfoByFileid( n.getCfid() );
+//                for (BorrowCFExtends borrowCFExtend : borrowCFExtends) {
+//                    if( borrowCFExtend.getUser() != null ) {
+//                        n.setUid( borrowCFExtend.getUser().getUid() );
+//                        n.setUname( borrowCFExtend.getUser().getUname() );
+//                    }
+//                    if( borrowCFExtend.getUserSecond() != null ) {
+//                        n.setSecondUid( borrowCFExtend.getUserSecond().getUid() );
+//                        n.setSecondName( borrowCFExtend.getUserSecond().getUname() );
+//                    }
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+//    }
+//    @Override
+//    public List<BorrowGFExtends> selectLevelGetFile() throws Exception{
+//
+//    }
+//    //非涉密
+//    @Override
+//    public List<BorrowCFExtends> selectNOTLevelCompanyFile() throws Exception{
+//
+//    }
+//    @Override
+//    public List<BorrowGFExtends> selectNOTLevelGetFile() throws Exception{
+//
+//    }
 }

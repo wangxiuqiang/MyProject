@@ -60,7 +60,7 @@ public class TestOCR {
 //            final String destDir = testData.getParent()+"/testOCR";
 //            cleanImage(testData ,destDir);
 //            OCRHelper.convertFile( "/home/wxq/test.png");
-            ocr("/home/wxq/test.png");
+            ocr("/home/wxq/test1.tif");
 //             Date date = new Date();
 //            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //           String  a = format.format(date);

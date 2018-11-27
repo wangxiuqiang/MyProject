@@ -106,43 +106,43 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      * @throws Exception
      */
     @Override
-    public List<CompanyFile> findTypeFiles(CompanyFile companyFile , String endtime ) throws Exception {
+    public List<CompanyFile> findTypeFiles(CompanyFile companyFile , String endtime , int level  ) throws Exception {
         //先找到文件信息,然后根据文件的id找到文件的借阅信息,并将借阅信息写入
         List<CompanyFile> companyFiles = new ArrayList<>();
         //用来做返回数据
 //        List<CompanyFileExtends> companyFileExtends = new ArrayList<>();
 
-        if(companyFile.getCfname() != null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
-                && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
-            companyFiles = selectCompanyFileByName(companyFile.getCfname());
+        if(companyFile.getCfname() != null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
+                && companyFile.getCfdate() == null && companyFile.getCffontid() == null  ) {
+            companyFiles = selectCompanyFileByName(companyFile.getCfname() , level );
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() != 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
 
-            companyFiles = selectCompanyFileByClassifyId(companyFile.getCfclassifyid());
+            companyFiles = selectCompanyFileByClassifyId(companyFile.getCfclassifyid() , level );
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() != null
-                && companyFile.getCfdate() == null && companyFile.getCffontid() == null) {
+                && companyFile.getCfdate() == null && companyFile.getCffontid() == null ) {
 
-            companyFiles = selectCompanyFileByLanguage(companyFile.getCflanguage());
+            companyFiles = selectCompanyFileByLanguage(companyFile.getCflanguage() , level);
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() != null && endtime != null && companyFile.getCffontid() == null) {
 
-            companyFiles = selectCompanyFileByDateTime(companyFile.getCfdate() , endtime);
+            companyFiles = selectCompanyFileByDateTime(companyFile.getCfdate() , endtime , level);
 
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() != null){
 
-            companyFiles = selectCompanyFileByFontid(companyFile.getCffontid());
+            companyFiles = selectCompanyFileByFontid(companyFile.getCffontid() , level );
 
         }else if(companyFile.getCfname() == null && companyFile.getCfclassifyid() == 0 && companyFile.getCflanguage() == null
                 && companyFile.getCfdate() == null && companyFile.getCffontid() == null){
            return  null;
         }else {
-            companyFiles = selectCompanyFileByTwoOrMore(companyFile , endtime );
+            companyFiles = selectCompanyFileByTwoOrMore(companyFile , endtime , level );
         }
         /**
          * 将 指定领取人和 实际领取人的用户名和用户编号放到文件类中
@@ -172,8 +172,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     /**
      * 多项组合查询
      */
-    public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile , String endtime ) throws Exception{
-        return userCompanyFileMapper.selectCompanyFileByTwoOrMore( companyFile , endtime );
+    public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile , String endtime , int level ) throws Exception{
+        return userCompanyFileMapper.selectCompanyFileByTwoOrMore( companyFile , endtime , level );
     }
 
     /**
@@ -230,33 +230,33 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
     }
 
     @Override
-    public List<CompanyFile> selectCompanyFileByName(String cfname) throws Exception {
-        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByName(cfname);
+    public List<CompanyFile> selectCompanyFileByName(String cfname , int level) throws Exception {
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByName(cfname , level);
 
         return selectAllClassifyId(cfs);
     }
 
     @Override
-    public List<CompanyFile> selectCompanyFileByLanguage(String language) throws Exception {
-        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByLanguage(language);
+    public List<CompanyFile> selectCompanyFileByLanguage(String language , int level) throws Exception {
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByLanguage(language , level);
         return selectAllClassifyId(cfs);
     }
 
     @Override
-    public List<CompanyFile> selectCompanyFileByClassifyId(int classifyid) throws Exception {
-        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByClassifyId(classifyid);
+    public List<CompanyFile> selectCompanyFileByClassifyId(int classifyid , int level) throws Exception {
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByClassifyId(classifyid , level);
         return selectAllClassifyId(cfs);
     }
 
     @Override
-    public List<CompanyFile> selectCompanyFileByDateTime(String date , String endtime ) throws Exception {
-        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByDateTime(date , endtime );
+    public List<CompanyFile> selectCompanyFileByDateTime(String date , String endtime , int level) throws Exception {
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByDateTime(date , endtime  , level);
         return selectAllClassifyId(cfs);
     }
 
     @Override
-    public List<CompanyFile> selectCompanyFileByFontid(String cffontid) throws Exception {
-        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByFontid(cffontid);
+    public List<CompanyFile> selectCompanyFileByFontid(String cffontid , int level) throws Exception {
+        List<CompanyFile> cfs = userCompanyFileMapper.selectCompanyFileByFontid(cffontid , level);
         return selectAllClassifyId(cfs);
     }
 
@@ -266,8 +266,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
      * @throws Exception
      */
     @Override
-    public List<CompanyFile> selectAllCompanyFile() throws Exception {
-        List<CompanyFile> cfs = userCompanyFileMapper.selectAllCompanyFile();
+    public List<CompanyFile> selectAllCompanyFile( int  level ) throws Exception {
+        List<CompanyFile> cfs = userCompanyFileMapper.selectAllCompanyFile(level);
         return selectAllClassifyId(cfs);
     }
 

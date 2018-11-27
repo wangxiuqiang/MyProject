@@ -59,16 +59,16 @@ public class UserGetFileController {
      * 根据单项查收文信息  或多项
      */
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/findTypeGetFiles/{page}")
+    @RequestMapping(value = "/findTypeGetFiles/{page}/{level}")
     @RequiresRoles(value = "admin")
     @ResponseBody
-    public String findTypeFiles(@PathVariable Integer page , GetFile getFile, String endtime) throws Exception {
+    public String findTypeFiles(@PathVariable Integer page ,@PathVariable Integer level, GetFile getFile, String endtime) throws Exception {
         System.out.println(getFile);
         if(getFile.getGfnumber() != null || (getFile.getGfdatetime() != null && endtime != null) || getFile.getGfcompany() != null
                 || getFile.getGfname() != null) {
             PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
-            List<GetFile> getFiles = userGetFileService.findTypeFiles(getFile,endtime);
+            List<GetFile> getFiles = userGetFileService.findTypeFiles(getFile,endtime ,level);
 
             PageInfo<GetFile> pageInfo = new PageInfo<GetFile>(getFiles);
 
@@ -97,13 +97,13 @@ public class UserGetFileController {
      *
      */
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/findGetFiles/{page}")
+    @RequestMapping(value = "/findGetFiles/{page}/{level}")
     @RequiresRoles(value = "admin")
     @ResponseBody
-    public String findFiles(@PathVariable Integer page) throws Exception {
+    public String findFiles(@PathVariable Integer page,@PathVariable Integer level) throws Exception {
         PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
-        List<GetFile> getFiles = userGetFileService.selectAllGetFile();
+        List<GetFile> getFiles = userGetFileService.selectAllGetFile(level);
 
         PageInfo<GetFile> pageInfo = new PageInfo<GetFile>(getFiles);
         return  JSON.toJSONString(pageInfo, SerializerFeature.DisableCircularReferenceDetect);

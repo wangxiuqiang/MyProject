@@ -30,7 +30,13 @@
     <select id="selectCompanyFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cfname like concat(concat('%',#{value}), '%') and state=1
+        from companyFile where cfname like concat(concat('%',#{cfname}), '%') and state=1
+        <if test="level == 1">
+            and cflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and cflevel = "普通"
+        </if>
     </select>
 
 
@@ -45,27 +51,54 @@
         select
         <include refid="Base_Columns_List" />
         from companyFile where cfdate &gt;= #{date} and cfdate &lt;= #{endtime} and state=1
+        <if test="level == 1">
+            and cflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and cflevel = "普通"
+        </if>
+
     </select>
 
     <select id="selectCompanyFileByFontid" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cffontid = #{value} and state=1
+        from companyFile where cffontid = #{cffontid} and state=1
+        <if test="level == 1">
+            and cflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and cflevel = "普通"
+        </if>
+
     </select>
 
     <select id="selectCompanyFileByLanguage" parameterType="java.lang.String" resultType="cn.fm.pojo.CompanyFile">
         select
         <include refid="Base_Columns_List" />
-        from companyFile where cflanguage = #{value} and state = 1
+        from companyFile where cflanguage = #{cflanguage} and state = 1
+        <if test="level == 1">
+            and cflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and cflevel = "普通"
+        </if>
+
     </select>
     <!--
 
 
    -->
-    <select id="selectAllCompanyFile" resultType="cn.fm.pojo.CompanyFile">
+    <select id="selectAllCompanyFile" resultType="cn.fm.pojo.CompanyFile" parameterType="java.lang.Integer">
         select
         <include refid="Base_Columns_List" />
         from companyFile where state=1
+        <if test="level == 1">
+            and cflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and cflevel = "普通"
+        </if>
     </select>
 
     <!--修改文件信息-->
@@ -138,6 +171,13 @@
             <if test="companyFile.cfdate != null">
                 AND cfdate &gt;= #{companyFile.cfdate} and cfdate &lt;= #{endtime}
             </if>
+            <if test="level == 1">
+                and cflevel != "普通"
+            </if>
+            <if test="level == 2">
+                and cflevel = "普通"
+            </if>
+
             AND state=1
         </where>
     </select>
@@ -177,5 +217,16 @@
     <update id="delCompanyFileBack" >
         UPDATE companyFile SET back = 1,backDate=#{backDate} where cfid = #{cfid} and state = 1
     </update>
+<!--根据是否涉密查找文件-->
+    <select id="selectNOTLevelCompanyFile" resultType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from companyFile where cflevel !="普通"
+    </select>
 
+    <select id="selectLevelCompanyFile" resultType="cn.fm.pojo.CompanyFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from companyFile where cflevel ="普通"
+    </select>
 </mapper>

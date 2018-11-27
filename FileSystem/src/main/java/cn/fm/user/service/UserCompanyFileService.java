@@ -21,7 +21,7 @@ public interface UserCompanyFileService {
     /**
      * 总的包揽下面几个查询的函数
      */
-    public List<CompanyFile> findTypeFiles(CompanyFile companyFile , String endtime ) throws Exception;
+    public List<CompanyFile> findTypeFiles(CompanyFile companyFile , String endtime ,int level ) throws Exception;
     /**
      * 根据id 查找分类信息
      * @param classifyid
@@ -33,7 +33,7 @@ public interface UserCompanyFileService {
     /**
      * 多项组合查询
      */
-    public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile , String endtime ) throws Exception;
+    public List<CompanyFile> selectCompanyFileByTwoOrMore(CompanyFile companyFile , String endtime ,int level) throws Exception;
 
     /**
      * 单独用名字来做模糊查询
@@ -41,7 +41,7 @@ public interface UserCompanyFileService {
      * @return
      * @throws Exception
      */
-    public List<CompanyFile> selectCompanyFileByName(String cfname) throws Exception;
+    public List<CompanyFile> selectCompanyFileByName(String cfname,int level) throws Exception;
 
     /**
      * 根据单位来查找文件信息
@@ -49,7 +49,7 @@ public interface UserCompanyFileService {
      * @return
      * @throws Exception
      */
-    public List<CompanyFile> selectCompanyFileByLanguage(String language) throws Exception;
+    public List<CompanyFile> selectCompanyFileByLanguage(String language,int level) throws Exception;
 
     /**
      * 根据最后的一个分类的id查询,因为最后的一个分类是叶子
@@ -57,7 +57,7 @@ public interface UserCompanyFileService {
      * @return
      * @throws Exception
      */
-    public List<CompanyFile> selectCompanyFileByClassifyId(int classifyid) throws Exception;
+    public List<CompanyFile> selectCompanyFileByClassifyId(int classifyid,int level) throws Exception;
 
     /**
      * 根据录入时间查询文件信息
@@ -65,17 +65,17 @@ public interface UserCompanyFileService {
      * @return
      * @throws Exception
      */
-    public List<CompanyFile> selectCompanyFileByDateTime(String date , String endtime ) throws Exception;
+    public List<CompanyFile> selectCompanyFileByDateTime(String date , String endtime,int level ) throws Exception;
 
     /**
      *根据文号查询
      */
-    public List<CompanyFile> selectCompanyFileByFontid(String cffontid) throws Exception;
+    public List<CompanyFile> selectCompanyFileByFontid(String cffontid,int level) throws Exception;
 
     /**
      * 查询全部的单位制发文件文件信息
      */
-    public List<CompanyFile> selectAllCompanyFile() throws  Exception;
+    public List<CompanyFile> selectAllCompanyFile(int level) throws  Exception;
     /**
      * 根据id找文件
      * @param cfid

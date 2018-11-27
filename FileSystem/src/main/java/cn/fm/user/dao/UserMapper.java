@@ -1,8 +1,6 @@
 package cn.fm.user.dao;
 
-import cn.fm.pojo.Borrow;
-import cn.fm.pojo.Classify;
-import cn.fm.pojo.User;
+import cn.fm.pojo.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -159,4 +157,7 @@ public interface UserMapper {
      */
     public int insertgfWaitBorrowInfo( Borrow borrow ) throws  Exception;
     public int insertcfWaitBorrowInfo( Borrow borrow ) throws  Exception;
+
+
+
 }

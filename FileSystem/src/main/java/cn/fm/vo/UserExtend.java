@@ -9,13 +9,13 @@ public class UserExtend {
     @NotNull(message = "{user.company.isnull}")
     private String ucompany;
 
-//    private String uemail;
-//    private String code;
+//  private String uemail;
+//  private String code;
 
     private int  uid;
     private String uname;
     private String upwd;
-//    private String ucompany;
+//  private String ucompany;
     private String uupdatetime;
     private int state;
     private String uphone;

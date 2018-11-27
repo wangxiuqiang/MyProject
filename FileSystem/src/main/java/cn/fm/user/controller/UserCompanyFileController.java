@@ -44,13 +44,13 @@ public class UserCompanyFileController {
      * @throws Exception
      */
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-   @RequestMapping(value = "/findCompanyFiles/{page}")
+   @RequestMapping(value = "/findCompanyFiles/{page}/{level}")
    @ResponseBody
     @RequiresRoles(value = "admin")
-    public String findCompanyFiles(@PathVariable Integer page) throws Exception {
+    public String findCompanyFiles(@PathVariable Integer page , @PathVariable Integer level) throws Exception {
        PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
-       List<CompanyFile> companyFiles= userCompanyFileService.selectAllCompanyFile();
+       List<CompanyFile> companyFiles= userCompanyFileService.selectAllCompanyFile(level);
 
        PageInfo<CompanyFile> pageInfo = new PageInfo<CompanyFile>(companyFiles);
        return JSON.toJSONString(pageInfo, SerializerFeature.DisableCircularReferenceDetect);
@@ -63,16 +63,16 @@ public class UserCompanyFileController {
      * @throws Exception
      */
 //     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/findTypeCompanyFiles/{page}")
+    @RequestMapping(value = "/findTypeCompanyFiles/{page}/{level}")
     @ResponseBody
     @RequiresRoles(value = "admin")
 
-    public String findTypeCompanyFiles( CompanyFile companyFile,@PathVariable  Integer page,String endtime ) throws Exception {
+    public String findTypeCompanyFiles( CompanyFile companyFile,@PathVariable  Integer page,String endtime,@PathVariable Integer level ) throws Exception {
         if( companyFile.getCfname() != null || companyFile.getCfclassifyid() != 0 || companyFile.getCflanguage() != null
                 || companyFile.getCfdate() != null || companyFile.getCffontid() != null) {
             PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
 
-            List<CompanyFile> companyFiles = userCompanyFileService.findTypeFiles(companyFile , endtime );
+            List<CompanyFile> companyFiles = userCompanyFileService.findTypeFiles(companyFile , endtime ,level );
 
             PageInfo<CompanyFile> pageInfo = new PageInfo<CompanyFile>(companyFiles);
             return JSON.toJSONString(pageInfo, SerializerFeature.DisableCircularReferenceDetect);
