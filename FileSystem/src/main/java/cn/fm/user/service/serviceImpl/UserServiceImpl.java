@@ -64,8 +64,8 @@ public class UserServiceImpl implements UserService {
  * 通过姓名进行查询 信息 ,给下面借文件提供id
  */
     @Override
-    public List<User> selectUserByName(String name) throws Exception{
-        return userMapper.selectUserId(name);
+    public List<User> selectUserByName(String name,int wid) throws Exception{
+        return userMapper.selectUserId(name , wid);
     }
 
     /**
@@ -637,22 +637,37 @@ public class UserServiceImpl implements UserService {
      * 整合下面的四个方法 ,预分配
      */
     @Override
-    public int addBorrowInfo( Borrow borrow , int type  ) throws Exception{
+    public int addBorrowInfo( int fileid , int type ,String uid ,String wid ) throws Exception{
         int result = 0;
+        Borrow borrow = new Borrow();
+        String[] uids = uid.split(",");
+        String[] wids = wid.split(",");
+        borrow.setFileid( fileid );
         if( type == 2) {
             //收文
-            result = updategfWaitBorrow( borrow.getFileid() );
+            result = updategfWaitBorrow( fileid );
 //            System.out.println( result );
+
             if( result > 0) {
-                result = insertgfWaitBorrowInfo( borrow );
+                for ( int i = 0; i < uids.length ; i++ ) {
+                    borrow.setUid( Integer.parseInt( uids[i] ) );
+                    borrow.setWid( Integer.parseInt( wids[i] ) );
+                    result = insertgfWaitBorrowInfo( borrow );
+                }
+
             }
 
             return result;
         } else {
-            result = updatecfWaitBorrow( borrow.getFileid() );
+            result = updatecfWaitBorrow( fileid );
 //            System.out.println( result );
             if( result > 0) {
-                result = insertcfWaitBorrowInfo( borrow );
+                for ( int i = 0; i < uids.length ; i++ ) {
+                    borrow.setUid( Integer.parseInt( uids[i] ) );
+                    borrow.setWid( Integer.parseInt( wids[i] ) );
+                    result = insertcfWaitBorrowInfo( borrow );
+                }
+
             }
             return result;
         }
@@ -681,10 +696,12 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int insertgfWaitBorrowInfo( Borrow borrow ) throws  Exception{
+        borrow.setGivetime( DateToStringUtils.dataTostring());
         return userMapper.insertgfWaitBorrowInfo( borrow );
     }
     @Override
     public int insertcfWaitBorrowInfo( Borrow borrow ) throws  Exception{
+        borrow.setGivetime( DateToStringUtils.dataTostring());
         return userMapper.insertcfWaitBorrowInfo( borrow );
     }
 

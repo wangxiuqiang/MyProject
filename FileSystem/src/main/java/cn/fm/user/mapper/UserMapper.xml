@@ -12,10 +12,13 @@
     <!--</update>-->
     <!--根据用户的姓名 ,单位等信息,查找id-->
     <select id="selectUserId" parameterType="cn.fm.pojo.User" resultType="cn.fm.pojo.User">
-        select uid,uname,ucompany,uemail,ifAdmin,uupdatetime,state from user
+        select uid,uname,ucompany,uupdatetime,uphone,wid,unumber,state,ifAdmin,uaccount,uworkname  from user
         <where>
             <if test="uname != null" >
                 uname like concat(concat('%',#{uname}), '%')
+            </if>
+            <if test="wid != 0">
+               and  wid = #{wid}
             </if>
             and state != 0
         </where>

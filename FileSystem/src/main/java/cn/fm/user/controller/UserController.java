@@ -222,8 +222,12 @@ public class UserController {
     @RequestMapping(value = "/selectUserByName")
     @RequiresRoles(value = "admin")
     @ResponseBody
-    public String selectUserByName(String uname) throws Exception{
-        List<User> users = userService.selectUserByName(uname);
+    public String selectUserByName(String uname , Integer wid ) throws Exception{
+        int widInt = 0;
+        if( wid != null ){
+            widInt = wid;
+        }
+        List<User> users = userService.selectUserByName(uname,widInt);
         if(users != null &&users.size() >0) {
             return JSON.toJSONString(users);
         }
@@ -786,18 +790,18 @@ public class UserController {
     }
 
     /**
-     * 预分配接口,将文件的待借阅标记修改为1, 然后将待借阅的信息,uid,wid,fileid ,givetime写入借阅表中
+     * 预分配接口,将文件的待借阅标记修改为1, 然后将待借阅的信息,uid,wid,fileid ,写入借阅表中 , 可以多选
      * @param type
-     * @param borrow
+     * @param fileid
      * @return
      * @throws Exception
      */
     @RequiresRoles(value = {"admin"} )
     @RequestMapping(value = "/insertWaitBorrowInfo/{type}")
     @ResponseBody
-    public String insertWaitBorrowInfo( @PathVariable int type , Borrow borrow) throws Exception {
+    public String insertWaitBorrowInfo( @PathVariable int type , int fileid ,String uid , String wid ) throws Exception {
         HashMap<String , Integer> map = new HashMap<>();
-        int result = userService.addBorrowInfo( borrow , type );
+        int result = userService.addBorrowInfo( fileid , type ,uid , wid );
         if( result > 0 ){
             map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
         } else {

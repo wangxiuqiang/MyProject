@@ -57,6 +57,7 @@ public class LoginController {
         return JSON.toJSONString(map);
 
     }
+
     @RequestMapping(value = "/logout" )
     @ResponseBody
     public String logout() throws Exception {

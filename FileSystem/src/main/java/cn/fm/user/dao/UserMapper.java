@@ -24,7 +24,7 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
-    public List<User> selectUserId(@Param(value = "uname") String uname) throws Exception;
+    public List<User> selectUserId(@Param(value = "uname") String uname , @Param( value="wid") int wid ) throws Exception;
 
     /**
      * 添加借阅信息

@@ -23,7 +23,7 @@ public interface UserService {
 /**
  * 通过姓名进行查询 信息 ,给下面借文件提供id
  */
-    public List<User> selectUserByName(String name) throws Exception;
+    public List<User> selectUserByName(String name, int wid) throws Exception;
 
     /**
      * 添加借阅信息
@@ -113,7 +113,7 @@ public interface UserService {
     /**
      * 整合下面的四个方法 ,预分配
      */
-    public int addBorrowInfo( Borrow borrow , int type  ) throws Exception;
+    public int addBorrowInfo( int fileid , int type ,String uid , String wid ) throws Exception;
     /**
      * 下面的四个方法是预分配接口调用的
      * 更新文件的待借阅标记,默认为0 表示没有被分配, 1表示已经分配
