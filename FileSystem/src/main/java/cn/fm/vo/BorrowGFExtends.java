@@ -1,5 +1,6 @@
 package cn.fm.vo;
 
+import cn.fm.pojo.Borrow;
 import cn.fm.pojo.GetFile;
 import cn.fm.pojo.User;
 
@@ -10,6 +11,15 @@ public class BorrowGFExtends {
       private String borrowtime;
      private String sholdback;
      private String givetime;
+    private Borrow borrow;
+
+    public Borrow getBorrow() {
+        return borrow;
+    }
+
+    public void setBorrow(Borrow borrow) {
+        this.borrow = borrow;
+    }
 
     public String getSholdback() {
         return sholdback;

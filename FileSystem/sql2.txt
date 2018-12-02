@@ -110,7 +110,7 @@ gfnumber varchar(50) not null,
 gfpersonRead varchar(60),
 gfpartnumber varchar(20),
 type int default 2,
-isborrow int default 1,
+isborrow int default 0,
 back int default 0,
 state int default 1,
 backDate varchar(30),
@@ -157,10 +157,10 @@ cfaddress varchar(100),
 cfclassifyid int ,
 cfclassifyname varchar(100),
 type int default 1,
-isborrow int default 1,
+isborrow int default 0,
 state int default 1,
 waitborrow int default 0,
-destroy int default 1,
+destroy int default 0,
 back int default 0,
 backDate varchar(30),
 destroyDate varchar(30),
@@ -283,6 +283,7 @@ state int default 1,
 secondUid int
 );
 
+insert into borrow_companyFile(wid ,uid,fileid,givetime,borrowtime,shouldback,backtime,secondUid) values(1,1,1,"2018-09-11 12:00:00","2018-09-11 12:00:00" ,"2018-09-12 12:00:00","2018-09-12 11:00:00",2);
 
 create table level (
 lid int primary key auto_increment ,

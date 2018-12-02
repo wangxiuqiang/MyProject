@@ -1,5 +1,6 @@
 package cn.fm.vo;
 
+import cn.fm.pojo.Borrow;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.pojo.GetFile;
 import cn.fm.pojo.User;
@@ -11,12 +12,21 @@ public class BorrowCFExtends {
     //  设定的领取人
     private User user;
     private CompanyFile companyFile;
+    private Borrow borrow;
     private String backtime;
     private String borrowtime;
     private String sholdback;
     private String givetime;
     //真实领取人
     private User userSecond;
+
+    public Borrow getBorrow() {
+        return borrow;
+    }
+
+    public void setBorrow(Borrow borrow) {
+        this.borrow = borrow;
+    }
 
     public User getUserSecond() {
         return userSecond;

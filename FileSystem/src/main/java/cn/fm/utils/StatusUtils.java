@@ -76,5 +76,9 @@ public class StatusUtils {
     //已经激活
     public static final int ALREADY_REG = -6;
     public static final int NEED_REG = 17;
+    //借阅表的id存在,就是已经分配了
+    public static final int IS_EXIST_BORROW_UID = 18;
+    //借阅表的id存在,就是已经分配了,并且文件被接走了
+    public static final int IS_EXIST_BORROW_UID_FILEGO = 19;
 }
 

@@ -94,7 +94,7 @@ public class CompanyFile {
 //等待被借阅 ,
     private int waitborrow;
     //是否销毁
-    private int destory;
+    private int destroy;
     //清退字段
     private int back;
     //销毁日期和清退日期
@@ -133,12 +133,12 @@ public class CompanyFile {
         this.waitborrow = waitborrow;
     }
 
-    public int getDestory() {
-        return destory;
+    public int getDestroy() {
+        return destroy;
     }
 
-    public void setDestory(int destory) {
-        this.destory = destory;
+    public void setDestroy(int destroy) {
+        this.destroy = destroy;
     }
 
     public int getState() {

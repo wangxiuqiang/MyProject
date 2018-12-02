@@ -20,7 +20,7 @@ public class TestOCR {
             ITesseract instance = new Tesseract();
             //指定放着库文件夹的文件夹
             instance.setDatapath("/usr/local/share");
-            instance.setLanguage("chi_sim");
+            instance.setLanguage("test");
             System.out.println( tifFile.canRead() );
             String result = instance.doOCR(tifFile);
 //            result = result.replaceAll("、" ,"");
@@ -60,7 +60,7 @@ public class TestOCR {
 //            final String destDir = testData.getParent()+"/testOCR";
 //            cleanImage(testData ,destDir);
 //            OCRHelper.convertFile( "/home/wxq/test.png");
-            ocr("/home/wxq/test.png");
+            ocr("/home/wxq/test.JPG");
 //             Date date = new Date();
 //            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //           String  a = format.format(date);
