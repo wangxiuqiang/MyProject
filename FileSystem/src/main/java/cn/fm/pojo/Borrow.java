@@ -5,11 +5,19 @@ public class Borrow {
     private int fileid;
     private String borrowtime;
     private String backtime;
-    private int state;
+    private int borrowstate;
     private String givetime;
     private String shouldback;
     private int wid;
     private int secondUid;
+
+    public int getBorrowstate() {
+        return borrowstate;
+    }
+
+    public void setBorrowstate(int borrowstate) {
+        this.borrowstate = borrowstate;
+    }
 
     public int getSecondUid() {
         return secondUid;
@@ -43,14 +51,7 @@ public class Borrow {
         this.wid = wid;
     }
 
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
+   
     public int getUid() {
         return uid;
     }

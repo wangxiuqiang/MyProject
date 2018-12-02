@@ -25,54 +25,25 @@
       <file leaf-file-name="FileDao.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/mapper/FileDao.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="250" column="99" lean-forward="false" selection-start-line="250" selection-start-column="99" selection-end-line="250" selection-end-column="99" />
+            <state relative-caret-position="114">
+              <caret line="225" column="31" lean-forward="false" selection-start-line="225" selection-start-column="31" selection-end-line="225" selection-end-column="31" />
               <folding>
-                <element signature="e#8709#8713#0" expanded="true" />
-                <marker date="1543720631988" expanded="true" signature="715:1086" ph="insert into companyFile... " />
-                <marker date="1543720631988" expanded="true" signature="1206:1306" ph="insert into borrow_companyFile... " />
-                <marker date="1543720631988" expanded="true" signature="1465:1545" ph="select from companyFile" />
-                <marker date="1543720631988" expanded="true" signature="1745:1796" ph="select from borrr" />
-                <marker date="1543720631988" expanded="true" signature="1745:1799" ph="select from borrow" />
-                <marker date="1543720631988" expanded="true" signature="1745:1811" ph="select from borrow_companyFile" />
-                <marker date="1543720631988" expanded="true" signature="2714:2739" ph="update borro... " />
-                <marker date="1543720631988" expanded="true" signature="2714:3635" ph="update borro... " />
-                <marker date="1543720631988" expanded="true" signature="3756:3774" ph="update compa... " />
-                <marker date="1543720631988" expanded="true" signature="5650:5699" ph="update compa... " />
-                <marker date="1543720631988" expanded="true" signature="5802:5858" ph="update borro... " />
-                <marker date="1543720631988" expanded="true" signature="8335:8503" ph="select , fro... " />
-                <marker date="1543720631988" expanded="true" signature="10084:10303" ph="select , fro... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserCompanyFileMapper.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserCompanyFileMapper.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="171" column="20" lean-forward="false" selection-start-line="171" selection-start-column="20" selection-end-line="171" selection-end-column="82" />
-              <folding>
-                <element signature="e#5983#5987#0" expanded="true" />
-                <marker date="1543136147148" expanded="true" signature="582:953" ph="insert into companyFile... " />
-                <marker date="1543136147148" expanded="true" signature="1077:1151" ph="select cyid,... classify" />
-                <marker date="1543136147148" expanded="true" signature="1271:1381" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="1516:1658" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="1954:2073" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="2213:2357" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="2648:2766" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="3059:3169" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="3059:3183" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="3487:3578" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="3852:5168" ph="update compa... " />
-                <marker date="1543136147148" expanded="true" signature="6411:6464" ph="select * fro... borrow_companyFile" />
-                <marker date="1543136147148" expanded="true" signature="7075:7168" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="7253:7339" ph="UPDATE compa... " />
-                <marker date="1543136147148" expanded="true" signature="7253:7353" ph="UPDATE compa... " />
-                <marker date="1543136147148" expanded="true" signature="7442:7515" ph="UPDATE compa... " />
-                <marker date="1543136147148" expanded="true" signature="7442:7529" ph="UPDATE compa... " />
-                <marker date="1543136147148" expanded="true" signature="7650:7747" ph="select from companyFile" />
-                <marker date="1543136147148" expanded="true" signature="7848:7944" ph="select from companyFile" />
+                <element signature="e#8697#8701#0" expanded="true" />
+                <marker date="1543737552262" expanded="true" signature="715:1086" ph="insert into companyFile... " />
+                <marker date="1543737552262" expanded="true" signature="1206:1306" ph="insert into borrow_companyFile... " />
+                <marker date="1543737552262" expanded="true" signature="1465:1545" ph="select from companyFile" />
+                <marker date="1543737552262" expanded="true" signature="1745:1796" ph="select from borrr" />
+                <marker date="1543737552262" expanded="true" signature="1745:1799" ph="select from borrow" />
+                <marker date="1543737552262" expanded="true" signature="1745:1811" ph="select from borrow_companyFile" />
+                <marker date="1543737552262" expanded="true" signature="2714:2739" ph="update borro... " />
+                <marker date="1543737552262" expanded="true" signature="2714:3635" ph="update borro... " />
+                <marker date="1543737552262" expanded="true" signature="3756:3774" ph="update compa... " />
+                <marker date="1543737552262" expanded="true" signature="5650:5699" ph="update compa... " />
+                <marker date="1543737552262" expanded="true" signature="5802:5866" ph="update borro... " />
+                <marker date="1543737552262" expanded="true" signature="8355:8449" ph="select , fro... " />
+                <marker date="1543737552262" expanded="true" signature="8355:8450" ph="select * fro... companyFile" />
+                <marker date="1543737552262" expanded="true" signature="10310:10455" ph="select , fro... " />
+                <marker date="1543737552262" expanded="true" signature="10310:10485" ph="select * fro... companyFile" />
               </folding>
             </state>
           </provider>
@@ -81,8 +52,8 @@
       <file leaf-file-name="FileDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/dao/FileDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state relative-caret-position="88">
+              <caret line="68" column="122" lean-forward="false" selection-start-line="68" selection-start-column="122" selection-end-line="68" selection-end-column="122" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,8 +64,8 @@
       <file leaf-file-name="FileController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/controller/FileController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="146" column="17" lean-forward="true" selection-start-line="146" selection-start-column="17" selection-end-line="146" selection-end-column="17" />
+            <state relative-caret-position="262">
+              <caret line="66" column="50" lean-forward="true" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,17 +73,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BorrowCFExtends.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/vo/BorrowCFExtends.java">
+      <file leaf-file-name="StatusUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/StatusUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="26" />
-              <folding>
-                <element signature="e#477#478#0" expanded="true" />
-                <element signature="e#506#507#0" expanded="true" />
-                <element signature="e#550#551#0" expanded="true" />
-                <element signature="e#586#587#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="482">
+              <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -120,8 +86,8 @@
       <file leaf-file-name="FileServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/serviceImpl/FileServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="554">
-              <caret line="267" column="11" lean-forward="true" selection-start-line="267" selection-start-column="11" selection-end-line="267" selection-end-column="11" />
+            <state relative-caret-position="1276">
+              <caret line="265" column="38" lean-forward="true" selection-start-line="265" selection-start-column="38" selection-end-line="265" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,8 +98,8 @@
       <file leaf-file-name="FileService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/FileService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="60" column="0" lean-forward="true" selection-start-line="54" selection-start-column="4" selection-end-line="60" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="53" column="115" lean-forward="false" selection-start-line="53" selection-start-column="115" selection-end-line="53" selection-end-column="115" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -245,13 +211,13 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/mapper/fileDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/controller/fileController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/StatusUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/Borrow.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/CompanyFile.java" />
         <option value="$PROJECT_DIR$/sql2.txt" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/vo/BorrowCFExtends.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/vo/BorrowGFExtends.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/FileService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/Borrow.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/pojo/CompanyFile.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/dao/FileDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/FileService.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/mapper/FileDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/serviceImpl/FileServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/controller/FileController.java" />
@@ -561,7 +527,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.testOCR">
+  <component name="RunManager" selected="Tomcat Server.run">
     <configuration name="BackUp" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="cn.fm.utils.MysqlBackupUtils" />
@@ -916,12 +882,12 @@
       <workItem from="1543488816379" duration="2686000" />
       <workItem from="1543547526222" duration="3986000" />
       <workItem from="1543628568607" duration="15205000" />
-      <workItem from="1543716126570" duration="4505000" />
+      <workItem from="1543716126570" duration="10040000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="606080000" />
+    <option name="totallyTimeSpent" value="611615000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="195" y="251" width="1321" height="780" extended-state="6" />
@@ -939,11 +905,12 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31873727" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.8149254" sideWeight="0.49813133" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36119404" sideWeight="0.49813133" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -957,7 +924,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -975,13 +941,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/pojo/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/OCRHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -1207,6 +1166,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="902">
           <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1261,6 +1221,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="814">
           <caret line="61" column="17" lean-forward="false" selection-start-line="59" selection-start-column="3" selection-end-line="61" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1287,46 +1248,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/StatusUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="81" column="54" lean-forward="false" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/pojo/Borrow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/pojo/CompanyFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-652">
-          <caret line="135" column="29" lean-forward="false" selection-start-line="135" selection-start-column="29" selection-end-line="135" selection-end-column="29" />
-          <folding>
-            <element signature="e#2897#2898#0" expanded="true" />
-            <element signature="e#2940#2941#0" expanded="true" />
-            <element signature="e#2978#2979#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserCompanyFileServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
           <caret line="85" column="63" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="85" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserCompanyFileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="75" column="0" lean-forward="true" selection-start-line="72" selection-start-column="11" selection-end-line="78" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1350,16 +1275,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/vo/BorrowCFExtends.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserCompanyFileController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="14" column="4" lean-forward="false" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="26" />
-          <folding>
-            <element signature="e#477#478#0" expanded="true" />
-            <element signature="e#506#507#0" expanded="true" />
-            <element signature="e#550#551#0" expanded="true" />
-            <element signature="e#586#587#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="245">
+          <caret line="75" column="0" lean-forward="true" selection-start-line="72" selection-start-column="11" selection-end-line="78" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1392,53 +1312,119 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/FileService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="60" column="0" lean-forward="true" selection-start-line="54" selection-start-column="4" selection-end-line="60" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/vo/BorrowCFExtends.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/pojo/Borrow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-282">
+          <caret line="9" column="21" lean-forward="false" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#318#319#0" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
+            <element signature="e#403#404#0" expanded="true" />
+            <element signature="e#449#450#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/mapper/FileDao.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/pojo/CompanyFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="250" column="99" lean-forward="false" selection-start-line="250" selection-start-column="99" selection-end-line="250" selection-end-column="99" />
+        <state relative-caret-position="-638">
+          <caret line="10" column="2" lean-forward="false" selection-start-line="10" selection-start-column="2" selection-end-line="46" selection-end-column="0" />
           <folding>
-            <element signature="e#8709#8713#0" expanded="true" />
-            <marker date="1543720631988" expanded="true" signature="715:1086" ph="insert into companyFile... " />
-            <marker date="1543720631988" expanded="true" signature="1206:1306" ph="insert into borrow_companyFile... " />
-            <marker date="1543720631988" expanded="true" signature="1465:1545" ph="select from companyFile" />
-            <marker date="1543720631988" expanded="true" signature="1745:1796" ph="select from borrr" />
-            <marker date="1543720631988" expanded="true" signature="1745:1799" ph="select from borrow" />
-            <marker date="1543720631988" expanded="true" signature="1745:1811" ph="select from borrow_companyFile" />
-            <marker date="1543720631988" expanded="true" signature="2714:2739" ph="update borro... " />
-            <marker date="1543720631988" expanded="true" signature="2714:3635" ph="update borro... " />
-            <marker date="1543720631988" expanded="true" signature="3756:3774" ph="update compa... " />
-            <marker date="1543720631988" expanded="true" signature="5650:5699" ph="update compa... " />
-            <marker date="1543720631988" expanded="true" signature="5802:5858" ph="update borro... " />
-            <marker date="1543720631988" expanded="true" signature="8335:8503" ph="select , fro... " />
-            <marker date="1543720631988" expanded="true" signature="10084:10303" ph="select , fro... " />
+            <element signature="e#295#296#0" expanded="true" />
+            <element signature="e#321#322#0" expanded="true" />
+            <element signature="e#356#357#0" expanded="true" />
+            <element signature="e#386#387#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#446#447#0" expanded="true" />
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="e#522#523#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#634#635#0" expanded="true" />
+            <element signature="e#676#677#0" expanded="true" />
+            <element signature="e#713#714#0" expanded="true" />
+            <element signature="e#746#747#0" expanded="true" />
+            <element signature="e#798#799#0" expanded="true" />
+            <element signature="e#842#843#0" expanded="true" />
+            <element signature="e#2867#2868#0" expanded="true" />
+            <element signature="e#2897#2898#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/dao/FileDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+        <state relative-caret-position="88">
+          <caret line="68" column="122" lean-forward="false" selection-start-line="68" selection-start-column="122" selection-end-line="68" selection-end-column="122" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/FileService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="53" column="115" lean-forward="false" selection-start-line="53" selection-start-column="115" selection-end-line="53" selection-end-column="115" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/StatusUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/mapper/FileDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="225" column="31" lean-forward="false" selection-start-line="225" selection-start-column="31" selection-end-line="225" selection-end-column="31" />
+          <folding>
+            <element signature="e#8697#8701#0" expanded="true" />
+            <marker date="1543737552262" expanded="true" signature="715:1086" ph="insert into companyFile... " />
+            <marker date="1543737552262" expanded="true" signature="1206:1306" ph="insert into borrow_companyFile... " />
+            <marker date="1543737552262" expanded="true" signature="1465:1545" ph="select from companyFile" />
+            <marker date="1543737552262" expanded="true" signature="1745:1796" ph="select from borrr" />
+            <marker date="1543737552262" expanded="true" signature="1745:1799" ph="select from borrow" />
+            <marker date="1543737552262" expanded="true" signature="1745:1811" ph="select from borrow_companyFile" />
+            <marker date="1543737552262" expanded="true" signature="2714:2739" ph="update borro... " />
+            <marker date="1543737552262" expanded="true" signature="2714:3635" ph="update borro... " />
+            <marker date="1543737552262" expanded="true" signature="3756:3774" ph="update compa... " />
+            <marker date="1543737552262" expanded="true" signature="5650:5699" ph="update compa... " />
+            <marker date="1543737552262" expanded="true" signature="5802:5866" ph="update borro... " />
+            <marker date="1543737552262" expanded="true" signature="8355:8449" ph="select , fro... " />
+            <marker date="1543737552262" expanded="true" signature="8355:8450" ph="select * fro... companyFile" />
+            <marker date="1543737552262" expanded="true" signature="10310:10455" ph="select , fro... " />
+            <marker date="1543737552262" expanded="true" signature="10310:10485" ph="select * fro... companyFile" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/serviceImpl/FileServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="554">
-          <caret line="267" column="11" lean-forward="true" selection-start-line="267" selection-start-column="11" selection-end-line="267" selection-end-column="11" />
+        <state relative-caret-position="1276">
+          <caret line="265" column="38" lean-forward="true" selection-start-line="265" selection-start-column="38" selection-end-line="265" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1447,8 +1433,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/controller/FileController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="146" column="17" lean-forward="true" selection-start-line="146" selection-start-column="17" selection-end-line="146" selection-end-column="17" />
+        <state relative-caret-position="262">
+          <caret line="66" column="50" lean-forward="true" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
