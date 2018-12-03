@@ -71,8 +71,9 @@ public class AdminServiceImpl implements AdminService{
 //       System.out.println(user.getUid());
 //        System.out.println(user.getRid());
        int result = adminMapper.addUser(user) + adminMapper.addUser_Role(user.getUid(),user.getRid());
+
        int uid = user.getUid();
-       if(result != 0 && uid != 0) {
+       if(result == 2 && uid != 0) {
             return uid;
         } else {
            return 0;
@@ -179,7 +180,7 @@ public class AdminServiceImpl implements AdminService{
     public int deleteWorkerById(int[] id) throws Exception{
         int flag = 0;
         for(int i = 0; i < id.length; i++) {
-
+//查询用户的借阅信息,如果有的话,查看是不是有 文件没还,有的话不能删除,要从两种文件中都找一下
             List<Borrow> bs = userMapper.selectBorrowgfById(id[i]);
             for(int j = 0; j < bs.size() ; j++) {
                 Borrow b = bs.get(i);
@@ -213,7 +214,9 @@ public class AdminServiceImpl implements AdminService{
         if(flag == 1) {
             return 0;
         }
-        return adminMapper.deleteWorkerById(id) + adminMapper.deleteUser_roles(id) + delFingerInfoByUid(id);
+//        删除用户的信息,删除用户的权限信息,删除用户的指纹
+//     adminMapper.deleteUser_roles(id) +  暂时没有提供太多的用户的权限的信息,就不删除了
+        return adminMapper.deleteWorkerById(id) +  delFingerInfoByUid(id);
     }
 
     /**
@@ -281,6 +284,7 @@ public class AdminServiceImpl implements AdminService{
      */
     @Override
     public int updateCompany ( WorkPlace workPlace ) throws Exception {
+        System.out.println( workPlace.getWname() + "-----" + workPlace.getWid());
         return adminMapper.updateCompany( workPlace );
     }
     /**
@@ -491,10 +495,10 @@ public class AdminServiceImpl implements AdminService{
             }
         }
         /**
-         * 如果分数>=300 表示这个人可以使用,
+         * 如果分数>=80 表示这个人可以使用,
          */
         RmFileUtils.rmFile();
-        if( maxScore >=300 ) {
+        if( maxScore >= 80 ) {
             return  adminMapper.findWorkerById( fingerprint.getUid() );
 
         }

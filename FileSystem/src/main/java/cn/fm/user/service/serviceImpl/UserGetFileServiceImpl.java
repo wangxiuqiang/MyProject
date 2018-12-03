@@ -3,6 +3,7 @@ package cn.fm.user.service.serviceImpl;
 import cn.fm.admin.dao.AdminMapper;
 import cn.fm.pojo.*;
 import cn.fm.user.dao.UserGetFileMapper;
+import cn.fm.user.dao.UserMapper;
 import cn.fm.user.service.UserGetFileService;
 import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.StatusUtils;
@@ -22,7 +23,8 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 
     @Autowired
     AdminMapper adminMapper;
-
+    @Autowired
+    UserMapper userMapper;
     /**
      *查找分类信息
      * @param classifyid
@@ -191,7 +193,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
             //多项查询
           getFiles = selectGetFileByTwoAndMore(getFile ,endtime ,level);
         }
-
+//设置传阅人
         getFiles.forEach( n -> {
             if( n.getGfpersonRead() != null ) {
                 //将用编号隔开的userId取出来
@@ -266,7 +268,7 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     public List<GetFile> selectAllGetFile( int  level ) throws Exception {
 //        return selectAllClassifyId(userGetFileMapper.selectAllGetFile());
         List<GetFile> getFiles = userGetFileMapper.selectAllGetFile(level);
-
+//设置传阅人
         getFiles.forEach( n -> {
             //将用编号隔开的userId取出来
             if( n.getGfpersonRead() != null ) {
@@ -404,14 +406,20 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     }
 
     /**
-     * 清退一个文件
+     * 清退一个文件 ,如果文件没 别借完,不能进行清退
      * @param gfid
      * @return
      * @throws Exception
      */
     @Override
     public int delGetFileBack(int gfid ) throws Exception{
-        return userGetFileMapper.delGetFileBack( gfid ,DateToStringUtils.dataTostring() );
+        int borrow = userMapper.selectgfisBorrow( gfid );
+        if( borrow == 2 ) {
+            return userGetFileMapper.delGetFileBack( gfid ,DateToStringUtils.dataTostring() );
+        } else {
+            return -5;
+        }
+
     }
 
 }

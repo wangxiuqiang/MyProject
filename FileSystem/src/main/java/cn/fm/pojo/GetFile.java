@@ -37,6 +37,16 @@ public class GetFile {
     private String gfpartnumber;
     //传阅人
     private String gfpersonRead;
+    private String gfpersonReadCom;
+
+    public String getGfpersonReadCom() {
+        return gfpersonReadCom;
+    }
+
+    public void setGfpersonReadCom(String gfpersonReadCom) {
+        this.gfpersonReadCom = gfpersonReadCom;
+    }
+
     //用来保存传阅人的用户id
     private int[] gfpersonReadIds;
     //用来保存传阅人的姓名

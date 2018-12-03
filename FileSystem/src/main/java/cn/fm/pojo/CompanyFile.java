@@ -98,7 +98,7 @@ public class CompanyFile {
     //清退字段
     private int back;
     //销毁日期和清退日期
-    private String destoryDate;
+    private String destroyDate;
     private String backDate;
 
     public int getBack() {
@@ -109,12 +109,12 @@ public class CompanyFile {
         this.back = back;
     }
 
-    public String getDestoryDate() {
-        return destoryDate;
+    public String getDestroyDate() {
+        return destroyDate;
     }
 
-    public void setDestoryDate(String destoryDate) {
-        this.destoryDate = destoryDate;
+    public void setDestroyDate(String destroyDate) {
+        this.destroyDate = destroyDate;
     }
 
     public String getBackDate() {

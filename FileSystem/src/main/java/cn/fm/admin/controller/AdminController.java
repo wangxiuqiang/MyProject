@@ -10,6 +10,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.machinezoo.sourceafis.FingerprintTemplate;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.Logical;
@@ -53,7 +54,7 @@ public class AdminController {
 
     /**
      * 录入用户的信息
-     * 接受前端的数据,进行数据的写入
+     * 接受前端的数据,进行数据的写入,需要系统生成录入时间,返回录入的用户的id和状态码
      * @param user
      * @return
      */
@@ -90,14 +91,18 @@ public class AdminController {
 //    }
 
     /**
-     * 查找相应的单位
+     * 查找相应的单位 ,传入page和pageSize两个参数,用来换页和每页的数量
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/selectWorkPlace")
+    @RequestMapping(value = "/selectWorkPlace/{page}/{pageSize}")
     @ResponseBody
-    public String selectWorkPlace() throws Exception{
+    public String selectWorkPlace(@PathVariable Integer page , @PathVariable int pageSize) throws Exception{
+
+        PageHelper.startPage(page, pageSize );
         List<WorkPlace> list = adminService.selectWorkPlace();
+        PageInfo<WorkPlace> pageInfo = new PageInfo<WorkPlace>(list);
+
        // System.out.println(list.get(0).getWid());
          return JSON.toJSONString(list);
     }
@@ -125,15 +130,15 @@ public class AdminController {
 //    }
 
     /**
-     *  查找所有的用户信息
+     *  查找所有的用户信息.传入page和pageSize两个参数,用来换页和每页的数量
      * @return
      * @throws Exception
      */
     @RequiresRoles(value = "admin")
-    @RequestMapping(value = "/findWorkers/{page}")
+    @RequestMapping(value = "/findWorkers/{page}/{pageSize}")
     @ResponseBody
-    public String findWorkers(@PathVariable Integer page) throws Exception{
-        PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
+    public String findWorkers(@PathVariable Integer page , @PathVariable int pageSize) throws Exception{
+        PageHelper.startPage(page, pageSize );
 
         List<User> users= adminService.findAllWorker();
 
@@ -149,9 +154,9 @@ public class AdminController {
         }
     }
     /**
-     * 根据id查找用户信息
+     * 根据id查找用户信息,传入用户的id,然后将用户的信息输出,如果有的话,
      */
-    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    @RequiresRoles(value = "admin")
     @RequestMapping(value = "/findWorker/{uid}")
     @ResponseBody
     public String findWorker(@PathVariable int uid) throws Exception{
@@ -169,7 +174,8 @@ public class AdminController {
 
     /**
      * 删除信息,,根据工作人员id ,同时删除用户的权限信息,和指纹信息
-     * 权限和指纹是要删除的,用户信息为了方便查他以前的借阅记录,所以是要将标志位改掉
+     * 权限和指纹是要删除的,用户信息为了方便查他以前的借阅记录,所以是要将标志位改掉,因为文件还存在,所以文件暂时不删除,
+     * 需要查看他是不是还有没有归还的文件,如果有的话 不能删除,两种文件都要查看一下
      * IllegalStateException
      */
     @RequiresRoles(value = "admin")
@@ -195,7 +201,7 @@ public class AdminController {
     }
 
     /**
-     * 根据id进行修改
+     * 根据id进行修改, 需要将用户的全部的字段都传过来,然后根据修改了的值进行修改,rid暂时不需要,修改权限的
      * @param user
      * @return
      * @throws Exception
@@ -203,19 +209,19 @@ public class AdminController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updateWorker")
     @ResponseBody
-    public String updateWorker( User user,int rid) throws Exception{
+    public String updateWorker( User user,Integer rid) throws Exception{
         HashMap<String,Integer> map = new HashMap<>();
 
-        if(user.getUpwd() != null) {
-            PassWordHelper helper = new PassWordHelper();
-            user.setUpwd(helper.SHA256(user.getUpwd()));
-        }
+//        if(user.getUpwd() != null) {
+//            PassWordHelper helper = new PassWordHelper();
+//            user.setUpwd(helper.SHA256(user.getUpwd()));
+//        }
         //如果对角色插入失败, 就返回
 
-            if(adminService.updateUser_Role(user.getUid(),rid) == 0) {
-                map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
-                return JSON.toJSONString(map);
-            }
+//            if(adminService.updateUser_Role(user.getUid(),rid) == 0) {
+//                map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
+//                return JSON.toJSONString(map);
+//            }
 
         if(adminService.updateWorkerById(user) != 0) {
             map.put(StatusUtils.statecode,StatusUtils.SUCCESS_INSERT);
@@ -492,7 +498,7 @@ public class AdminController {
     @ResponseBody
     public String addFingerInfo(int uid ,  MultipartFile finger ) throws Exception {
         HashMap<String,Integer> map = new HashMap<>();
-        System.out.println( finger.getOriginalFilename() );
+//        System.out.println( finger.getOriginalFilename() );
         if( !finger.isEmpty() ) {
             //获取图片存放在服务器的路径
             String bmpFilePath = UploadUtils.upload( finger , 0);

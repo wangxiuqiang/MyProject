@@ -97,7 +97,7 @@ insert into classify(cyname,cyfatherid,cyaddress) values("A111类",3,"15箱");
 
 create table getFile(
 gfid int primary key auto_increment,
-gfname varchar(50) NOT NULL,
+gfname varchar(150) NOT NULL,
 gfidea text,
 gfloader text,
 gffrom varchar(20),
@@ -108,6 +108,7 @@ gfresult varchar(20),
 gfdatetime varchar(30),
 gfnumber varchar(50) not null,
 gfpersonRead varchar(60),
+gfpersonReadCom varchar(60),
 gfpartnumber varchar(20),
 type int default 2,
 isborrow int default 0,
@@ -142,7 +143,7 @@ insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,
 
 create table companyFile (
 cfid int primary key auto_increment,
-cfname varchar(50) ,
+cfname varchar(150) ,
 cfdate varchar(30) ,
 cfaccept varchar(30),
 cfeditor varchar(50),

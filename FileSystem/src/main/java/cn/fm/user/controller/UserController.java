@@ -44,7 +44,8 @@ public class UserController {
     private static String address = "";
     @Autowired
     UserService userService;
-
+    @Autowired
+    AdminService adminService;
     /**
      * 用户在邮箱中跳转,实现激活
      * @param code
@@ -261,10 +262,11 @@ public class UserController {
 //                .create(image);
 //
         //从数据库中取出数据
-        AdminService adminService = new AdminServiceImpl();
+
         User user = adminService.selectAllFingerInfoAndCompare(name);
         if( user != null ) {
             //根据用户去找他是不是用其他借阅的信息 ,1表示没有归还的
+            System.out.println( user.getUname());
            List<BorrowCFExtends> cfExtends = userService.selectBorrowcfInfo( user.getUid() , 1 );
            if( cfExtends != null && cfExtends.size() > 0 ) {
                return JSON.toJSONString( cfExtends );
@@ -300,7 +302,7 @@ public class UserController {
 //                .create(image);
 //
         //从数据库中取出数据
-        AdminService adminService = new AdminServiceImpl();
+
         User user = adminService.selectAllFingerInfoAndCompare( name );
         if( user != null ) {
             //根据用户去找他是不是用其他借阅的信息 ,1表示没有归还的
@@ -690,7 +692,7 @@ public class UserController {
            return JSON.toJSONString(map);
         }
         List<BorrowCFExtends> bcf = userService.selectBorrowcfByborrowtime(starttime, endtime );
-        if( bcf != null ) {
+        if( bcf != null && bcf.size() > 0  ) {
             return JSON.toJSONString(bcf);
         }else {
             map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
@@ -802,6 +804,9 @@ public class UserController {
     public String insertWaitBorrowInfo( @PathVariable int type , int fileid ,String uid , String wid ) throws Exception {
         HashMap<String , Integer> map = new HashMap<>();
         int result = userService.addBorrowInfo( fileid , type ,uid , wid );
+        if( result == -5 ) {
+            map.put( StatusUtils.statecode , StatusUtils.IS_BORROW );
+        }
         if( result > 0 ){
             map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
         } else {

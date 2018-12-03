@@ -211,7 +211,7 @@
 
     <!--销毁一个文件-->
     <update id="delCompanyFileDestroy"   >
-        UPDATE companyFile SET destroy = 0 , destroyDate = #{destroyDate} where cfid = #{cfid} and state = 1
+        UPDATE companyFile SET destroy = 1 , destroyDate = #{destroyDate} where cfid = #{cfid} and state = 1
     </update>
     <!--清退一个文件 修改清退文件的日期-->
     <update id="delCompanyFileBack" >

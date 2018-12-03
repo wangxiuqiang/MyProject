@@ -56,17 +56,17 @@ public class UserGetFileController {
     }
 
     /**
-     * 根据单项查收文信息  或多项
+     * 根据单项查收文信息  或多项,,然后设置传阅人的数组
      */
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/findTypeGetFiles/{page}/{level}")
+    @RequestMapping(value = "/findTypeGetFiles/{page}/{level}/{pageSize}")
     @RequiresRoles(value = "admin")
     @ResponseBody
-    public String findTypeFiles(@PathVariable Integer page ,@PathVariable Integer level, GetFile getFile, String endtime) throws Exception {
+    public String findTypeFiles(@PathVariable Integer page ,@PathVariable Integer level,@PathVariable Integer pageSize, GetFile getFile, String endtime) throws Exception {
         System.out.println(getFile);
         if(getFile.getGfnumber() != null || (getFile.getGfdatetime() != null && endtime != null) || getFile.getGfcompany() != null
                 || getFile.getGfname() != null) {
-            PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
+            PageHelper.startPage( page,pageSize );
 
             List<GetFile> getFiles = userGetFileService.findTypeFiles(getFile,endtime ,level);
 
@@ -97,11 +97,11 @@ public class UserGetFileController {
      *
      */
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/findGetFiles/{page}/{level}")
+    @RequestMapping(value = "/findGetFiles/{page}/{level}/{pageSize}")
     @RequiresRoles(value = "admin")
     @ResponseBody
-    public String findFiles(@PathVariable Integer page,@PathVariable Integer level) throws Exception {
-        PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
+    public String findFiles(@PathVariable Integer page,@PathVariable Integer pageSize,@PathVariable Integer level) throws Exception {
+        PageHelper.startPage(page,pageSize);
 
         List<GetFile> getFiles = userGetFileService.selectAllGetFile(level);
 
@@ -110,7 +110,7 @@ public class UserGetFileController {
     }
 
     /**
-     * 根据id更新  文件
+     * 根据id更新  文件 ,如果传state = 1就是将文件从删除状态 变成未删除状态
      */
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
     @RequestMapping(value = "/updateSubGetFile")
@@ -211,7 +211,7 @@ public class UserGetFileController {
         }
     }
 /**
- * 清退一个收文
+ * 清退一个收文 如果文件没 别借完,不能进行清退 isborrow != 2
  */
     @RequiresRoles(value = {"admin"} )
     @RequestMapping(value = "/backGetFile")
@@ -224,8 +224,6 @@ public class UserGetFileController {
          } else {
              map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
          }
-
-
          return JSON.toJSONString( map );
     }
 }

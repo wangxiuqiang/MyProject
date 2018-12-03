@@ -18,6 +18,7 @@ public class UploadUtils {
 //        String fwPath = "http://39.106.191.144/OCR/pic/";
         String filename = "";
         String path = "/root/OCR/pic/";
+//        String path = "/home/wxq/finger/";
         try {//定义上传的位置
             //获取文件的日期
             Date date = new Date();

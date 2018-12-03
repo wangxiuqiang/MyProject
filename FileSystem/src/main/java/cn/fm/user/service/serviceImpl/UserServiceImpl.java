@@ -198,12 +198,16 @@ public class UserServiceImpl implements UserService {
 
 
         //根据用户id找到借阅的文件信息
+        System.out.println( "到这里"  );
         List<Borrow> cs = userMapper.selectBorrowcfById(uid);
         List<BorrowCFExtends> bcf = new ArrayList<BorrowCFExtends>();
         cs.forEach(n -> {
+            System.out.println( n.getGivetime()  );
+
             try {
                 BorrowCFExtends bcfe = new BorrowCFExtends();
                 CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(n.getFileid());
+                System.out.println( cf.getCfname() );
                 User user = adminMapper.findWorkerById(uid);
                 bcfe.setUser(user);
                 //找到用户信息
@@ -311,6 +315,7 @@ public class UserServiceImpl implements UserService {
               bcf.setCompanyFile(companyFile);
               bcf.setUser(user);
                 //找到用户信息
+                System.out.println( n.getSecondUid() );
                 if( n.getSecondUid() != 0 ) {
                     user = adminMapper.findWorkerById( n.getSecondUid() );
                     bcf.setUserSecond( user );
@@ -351,8 +356,8 @@ public class UserServiceImpl implements UserService {
         //归还原则:根据数组的长度一个个找出来进行判断
         for(int i = 0;i < fileid.length; i++) {
             //没有被借出 ,表明 传输的有错误 ,  返回一个-5 ,表示  不对
-             int isborrow = userMapper.selectcfisBorrow(fileid[i]);
-            if( isborrow != 2) {
+            int isborrow = userMapper.selectcfisBorrow( fileid[i] );
+            if( isborrow != 1) {
                 return -5;
             }
         }
@@ -370,22 +375,49 @@ public class UserServiceImpl implements UserService {
 //        }
 //        return userMapper.updateCompanyFileBack(borrow.getFileid()) +userMapper.updatecfBackTime(borrow);
     }
+
+    /**
+     * 修改借阅信息的时候,由于是多个人传阅所以要进行 一些要求,要先查出文件的两个字段,比较一下是不是一样,不一样就不是最后一个人,这个文件可以继续借阅,将isborrow改为0,
+     * 同时将其中的一个字段修改,添加一个用户的id,如果一样就isborrow设为2,结束传阅
+     * @param fileid
+     * @return
+     * @throws Exception
+     */
     @Override
     public int updategfBackTime(int[] fileid) throws Exception{
         //如果还多个文件, 就先从这些里面查找是不是用文件已经还了,如果没有的话,在进行归还
         //归还原则:根据数组的长度一个个找出来进行判断
+        int flag[] = new int[fileid.length];
         for(int i = 0;i < fileid.length; i++) {
             //没有被借出 ,表明 传输的有错误 ,  返回一个-5 ,表示  不对
             int isborrow = userMapper.selectgfisBorrow(fileid[i]);
-            if(isborrow != 2) {
+            if(isborrow != 1) {
                 return -5;
             }
-        }
-        if(userMapper.updateGetFileBack(fileid) != 0) {
-            System.out.println(userMapper.updateGetFileBack(fileid));
-            if(userMapper.updategfBackTime(fileid) != 0) {
-                return 1;
+            GetFile getFile = userGetFileMapper.selectGetFileById( fileid[i] );
+            if ( getFile.getGfpersonRead().equals( getFile.getGfpersonReadCom() ) ) {
+                flag[i] = 2;
+            } else  {
+                if( getFile.getGfpersonReadCom() == null ) {
+                    getFile.setGfpersonReadCom(  "" +fileid );
+                } else {
+                    getFile.setGfpersonReadCom( getFile.getGfpersonReadCom() + "," +fileid );
+                }
+                flag[i] = 0;
             }
+        }
+//        根据id查找信息
+        int result = 0;
+        if(userMapper.updategfBackTime(fileid) != 0) {
+
+            for( int i =0; i < fileid.length ; i++ ) {
+                result += userMapper.updateGetFileBack(fileid[i] , flag[i]) ;
+                System.out.println(userMapper.updateGetFileBack(fileid[i] , flag[i]));
+            }
+
+        }
+        if( result == fileid.length ) {
+            return 1;
         }
         return 0;
 //        String time = DateToStringUtils.dataTostring();
@@ -516,7 +548,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<CompanyFile> selectcfWaitBorrow(   int uid, int wid  ) throws Exception{
-        int fileids[] = userMapper.selectcfWaitBorrow(  wid ) ;
+        int[] fileids = userMapper.selectcfWaitBorrow(  wid ) ;
+//        System.out.println(fileids[0]);
         List<CompanyFile> companyFiles = new ArrayList<>();
         for( int i = 0; i < fileids.length; i++ ) {
             CompanyFile companyFile = userCompanyFileMapper.selectCompanyFileById( fileids[i] );
@@ -525,6 +558,7 @@ public class UserServiceImpl implements UserService {
             }
 
         }
+        System.out.println( companyFiles.size() );
         if( companyFiles.size() > 0 ) {
             return companyFiles;
         }
@@ -644,32 +678,50 @@ public class UserServiceImpl implements UserService {
         String[] wids = wid.split(",");
         borrow.setFileid( fileid );
         if( type == 2) {
-            //收文
-            result = updategfWaitBorrow( fileid );
-//            System.out.println( result );
+            /**
+             * 先检查 isborrow  是否为 2和1.如果是的话,那么就能进行 ,否则返回 -5
+             */
+            int flag = userMapper.selectgfisBorrow( fileid );
+            System.out.println( flag );
 
-            if( result > 0) {
-                for ( int i = 0; i < uids.length ; i++ ) {
-                    borrow.setUid( Integer.parseInt( uids[i] ) );
-                    borrow.setWid( Integer.parseInt( wids[i] ) );
-                    result = insertgfWaitBorrowInfo( borrow );
+            if( flag != 1 || flag != 2) {
+                //收文
+                result = updategfWaitBorrow( fileid );
+            System.out.println( result +" 这是结果" );
+
+                if( result > 0) {
+                    for ( int i = 0; i < uids.length ; i++ ) {
+                        borrow.setUid( Integer.parseInt( uids[i] ) );
+                        borrow.setWid( Integer.parseInt( wids[i] ) );
+                        result = insertgfWaitBorrowInfo( borrow );
+                        System.out.println( result +" 这是结果2" );
+                    }
+
                 }
 
+                return result;
+            } else {
+                return -5;
             }
 
-            return result;
         } else {
-            result = updatecfWaitBorrow( fileid );
+            int flag = userMapper.selectgfisBorrow( fileid );
+            if( flag != 1 || flag != 2) {
+                result = updatecfWaitBorrow( fileid );
 //            System.out.println( result );
-            if( result > 0) {
-                for ( int i = 0; i < uids.length ; i++ ) {
-                    borrow.setUid( Integer.parseInt( uids[i] ) );
-                    borrow.setWid( Integer.parseInt( wids[i] ) );
-                    result = insertcfWaitBorrowInfo( borrow );
-                }
+                if( result > 0) {
+                    for ( int i = 0; i < uids.length ; i++ ) {
+                        borrow.setUid( Integer.parseInt( uids[i] ) );
+                        borrow.setWid( Integer.parseInt( wids[i] ) );
+                        result = insertcfWaitBorrowInfo( borrow );
+                    }
 
+                }
+                return result;
+            } else {
+                return -5;
             }
-            return result;
+
         }
     }
     /**

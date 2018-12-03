@@ -5,14 +5,14 @@
 <mapper namespace="cn.fm.user.dao.UserGetFileMapper">
     <sql id="Base_Columns_List">
         gfid,gfname , gfidea, gfloader,gffrom,gettime ,gflevel,waitborrow,back
-         ,gfcompany, gfresult, gfdatetime,gfnumber,type,isborrow,gfpartnumber,gfpersonRead,state,backDate
+         ,gfcompany, gfresult, gfdatetime,gfnumber,type,isborrow,gfpartnumber,gfpersonRead,state,backDate,gfpersonReadCom
     </sql>
 
     <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile">
           insert into getFile(gfname,gfdatetime,gfnumber,gffrom,gettime,gflevel,gfpartnumber,
-          gfidea,gfresult,gfloader,gfcompany) values(#{gfname},#{gfdatetime},#{gfnumber},
+          gfidea,gfresult,gfloader,gfcompany,gfpersonRead) values(#{gfname},#{gfdatetime},#{gfnumber},
           #{gffrom} ,#{gettime},#{gflevel},#{gfpartnumber},#{gfidea},
-          #{gfresult}, #{gfloader},#{gfcompany})
+          #{gfresult}, #{gfloader},#{gfcompany},#{gfpersonRead})
       </insert>
 
     <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
@@ -114,8 +114,6 @@
             </if>
             and state=1
         </where>
-
-
     </select>
     <!--
 

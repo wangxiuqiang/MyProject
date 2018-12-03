@@ -14,6 +14,7 @@
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/dao/UserGetFileMapper.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/UserRegService.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/controller/AdminAddUserController.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/fileSystemChange/service/serviceImpl/FileServiceImpl.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/controller/UserController.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/FingerUtils.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/StatusUtils.java
@@ -26,16 +27,19 @@
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/vo/BorrowCFExtends.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/dao/UserRegMapper.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/vo/BorrowGFExtends.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/fileSystemChange/dao/FileDao.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/Permission.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/MysqlBackupUtils.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/CompanyFile.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/Realm/MyRealm.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/fileSystemChange/service/FileService.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/UserCompanyFileService.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/utils/PassWordHelper.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/dao/UserMapper.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/vo/FingerUser.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/pojo/Role.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/serviceImpl/UserServiceImpl.java
+/home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/fileSystemChange/controller/FileController.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/ExceptionHandler/ExceptionHandlers.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/dao/AdminMapper.java
 /home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/admin/controller/LoginController.java

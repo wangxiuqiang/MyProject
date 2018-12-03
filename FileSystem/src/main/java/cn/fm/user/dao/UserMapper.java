@@ -58,7 +58,7 @@ public interface UserMapper {
      * @throws Exception
      */
     public int updateGetFileIsBorrow(@Param(value = "gfid") int gfid) throws Exception;
-    public int updateGetFileBack(@Param(value = "fileid") int[] fileid) throws Exception;
+    public int updateGetFileBack(@Param(value = "fileid") int fileid,@Param(value = "isborrow") int isborrow) throws Exception;
 
     /**
      * 更新归还时间

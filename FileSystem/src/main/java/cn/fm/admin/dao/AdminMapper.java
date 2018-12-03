@@ -131,7 +131,7 @@ public interface AdminMapper {
      * @return
      * @throws Exception
      */
-    public int  updateUser_Role(int uid,int rid) throws Exception;
+    public int  updateUser_Role(@Param(value = "uid") int uid,@Param(value = "rid") int rid) throws Exception;
 
     /**
      * 用于前端的展示
@@ -164,7 +164,7 @@ public interface AdminMapper {
      * @return
      * @throws Exception
      */
-    public int updateCompany ( WorkPlace workPlace ) throws Exception;
+    public int updateCompany (@Param(value = "workPlace") WorkPlace workPlace ) throws Exception;
     /**
      * 添加分类
      * @param classify

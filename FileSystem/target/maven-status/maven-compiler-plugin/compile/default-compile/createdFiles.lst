@@ -42,9 +42,13 @@ cn/fm/utils/MysqlBackupUtils.class
 cn/fm/utils/UploadUtils.class
 cn/fm/admin/service/AdminService.class
 cn/fm/user/controller/UserGetFileController.class
+cn/fm/fileSystemChange/service/FileService.class
+cn/fm/fileSystemChange/controller/FileController.class
 cn/fm/user/service/UserGetFileService.class
+cn/fm/fileSystemChange/service/serviceImpl/FileServiceImpl.class
 cn/fm/vo/FingerUser.class
 cn/fm/pojo/CompanyFile.class
 cn/fm/admin/controller/AdminController.class
 cn/fm/pojo/Borrow.class
+cn/fm/fileSystemChange/dao/FileDao.class
 cn/fm/utils/StatusUtils.class

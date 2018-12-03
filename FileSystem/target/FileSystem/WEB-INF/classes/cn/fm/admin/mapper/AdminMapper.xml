@@ -165,14 +165,7 @@
     </delete>
     <!--更新 用户单位-->
     <update id="updateCompany" parameterType="cn.fm.pojo.WorkPlace">
-        update workPlace
-        <set>
-            <if test="wname != null">
-                wname = #{wname}
-            </if>
-
-        </set>
-        where wid = #{wid}
+        update workPlace set wname=#{workPlace.wname} where wid=#{workPlace.wid}
     </update>
     <!--添加分类 -->
     <insert id="insertClassify" parameterType="cn.fm.pojo.Classify"  useGeneratedKeys="true" keyProperty="cyid">

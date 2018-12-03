@@ -5,6 +5,7 @@ package cn.fm.utils;
  */
 public class RmFileUtils {
     private static String cmd = "rm -r /root/OCR/pic/*";
+//    private static String cmd = "rm -r /home/wxq/finger/*";
     public static void rmFile() throws  Exception {
         Process process = Runtime.getRuntime().exec(cmd);
         process.waitFor();
