@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fm.fileSystemChange.dao.FileDao">
+
+    <sql id="Base_Columns_List">
+        cfid,cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
+        cfsend,cflevel,cffontid,cfnumber,cflanguage ,cfloader,type,isborrow,waitborrow,
+        destroy,back,backDate,destroyDate,leveltime,state
+    </sql>
+    <sql id="Base_Borrow_List">
+       fileid,uid,wid,borrowtime,backtime,state,givetime,shouldback,secondUid
+    </sql>
+<!--添加发文的信息-->
+    <insert id="insertCompanyFile" parameterType="cn.fm.pojo.CompanyFile" >
+        insert into companyFile(cfname,cfclassifyid,cfclassifyname,cfaddress,cfdate,cfeditor,cfaccept,
+        cfsend,cflevel,cffontid,cfnumber,cflanguage,cfloader , leveltime) values(#{cfname},
+        #{cfclassifyid} ,#{cfclassifyname},#{cfaddress},#{cfdate},#{cfeditor},#{cfaccept},
+        #{cfsend},#{cflevel},#{cffontid},#{cfnumber},#{cflanguage},#{cfloader}, #{leveltime})
+    </insert>
+    <!--添加文件借阅信息-->
+    <insert id="insertBorrow_CompanyFile" parameterType="cn.fm.pojo.Borrow">
+        insert into borrow_companyFile(fileid,uid,wid,givetime) VALUES (#{fileid},#{uid},#{wid},#{givetime})
+    </insert>
+    <!--根据文件id查看文件信息-->
+    <select id="selectCompanyFileByCFId" resultType="cn.fm.pojo.CompanyFile" parameterType="java.lang.Integer">
+        select <include refid="Base_Columns_List"/> from companyFile where cfid =#{cfid};
+    </select>
+    <!--查借阅信息,如果borrowtime不等与null 查的是被领走的 结合backtime 查被领走,或者已归还的-->
+    <select id="selectBorrow_CompanyFile" resultType="cn.fm.pojo.Borrow" parameterType="cn.fm.pojo.Borrow">
+        select <include refid="Base_Borrow_List"/> from borrow_companyFile
+        <where>
+            <if test="fileid != 0" >
+                fileid = #{fileid}
+            </if>
+            <if test="wid != 0">
+                and wid =#{wid}
+            </if>
+            <if test="uid != 0">
+                and uid = #{uid}
+            </if>
+            <if test="backtime == null">
+               and backtime=null
+            </if>
+            <if test="backtime != null">
+                and backtime!=null
+            </if>
+            <if test="borrowtime == null">
+                and borrowtime=null
+            </if>
+            <if test="borrowtime != null">
+                and borrowtime!=null
+            </if>
+            <if test="secondUid != 0">
+                and secondUid=#{secondUid}
+            </if>
+        </where>
+    </select>
+    <!--根据文件的id修改借阅表的-->
+    <update id="updateBorrow_CompanyFileByCFId" parameterType="cn.fm.pojo.Borrow" >
+        update borrow_companyFile
+        <set>
+            <if test="uid != 0">
+                uid=#{uid},
+            </if>
+            <if test="wid != 0" >
+                wid =#{wid},
+            </if>
+            <if test="givetime != null">
+                givetime = #{givetime},
+            </if>
+            <if test="backtime != null">
+                backtime = #{backtime},
+            </if>
+            <if test="borrowtime != null">
+                borrowtime=#{borrowtime},
+            </if>
+            <if test="secondUid != 0">
+                secondUid = #{secondUid},
+            </if>
+            <if test="shouldback != null">
+                shouldback=#{shouldback},
+            </if>
+            <if test="fileid != 0">
+                fileid=#{fileid}
+            </if>
+            <if test="state != 0">
+                state=#{state}
+            </if>
+        </set>
+        where fileid = #{fileid}
+    </update>
+    <!--修改文件信息-->
+    <update id="updateCompanyFileById" parameterType="cn.fm.pojo.CompanyFile" >
+        update companyFile
+        <set>
+            <if test="isborrow != 0">
+                isborrow = #{isborrow},
+            </if>
+            <if test="cfname != null">
+                cfname = #{cfname},
+            </if>
+            <if test="cfaccept !=null">
+                cfaccept=#{cfaccept},
+            </if>
+            <if test="cfeditor != null">
+                cfeditor = #{cfeditor},
+            </if>
+            <if test="cfsend != null" >
+                cfsend = #{cfsend},
+            </if>
+            <if test="cflevel != null">
+                cflevel = #{cflevel},
+            </if>
+            <if test="leveltime != null">
+                leveltime = #{leveltime},
+            </if>
+            <if test="cfloader != null">
+                cfloader =#{cfloader},
+            </if>
+            <if test="cfnumber != 0">
+                cfnumber = #{cfnumber},
+            </if>
+            <if test="cffontid != null">
+                cffontid = #{cffontid},
+            </if>
+            <if test="cflanguage != null" >
+                cflanguage = #{cflanguage},
+            </if>
+            <if test="state != 0">
+                state = #{state},
+            </if>
+            <if test="waitborrow != 0">
+                waitborrow = #{waitborrow},
+            </if>
+            <if test="destroy != 0 ">
+                destroy = #{destroy},
+            </if>
+            <if test="back != 0">
+                back = #{back},
+            </if>
+            <!--<if test="back != 0">-->
+                <!--back = #{back},-->
+            <!--</if>-->
+            <if test="destroyDate != null">
+                destroyDate = #{destroyDate},
+            </if>
+            <if test="backDate != null">
+                backDate = #{backDate}
+            </if>
+        </set>
+    </update>
+    <!--修改文件为删除状态-->
+    <update id="delCompanyFileById" parameterType="java.lang.Integer">
+        update companyFile set state=0 where cfid=#{cfid}
+    </update>
+    <update id="delBorrow_CompanyFileByCFId" parameterType="java.lang.Integer">
+        update borrow_companyFile set borrowstate=0 WHERE fileid=#{cfid}
+    </update>
+    <!--查询文件的信息,根据除id以外的所有字段-->
+    <!--扩展类的文件map-->
+    <resultMap id="companyFileMap" type="cn.fm.vo.BorrowCFExtends">
+        <association property="borrow" javaType="cn.fm.pojo.Borrow">
+            <result property="fileid" column="fileid" />
+            <result property="wid" column="wid"/>
+            <result property="uid" column="uid"/>
+            <result property="secondUid" column="secondUid"/>
+            <result property="backtime" column="backtime" />
+            <result property="shouldback" column="shouldback"/>
+            <result property="givetime" column="givetime"/>
+            <result property="borrowtime" column="borrow"/>
+            <result property="borrowstate" column="borrowstate"/>
+        </association>
+        <association property="companyFile" javaType="cn.fm.pojo.CompanyFile">
+            <id property="cfid" column="cfid"/>
+            <result property="cfname" column="cfname"/>
+            <result property="cfdate" column="cfdate"/>
+            <result property="cfaccept" column="cfaccept"/>
+            <result property="cfeditor" column="cfeditor"/>
+            <result property="cfsend" column="cfsend"/>
+            <result property="cflevel" column="cflevel"/>
+            <result property="leveltime" column="leveltime"/>
+            <result property="cfloader" column="cfloader"/>
+            <result property="cfnumber" column="cfnumber"/>
+            <result property="cffontid" column="cffontid"/>
+            <result property="cflanguage" column="cflanguage"/>
+            <result property="cfaddress" column="cfaddress"/>
+            <result property="cfclassifyid" column="cfclassifyid"/>
+            <result property="cfclassifyname" column="cfclassifyname"/>
+            <result property="type" column="type"/>
+            <result property="isborrow" column="isborrow"/>
+            <result property="state" column="state"/>
+            <result property="waitborrow" column="waitborrow"/>
+            <result property="destroy" column="destroy"/>
+            <result property="destroyDate" column="destroyDate"/>
+            <result property="back" column="back"/>
+            <result property="backDate" column="backDate"/>
+        </association>
+    </resultMap>
+    <!--isborrow 有三种情况0,1,2 ,0表示没被借走,1表示借走没还,2表示归还了的,下面用isborrow!=0做条件
+    就是说,如果 isborrow=0就会查看所有的文件的信息, waitborrow也是一个意思,0,1,2,0表示没有分配,1表示
+    分配了没有领走,2表示领走了,一般只根据1来查询-->
+    <select id="selectCompanyFile" resultMap="companyFileMap">
+        select * from companyFile cf
+        left join borrow_companyFile bcf on (bcf.fileid = cf.cfid)
+        <where>
+            <if test="companyFile.cfname != null">
+                cf.cfname like concat(concat('%',#{companyFile.cfname}), '%')
+            </if>
+            <if test="companyFile.cfdate != null" >
+                and cf.cfdate  &gt;= #{companyFile.cfdate} and cfdate &lt;= #{endtime}
+            </if>
+            <if test="companyFile.cfaccept != null">
+                and cf.cfaccept = #{companyFile.cfaccept}
+            </if>
+            <if test="companyFile.cfeditor != null">
+                and cf.cfeditor = #{companyFile.cfeditor}
+            </if>
+            <if test="companyFile.cfsend != null">
+                and cf.cfsend = #{companyFile.cfsend}
+            </if>
+            <if test="level == 1">
+                and cf.cflevel != "普通"
+            </if>
+            <if test="level == 2">
+                AND cf.cflevel = "普通"
+            </if>
+            <if test="companyFile.cflanguage != null">
+                and cf.cflanguage = #{companyFile.cflanguage}
+            </if>
+            <if test="companyFile.cfclassifyid != 0">
+                and cf.cfclassifyid = #{companyFile.cfclassifyid}
+            </if>
+            <if test="companyFile.isborrow != 0">
+                and cf.isborrow = #{companyFile.isborrow}
+            </if>
+            <if test="companyFile.waitborrow != 0">
+                and cf.waitborrow = #{companyFile.waitborrow}
+            </if>
+            <if test="companyFile.destroy != 0">
+               and cf.destroy =#{companyFile.destroy}
+            </if>
+            <if test="companyFile.back != 0">
+              and  cf.back = #{companyFile.back}
+            </if>
+            and cf.state = #{state}
+        </where>
+    </select>
+    <!--根据用户id查找他领取和分配给他的文件信息-->
+    <select id="selectCompanyFileByUid" parameterType="java.lang.Integer" resultMap="companyFileMap">
+        select * from companyFile cf
+        left join borrow_companyFile bcf on (bcf.fileid = cf.cfid) where bcf.uid = #{uid} OR  bcf.secondUid = #{uid}
+        and cf.state=#{state}
+    </select>
+</mapper>
