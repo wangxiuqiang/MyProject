@@ -33,7 +33,7 @@
     <!--</insert>-->
     <!--查找工作的单位-->
     <select id="selectWorkPlace" resultType="cn.fm.pojo.WorkPlace" >
-        select wid ,wname from workPlace;
+        select wid ,wname from workPlace
     </select>
     <!--查找用户是不是存在-->
     <!--<select id="selectEmailIfExist" parameterType="java.lang.String" resultType="java.lang.String">-->

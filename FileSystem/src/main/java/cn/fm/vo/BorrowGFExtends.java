@@ -12,6 +12,24 @@ public class BorrowGFExtends {
      private String sholdback;
      private String givetime;
     private Borrow borrow;
+    private User userSecond;
+    private User userThird;
+
+    public User getUserSecond() {
+        return userSecond;
+    }
+
+    public void setUserSecond(User userSecond) {
+        this.userSecond = userSecond;
+    }
+
+    public User getUserThird() {
+        return userThird;
+    }
+
+    public void setUserThird(User userThird) {
+        this.userThird = userThird;
+    }
 
     public Borrow getBorrow() {
         return borrow;

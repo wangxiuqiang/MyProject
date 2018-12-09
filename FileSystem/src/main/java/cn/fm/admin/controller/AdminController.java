@@ -104,7 +104,7 @@ public class AdminController {
         PageInfo<WorkPlace> pageInfo = new PageInfo<WorkPlace>(list);
 
        // System.out.println(list.get(0).getWid());
-         return JSON.toJSONString(list);
+         return JSON.toJSONString(pageInfo);
     }
 
     /**
@@ -288,7 +288,7 @@ public class AdminController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/delCompany")
     @ResponseBody
-    public String delCompany ( int wid ) throws Exception {
+    public String delCompany ( String wid ) throws Exception {
         HashMap<String,Integer> map = new HashMap<>();
         int result = adminService.delCompany( wid );
             if(result > 0) {

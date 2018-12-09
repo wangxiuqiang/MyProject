@@ -272,8 +272,16 @@ public class AdminServiceImpl implements AdminService{
      * @throws Exception
      */
     @Override
-    public int delCompany( int wid ) throws Exception {
-        return adminMapper.delCompany(wid);
+    public int delCompany( String wid ) throws Exception {
+        String[] wids = wid.split(",");
+        int result = 0;
+        for (int i = 0; i < wids.length ; i++) {
+            result = adminMapper.delCompany( Integer.parseInt( wids[i]));
+        }
+        if( result == wids.length ) {
+            return 1;
+        }
+        return 0;
     }
 
     /**

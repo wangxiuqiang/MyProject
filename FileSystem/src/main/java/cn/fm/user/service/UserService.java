@@ -37,13 +37,13 @@ public interface UserService {
      * 更新归还时间  ,同时在这里面完成对文件状态的改变
      */
     public int updatecfBackTime(int[] fileid) throws Exception;
-    public int updategfBackTime(int[] fileid) throws Exception;
+    public int updategfBackTime(int[] fileid ,int uid , int wid) throws Exception;
 
     /**
      * 查询一个用户所有的借阅数据
      */
-    public List<BorrowCFExtends> selectBorrowcfInfo(int uid,int flag) throws Exception;
-    public List<BorrowGFExtends> selectBorrowgfInfo(int uid,int flag) throws Exception;
+    public List<BorrowCFExtends> selectBorrowcfInfo(int wid,int flag) throws Exception;
+    public List<BorrowGFExtends> selectBorrowgfInfo(int wid,int flag) throws Exception;
 
     /**
      * 查询一个文件所有的借阅数据

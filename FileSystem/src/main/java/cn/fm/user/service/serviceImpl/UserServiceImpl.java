@@ -128,13 +128,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insertBorrowgfInfo(int uid,int gfid ,int wid) throws Exception{
         Borrow borrow = new Borrow();
-
+        System.out.println(gfid);
         //查看这些文件是不是被借了,如果被借了就返回 - 5
         int isBorrow = userMapper.selectgfisBorrow(gfid);
 //        for(int j = 0; j < isBorrow.length; j++){
 //            if(isBorrow[j] == 2) {
 //                return -5;
 //            }
+        System.out.println(isBorrow);
         if( isBorrow == 2) {
             return -5;
         }
@@ -147,11 +148,13 @@ public class UserServiceImpl implements UserService {
         borrow.setShouldback( dateAddToTomorrow() );
         //修改借阅表
             int r = userMapper.insertBorrowgfInfo(borrow);
+        System.out.println(gfid);
             if(r == 0) {
                 return -4;
             }
             //修改文件表,文件信息
            int re = userMapper.updateGetFileIsBorrow(gfid);
+        System.out.println(gfid);
             if(re == 0) {
                 return -4;
             }
@@ -159,20 +162,67 @@ public class UserServiceImpl implements UserService {
         return  1;
     }
 /**
- *  查询一个用户所有的借阅出去的文件 ,如果flag = 0 表示所有的借阅信息, fflag = 1 表示没有还的,flag = 2表示还了的.
+ *  查询一个单位所有的借阅出去的文件 ,如果flag = 0 表示所有的借阅信息, fflag = 1 表示没有还的,flag = 2表示还了的.
  */
     @Override
-    public List<BorrowCFExtends> selectBorrowcfInfo(int uid,int flag) throws Exception{
-        if(uid == 0) {
+    public List<BorrowCFExtends> selectBorrowcfInfo(int wid,int flag) throws Exception{
+        if(wid == 0) {
             List<Borrow> cs = userMapper.selectBorrowcfById(0);
+            if( cs != null && cs.size() > 0) {
+                List<BorrowCFExtends> bcf = new ArrayList<BorrowCFExtends>();
+                cs.forEach(n -> {
+                    try {
+                        BorrowCFExtends bcfe = new BorrowCFExtends();
+                        CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(n.getFileid());
+                        System.out.println(n.getUid() + "``````````````````````````````````````");
+
+                        User user = adminMapper.findWorkerById(n.getUid());
+                        bcfe.setUser(user);
+
+                        if( n.getSecondUid() != 0 ) {
+                            user = adminMapper.findWorkerById( n.getSecondUid() );
+                            bcfe.setUserSecond( user );
+                        }
+                        bcfe.setCompanyFile(cf);
+                        bcfe.setBorrowtime(n.getBorrowtime());
+                        bcfe.setBacktime(n.getBacktime());
+                        if(flag == 0) {
+                            bcf.add(bcfe);
+                        }
+                        if(flag == 1 && n.getBacktime() == null  && n.getBorrowtime() != null) {
+                            bcf.add(bcfe);
+                        }
+                        if(flag == 2 && n.getBacktime() != null){
+                            bcf.add(bcfe);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+                return bcf;
+            } else {
+                return null;
+            }
+
+        }
+
+
+        //根据用户id找到借阅的文件信息
+        System.out.println( "到这里"  );
+        List<Borrow> cs = userMapper.selectBorrowcfById(wid);
+        if( cs != null && cs.size() > 0) {
             List<BorrowCFExtends> bcf = new ArrayList<BorrowCFExtends>();
             cs.forEach(n -> {
+                System.out.println( n.getGivetime()  );
+
                 try {
                     BorrowCFExtends bcfe = new BorrowCFExtends();
                     CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(n.getFileid());
-                    System.out.println(n.getUid() + "``````````````````````````````````````");
-                    User user = adminMapper.findWorkerById(n.getUid());
+                    System.out.println( cf.getCfname() );
+                    User user = adminMapper.findWorkerById( n.getUid()  );
                     bcfe.setUser(user);
+
+                    //找到用户信息
                     if( n.getSecondUid() != 0 ) {
                         user = adminMapper.findWorkerById( n.getSecondUid() );
                         bcfe.setUserSecond( user );
@@ -183,7 +233,7 @@ public class UserServiceImpl implements UserService {
                     if(flag == 0) {
                         bcf.add(bcfe);
                     }
-                    if(flag == 1 && n.getBacktime() == null) {
+                    if(flag == 1 && n.getBacktime() == null  && n.getBorrowtime() != null) {
                         bcf.add(bcfe);
                     }
                     if(flag == 2 && n.getBacktime() != null){
@@ -194,58 +244,91 @@ public class UserServiceImpl implements UserService {
                 }
             });
             return bcf;
+        } else {
+            return null;
+        }
+
+    }
+    @Override
+    public List<BorrowGFExtends> selectBorrowgfInfo(int wid,int flag) throws Exception{
+        if(wid == 0) {
+            List<Borrow> bs = userMapper.selectBorrowgfById(0);
+            if( bs != null && bs.size() > 0) {
+                List<BorrowGFExtends> bgf = new ArrayList<BorrowGFExtends>();
+                bs.forEach(n -> {
+                    try {
+                        BorrowGFExtends bgfe = new BorrowGFExtends();
+                        GetFile gf = userGetFileMapper.selectGetFileById(n.getFileid());
+                        User user = adminMapper.findWorkerById(n.getUid());
+                        System.out.println(user.toString() + "`````````````````````````");
+                        bgfe.setUser(user);
+                        System.out.println( n.getSecondUid() );
+                        System.out.println( n.getThirdUid()  );
+
+                        if( n.getSecondUid() != 0 ) {
+                            user = adminMapper.findWorkerById( n.getSecondUid() );
+
+                            bgfe.setUserSecond(user);
+                        }
+                        System.out.println( user.getUname() );
+                        if( n.getThirdUid() != 0 ) {
+                            user = adminMapper.findWorkerById( n.getThirdUid() );
+                            System.out.println( user.getUname() );
+                            bgfe.setUserThird(user);
+                        }
+                        bgfe.setGetFile(gf);
+                        bgfe.setBorrowtime(n.getBorrowtime());
+                        bgfe.setGivetime( n.getGivetime() );
+                        bgfe.setSholdback( n.getBacktime() );
+                        bgfe.setBacktime(n.getBacktime());
+                        System.out.println(n.getBacktime());
+                        if(flag == 0) {
+                            bgf.add(bgfe);
+                        }
+                        if(flag == 1 && n.getBacktime() == null && n.getBorrowtime() != null ) {
+                            bgf.add(bgfe);
+                        }
+                        if(flag == 2 && n.getBacktime() != null){
+                            bgf.add(bgfe);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+                return bgf;
+            } else {
+                return null;
+            }
         }
 
 
-        //根据用户id找到借阅的文件信息
-        System.out.println( "到这里"  );
-        List<Borrow> cs = userMapper.selectBorrowcfById(uid);
-        List<BorrowCFExtends> bcf = new ArrayList<BorrowCFExtends>();
-        cs.forEach(n -> {
-            System.out.println( n.getGivetime()  );
+        //找到用户信息
 
-            try {
-                BorrowCFExtends bcfe = new BorrowCFExtends();
-                CompanyFile cf = userCompanyFileMapper.selectCompanyFileById(n.getFileid());
-                System.out.println( cf.getCfname() );
-                User user = adminMapper.findWorkerById(uid);
-                bcfe.setUser(user);
-                //找到用户信息
-                if( n.getSecondUid() != 0 ) {
-                    user = adminMapper.findWorkerById( n.getSecondUid() );
-                    bcfe.setUserSecond( user );
-                }
-                bcfe.setCompanyFile(cf);
-                bcfe.setBorrowtime(n.getBorrowtime());
-                bcfe.setBacktime(n.getBacktime());
-                if(flag == 0) {
-                    bcf.add(bcfe);
-                }
-                if(flag == 1 && n.getBacktime() == null) {
-                    bcf.add(bcfe);
-                }
-                if(flag == 2 && n.getBacktime() != null){
-                    bcf.add(bcfe);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-       return bcf;
-    }
-    @Override
-    public List<BorrowGFExtends> selectBorrowgfInfo(int uid,int flag) throws Exception{
-        if(uid == 0) {
-            List<Borrow> bs = userMapper.selectBorrowgfById(0);
+        //根据用户id找到借阅的文件信息
+        List<Borrow> bs = userMapper.selectBorrowgfById(wid);
+        if( bs != null && bs.size() > 0) {
             List<BorrowGFExtends> bgf = new ArrayList<BorrowGFExtends>();
             bs.forEach(n -> {
                 try {
                     BorrowGFExtends bgfe = new BorrowGFExtends();
                     GetFile gf = userGetFileMapper.selectGetFileById(n.getFileid());
-                    User user = adminMapper.findWorkerById(n.getUid());
-                    System.out.println(user.toString() + "`````````````````````````");
+                    User user = adminMapper.findWorkerById( n.getUid() );
                     bgfe.setUser(user);
                     bgfe.setGetFile(gf);
+                    System.out.println( n.getSecondUid() );
+                    System.out.println( n.getThirdUid()  );
+                    if( n.getSecondUid() != 0 ) {
+                        user = adminMapper.findWorkerById( n.getSecondUid() );
+                        System.out.println( user.getUname() );
+
+                        bgfe.setUserSecond(user);
+                    }
+                    if( n.getThirdUid() != 0 ) {
+                        user = adminMapper.findWorkerById( n.getThirdUid() );
+                        System.out.println( user.getUname() );
+
+                        bgfe.setUserThird(user);
+                    }
                     bgfe.setBorrowtime(n.getBorrowtime());
                     bgfe.setGivetime( n.getGivetime() );
                     bgfe.setSholdback( n.getBacktime() );
@@ -253,7 +336,7 @@ public class UserServiceImpl implements UserService {
                     if(flag == 0) {
                         bgf.add(bgfe);
                     }
-                    if(flag == 1 && n.getBacktime() == null) {
+                    if(flag == 1 && n.getBacktime() == null  && n.getBorrowtime() != null) {
                         bgf.add(bgfe);
                     }
                     if(flag == 2 && n.getBacktime() != null){
@@ -264,38 +347,10 @@ public class UserServiceImpl implements UserService {
                 }
             });
             return bgf;
+        } else {
+            return null;
         }
 
-
-        //找到用户信息
-        User user = adminMapper.findWorkerById(uid);
-        //根据用户id找到借阅的文件信息
-        List<Borrow> bs = userMapper.selectBorrowgfById(uid);
-        List<BorrowGFExtends> bgf = new ArrayList<BorrowGFExtends>();
-        bs.forEach(n -> {
-            try {
-                BorrowGFExtends bgfe = new BorrowGFExtends();
-                GetFile gf = userGetFileMapper.selectGetFileById(n.getFileid());
-                bgfe.setUser(user);
-                bgfe.setGetFile(gf);
-                bgfe.setBorrowtime(n.getBorrowtime());
-                bgfe.setGivetime( n.getGivetime() );
-                bgfe.setSholdback( n.getBacktime() );
-                bgfe.setBacktime(n.getBacktime());
-                if(flag == 0) {
-                    bgf.add(bgfe);
-                }
-                if(flag == 1 && n.getBacktime() == null) {
-                    bgf.add(bgfe);
-                }
-                if(flag == 2 && n.getBacktime() != null){
-                    bgf.add(bgfe);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        return bgf;
     }
 
     /**
@@ -310,10 +365,12 @@ public class UserServiceImpl implements UserService {
             try {
               BorrowCFExtends bcf = new BorrowCFExtends();
               User user = adminMapper.findWorkerById(n.getUid());
+              bcf.setGivetime( n.getGivetime() );
               bcf.setBacktime(n.getBacktime());
               bcf.setBorrowtime(n.getBorrowtime());
               bcf.setCompanyFile(companyFile);
               bcf.setUser(user);
+
                 //找到用户信息
                 System.out.println( n.getSecondUid() );
                 if( n.getSecondUid() != 0 ) {
@@ -340,6 +397,15 @@ public class UserServiceImpl implements UserService {
                 bgf.setBorrowtime(n.getBorrowtime());
                 bgf.setGetFile(getFile);
                 bgf.setUser(user);
+                if( n.getSecondUid() != 0 ) {
+                    user = adminMapper.findWorkerById( n.getSecondUid() );
+                    bgf.setUserSecond(user);
+                }
+                System.out.println( n.getThirdUid() );
+                if( n.getThirdUid() != 0 ) {
+                    user = adminMapper.findWorkerById( n.getThirdUid() );
+                    bgf.setUserThird(user);
+                }
                 bgfes.add(bgf);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -384,39 +450,41 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
     @Override
-    public int updategfBackTime(int[] fileid) throws Exception{
+    public int updategfBackTime(int[] fileid , int uid , int wid) throws Exception{
         //如果还多个文件, 就先从这些里面查找是不是用文件已经还了,如果没有的话,在进行归还
         //归还原则:根据数组的长度一个个找出来进行判断
         int flag[] = new int[fileid.length];
+        GetFile getFile = null;
         for(int i = 0;i < fileid.length; i++) {
             //没有被借出 ,表明 传输的有错误 ,  返回一个-5 ,表示  不对
             int isborrow = userMapper.selectgfisBorrow(fileid[i]);
             if(isborrow != 1) {
                 return -5;
             }
-            GetFile getFile = userGetFileMapper.selectGetFileById( fileid[i] );
-            if ( getFile.getGfpersonRead().equals( getFile.getGfpersonReadCom() ) ) {
+             getFile = userGetFileMapper.selectGetFileById( fileid[i] );
+            if ( getFile.getGfpersonRead().length() ==  getFile.getGfpersonReadCom().length()  ) {
                 flag[i] = 2;
             } else  {
                 if( getFile.getGfpersonReadCom() == null ) {
-                    getFile.setGfpersonReadCom(  "" +fileid );
+                    getFile.setGfpersonReadCom(  "" + uid );
                 } else {
-                    getFile.setGfpersonReadCom( getFile.getGfpersonReadCom() + "," +fileid );
+                    getFile.setGfpersonReadCom( getFile.getGfpersonReadCom() + "," +uid );
                 }
                 flag[i] = 0;
             }
         }
 //        根据id查找信息
         int result = 0;
-        if(userMapper.updategfBackTime(fileid) != 0) {
-
+        if(userMapper.updategfBackTime(fileid ,wid, uid) != 0) {
+//更新所有文件的标志位
             for( int i =0; i < fileid.length ; i++ ) {
+                result += userGetFileMapper.updateGetFileById(getFile);
                 result += userMapper.updateGetFileBack(fileid[i] , flag[i]) ;
                 System.out.println(userMapper.updateGetFileBack(fileid[i] , flag[i]));
             }
 
         }
-        if( result == fileid.length ) {
+        if( result == fileid.length*2 ) {
             return 1;
         }
         return 0;
@@ -570,6 +638,17 @@ public class UserServiceImpl implements UserService {
         List<GetFile> getFiles = new ArrayList<>();
         for( int i = 0; i < fileids.length; i++ ) {
             GetFile getFile = userGetFileMapper.selectGetFileById( fileids[i] );
+            String[] ids = getFile.getGfpersonRead().split(",");
+            String[] names = new String[ids.length];
+            int[] id = new int[ids.length];
+            for ( int j = 0; j < ids.length ; i ++) {
+                User user = adminMapper.findWorkerById( Integer.parseInt( ids[i] ));
+                id[i] = user.getUid();
+                names[i] =user.getUname();
+
+            }
+            getFile.setGfpersonReadIds( id );
+            getFile.setGfpersonReadNames( names );
             if(getFile != null ) {
                 getFiles.add(  getFile );
             }
@@ -681,19 +760,33 @@ public class UserServiceImpl implements UserService {
             /**
              * 先检查 isborrow  是否为 2和1.如果是的话,那么就能进行 ,否则返回 -5
              */
-            int flag = userMapper.selectgfisBorrow( fileid );
+            Integer flag1 = userMapper.selectcfisExist( fileid );
+            System.out.println( "这是文件是否删除的标志位" + flag1);
+            if ( flag1 == 0 || flag1 == null) {
+                return -3;
+            }
+            Integer flag = userMapper.selectgfisBorrow( fileid );
+            if (flag == null) {
+                //文件不存在
+                return -2;
+            }
             System.out.println( flag );
 
             if( flag != 1 || flag != 2) {
                 //收文
                 result = updategfWaitBorrow( fileid );
-            System.out.println( result +" 这是结果" );
-
+                System.out.println( result +" 这是结果" );
+                //更新文件的 gfpersonRead
+                GetFile file = new GetFile();
+                file.setGfpersonRead(uid);
+                file.setGfid(fileid);
+                result += userGetFileMapper.updateGetFileById(file);
                 if( result > 0) {
                     for ( int i = 0; i < uids.length ; i++ ) {
                         borrow.setUid( Integer.parseInt( uids[i] ) );
                         borrow.setWid( Integer.parseInt( wids[i] ) );
                         result = insertgfWaitBorrowInfo( borrow );
+                        borrow.setFileid( fileid );
                         System.out.println( result +" 这是结果2" );
                     }
 
@@ -705,17 +798,28 @@ public class UserServiceImpl implements UserService {
             }
 
         } else {
-            int flag = userMapper.selectgfisBorrow( fileid );
+            Integer flag1 = userMapper.selectcfisExist( fileid );
+            System.out.println( "这是文件是否删除的标志位" + flag1);
+            if ( flag1 == 0 || flag1 == null) {
+                return -3;
+            }
+            Integer flag = userMapper.selectcfisBorrow( fileid );
+            System.out.println( flag );
+            if (flag == null ) {
+                //文件不存在
+                return -2;
+            }
             if( flag != 1 || flag != 2) {
                 result = updatecfWaitBorrow( fileid );
 //            System.out.println( result );
                 if( result > 0) {
                     for ( int i = 0; i < uids.length ; i++ ) {
+
                         borrow.setUid( Integer.parseInt( uids[i] ) );
                         borrow.setWid( Integer.parseInt( wids[i] ) );
+                        borrow.setFileid( fileid );
                         result = insertcfWaitBorrowInfo( borrow );
                     }
-
                 }
                 return result;
             } else {

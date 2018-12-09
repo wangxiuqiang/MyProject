@@ -164,35 +164,35 @@ public class UserGetFileServiceImpl implements UserGetFileService{
     public List<GetFile> findTypeFiles(GetFile getFile , String endtime ,int level ) throws Exception {
 //&& getFile.getGfclassifyid() == 0
         List<GetFile> getFiles = new ArrayList<>();
-        if(getFile.getGfname() != null  && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
-            getFiles = selectGetFileByName(getFile.getGfname() ,level);
-        }
-//        else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
-//                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
-//            return selectGetFileByClassifyId(getFile.getGfclassifyid());
-//
-//
+//        if(getFile.getGfname() != null  && getFile.getGfcompany() == null
+//                && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
+//            getFiles = selectGetFileByName(getFile.getGfname() ,level);
 //        }
-        else if(getFile.getGfname() == null  && getFile.getGfcompany() != null
-                && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
-            getFiles = selectGetFileByCompany(getFile.getGfcompany() ,level);
-
-        }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() != null && endtime !=null && getFile.getGfnumber() == null) {
-
-            getFiles = selectGetFileByDateTime(getFile.getGfdatetime() ,endtime ,level);
-        }else if(getFile.getGfname() == null && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() == null && getFile.getGfnumber() != null){
-           getFiles =  selectGetFileByNumber(getFile.getGfnumber() ,level);
-
-        }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
-                && getFile.getGfdatetime() == null && getFile.getGfnumber() == null){
-             return  null;
-        }else {
+////        else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
+////                && getFile.getGfdatetime() == null && getFile.getGfnumber() == 0) {
+////            return selectGetFileByClassifyId(getFile.getGfclassifyid());
+////
+////
+////        }
+//        else if(getFile.getGfname() == null  && getFile.getGfcompany() != null
+//                && getFile.getGfdatetime() == null && getFile.getGfnumber() == null) {
+//            getFiles = selectGetFileByCompany(getFile.getGfcompany() ,level);
+//
+//        }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
+//                && getFile.getGfdatetime() != null && endtime !=null && getFile.getGfnumber() == null) {
+//
+//            getFiles = selectGetFileByDateTime(getFile.getGfdatetime() ,endtime ,level);
+//        }else if(getFile.getGfname() == null && getFile.getGfcompany() == null
+//                && getFile.getGfdatetime() == null && getFile.getGfnumber() != null){
+//           getFiles =  selectGetFileByNumber(getFile.getGfnumber() ,level);
+//
+//        }else if(getFile.getGfname() == null  && getFile.getGfcompany() == null
+//                && getFile.getGfdatetime() == null && getFile.getGfnumber() == null){
+//             return  null;
+//        }else {
             //多项查询
           getFiles = selectGetFileByTwoAndMore(getFile ,endtime ,level);
-        }
+//        }
 //设置传阅人
         getFiles.forEach( n -> {
             if( n.getGfpersonRead() != null ) {
@@ -407,18 +407,27 @@ public class UserGetFileServiceImpl implements UserGetFileService{
 
     /**
      * 清退一个文件 ,如果文件没 别借完,不能进行清退
-     * @param gfid
+     * @param gfids
      * @return
      * @throws Exception
      */
     @Override
-    public int delGetFileBack(int gfid ) throws Exception{
-        int borrow = userMapper.selectgfisBorrow( gfid );
-        if( borrow == 2 ) {
-            return userGetFileMapper.delGetFileBack( gfid ,DateToStringUtils.dataTostring() );
-        } else {
-            return -5;
+    public int delGetFileBack(String[] gfids ) throws Exception{
+        int result = 0;
+        for (int i = 0; i < gfids.length; i++) {
+            int borrow = userMapper.selectgfisBorrow( Integer.parseInt( gfids[i]) );
+            if( borrow == 2 ) {
+                 result += userGetFileMapper.delGetFileBack( Integer.parseInt( gfids[i]) ,DateToStringUtils.dataTostring() );
+
+            } else {
+                return -5;
+            }
         }
+       if( result == gfids.length ) {
+            return 1;
+       }else {
+            return 0;
+       }
 
     }
 

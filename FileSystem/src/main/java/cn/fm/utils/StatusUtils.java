@@ -80,5 +80,7 @@ public class StatusUtils {
     public static final int IS_EXIST_BORROW_UID = 18;
     //借阅表的id存在,就是已经分配了,并且文件被接走了
     public static final int IS_EXIST_BORROW_UID_FILEGO = 19;
+    //没有被清退
+    public static final int IS_NOTBACK = 20;
 }
 

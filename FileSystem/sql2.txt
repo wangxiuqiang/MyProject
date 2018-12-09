@@ -117,29 +117,29 @@ state int default 1,
 backDate varchar(30),
 waitborrow int default 0
 );
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省淄博市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","1,2,3,5","000001");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省济南市电力局文件","办公室","瑞源公司","绝密","二年","2018-09-12","xxxxx","1,2,3,5","000002");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省潍坊市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","1,2,3,5","000003");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省威海市电力局文件","办公室","瑞源公司","绝密","二年","2018-09-12","xxxxx","1,2,3,5","000004");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省烟台市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","1,2,3,5","000005");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省青岛市电力局文件","办公室","瑞源公司","绝密","二年","2018-09-12","xxxxx","1,2,3,5","000006");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省日照市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","1,2,3,5","000007");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省临沂市电力局文件","办公室","瑞源公司","绝密","二年","2018-03-12","xxxxx","1,2,3,5","000008");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省莱芜市电力局文件","办公室","光明公司","绝密","二年","2018-03-12","xxxxx","9,8,6,3","000009");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省泰安市电力局文件","办公室","瑞源公司","绝密","二年","2018-03-12","xxxxx","9,8,6,3","000010");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省东营市电力局文件","办公室","光明公司","绝密","二年","2018-03-12","xxxxx","9,8,6,3","000011");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省曲阜市电力局文件","办公室","瑞源公司","绝密","二年","2018-03-12","xxxxx","9,8,6,3","000012");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省平度市电力局文件","办公室","光明公司","绝密","二年","2018-03-12","xxxxx","9,8,6,3","000013");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省聊城市电力局文件","办公室","瑞源公司","绝密","二年","2018-03-12","xxxxx","9,8,6,3","000014");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省德州市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","9,8,6,3","000015");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省枣庄市电力局文件","办公室","瑞源公司","普通","零年","2018-09-12","xxxxx","1,2,3,5","000016");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省诸城市电力局文件","办公室","光明公司","普通","零年","2018-12-12","xxxxx","1,2,6,9","000017");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省章丘市电力局文件","办公室","瑞源公司","普通","零年","2018-12-12","xxxxx","1,2,6,9","000018");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省黄岛区电力局文件","办公室","光明公司","普通","零年","2018-12-12","xxxxx","1,2,6,9","000019");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省安丘市电力局文件","办公室","光明公司","普通","零年","2018-12-12","xxxxx","1,2,6,9","000020");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省昌邑市电力局文件","办公室","瑞源公司","普通","零年","2018-12-12","xxxxx","1,2,6,9","000021");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省博山区电力局文件","办公室","光明公司","普通","零年","2018-12-12","xxxxx","1,2,6,9","000022");
-insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpersonRead,gfpartnumber) values("山东省张店区电力局文件","办公室","瑞源公司","普通","零年","2018-12-12","xxxxx","1,2,6,9","000023");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省淄博市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","000001");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省济南市电力局文件","办公室","瑞源公司","绝密","二年","2018-09-12","xxxxx","000002");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省潍坊市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","000003");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省威海市电力局文件","办公室","瑞源公司","绝密","二年","2018-09-12","xxxxx","000004");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省烟台市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","000005");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省青岛市电力局文件","办公室","瑞源公司","绝密","二年","2018-09-12","xxxxx","000006");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省日照市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","000007");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省临沂市电力局文件","办公室","瑞源公司","绝密","二年","2018-03-12","xxxxx","000008");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省莱芜市电力局文件","办公室","光明公司","绝密","二年","2018-03-12","xxxxx","000009");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省泰安市电力局文件","办公室","瑞源公司","绝密","二年","2018-03-12","xxxxx","000010");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省东营市电力局文件","办公室","光明公司","绝密","二年","2018-03-12","xxxxx","000011");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省曲阜市电力局文件","办公室","瑞源公司","绝密","二年","2018-03-12","xxxxx","000012");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省平度市电力局文件","办公室","光明公司","绝密","二年","2018-03-12","xxxxx","000013");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省聊城市电力局文件","办公室","瑞源公司","绝密","二年","2018-03-12","xxxxx","000014");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省德州市电力局文件","办公室","光明公司","绝密","二年","2018-09-12","xxxxx","000015");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省枣庄市电力局文件","办公室","瑞源公司","普通","零年","2018-09-12","xxxxx","000016");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省诸城市电力局文件","办公室","光明公司","普通","零年","2018-12-12","xxxxx","000017");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省章丘市电力局文件","办公室","瑞源公司","普通","零年","2018-12-12","xxxxx","000018");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省黄岛区电力局文件","办公室","光明公司","普通","零年","2018-12-12","xxxxx","000019");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省安丘市电力局文件","办公室","光明公司","普通","零年","2018-12-12","xxxxx","000020");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省昌邑市电力局文件","办公室","瑞源公司","普通","零年","2018-12-12","xxxxx","000021");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省博山区电力局文件","办公室","光明公司","普通","零年","2018-12-12","xxxxx","000022");
+insert into getFile(gfname,gfcompany,gffrom,gflevel,gettime,gfdatetime,gfnumber,gfpartnumber) values("山东省张店区电力局文件","办公室","瑞源公司","普通","零年","2018-12-12","xxxxx","000023");
 
 create table companyFile (
 cfid int primary key auto_increment,
@@ -268,8 +268,9 @@ givetime varchar(30),
 borrowtime varchar(30) ,
 shouldback varchar(30),
 backtime varchar(30),
-state int default 1,
-secondUid int
+borrowstate int default 1,
+secondUid int ,
+thirdUid int
 );
 
 create table borrow_companyFile (
@@ -280,11 +281,10 @@ givetime varchar(30),
 borrowtime varchar(30),
 shouldback varchar(30),
 backtime varchar(30),
-state int default 1,
+borrowstate int default 1,
 secondUid int
 );
 
-insert into borrow_companyFile(wid ,uid,fileid,givetime,borrowtime,shouldback,backtime,secondUid) values(1,1,1,"2018-09-11 12:00:00","2018-09-11 12:00:00" ,"2018-09-12 12:00:00","2018-09-12 11:00:00",2);
 
 create table level (
 lid int primary key auto_increment ,

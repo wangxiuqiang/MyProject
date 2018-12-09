@@ -32,6 +32,13 @@ public class LoginController {
     @Autowired
     AdminService adminService;
 
+
+    @RequestMapping(value = "/welcome" )
+    @ResponseBody
+    public String welcome() throws Exception {
+        return JSON.toJSONString("1");
+    }
+
     @RequestMapping(value = "/login" )
     @ResponseBody
     public String login(@Validated User user, BindingResult bindingResult) throws Exception {

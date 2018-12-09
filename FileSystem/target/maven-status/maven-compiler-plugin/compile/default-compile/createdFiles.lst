@@ -1,7 +1,6 @@
 cn/fm/utils/MysqlRecoverUtils.class
 cn/fm/user/controller/UserController.class
 cn/fm/vo/GetFileExtends.class
-cn/fm/utils/TestOCR.class
 cn/fm/user/service/serviceImpl/UserGetFileServiceImpl.class
 cn/fm/user/service/serviceImpl/UserCompanyFileServiceImpl.class
 cn/fm/pojo/Level.class
@@ -16,7 +15,6 @@ cn/fm/utils/MD5Utils.class
 cn/fm/user/service/UserCompanyFileService.class
 cn/fm/admin/controller/LoginController.class
 cn/fm/vo/BorrowGFExtends.class
-cn/fm/utils/OCRHelper.class
 cn/fm/pojo/Role.class
 cn/fm/pojo/Classify.class
 cn/fm/user/dao/UserGetFileMapper.class

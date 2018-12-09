@@ -240,7 +240,7 @@ public class UserController {
 
     /**
      * 在录入指纹的时候弹出的信息,查看是不是有没有归还的文件,,可以用这个来实现获取id和wid的情况,正好是显示没有归还的信息
-     * 用来归还,取走文件
+     * 用来归还,取走文件  ,通过wid 来查看,查看出来的未归还的文件
      * @param finger
      * @return
      * @throws Exception
@@ -267,9 +267,9 @@ public class UserController {
         if( user != null ) {
             //根据用户去找他是不是用其他借阅的信息 ,1表示没有归还的
             System.out.println( user.getUname());
-           List<BorrowCFExtends> cfExtends = userService.selectBorrowcfInfo( user.getUid() , 1 );
+           List<BorrowCFExtends> cfExtends = userService.selectBorrowcfInfo( user.getWid() , 1  );
            if( cfExtends != null && cfExtends.size() > 0 ) {
-               return JSON.toJSONString( cfExtends );
+               return JSON.toJSONString( cfExtends,SerializerFeature.DisableCircularReferenceDetect );
            }else {
                map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
                return JSON.toJSONString( map );
@@ -305,10 +305,10 @@ public class UserController {
 
         User user = adminService.selectAllFingerInfoAndCompare( name );
         if( user != null ) {
-            //根据用户去找他是不是用其他借阅的信息 ,1表示没有归还的
-            List<BorrowGFExtends> gfExtends = userService.selectBorrowgfInfo( user.getUid() , 1 );
+            //根据用户去找他是不是用其他借阅的信息 ,1表示没有归还的 ,
+            List<BorrowGFExtends> gfExtends = userService.selectBorrowgfInfo( user.getWid() , 1 );
             if( gfExtends != null && gfExtends.size() > 0 ) {
-                return JSON.toJSONString( gfExtends );
+                return JSON.toJSONString( gfExtends,SerializerFeature.DisableCircularReferenceDetect );
             }else {
                 map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
                 return JSON.toJSONString( map );
@@ -320,7 +320,7 @@ public class UserController {
     }
 
     /**
-     * 根据用户的id查看 ,待领取的文件
+     * 根据用户的wid查看 ,待领取的文件
      * @param uid
      * @return
      * @throws Exception
@@ -332,7 +332,7 @@ public class UserController {
         HashMap<String,Integer> map = new HashMap<>();
         List<CompanyFile> companyFiles = userService.selectcfWaitBorrow( uid , wid );
         if( companyFiles != null && companyFiles.size() > 0 ) {
-            return JSON.toJSONString( companyFiles );
+            return JSON.toJSONString( companyFiles, SerializerFeature.DisableCircularReferenceDetect );
         }
         map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
         return JSON.toJSONString( map );
@@ -340,7 +340,7 @@ public class UserController {
     }
 
     /**
-     * 根据用户的id查看 待领取的文件,
+     * 根据用户的wid查看 待领取的文件,
      * @param uid
      * @return
      * @throws Exception
@@ -352,7 +352,7 @@ public class UserController {
         HashMap<String,Integer> map = new HashMap<>();
         List<GetFile> getFiles = userService.selectgfWaitBorrow( uid , wid );
         if( getFiles != null && getFiles.size() > 0 ) {
-            return JSON.toJSONString( getFiles );
+            return JSON.toJSONString( getFiles,SerializerFeature.DisableCircularReferenceDetect  );
         }
         map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
         return JSON.toJSONString( map );
@@ -436,6 +436,10 @@ public class UserController {
     @ResponseBody
     public String updatecfBackTime(String cfid) throws Exception {
         HashMap<String,Integer> map = new HashMap<>();
+        if( cfid == null ) {
+            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+            return JSON.toJSONString( map );
+        }
         String[] cfidStrings = cfid.split(",");
         int[] cfids = new int[cfidStrings.length];
         for(int i = 0; i < cfidStrings.length; i++) {
@@ -458,9 +462,13 @@ public class UserController {
     @RequiresRoles(value = "admin")
     @RequestMapping(value = "/updategfBackTime")
     @ResponseBody
-    public String updategfBackTime(String gfid) throws Exception {
+    public String updategfBackTime(String gfid , int uid ,int wid) throws Exception {
 
         HashMap<String,Integer> map = new HashMap<>();
+        if( gfid == null ) {
+            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+            return JSON.toJSONString( map );
+        }
 //        Borrow borrow = new Borrow();
 ////        System.out.println(uid + "---------------------" + gfid);
 //        borrow.setFileid(gfid);
@@ -472,7 +480,7 @@ public class UserController {
         for(int i = 0; i < gfidStrings.length; i++) {
             gfids[i] = Integer.parseInt(gfidStrings[i]);
         }
-        int result = userService.updategfBackTime(gfids);
+        int result = userService.updategfBackTime(gfids,uid,wid);
         if(result == -5){
             map.put(StatusUtils.statecode,StatusUtils.FAILURE_INSERT);
             return JSON.toJSONString(map);
@@ -488,19 +496,19 @@ public class UserController {
 
 
     /**
-     * 根据id查询
+     * 根据单位id查询
      * flag 0 表示查全部
      * 1 查借阅中的,
      * 2 已经归还的
      */
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/selectBorrowcfInfo/{flag}/{page}")
+    @RequestMapping(value = "/selectBorrowcfInfo/{flag}/{page}/{pageSize}")
     @RequiresRoles(value = "admin")
     @ResponseBody
-    public String selectBorrowcfInfo(@PathVariable int flag,@PathVariable int page, int uid) throws Exception{
+    public String selectBorrowcfInfo(@PathVariable int flag,@PathVariable int page, int wid ,@PathVariable int pageSize) throws Exception{
         HashMap<String,Integer> map = new HashMap<>();
-        PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
-        List<BorrowCFExtends> bcfes = userService.selectBorrowcfInfo(uid,flag);
+        PageHelper.startPage(page,pageSize);
+        List<BorrowCFExtends> bcfes = userService.selectBorrowcfInfo(wid,flag);
         PageInfo<BorrowCFExtends> pageInfo = new PageInfo<BorrowCFExtends>(bcfes);
         if(bcfes != null && bcfes.size() > 0) {
             return JSON.toJSONString(pageInfo,SerializerFeature.DisableCircularReferenceDetect);
@@ -510,17 +518,17 @@ public class UserController {
         }
     }
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/selectBorrowgfInfo/{flag}/{page}")
+    @RequestMapping(value = "/selectBorrowgfInfo/{flag}/{page}/{pageSize}")
     @RequiresRoles(value = "admin")
     @ResponseBody
-    public String selectBorrowgfInfo(@PathVariable int flag,@PathVariable Integer page,int uid) throws Exception {
+    public String selectBorrowgfInfo(@PathVariable int flag,@PathVariable Integer page,int wid,@PathVariable int pageSize) throws Exception {
         //flag = 0 查询所有的, flag = 1 查询 在借阅中的,flag = 2 归还了的
         HashMap<String,Integer> map = new HashMap<>();
 
 
-        PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
+        PageHelper.startPage(page,pageSize);
 
-        List<BorrowGFExtends> bgfes = userService.selectBorrowgfInfo(uid,flag);
+        List<BorrowGFExtends> bgfes = userService.selectBorrowgfInfo(wid,flag);
 
         PageInfo<BorrowGFExtends> pageInfo = new PageInfo<BorrowGFExtends>(bgfes);
         if(bgfes != null  && bgfes.size() > 0) {
@@ -532,15 +540,15 @@ public class UserController {
     }
 
     /**
-     * 根据文件id查这个文件的流向
+     * 根据文件id查这个文件的流向, 差全面,将用户的借阅信息和用户信息全查出来
      */
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/selectBorrowcfInfoByFileid/{page}")
+    @RequestMapping(value = "/selectBorrowcfInfoByFileid/{page}/{pageSize}")
     @RequiresRoles(value = "admin")
     @ResponseBody
-    public String selectBorrowcfInfoByFileid(@PathVariable int page, int cfid) throws Exception{
+    public String selectBorrowcfInfoByFileid(@PathVariable int page, int cfid,@PathVariable int pageSize) throws Exception{
         HashMap<String,Integer> map = new HashMap<>();
-        PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
+        PageHelper.startPage(page,pageSize);
         List<BorrowCFExtends> bcfes = userService.selectBorrowcfInfoByFileid(cfid);
         PageInfo<BorrowCFExtends> pageInfo = new PageInfo<BorrowCFExtends>(bcfes);
         if(bcfes != null && bcfes.size() > 0) {
@@ -551,15 +559,15 @@ public class UserController {
         }
     }
 //    @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/selectBorrowgfInfoByFileid/{page}")
+    @RequestMapping(value = "/selectBorrowgfInfoByFileid/{page}/{pageSize}")
     @RequiresRoles(value = "admin")
     @ResponseBody
-    public String selectBorrowgfInfoByFileid(@PathVariable Integer page,int gfid) throws Exception {
+    public String selectBorrowgfInfoByFileid(@PathVariable Integer page,int gfid,@PathVariable int pageSize) throws Exception {
         //flag = 0 查询所有的, flag = 1 查询 在借阅中的,flag = 2 归还了的
         HashMap<String,Integer> map = new HashMap<>();
 
 
-        PageHelper.startPage(page,StatusUtils.PAGE_SIZE);
+        PageHelper.startPage(page,pageSize);
 
         List<BorrowGFExtends> bgfes = userService.selectBorrowgfInfoByFileid(gfid);
 
@@ -735,32 +743,32 @@ public class UserController {
      * @return
      * @throws Exception
      */
-    @RequiresRoles(value = {"admin"} )
-    @RequestMapping(value = "/returnOcrInfo/{type}")
-    @ResponseBody
-    public String returnOcrInfo ( MultipartFile file , @PathVariable int type ) throws Exception {
-        String path = UploadUtils.upload(file , 1);
-        HashMap<String , Integer > map = new HashMap<>();
-        if (path == null ) {
-            map.put(StatusUtils.statecode , StatusUtils.IS_NULL );
-            return JSON.toJSONString( map );
-        }
-        int flag = OCRHelper.convertFile(path);
-        if( flag == 0 ) {
-            //type == 1 表示这是companyFile type == 2 表示这个是GetFile
-            if( type == 1) {
-               CompanyFile companyFile = OCRHelper.ocrCompanyFile( path );
-               return JSON.toJSONString( companyFile );
-            }
-            if (type == 2 ) {
-                GetFile getFile = OCRHelper.ocrGetFile( path );
-                return JSON.toJSONString( getFile );
-            }
-        }
-
-        map.put( StatusUtils.statecode, StatusUtils.FAILURE_OCR );
-        return JSON.toJSONString( map );
-    }
+//    @RequiresRoles(value = {"admin"} )
+//    @RequestMapping(value = "/returnOcrInfo/{type}")
+//    @ResponseBody
+//    public String returnOcrInfo ( MultipartFile file , @PathVariable int type ) throws Exception {
+//        String path = UploadUtils.upload(file , 1);
+//        HashMap<String , Integer > map = new HashMap<>();
+//        if (path == null ) {
+//            map.put(StatusUtils.statecode , StatusUtils.IS_NULL );
+//            return JSON.toJSONString( map );
+//        }
+////        int flag = OCRHelper.convertFile(path);
+////        if( flag == 0 ) {
+//            //type == 1 表示这是companyFile type == 2 表示这个是GetFile
+//            if( type == 1) {
+//               CompanyFile companyFile = OCRHelper.ocrCompanyFile( path );
+//               return JSON.toJSONString( companyFile );
+//            }
+//            if (type == 2 ) {
+//                GetFile getFile = OCRHelper.ocrGetFile( path );
+//                return JSON.toJSONString( getFile );
+//            }
+////        }
+//
+//        map.put( StatusUtils.statecode, StatusUtils.FAILURE_OCR );
+//        return JSON.toJSONString( map );
+//    }
 
     /**
      * 查看文件借阅超时的接口
@@ -804,16 +812,23 @@ public class UserController {
     public String insertWaitBorrowInfo( @PathVariable int type , int fileid ,String uid , String wid ) throws Exception {
         HashMap<String , Integer> map = new HashMap<>();
         int result = userService.addBorrowInfo( fileid , type ,uid , wid );
+        if( result == -3 ) {
+            map.put( StatusUtils.statecode , StatusUtils.IS_NULL  );
+            return  JSON.toJSONString( map );
+        }
         if( result == -5 ) {
             map.put( StatusUtils.statecode , StatusUtils.IS_BORROW );
+            return  JSON.toJSONString( map );
+        }
+        if( result == -2 ) {
+            map.put( StatusUtils.statecode , StatusUtils.IS_NULL );
+            return  JSON.toJSONString( map );
         }
         if( result > 0 ){
             map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
         } else {
-            map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT );
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT  );
         }
         return  JSON.toJSONString( map );
     }
-
-
 }

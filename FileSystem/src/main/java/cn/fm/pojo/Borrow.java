@@ -10,6 +10,15 @@ public class Borrow {
     private String shouldback;
     private int wid;
     private int secondUid;
+    private int thirdUid;
+
+    public int getThirdUid() {
+        return thirdUid;
+    }
+
+    public void setThirdUid(int thirdUid) {
+        this.thirdUid = thirdUid;
+    }
 
     public int getBorrowstate() {
         return borrowstate;

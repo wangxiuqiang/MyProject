@@ -105,17 +105,17 @@ public interface UserCompanyFileService {
 
     /**
      * 销毁一个文件,更新销毁日期
-     * @param cfid
+     * @param cfids
      * @return
      * @throws Exception
      */
-    public int delCompanyFileDestroy( int cfid) throws Exception;
+    public int delCompanyFileDestroy( String[] cfids) throws Exception;
 
     /**
      * 清退一个文件,更新清退日期
-     * @param cfid
+     * @param cfids
      * @return
      * @throws Exception
      */
-    public int delCompanyFileBack(  int cfid  ) throws Exception;
+    public int delCompanyFileBack(  String[] cfids  ) throws Exception;
 }

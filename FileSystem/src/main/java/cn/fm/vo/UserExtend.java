@@ -27,12 +27,12 @@ public class UserExtend {
 //    private int ifAdmin;
 
 
-    @NotNull(message = "{user.ifadmin.isnull}")
+//    @NotNull(message = "{user.ifadmin.isnull}")
     private int ifAdmin;
-    @NotNull(message = "{user.roles.isnull}")
+//    @NotNull(message = "{user.roles.isnull}")
     private int rid;
 
-    @NotNull(message = "{user.roles.isnull}")
+//    @NotNull(message = "{user.roles.isnull}")
     private String rname;
 
     private String pname;

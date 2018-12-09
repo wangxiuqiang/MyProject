@@ -64,7 +64,7 @@ public interface UserMapper {
      * 更新归还时间
      */
     public int updatecfBackTime(@Param(value = "fileid") int[] fileid) throws Exception;
-    public int updategfBackTime(@Param(value = "fileid") int[] fileid) throws Exception;
+    public int updategfBackTime(@Param(value = "fileid") int[] fileid,@Param(value = "wid") int wid,@Param(value = "uid") int uid) throws Exception;
 
     /**
      * 根据传入的开始时间和终止时间查询 没有归还的文件信息, 范围查询,并通过这里面的用户id和文件id去查询用户和文件信息
@@ -78,18 +78,18 @@ public interface UserMapper {
 
     /**
      * 根据用户id 查询他所有的借阅,或者让id = 0 查询该类所有的借阅  cf 类
-     * @param uid
+     * @param wid
      * @return
      * @throws Exception
      */
-    public List<Borrow> selectBorrowcfById(@Param(value = "uid") int uid) throws Exception;
+    public List<Borrow> selectBorrowcfById(@Param(value = "wid") int wid) throws Exception;
     /**
      * 根据用户id 查询他所有的借阅,或者让id = 0 查询该类所有的借阅  gf 类
-     * @param uid
+     * @param wid
      * @return
      * @throws Exception
      */
-    public List<Borrow> selectBorrowgfById(@Param(value = "uid") int uid) throws Exception;
+    public List<Borrow> selectBorrowgfById(@Param(value = "wid") int wid) throws Exception;
 
     /**
      * 查询一个文件所有的借阅数据
@@ -102,9 +102,16 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
-    public int selectcfisBorrow(@Param(value = "cfid") int cfid) throws Exception;
-    public int selectgfisBorrow(@Param(value = "gfid") int gfid) throws Exception;
-
+    public Integer selectcfisBorrow(@Param(value = "cfid") int cfid) throws Exception;
+    public Integer selectgfisBorrow(@Param(value = "gfid") int gfid) throws Exception;
+    /**
+     * 查看是不是 删除了
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+    public Integer selectcfisExist(@Param(value = "cfid") int cfid) throws Exception;
+    public Integer selectgfisExist(@Param(value = "gfid") int gfid) throws Exception;
     /**
      * 查最顶层的分类
      */

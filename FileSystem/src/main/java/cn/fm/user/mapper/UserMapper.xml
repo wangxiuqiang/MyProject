@@ -68,26 +68,27 @@
         </foreach>
     </update>
     <update id="updategfBackTime" parameterType="int">
-        update borrow_getFile set backtime=CURDATE() WHERE backtime is null AND fileid IN
+        update borrow_getFile set backtime=CURDATE() , thirdUid=#{uid}  WHERE backtime is null and wid=#{wid} AND fileid IN
         <foreach collection="fileid" close=")" open="(" separator="," item="id">
             #{id}
         </foreach>
+
     </update>
 
     <!--根据时间范围 查找没有归还的文件-->
     <select id="selectBorrowcfByborrowtime" resultType="cn.fm.pojo.Borrow" parameterType="String" >
-        select uid,fileid,borrowtime,backtime,shouldback,givetime from borrow_companyFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime}
+        select uid,fileid,borrowtime,backtime,shouldback,givetime from borrow_companyFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime} and borrowstate=1
     </select>
     <!--根据时间范围 查找没有归还的文件-->
     <select id="selectBorrowgfByborrowtime" resultType="cn.fm.pojo.Borrow" parameterType="String" >
-        select uid,fileid,borrowtime,backtime,shouldback,givetime from borrow_getFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime}
+        select uid,fileid,borrowtime,backtime,shouldback,givetime from borrow_getFile where backtime is null and borrowtime &lt;= #{endtime} and borrowtime &gt;= #{starttime} and borrowstate=1
     </select>
-    <!--根据用户查询借阅信息 或者查询 这一类的借阅信息-->
+    <!--根据用户的工作单位查询借阅信息 或者查询 这一类的借阅信息-->
     <select id="selectBorrowcfById" resultType="cn.fm.pojo.Borrow" parameterType="int">
-        select uid,fileid,borrowtime,backtime,shouldback,givetime,wid from borrow_companyFile
+        select uid,fileid,borrowtime,backtime,shouldback,givetime,wid,secondUid from borrow_companyFile
         <where>
-            <if test="uid != 0" >
-                uid = #{uid}
+            <if test="wid != 0" >
+                wid = #{wid}
             </if>
             and borrowstate=1
         </where>
@@ -95,10 +96,10 @@
 
     <!--根据用户查询借阅信息-->
     <select id="selectBorrowgfById" resultType="cn.fm.pojo.Borrow" parameterType="int">
-        select uid,fileid,borrowtime,backtime,givetime,shouldback from borrow_getFile
+        select uid,fileid,borrowtime,backtime,givetime,shouldback,secondUid,thirdUid from borrow_getFile
         <where>
-            <if test="uid != 0" >
-                uid = #{uid}
+            <if test="wid != 0" >
+                 wid = #{wid}
             </if>
             and borrowstate=1
         </where>
@@ -109,7 +110,7 @@
          select wid,uid,fileid,borrowtime,backtime,givetime,shouldback,secondUid from borrow_companyFile where fileid = #{fileid} and borrowstate=1
     </select>
     <select id="selectBorrowgfInfoByFileid" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Borrow">
-        select wid,uid,fileid,borrowtime,backtime,givetime,shouldback,secondUid from borrow_getFile where fileid = #{fileid} and borrowstate=1
+        select wid,uid,fileid,borrowtime,backtime,givetime,shouldback,secondUid,thirdUid from borrow_getFile where fileid = #{fileid} and borrowstate=1
     </select>
 
     <!--查看该文件是不是被借出去了,-->
@@ -129,6 +130,14 @@
             <!--#{id}-->
         <!--</foreach>-->
         and state=1
+    </select>
+
+    <select id="selectcfisExist" parameterType="int" resultType="int">
+        select state from companyFile where cfid = #{cfid}
+
+    </select>
+    <select id="selectgfisExist" parameterType="int" resultType="int">
+        select state from getFile where gfid = #{gfid}
     </select>
 
 

@@ -63,7 +63,7 @@ public class UserCompanyFileController {
      * @throws Exception
      */
 //     @RequiresRoles(value = {"admin","user"},logical = Logical.OR)
-    @RequestMapping(value = "/findTypeCompanyFiles/{page}/{level}")
+    @RequestMapping(value = "/findTypeCompanyFiles/{page}/{level}/{pageSize}")
     @ResponseBody
     @RequiresRoles(value = "admin")
 
@@ -209,7 +209,7 @@ public class UserCompanyFileController {
     }
 
     /**
-     * 标记一个文件为销毁状态
+     * 标记一个文件为销毁状态,多选
      * @param cfid
      * @return
      * @throws Exception
@@ -217,9 +217,10 @@ public class UserCompanyFileController {
     @RequiresRoles(value = {"admin"} )
     @RequestMapping(value = "/destroyCompanyFile")
     @ResponseBody
-    public String destroyCompanyFile( int cfid) throws  Exception {
+    public String destroyCompanyFile( String cfid) throws  Exception {
         HashMap<String , Integer > map = new HashMap<>();
-        int result = userCompanyFileService.delCompanyFileDestroy( cfid );
+        String[] cfids = cfid.split(",");
+        int result = userCompanyFileService.delCompanyFileDestroy( cfids );
         if(result > 0 ) {
             map.put( StatusUtils.statecode , StatusUtils.SUCCESS_DEL );
         }else {
@@ -228,15 +229,16 @@ public class UserCompanyFileController {
         return JSON.toJSONString( map );
     }
 
-    /**
+    /**多选
      * 清退一个收文
      */
     @RequiresRoles(value = {"admin"} )
     @RequestMapping(value = "/backCompanyFile")
     @ResponseBody
-    public String backGetFile(int cfid ) throws Exception {
+    public String backGetFile(String cfid ) throws Exception {
         HashMap<String ,Integer > map = new HashMap<>();
-        int result = userCompanyFileService.delCompanyFileBack( cfid ) ;
+        String[] cfids = cfid.split(",");
+        int result = userCompanyFileService.delCompanyFileBack( cfids ) ;
         if( result > 0) {
             map.put( StatusUtils.statecode ,StatusUtils.SUCCESS_DEL );
         } else {

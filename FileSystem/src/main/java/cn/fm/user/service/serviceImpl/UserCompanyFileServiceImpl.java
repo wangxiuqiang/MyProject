@@ -4,6 +4,7 @@ import cn.fm.pojo.Borrow;
 import cn.fm.pojo.Classify;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.user.dao.UserCompanyFileMapper;
+import cn.fm.user.dao.UserMapper;
 import cn.fm.user.service.UserCompanyFileService;
 import cn.fm.user.service.UserService;
 import cn.fm.utils.DateToStringUtils;
@@ -23,6 +24,8 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
     @Autowired
     UserService userService;
+    @Autowired
+    UserMapper userMapper;
     /**
      * 录入信息
      * @param companyFile
@@ -364,22 +367,53 @@ public class UserCompanyFileServiceImpl implements UserCompanyFileService {
 
     /**
      * 销毁一个文件
-     * @param cfid
+     * @param cfids
      * @return
      * @throws Exception
      */
-    public int delCompanyFileDestroy(  int cfid) throws Exception {
-        return userCompanyFileMapper.delCompanyFileDestroy( cfid , DateToStringUtils.dataTostring() );
+    public int delCompanyFileDestroy(  String[] cfids ) throws Exception {
+        int result = 0;
+        for (int i = 0; i < cfids.length; i++) {
+            int borrow = userMapper.selectcfisBorrow( Integer.parseInt( cfids[i]) );
+            if( borrow == 2 ) {
+                result += userCompanyFileMapper.delCompanyFileDestroy( Integer.parseInt( cfids[i]) , DateToStringUtils.dataTostring() );
+
+            } else {
+                return -5;
+            }
+        }
+        if( result == cfids.length ) {
+            return 1;
+        }else {
+            return 0;
+        }
+
     }
 
     /**
      * 清退一个文件 ,更新清退日期
-     * @param cfid
+     * @param cfids
      * @return
      * @throws Exception
      */
     @Override
-    public int delCompanyFileBack(int cfid  ) throws Exception{
-        return userCompanyFileMapper.delCompanyFileBack( cfid  , DateToStringUtils.dataTostring() );
+    public int delCompanyFileBack(String[] cfids ) throws Exception{
+
+        int result = 0;
+        for (int i = 0; i < cfids.length; i++) {
+            int borrow = userMapper.selectcfisBorrow( Integer.parseInt( cfids[i]) );
+            if( borrow == 2 ) {
+                result += userCompanyFileMapper.delCompanyFileBack( Integer.parseInt( cfids[i])  , DateToStringUtils.dataTostring() );
+
+            } else {
+                return -5;
+            }
+        }
+        if( result == cfids.length ) {
+            return 1;
+        }else {
+            return 0;
+        }
+
     }
 }

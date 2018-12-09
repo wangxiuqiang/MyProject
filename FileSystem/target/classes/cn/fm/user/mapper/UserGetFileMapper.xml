@@ -65,7 +65,7 @@
     <select id="selectGetFileByDateTime" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
         select
         <include refid="Base_Columns_List"/>
-        from getFile where gfdatetime &gt;= #{gfdateime} AND gfdatetime &lt;= #{endtime} and state=1
+        from getFile where (gfdatetime BETWEEN #{gfdatetime} AND  #{endtime}) and state=1
         <if test="level == 1">
             and gflevel != "普通"
         </if>
@@ -92,7 +92,7 @@
         <include refid="Base_Columns_List"/>
         from getFile
         <where>
-            <if test="getFile.gfnumber != 0">
+            <if test="getFile.gfnumber != null">
                 gfnumber = #{getFile.gfnumber}
             </if>
             <if test="getFile.gfcompany != null">
@@ -103,7 +103,7 @@
             </if>
 
             <if test="getFile.gfdatetime != null">
-                and gfdatetime &gt;= #{getFile.gfdatetime} and gfdatetime &lt;= #{endtime}
+                and (gfdatetime BETWEEN #{getFile.gfdatetime} and #{endtime})
             </if>
 
             <if test="level == 1">
@@ -112,7 +112,16 @@
             <if test="level == 2">
                 and gflevel = "普通"
             </if>
-            and state=1
+            <if test="getFile.isborrow != 0">
+                and isborrow=#{getFile.isborrow}
+            </if>
+            <if test="getFile.waitborrow != 0">
+                and waitborrow=#{getFile.waitborrow}
+            </if>
+            <if test="getFile.back != 0">
+                and back=#{getFile.back}
+            </if>
+            and state=#{getFile.state}
         </where>
     </select>
     <!--
@@ -122,13 +131,16 @@
     <select id="selectAllGetFile" resultType="cn.fm.pojo.GetFile" parameterType="java.lang.Integer">
         select
         <include refid="Base_Columns_List"/>
-        from getFile where state=1
+        from getFile
+        <where>
+           state=1
         <if test="level == 1">
             and gflevel != "普通"
         </if>
         <if test="level == 2">
             and gflevel = "普通"
         </if>
+        </where>
     </select>
 
     <!--更新 -->
@@ -169,7 +181,19 @@
                 gettime = #{gettime},
             </if>
             <if test="gfpartnumber != null">
-                gfpartnumber = #{gfpartnumber}
+                gfpartnumber = #{gfpartnumber},
+            </if>
+            <if test="state != 0">
+                state=#{state},
+            </if>
+            <if test="gfpersonRead != null">
+                gfpersonRead=#{gfpersonRead},
+            </if>
+            <if test="gfpersonReadCom != null">
+                gfpersonReadCom=#{gfpersonReadCom},
+            </if>
+            <if test="backDate != null">
+                backDate=#{backDate}
             </if>
         </set>
         where gfid = #{gfid}

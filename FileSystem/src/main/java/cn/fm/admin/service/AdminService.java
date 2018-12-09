@@ -150,7 +150,7 @@ public interface AdminService {
      * @return
      * @throws Exception
      */
-    public int delCompany( int wid ) throws Exception;
+    public int delCompany( String wid ) throws Exception;
 
     /**
      * 更新一个用户单位

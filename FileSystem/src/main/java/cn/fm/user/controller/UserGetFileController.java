@@ -64,14 +64,15 @@ public class UserGetFileController {
     @ResponseBody
     public String findTypeFiles(@PathVariable Integer page ,@PathVariable Integer level,@PathVariable Integer pageSize, GetFile getFile, String endtime) throws Exception {
         System.out.println(getFile);
-        if(getFile.getGfnumber() != null || (getFile.getGfdatetime() != null && endtime != null) || getFile.getGfcompany() != null
-                || getFile.getGfname() != null) {
+//        if(getFile.getGfnumber() != null || (getFile.getGfdatetime() != null && endtime != null) || getFile.getGfcompany() != null
+//                || getFile.getGfname() != null) {
             PageHelper.startPage( page,pageSize );
 
             List<GetFile> getFiles = userGetFileService.findTypeFiles(getFile,endtime ,level);
 
             PageInfo<GetFile> pageInfo = new PageInfo<GetFile>(getFiles);
 
+            System.out.println( getFiles.size() );
             if(getFiles != null && getFiles.size() > 0 ) {
 
                 return JSON.toJSONString(pageInfo, SerializerFeature.DisableCircularReferenceDetect);
@@ -82,11 +83,11 @@ public class UserGetFileController {
                 return JSON.toJSONString(map);
             }
 
-        }else{
-            HashMap<String,Integer> map = new HashMap<>();
-            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
-            return JSON.toJSONString(map);
-        }
+//        }else{
+//            HashMap<String,Integer> map = new HashMap<>();
+//            map.put(StatusUtils.statecode,StatusUtils.IS_NULL);
+//            return JSON.toJSONString(map);
+//        }
 
 
 
@@ -157,7 +158,7 @@ public class UserGetFileController {
 
         for(int i = 0; i < gfids.length;i++) {
             int gfisborrow =userService.selectgfisBorrow(gfids[i]);
-            if(gfisborrow == 2) {
+            if(gfisborrow == 1) {
                 map.put(StatusUtils.statecode,StatusUtils.IS_BORROW);
                 return JSON.toJSONString(map);
             }
@@ -211,18 +212,20 @@ public class UserGetFileController {
         }
     }
 /**
- * 清退一个收文 如果文件没 别借完,不能进行清退 isborrow != 2
+ * 清退一个收文 如果文件没 借完,不能进行清退 isborrow != 2
  */
     @RequiresRoles(value = {"admin"} )
     @RequestMapping(value = "/backGetFile")
     @ResponseBody
-    public String backGetFile(int gfid ) throws Exception {
+    public String backGetFile(String gfid ) throws Exception {
         HashMap<String ,Integer > map = new HashMap<>();
-         int result = userGetFileService.delGetFileBack( gfid ) ;
+         String[] gfids = gfid.split(",");
+         int result = 0;
+        result = userGetFileService.delGetFileBack( gfids ) ;
          if( result > 0) {
              map.put( StatusUtils.statecode ,StatusUtils.SUCCESS_DEL );
          } else {
-             map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
+             map.put( StatusUtils.statecode , StatusUtils.IS_BORROW );
          }
          return JSON.toJSONString( map );
     }
