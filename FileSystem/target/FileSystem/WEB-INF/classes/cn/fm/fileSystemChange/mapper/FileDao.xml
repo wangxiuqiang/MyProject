@@ -180,7 +180,7 @@
             <result property="backtime" column="backtime" />
             <result property="shouldback" column="shouldback"/>
             <result property="givetime" column="givetime"/>
-            <result property="borrowtime" column="borrow"/>
+            <result property="borrowtime" column="borrowtime"/>
             <result property="borrowstate" column="borrowstate"/>
         </association>
         <association property="companyFile" javaType="cn.fm.pojo.CompanyFile">
@@ -330,7 +330,7 @@
     </select>
     <!--根据文件id查找文件的信息-->
     <select id="selectGetFileByGFid" resultType="cn.fm.pojo.GetFile" parameterType="java.lang.Integer">
-        select <include refid="Base_getFile_Columns"/> from getFile gfid = #{gfid}
+        select <include refid="Base_getFile_Columns"/> from getFile where gfid = #{gfid}
     </select>
 
     <update id="updateGetFileByGFid" parameterType="cn.fm.pojo.GetFile" >
@@ -395,6 +395,9 @@
     </update>
     <!--添加文件信息-->
     <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile">
+        <selectKey  keyProperty="gfid" resultType="java.lang.Integer" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
         insert into getFile(gfname,gfidea,gfloader,gffrom,gflevel,gettime,gfcompany,gfresult,
         gfdatetime,gfnumber,gfpersonRead,gfpersonReadCom,gfpartnumber) values (
         #{gfname} , #{gfidea},#{gfloader},#{gffrom},#{gflevel},#{gettime},#{gfcompany},
@@ -417,6 +420,9 @@
             </if>
             <if test="borrowtime != null">
                 borrowtime=#{borrowtime},
+            </if>
+            <if test="thirdUid != 0">
+                thirdUid = #{thirdUid},
             </if>
             <if test="secondUid != 0">
                 secondUid = #{secondUid},
@@ -465,7 +471,7 @@
             <result property="backtime" column="backtime" />
             <result property="shouldback" column="shouldback"/>
             <result property="givetime" column="givetime"/>
-            <result property="borrowtime" column="borrow"/>
+            <result property="borrowtime" column="borrowtime"/>
             <result property="borrowstate" column="borrowstate"/>
         </association>
         <association property="getFile" javaType="cn.fm.pojo.GetFile">
@@ -493,7 +499,7 @@
 <!--查找包括借阅信息在内的信息 ,根据用户的单位查-->
     <select id="selectGetFileAndBorrowInfo" resultMap="getFileMap">
         select * from getFile gf
-        left join borrow_getFile bgf on (bgf.fileid = bf.bfid)
+        right join borrow_getFile bgf on (bgf.fileid = gf.gfid)
         <where>
             gf.state = 1
             <if test="wid != 0">

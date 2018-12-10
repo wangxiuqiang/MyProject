@@ -109,6 +109,8 @@ public class FileController {
             map.put( StatusUtils.statecode , StatusUtils.IS_BORROW );
         } else if(result == 1) {
             map.put( StatusUtils.statecode , StatusUtils.SUCCESS_DEL );
+        } else if(result == -2 ){
+            map.put( StatusUtils.statecode , StatusUtils.FILE_IS_NOTEXISTS );
         } else {
             map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
         }
@@ -163,15 +165,17 @@ public class FileController {
     @RequiresRoles("admin")
     @RequestMapping(value = "/selectCompanyFileByUidNew/{page}/{pageSize}")
     @ResponseBody
-    public String selectCompanyFileByUidNew( int state, @PathVariable int page
+    public String selectCompanyFileByUidNew( Integer state, @PathVariable int page
             ,@PathVariable int pageSize , int uid  ) throws Exception {
+        if( state == null ) {
+            state = 1;
+        }
         //设置爱当前页码和页面显示条数
         PageHelper.startPage(page,pageSize);
 //查询
         List<BorrowCFExtends> borrowCFExtends = fileService.selectCompanyFileByUid( uid ,state );
         if( borrowCFExtends != null  && borrowCFExtends.size() > 0 ) {
             PageInfo<BorrowCFExtends> pageInfo = new PageInfo<BorrowCFExtends>(borrowCFExtends);
-
             return JSON.toJSONString(pageInfo, SerializerFeature.DisableCircularReferenceDetect);
         }else {
             HashMap<String ,Integer> map = new HashMap<>();
@@ -183,9 +187,9 @@ public class FileController {
       * 先修改文件的标志位,然后录入文件的借阅信息 ,根据文件id ,用户id, 单位id, 分配时间填入借阅表,根据文件id修改文件的waitborrow
      */
     @RequiresRoles("admin")
-    @RequestMapping(value = "/insertCompanyFilsWaitBorrowNew")
+    @RequestMapping(value = "/insertCompanyFilesWaitBorrowNew")
     @ResponseBody
-    public String insertCompanyFilsWaitBorrow( int uid, int wid, int fileid ) throws Exception {
+    public String insertCompanyFilesWaitBorrowNew( int uid, int wid, int fileid ) throws Exception {
         HashMap<String ,Integer> map = new HashMap<>();
         int result = fileService.insertCompanyFilsWaitBorrow( uid , wid, fileid );
         if( result > 0 ) {
@@ -208,6 +212,10 @@ public class FileController {
     public String updateCompanyFileIsBorrowNew( String fileid , @PathVariable  int flag , int uid ) throws Exception {
         HashMap<String ,Integer> map = new HashMap<>();
         int result = fileService.updateCompanyFileIsBorrowOrBackNew( uid, fileid, flag );
+        if ( result == -2 ) {
+            map.put( StatusUtils.statecode , StatusUtils.FILE_IS_NOTBORROW );
+            return  JSON.toJSONString( map );
+        }
         if( result > 0 ) {
             map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
         } else {
@@ -217,7 +225,7 @@ public class FileController {
     }
 
     /**
-     * 归还文件,要先查看这些文件是不是被归还了,就是isborrow=2的情况.,如果是的话,就进行清退
+     * 清退文件,要先查看这些文件是不是被归还了,就是isborrow=2的情况.,如果是的话,就进行清退
      * @param fileid
      * @return
      * @throws Exception
@@ -240,7 +248,7 @@ public class FileController {
     }
 
     /**
-     * 销毁文件,通过文件的id,可以多选,同时录入销毁的时间,
+     * 销毁文件,通过文件的id,可以多选,同时录入销毁的时间, 没被清退就不能销毁
      * @param fileid
      * @return
      * @throws Exception
@@ -366,6 +374,10 @@ public class FileController {
     public String updateBorrow_GetFileByGFId( int wid ,int fileid, int uid , int flag ) throws Exception {
         HashMap<String ,Integer> map = new HashMap<>();
         int result = fileService.updateBorrow_GetFileByGFId( wid, fileid ,uid ,flag);
+        if ( result == -2 ) {
+            map.put( StatusUtils.statecode , StatusUtils.FILE_IS_NOTBORROW );
+            return  JSON.toJSONString( map );
+        }
         if(result > 0 ) {
             map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
         } else {
@@ -387,9 +399,9 @@ public class FileController {
         HashMap<String ,Integer> map = new HashMap<>();
         int result = fileService.delGetFileByGfid( gfids );
         if(result > 0 ) {
-            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
+            map.put( StatusUtils.statecode , StatusUtils.SUCCESS_DEL );
         } else {
-            map.put( StatusUtils.statecode , StatusUtils.FAILURE_INSERT );
+            map.put( StatusUtils.statecode , StatusUtils.FAILURE_DEL );
         }
         return JSON.toJSONString( map );
     }

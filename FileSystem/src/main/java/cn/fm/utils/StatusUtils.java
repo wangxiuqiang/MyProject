@@ -82,5 +82,9 @@ public class StatusUtils {
     public static final int IS_EXIST_BORROW_UID_FILEGO = 19;
     //没有被清退
     public static final int IS_NOTBACK = 20;
+    //文件不存在
+    public static final int FILE_IS_NOTEXISTS = 21;
+    //文件没有被借走
+    public static final int FILE_IS_NOTBORROW = 22;
 }
 
