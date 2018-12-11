@@ -100,7 +100,7 @@ public interface FileService {
 
     // 下面是用户的收文的接口
     //只查找文件的信息,, 返回list
-    public List<GetFile> selectGetFile(@Param(value = "level") int level, @Param(value = "getFile") GetFile getFile ) throws Exception;
+    public List<GetFile> selectGetFile(@Param(value = "level") int level, @Param(value = "getFile") GetFile getFile,String endtime ) throws Exception;
 
     /**
      * 查找单个的文件的id

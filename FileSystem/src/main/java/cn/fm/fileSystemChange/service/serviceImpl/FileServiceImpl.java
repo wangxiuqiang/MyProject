@@ -531,8 +531,8 @@ public class FileServiceImpl implements FileService {
 
     // 下面是用户的收文的接口
     //只查找文件的信息,, 返回list ,根据文件的全部信息查,返回之后,将为用户的传阅人的名字和id传过去
-    public List<GetFile> selectGetFile(int level, GetFile getFile) throws Exception {
-        List<GetFile> files = fileDao.selectGetFile(level, getFile);
+    public List<GetFile> selectGetFile(int level, GetFile getFile , String endtime) throws Exception {
+        List<GetFile> files = fileDao.selectGetFile(level, getFile , endtime);
         files.forEach(n -> {
             User user = null;
             //如果不等于null的话就要查出用户的信息来
@@ -569,7 +569,7 @@ public class FileServiceImpl implements FileService {
     }
 
     /**
-     * 修改文件的信息. 可以对文件进行恢复
+     * 修改文件的信息. 可以对文件进行恢复,, 对文件进行清退,清退的要求是
      *
      * @param getFile
      * @return
@@ -610,8 +610,15 @@ public class FileServiceImpl implements FileService {
             }
             getFile.setWaitborrow(1);
         }
+        //清退,如果不是归还状态,不能进行清退
         if (getFile.getBack() == 1) {
-            getFile.setBackDate(DateToStringUtils.dataTostring());
+            GetFile getFile2 = fileDao.selectGetFileByGFid( getFile.getGfid() );
+            if( getFile2.getIsborrow() == 2 ) {
+                getFile.setBackDate(DateToStringUtils.dataTostring());
+            } else {
+                return -2;
+            }
+
         }
         int result = fileDao.updateGetFileByGFid(getFile);
         if (result > 0) {

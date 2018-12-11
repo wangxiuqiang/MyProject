@@ -5,6 +5,7 @@ package cn.fm.user.controller;
 
 import cn.fm.admin.service.AdminService;
 import cn.fm.admin.service.serviceImpl.AdminServiceImpl;
+import cn.fm.fileSystemChange.service.FileService;
 import cn.fm.pojo.*;
 import cn.fm.user.service.UserService;
 import cn.fm.utils.*;
@@ -46,6 +47,9 @@ public class UserController {
     UserService userService;
     @Autowired
     AdminService adminService;
+
+    @Autowired
+    FileService fileService;
     /**
      * 用户在邮箱中跳转,实现激活
      * @param code
@@ -265,9 +269,9 @@ public class UserController {
 
         User user = adminService.selectAllFingerInfoAndCompare(name);
         if( user != null ) {
-            //根据用户去找他是不是用其他借阅的信息 ,1表示没有归还的
+            //根据用户去找他是不是用其他借阅的信息 ,2表示没有归还的
             System.out.println( user.getUname());
-           List<BorrowCFExtends> cfExtends = userService.selectBorrowcfInfo( user.getWid() , 1  );
+           List<BorrowCFExtends> cfExtends = fileService.selectCompanyFileBorrowInfo( user.getWid() , 2 );
            if( cfExtends != null && cfExtends.size() > 0 ) {
                return JSON.toJSONString( cfExtends,SerializerFeature.DisableCircularReferenceDetect );
            }else {
@@ -305,8 +309,8 @@ public class UserController {
 
         User user = adminService.selectAllFingerInfoAndCompare( name );
         if( user != null ) {
-            //根据用户去找他是不是用其他借阅的信息 ,1表示没有归还的 ,
-            List<BorrowGFExtends> gfExtends = userService.selectBorrowgfInfo( user.getWid() , 1 );
+            //根据用户去找他是不是用其他借阅的信息 ,2表示没有归还的 ,
+            List<BorrowGFExtends> gfExtends = fileService.selectGetFileAndBorrowInfo( user.getWid() , 2 );
             if( gfExtends != null && gfExtends.size() > 0 ) {
                 return JSON.toJSONString( gfExtends,SerializerFeature.DisableCircularReferenceDetect );
             }else {

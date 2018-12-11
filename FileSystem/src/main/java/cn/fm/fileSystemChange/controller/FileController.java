@@ -305,13 +305,14 @@ public class FileController {
     @RequiresRoles("admin")
     @RequestMapping(value = "/selectGetFile/{page}/{pageSize}")
     @ResponseBody
-    public String selectGetFile( Integer level,  GetFile getFile, @PathVariable int page , @PathVariable int pageSize  ) throws Exception {
+    public String selectGetFile( Integer level,  GetFile getFile, @PathVariable int page , @PathVariable int pageSize
+    ,String endtime) throws Exception {
         if ( level == null ) {
             level = 0;
         }
         HashMap<String ,Integer> map = new HashMap<>();
         PageHelper.startPage(page,pageSize);
-        List<GetFile> getFiles = fileService.selectGetFile( level ,getFile );
+        List<GetFile> getFiles = fileService.selectGetFile( level ,getFile ,endtime );
         if( getFiles != null  && getFiles.size() > 0 ) {
             PageInfo<GetFile> pageInfo = new PageInfo<GetFile>(getFiles);
             return JSON.toJSONString(pageInfo, SerializerFeature.DisableCircularReferenceDetect);
@@ -347,6 +348,11 @@ public class FileController {
             map.put( StatusUtils.statecode , StatusUtils.EXIST_CONTENT );
             return  JSON.toJSONString( map );
 
+        }
+        if (result == -2 ) {
+            //没有归还
+            map.put( StatusUtils.statecode , StatusUtils.IS_BORROW );
+            return  JSON.toJSONString( map );
         }
         if(result > 0 ) {
             map.put( StatusUtils.statecode , StatusUtils.SUCCESS_INSERT );
