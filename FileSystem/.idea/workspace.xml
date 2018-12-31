@@ -20,33 +20,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="sql2.txt" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/sql2.txt">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="550">
-                    <caret line="115" column="20" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="20" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="FileDao.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/mapper/FileDao.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="300" column="35" lean-forward="true" selection-start-line="300" selection-start-column="35" selection-end-line="300" selection-end-column="35" />
+            <state relative-caret-position="-2024">
+              <caret line="300" column="35" lean-forward="false" selection-start-line="300" selection-start-column="35" selection-end-line="300" selection-end-column="35" />
               <folding>
                 <marker date="1544514622047" expanded="true" signature="863:1261" ph="insert into companyFile... " />
                 <marker date="1544514622047" expanded="true" signature="1381:1481" ph="insert into borrow_companyFile... " />
@@ -89,10 +69,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="sql2.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sql2.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1127">
+              <caret line="295" column="31" lean-forward="false" selection-start-line="295" selection-start-column="25" selection-end-line="295" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="FileService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/FileService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
+            <state relative-caret-position="2090">
               <caret line="102" column="130" lean-forward="false" selection-start-line="102" selection-start-column="130" selection-end-line="102" selection-end-column="130" />
               <folding />
             </state>
@@ -102,7 +92,7 @@
       <file leaf-file-name="FileDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/dao/FileDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
+            <state relative-caret-position="1848">
               <caret line="91" column="158" lean-forward="false" selection-start-line="91" selection-start-column="158" selection-end-line="91" selection-end-column="158" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -114,8 +104,8 @@
       <file leaf-file-name="FileServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/serviceImpl/FileServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="618" column="26" lean-forward="true" selection-start-line="618" selection-start-column="26" selection-end-line="618" selection-end-column="26" />
+            <state relative-caret-position="22">
+              <caret line="618" column="26" lean-forward="false" selection-start-line="618" selection-start-column="26" selection-end-line="618" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -126,17 +116,17 @@
       <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1061">
+            <state relative-caret-position="6116">
               <caret line="311" column="35" lean-forward="false" selection-start-line="311" selection-start-column="35" selection-end-line="311" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FileController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/controller/FileController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
+            <state relative-caret-position="478">
               <caret line="445" column="48" lean-forward="false" selection-start-line="445" selection-start-column="30" selection-end-line="445" selection-end-column="48" />
               <folding>
                 <element signature="e#5517#5534#0" expanded="true" />
@@ -150,12 +140,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StatusUtils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/StatusUtils.java">
+      <file leaf-file-name="TestOCR.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/TestOCR.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="668">
-              <caret line="84" column="11" lean-forward="false" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
+            <state relative-caret-position="528">
+              <caret line="36" column="16" lean-forward="true" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="47" column="28" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OCRHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/OCRHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="959">
+              <caret line="144" column="0" lean-forward="true" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -253,19 +267,16 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/RmFileUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/UploadUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/TestOCR.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserGetFileServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/vo/UserExtend.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/mapper/UserGetFileMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserCompanyFileController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/OCRHelper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/admin/controller/AdminController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/admin/service/serviceImpl/AdminServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/admin/service/AdminService.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserGetFileController.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/StatusUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserController.java" />
@@ -274,6 +285,9 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/mapper/FileDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/serviceImpl/FileServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/controller/FileController.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/OCRHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/fm/utils/TestOCR.java" />
       </list>
     </option>
   </component>
@@ -324,10 +338,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1911" />
-    <option name="y" value="338" />
-    <option name="width" value="979" />
-    <option name="height" value="367" />
+    <option name="x" value="2060" />
+    <option name="y" value="296" />
+    <option name="width" value="1875" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -344,8 +358,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -386,87 +398,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceImpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
               <item name="fileSystemChange" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="fileSystemChange" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="fileSystemChange" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
@@ -477,55 +409,6 @@
               <item name="fm" type="462c0819:PsiDirectoryNode" />
               <item name="fileSystemChange" type="462c0819:PsiDirectoryNode" />
               <item name="mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="fileSystemChange" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="fileSystemChange" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="serviceImpl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="pojo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
@@ -541,24 +424,7 @@
               <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="fm" type="462c0819:PsiDirectoryNode" />
-              <item name="vo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FileSystem" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="spring" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FileSystem" type="b2602c69:ProjectViewProjectNode" />
@@ -579,8 +445,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -589,9 +457,9 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GraduateSubject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///home/wxq/IdeaProjects/FileSystem/src/main/java/cn/fm/user/service/UserGetFileService.java&#10;mave&#9;ACTION&#9;ActivateMavenProjectsToolWindow" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -620,7 +488,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.run">
+  <component name="RunManager" selected="Application.testOCR">
     <configuration name="BackUp" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="cn.fm.utils.MysqlBackupUtils" />
@@ -990,21 +858,23 @@
       <workItem from="1544255082490" duration="5188000" />
       <workItem from="1544319654897" duration="13916000" />
       <workItem from="1544405828996" duration="15188000" />
-      <workItem from="1544511732669" duration="3148000" />
+      <workItem from="1544511732669" duration="3747000" />
+      <workItem from="1545568404835" duration="126000" />
+      <workItem from="1546239515746" duration="956000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="738816000" />
+    <option name="totallyTimeSpent" value="740497000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1911" y="338" width="1875" height="1092" extended-state="6" />
+    <frame x="1413" y="-4" width="1873" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25356415" sideWeight="0.50186867" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299389" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.123331554" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16380182" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1013,15 +883,16 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31873727" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790223" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30448064" sideWeight="0.49813133" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30448064" sideWeight="0.49813133" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2247731" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15803523" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1031,7 +902,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790223" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1163,13 +1033,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/TestOCR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1342">
-          <caret line="61" column="16" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="358" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/service/serviceImpl/UserRegServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1217,13 +1080,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/OCRHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="36" column="40" lean-forward="false" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -1297,13 +1153,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="49" column="26" lean-forward="false" selection-start-line="32" selection-start-column="7" selection-end-line="49" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/admin/mapper/AdminMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -1329,7 +1178,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="788" column="51" lean-forward="false" selection-start-line="788" selection-start-column="51" selection-end-line="788" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1352,7 +1200,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/StatusUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="668">
+        <state relative-caret-position="1848">
           <caret line="84" column="11" lean-forward="false" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
           <folding />
         </state>
@@ -1368,24 +1216,87 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/FileService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
+        <state relative-caret-position="2090">
           <caret line="102" column="130" lean-forward="false" selection-start-line="102" selection-start-column="130" selection-end-line="102" selection-end-column="130" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sql2.txt">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="115" column="20" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="20" />
+        <state relative-caret-position="6116">
+          <caret line="311" column="35" lean-forward="false" selection-start-line="311" selection-start-column="35" selection-end-line="311" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/dao/FileDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1848">
+          <caret line="91" column="158" lean-forward="false" selection-start-line="91" selection-start-column="158" selection-end-line="91" selection-end-column="158" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/controller/FileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="445" column="48" lean-forward="false" selection-start-line="445" selection-start-column="30" selection-end-line="445" selection-end-column="48" />
+          <folding>
+            <element signature="e#5517#5534#0" expanded="true" />
+            <element signature="e#6757#6774#0" expanded="true" />
+            <element signature="e#11260#11277#0" expanded="true" />
+            <element signature="e#12277#12286#0" expanded="true" />
+            <element signature="e#16217#16234#0" expanded="true" />
+            <element signature="e#17158#17175#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="47" column="28" lean-forward="false" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/serviceImpl/FileServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="618" column="26" lean-forward="false" selection-start-line="618" selection-start-column="26" selection-end-line="618" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/OCRHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="959">
+          <caret line="144" column="0" lean-forward="true" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/utils/TestOCR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="36" column="16" lean-forward="true" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/mapper/FileDao.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="300" column="35" lean-forward="true" selection-start-line="300" selection-start-column="35" selection-end-line="300" selection-end-column="35" />
+        <state relative-caret-position="-2024">
+          <caret line="300" column="35" lean-forward="false" selection-start-line="300" selection-start-column="35" selection-end-line="300" selection-end-column="35" />
           <folding>
             <marker date="1544514622047" expanded="true" signature="863:1261" ph="insert into companyFile... " />
             <marker date="1544514622047" expanded="true" signature="1381:1481" ph="insert into borrow_companyFile... " />
@@ -1427,46 +1338,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/user/controller/UserController.java">
+    <entry file="file://$PROJECT_DIR$/sql2.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1061">
-          <caret line="311" column="35" lean-forward="false" selection-start-line="311" selection-start-column="35" selection-end-line="311" selection-end-column="35" />
+        <state relative-caret-position="1127">
+          <caret line="295" column="31" lean-forward="false" selection-start-line="295" selection-start-column="25" selection-end-line="295" selection-end-column="31" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/dao/FileDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="91" column="158" lean-forward="false" selection-start-line="91" selection-start-column="158" selection-end-line="91" selection-end-column="158" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/service/serviceImpl/FileServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="618" column="26" lean-forward="true" selection-start-line="618" selection-start-column="26" selection-end-line="618" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/fm/fileSystemChange/controller/FileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="445" column="48" lean-forward="false" selection-start-line="445" selection-start-column="30" selection-end-line="445" selection-end-column="48" />
-          <folding>
-            <element signature="e#5517#5534#0" expanded="true" />
-            <element signature="e#6757#6774#0" expanded="true" />
-            <element signature="e#11260#11277#0" expanded="true" />
-            <element signature="e#12277#12286#0" expanded="true" />
-            <element signature="e#16217#16234#0" expanded="true" />
-            <element signature="e#17158#17175#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
