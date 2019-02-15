@@ -7,7 +7,7 @@ import cn.fm.admin.service.AdminService;
 import cn.fm.admin.service.serviceImpl.AdminServiceImpl;
 import cn.fm.fileSystemChange.service.FileService;
 import cn.fm.pojo.*;
-import cn.fm.user.service.UserService;
+//import cn.fm.user.service.UserService;
 import cn.fm.utils.*;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
@@ -43,8 +43,8 @@ import java.util.List;
 public class UserController {
 
     private static String address = "";
-    @Autowired
-    UserService userService;
+//    @Autowired
+//    UserService userService;
     @Autowired
     AdminService adminService;
 
@@ -217,30 +217,30 @@ public class UserController {
 
     }
 
-    /**
-     * 在借阅的时候提供 用户信息以供选择
-     * @param uname
-     * @return
-     * @throws Exception
-     */
-//    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
-    @RequestMapping(value = "/selectUserByName")
-    @RequiresRoles(value = "admin")
-    @ResponseBody
-    public String selectUserByName(String uname , Integer wid ) throws Exception{
-        int widInt = 0;
-        if( wid != null ){
-            widInt = wid;
-        }
-        List<User> users = userService.selectUserByName(uname,widInt);
-        if(users != null &&users.size() >0) {
-            return JSON.toJSONString(users);
-        }
-        HashMap<String,Integer> map = new HashMap<>();
-        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
-        return JSON.toJSONString(map);
-
-    }
+//    /**
+//     * 在借阅的时候提供 用户信息以供选择
+//     * @param uname
+//     * @return
+//     * @throws Exception
+//     */
+////    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
+//    @RequestMapping(value = "/selectUserByName")
+//    @RequiresRoles(value = "admin")
+//    @ResponseBody
+//    public String selectUserByName(String uname , Integer wid ) throws Exception{
+//        int widInt = 0;
+//        if( wid != null ){
+//            widInt = wid;
+//        }
+//        List<User> users = userService.selectUserByName(uname,widInt);
+//        if(users != null &&users.size() >0) {
+//            return JSON.toJSONString(users);
+//        }
+//        HashMap<String,Integer> map = new HashMap<>();
+//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+//        return JSON.toJSONString(map);
+//
+//    }
 
     /**
      * 在录入指纹的时候弹出的信息,查看是不是有没有归还的文件,,可以用这个来实现获取id和wid的情况,正好是显示没有归还的信息

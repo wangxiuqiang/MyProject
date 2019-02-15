@@ -3,8 +3,8 @@ package cn.fm.admin.service.serviceImpl;
 import cn.fm.admin.service.AdminService;
 import cn.fm.admin.dao.AdminMapper;
 import cn.fm.pojo.*;
-import cn.fm.user.dao.UserCompanyFileMapper;
-import cn.fm.user.dao.UserGetFileMapper;
+//import cn.fm.user.dao.UserCompanyFileMapper;
+//import cn.fm.user.dao.UserGetFileMapper;
 import cn.fm.user.dao.UserMapper;
 import cn.fm.utils.MailUtils;
 import cn.fm.utils.RmFileUtils;
@@ -30,11 +30,11 @@ public class AdminServiceImpl implements AdminService{
 
     @Autowired
     UserMapper userMapper;
-    @Autowired
-    UserGetFileMapper userGetFileMapper;
-
-    @Autowired
-    UserCompanyFileMapper userCompanyFileMapper;
+//    @Autowired
+//    UserGetFileMapper userGetFileMapper;
+//
+//    @Autowired
+//    UserCompanyFileMapper userCompanyFileMapper;
 //    /***
 //     * 查找admin用来进行登录
 //     * @param admin

@@ -2,7 +2,7 @@ package cn.fm.admin.controller;
 
 import cn.fm.admin.service.AdminService;
 import cn.fm.pojo.*;
-import cn.fm.user.service.UserService;
+//import cn.fm.user.service.UserService;
 import cn.fm.utils.*;
 import cn.fm.vo.UserExtend;
 import com.alibaba.fastjson.JSON;
@@ -40,9 +40,9 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-
-    @Autowired
-    UserService userService;
+//
+//    @Autowired
+//    UserService userService;
     /**
      * 展示主页
      * @return

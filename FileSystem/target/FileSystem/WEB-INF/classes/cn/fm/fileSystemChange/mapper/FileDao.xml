@@ -292,7 +292,7 @@
         select <include refid="Base_getFile_Columns" /> from getFile
         <where>
             <if test="getFile.gfname != null">
-                gfname = #{getFile.gfname}
+                gfname like concat(concat('%',#{getFile.gfname}), '%')
             </if>
             <if test="getFile.gffrom != null">
                 and gffrom = #{getFile.gffrom}
@@ -324,6 +324,9 @@
             </if>
             <if test="getFile.waitborrow != 0">
                 and waitborrow = #{getFile.waitborrow}
+            </if>
+            <if test="getFile.gfdatetime != null">
+                and ( gfdatetime BETWEEN #{getFile.gfdatetime} and  #{endtime})
             </if>
             and state = #{getFile.state}
         </where>

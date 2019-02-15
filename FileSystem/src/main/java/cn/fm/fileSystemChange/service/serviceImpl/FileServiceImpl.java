@@ -7,7 +7,7 @@ import cn.fm.pojo.Borrow;
 import cn.fm.pojo.CompanyFile;
 import cn.fm.pojo.GetFile;
 import cn.fm.pojo.User;
-import cn.fm.user.dao.UserMapper;
+//import cn.fm.user.dao.UserMapper;
 import cn.fm.utils.DateToStringUtils;
 import cn.fm.utils.StatusUtils;
 import cn.fm.vo.BorrowCFExtends;
@@ -26,8 +26,8 @@ public class FileServiceImpl implements FileService {
 
     @Autowired
     AdminMapper adminMapper;
-    @Autowired
-    UserMapper userMapper;
+//    @Autowired
+//    UserMapper userMapper;
     @Autowired
     FileDao fileDao;
 
