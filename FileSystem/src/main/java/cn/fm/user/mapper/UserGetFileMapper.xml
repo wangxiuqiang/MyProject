@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.fm.user.dao.UserGetFileMapper">
+    <sql id="Base_Columns_List">
+        gfid,gfname , gfidea, gfloader,gffrom,gettime ,gflevel,waitborrow,back
+         ,gfcompany, gfresult, gfdatetime,gfnumber,type,isborrow,gfpartnumber,gfpersonRead,state,backDate,gfpersonReadCom
+    </sql>
+
+    <insert id="insertGetFile" parameterType="cn.fm.pojo.GetFile">
+          insert into getFile(gfname,gfdatetime,gfnumber,gffrom,gettime,gflevel,gfpartnumber,
+          gfidea,gfresult,gfloader,gfcompany,gfpersonRead) values(#{gfname},#{gfdatetime},#{gfnumber},
+          #{gffrom} ,#{gettime},#{gflevel},#{gfpartnumber},#{gfidea},
+          #{gfresult}, #{gfloader},#{gfcompany},#{gfpersonRead})
+      </insert>
+
+    <select id="selectClassify" parameterType="java.lang.Integer" resultType="cn.fm.pojo.Classify">
+          select cyid,cyname,cyfatherid,cyaddress from classify WHERE cyid = #{value}
+      </select>
+
+    <select id="selectGetFileById" parameterType="int" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile where gfid = #{gfid} and state=1
+    </select>
+
+    <select id="selectGetFileByName" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile where gfname like concat(concat('%',#{gfname}), '%') and state=1
+        <if test="level == 1">
+            and gflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and gflevel = "普通"
+        </if>
+    </select>
+
+    <select id="selectGetFileByCompany" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile where gfcompany = #{gfcompany} and state=1
+        <if test="level == 1">
+            and gflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and gflevel = "普通"
+        </if>
+    </select>
+
+    <!--<select id="selectGetFileByClassifyId" parameterType="java.lang.Integer" resultType="cn.fm.pojo.GetFile">-->
+        <!--select-->
+        <!--<include refid="Base_Columns_List"/>-->
+        <!--from getFile where gfclassifyid = #{gf} and state=1-->
+        <!--<if test="level == 1">-->
+            <!--and gflevel != "普通"-->
+        <!--</if>-->
+        <!--<if test="level == 2">-->
+            <!--and gflevel = "普通"-->
+        <!--</if>-->
+    <!--</select>-->
+
+
+    <select id="selectGetFileByDateTime" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile where (gfdatetime BETWEEN #{gfdatetime} AND  #{endtime}) and state=1
+        <if test="level == 1">
+            and gflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and gflevel = "普通"
+        </if>
+    </select>
+
+    <select id="selectGetFileByNumber" parameterType="java.lang.String" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile where gfnumber = #{gfnumber} and state=1
+        <if test="level == 1">
+            and gflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and gflevel = "普通"
+        </if>
+    </select>
+
+    <!--多项查询-->
+    <select id="selectGetFileByTwoAndMore" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile
+        <where>
+            <if test="getFile.gfnumber != null">
+                gfnumber = #{getFile.gfnumber}
+            </if>
+            <if test="getFile.gfcompany != null">
+                and gfcompany = #{getFile.gfcompany}
+            </if>
+            <if test="getFile.gfname != null">
+                and gfname like concat(concat('%',#{getFile.gfname}), '%')
+            </if>
+
+            <if test="getFile.gfdatetime != null">
+                and (gfdatetime BETWEEN #{getFile.gfdatetime} and #{endtime})
+            </if>
+
+            <if test="level == 1">
+                and gflevel != "普通"
+            </if>
+            <if test="level == 2">
+                and gflevel = "普通"
+            </if>
+            <if test="getFile.isborrow != 0">
+                and isborrow=#{getFile.isborrow}
+            </if>
+            <if test="getFile.waitborrow != 0">
+                and waitborrow=#{getFile.waitborrow}
+            </if>
+            <if test="getFile.back != 0">
+                and back=#{getFile.back}
+            </if>
+            and state=#{getFile.state}
+        </where>
+    </select>
+    <!--
+
+
+   -->
+    <select id="selectAllGetFile" resultType="cn.fm.pojo.GetFile" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile
+        <where>
+           state=1
+        <if test="level == 1">
+            and gflevel != "普通"
+        </if>
+        <if test="level == 2">
+            and gflevel = "普通"
+        </if>
+        </where>
+    </select>
+
+    <!--更新 -->
+    <update id="updateGetFileById" parameterType="cn.fm.pojo.GetFile">
+        update getFile
+        <set>
+            <if test="gfname != null">
+                gfname = #{gfname} ,
+            </if>
+            <if test="gfidea != null">
+                gfidea = #{gfidea} ,
+            </if>
+            <if test="gfloader != null">
+                gfloader = #{gfloader},
+            </if>
+            <if test="gfcompany != null">
+                gfcompany = #{gfcompany},
+            </if>
+            <if test="gfresult != null">
+                gfresult = #{gfresult},
+            </if>
+            <if test="gfdatetime != null">
+                gfdatetime = #{gfdatetime},
+            </if>
+            <if test="gfnumber != null">
+                gfnumber = #{gfnumber},
+            </if>
+            <if test="isborrow != 0">
+                isborrow = #{isborrow},
+            </if>
+            <if test="gffrom != null">
+                gffrom = #{gffrom},
+            </if>
+            <if test="gflevel != null">
+                gflevel = #{gflevel},
+            </if>
+            <if test="gettime != null">
+                gettime = #{gettime},
+            </if>
+            <if test="gfpartnumber != null">
+                gfpartnumber = #{gfpartnumber},
+            </if>
+            <if test="state != 0">
+                state=#{state},
+            </if>
+            <if test="gfpersonRead != null">
+                gfpersonRead=#{gfpersonRead},
+            </if>
+            <if test="gfpersonReadCom != null">
+                gfpersonReadCom=#{gfpersonReadCom},
+            </if>
+            <if test="backDate != null">
+                backDate=#{backDate}
+            </if>
+        </set>
+        where gfid = #{gfid}
+    </update>
+
+    <!--查询这个文件的借阅信息是不是存在-->
+    <select id="selectGFhasBorrowInfo" parameterType="int" resultType="cn.fm.pojo.Borrow">
+         select * from borrow_getFile where fileid=#{id}
+    </select>
+    <update id="deleteGetFileById" parameterType="int">
+        update getFile set state=0 where gfid IN
+        <foreach collection="gfid" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="deleteGetFileBorrowInfo" parameterType="int">
+        update borrow_getFile set state=0
+        <where>
+            fileid=#{gfid}
+        </where>
+    </update>
+
+    <!--查看被删除的文件-->
+    <select id="selectTheGFileIsDel" resultType="cn.fm.pojo.GetFile">
+        select
+        <include refid="Base_Columns_List"/>
+        from getFile where state = 0
+    </select>
+    <!--清退一个文件-->
+    <update id="delGetFileBack">
+        UPDATE getFile SET back = 1 , backDate = #{backDate} where gfid = #{gfid} and state = 1
+    </update>
+    <!--根据是否涉密查找文件-->
+    <select id="selectLevelGetFile" resultType="cn.fm.pojo.GetFile" >
+        select
+        <include refid="Base_Columns_List"/> from getFile
+        where gflevel != "普通"
+    </select>
+
+    <select id="selectNOTLevelGetFile" resultType="cn.fm.pojo.GetFile" >
+        select
+        <include refid="Base_Columns_List"/> from getFile
+        where gflevel= "普通"
+    </select>
+</mapper>
