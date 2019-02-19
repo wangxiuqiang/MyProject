@@ -32,20 +32,23 @@ public class FileController {
     @Autowired
     FileService fileService;
     /**
-     * 添加一个用户或者修改一个用户,Controller
+     * 添加一个用户或者修改一个文件,Controller
      *添加和修改,将整个类进行传递,在添加的时候指定领取人,
      *(根据文件id是不是存在判断是添加还是 修改),直接将整个类传过来,参数是类,用户id
      * @param companyFile
      * @param uid ,
-     *            doIt 强制将领取人替换  1 0
+     *            doIt 强制将领取人替换  1   , 0表示不替换
      * @return
      * @throws Exception
      */
     @RequiresRoles("admin")
     @RequestMapping(value = "/insertCompanyFileInfoNew")
     @ResponseBody
-    public String insertCompanyFileInfoNew(CompanyFile companyFile , String uid , int doIt ) throws Exception {
+    public String insertCompanyFileInfoNew(CompanyFile companyFile , String uid ,Integer  doIt ) throws Exception {
         HashMap<String , Integer > map = new HashMap<>();
+        if ( doIt == null ) {
+            doIt = 0;
+        }
         int result = 0;//用来判定是否成功
         if( companyFile == null ) {
             map.put(StatusUtils.statecode , StatusUtils.IS_NULL );
@@ -423,7 +426,10 @@ public class FileController {
     @RequiresRoles("admin")
     @RequestMapping(value = "/selectGetFileAndBorrowInfo/{page}/{pageSize}")
     @ResponseBody
-    public String selectGetFileAndBorrowInfo(int wid , int flag ,@PathVariable int page , @PathVariable int pageSize  ) throws Exception {
+    public String selectGetFileAndBorrowInfo(Integer wid , int flag ,@PathVariable int page , @PathVariable int pageSize  ) throws Exception {
+        if (wid == null ) {
+            wid = 0;
+        }
         HashMap<String ,Integer> map = new HashMap<>();
         PageHelper.startPage(page,pageSize);
         List<BorrowGFExtends> borrowGFExtends = fileService.selectGetFileAndBorrowInfo( wid,flag );

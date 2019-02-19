@@ -171,7 +171,7 @@ public class AdminServiceImpl implements AdminService{
         return ue;
     }
     /**
-     * 删除一个用户 根据id
+     * 删除一个用户 根据id , 设置state = 0 , 并删除指纹, 同时将文件借阅历史隐藏
      * @param id
      * @return
      * @throws Exception
@@ -266,7 +266,8 @@ public class AdminServiceImpl implements AdminService{
         return adminMapper.insertCompany(workPlace);
     }
     /**
-     * 删除一个 用户单位
+     * 删除 (隐藏)一个 用户单位, 同时隐藏部门人员,
+     * 先隐藏人员,隐藏不了,,部门就不用了
      * @param wid
      * @return
      * @throws Exception
@@ -275,8 +276,24 @@ public class AdminServiceImpl implements AdminService{
     public int delCompany( String wid ) throws Exception {
         String[] wids = wid.split(",");
         int result = 0;
+
+        for ( int i = 0 ; i < wids.length; i++ ) {
+            List<User> userList = userMapper.selectUserId( null , Integer.parseInt( wids[i]) );
+            int uids[] = new int[ userList.size() ];
+            for (int j = 0; j < userList.size() ; j++ ) {
+                uids[j] = userList.get(j).getUid();
+            }
+            int flag = deleteWorkerById( uids );
+            if ( flag != 0) {
+                continue;
+            } else {
+                //如果不能删除,就返回0 ,
+                return 0;
+            }
+        }
+        //如果没有return 说明全部隐藏,这时候在删除部门信息
         for (int i = 0; i < wids.length ; i++) {
-            result = adminMapper.delCompany( Integer.parseInt( wids[i]));
+            result += adminMapper.delCompany( Integer.parseInt( wids[i]) );
         }
         if( result == wids.length ) {
             return 1;

@@ -7,7 +7,7 @@ import cn.fm.admin.service.AdminService;
 import cn.fm.admin.service.serviceImpl.AdminServiceImpl;
 import cn.fm.fileSystemChange.service.FileService;
 import cn.fm.pojo.*;
-//import cn.fm.user.service.UserService;
+import cn.fm.user.service.UserService;
 import cn.fm.utils.*;
 import cn.fm.vo.BorrowCFExtends;
 import cn.fm.vo.BorrowGFExtends;
@@ -43,8 +43,8 @@ import java.util.List;
 public class UserController {
 
     private static String address = "";
-//    @Autowired
-//    UserService userService;
+    @Autowired
+    UserService userService;
     @Autowired
     AdminService adminService;
 
@@ -223,24 +223,24 @@ public class UserController {
 //     * @return
 //     * @throws Exception
 //     */
-////    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
-//    @RequestMapping(value = "/selectUserByName")
-//    @RequiresRoles(value = "admin")
-//    @ResponseBody
-//    public String selectUserByName(String uname , Integer wid ) throws Exception{
-//        int widInt = 0;
-//        if( wid != null ){
-//            widInt = wid;
-//        }
-//        List<User> users = userService.selectUserByName(uname,widInt);
-//        if(users != null &&users.size() >0) {
-//            return JSON.toJSONString(users);
-//        }
-//        HashMap<String,Integer> map = new HashMap<>();
-//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
-//        return JSON.toJSONString(map);
-//
-//    }
+//    @RequiresRoles(value = {"admin", "user"}, logical = Logical.OR)
+    @RequestMapping(value = "/selectUserByName")
+    @RequiresRoles(value = "admin")
+    @ResponseBody
+    public String selectUserByName(String uname , Integer wid ) throws Exception{
+        int widInt = 0;
+        if( wid != null ){
+            widInt = wid;
+        }
+        List<User> users = userService.selectUserByName(uname,widInt);
+        if(users != null &&users.size() >0) {
+            return JSON.toJSONString(users);
+        }
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+        return JSON.toJSONString(map);
+
+    }
 
     /**
      * 在录入指纹的时候弹出的信息,查看是不是有没有归还的文件,,可以用这个来实现获取id和wid的情况,正好是显示没有归还的信息
@@ -323,12 +323,12 @@ public class UserController {
         }
     }
 
-//    /**
-//     * 根据用户的wid查看 ,待领取的文件
-//     * @param uid
-//     * @return
-//     * @throws Exception
-//     */
+    /**
+     * 根据用户的wid查看 ,待领取的文件
+     * @param uid
+     * @return
+     * @throws Exception
+     */
 //    @RequiresRoles(value = "admin")
 //    @RequestMapping(value = "/showcfWaitBorrow")
 //    @ResponseBody
@@ -342,13 +342,13 @@ public class UserController {
 //        return JSON.toJSONString( map );
 //
 //    }
-//
-//    /**
-//     * 根据用户的wid查看 待领取的文件,
+
+    /**
+     * 根据用户的wid查看 待领取的文件,
 //     * @param uid
-//     * @return
-//     * @throws Exception
-//     */
+     * @return
+     * @throws Exception
+     */
 //    @RequiresRoles(value = "admin")
 //    @RequestMapping(value = "/showgfWaitBorrow")
 //    @ResponseBody
@@ -629,71 +629,70 @@ public class UserController {
 //     * @throws Exception
 //     */
 ////    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
-//    @RequestMapping(value = "/selectClassifyBiggest")
-//    @RequiresRoles(value = "admin")
-//    @ResponseBody
-//    public String selectClassifyBiggst() throws Exception {
-//        List<Classify> classifies = userService.selectClassifyBiggest();
-//        if(classifies != null && classifies.size() > 0) {
-//            return JSON.toJSONString(classifies);
-//        }
-//        HashMap<String,Integer> map = new HashMap<>();
-//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
-//        return JSON.toJSONString(map);
-//    }
+    @RequestMapping(value = "/selectClassifyBiggest")
+    @RequiresRoles(value = "admin")
+    @ResponseBody
+    public String selectClassifyBiggst() throws Exception {
+        List<Classify> classifies = userService.selectClassifyBiggest();
+        if(classifies != null && classifies.size() > 0) {
+            return JSON.toJSONString(classifies);
+        }
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+        return JSON.toJSONString(map);
+    }
 //    /**
 //     * 查找下一级的分类, 并且 打印出这些分类的总的存放地址
 //     */
-////    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
-//    @RequestMapping(value = "/selectClassifyByFather/{fatherid}")
-//    @RequiresRoles(value = "admin")
-//    @ResponseBody
-//    public String selectClassifyByFather(@PathVariable int fatherid) throws Exception{
-//        List<Classify> classifies = userService.selectClassifyByFatherId(fatherid);
-////        如果这个 cyid = 0 则带出去的是选择了的分类的地址
-//        if(classifies != null && classifies.size() > 0) {
-////            for (Classify c: classifies) {
-////                if(c.getCyid() == 0) {
-////                    address = address + "-" + c.getCyaddress();
-////                    c.setCyaddress(address);
-////                }
-////            }
-//            return JSON.toJSONString(classifies);
-//        }
-//        HashMap<String,Integer> map = new HashMap<>();
-//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
-//        return JSON.toJSONString(map);
-//    }
+//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    @RequestMapping(value = "/selectClassifyByFather/{fatherid}")
+    @RequiresRoles(value = "admin")
+    @ResponseBody
+    public String selectClassifyByFather(@PathVariable int fatherid) throws Exception{
+        List<Classify> classifies = userService.selectClassifyByFatherId(fatherid);
+//        如果这个 cyid = 0 则带出去的是选择了的分类的地址
+        if(classifies != null && classifies.size() > 0) {
+//            for (Classify c: classifies) {
+//                if(c.getCyid() == 0) {
+//                    address = address + "-" + c.getCyaddress();
+//                    c.setCyaddress(address);
+//                }
+//            }
+            return JSON.toJSONString(classifies);
+        }
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+        return JSON.toJSONString(map);
+    }
+    /**
+     * 查看自己的用户信息
+     * @return
+     * @throws Exception
+     */
+    @RequiresRoles(value = "admin")
+    @RequestMapping(value = "/selectMyself")
+    @ResponseBody
+    public String selectMyself() throws Exception{
+        Subject subject = SecurityUtils.getSubject();
+        String uaccount = (String)subject.getPrincipal();
+//        System.out.println(uemail);
+       UserExtend ue = userService.selectMySelf(uaccount);
+       if(ue != null) {
+           return  JSON.toJSONString(ue);
+       }
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
+        return JSON.toJSONString(map);
+    }
 //
-//    /**
-//     * 查看自己的用户信息
-//     * @return
-//     * @throws Exception
-//     */
-//    @RequiresRoles(value = "admin")
-//    @RequestMapping(value = "/selectMyself")
-//    @ResponseBody
-//    public String selectMyself() throws Exception{
-//        Subject subject = SecurityUtils.getSubject();
-//        String uaccount = (String)subject.getPrincipal();
-////        System.out.println(uemail);
-//       UserExtend ue = userService.selectMySelf(uaccount);
-//       if(ue != null) {
-//           return  JSON.toJSONString(ue);
-//       }
-//        HashMap<String,Integer> map = new HashMap<>();
-//        map.put(StatusUtils.statecode,StatusUtils.FAILURE_FIND);
-//        return JSON.toJSONString(map);
-//    }
-//
-//    /**
-//     * 根据日期范围查询未归还的用户信息及其借阅的文件信息
-//     * @param starttime
-//     * @param endtime
-//     * @return
-//     * @throws Exception
-//     */
-////    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
+    /**
+     * 根据日期范围查询未归还的用户信息及其借阅的文件信息
+     * @param starttime
+     * @param endtime
+     * @return
+     * @throws Exception
+     */
+//    @RequiresRoles(value = {"admin","user"} ,logical = Logical.OR)
 //    @RequestMapping(value = "/selectBorrowcfByborrowtime")
 //    @RequiresRoles(value = "admin")
 //    @ResponseBody
@@ -712,7 +711,7 @@ public class UserController {
 //        }
 //
 //    }
-//
+////
 //    /**
 //     * 根据日期范围查询未归还的用户信息及其借阅的文件信息
 //     * @param starttime
@@ -739,70 +738,70 @@ public class UserController {
 //        }
 //
 //    }
-//
-//    /**
-//     * 返回ocr读取的数据
-//     * @param file
-//     * @param type
-//     * @return
-//     * @throws Exception
-//     */
-////    @RequiresRoles(value = {"admin"} )
-////    @RequestMapping(value = "/returnOcrInfo/{type}")
-////    @ResponseBody
-////    public String returnOcrInfo ( MultipartFile file , @PathVariable int type ) throws Exception {
-////        String path = UploadUtils.upload(file , 1);
-////        HashMap<String , Integer > map = new HashMap<>();
-////        if (path == null ) {
-////            map.put(StatusUtils.statecode , StatusUtils.IS_NULL );
-////            return JSON.toJSONString( map );
-////        }
-//////        int flag = OCRHelper.convertFile(path);
-//////        if( flag == 0 ) {
-////            //type == 1 表示这是companyFile type == 2 表示这个是GetFile
-////            if( type == 1) {
-////               CompanyFile companyFile = OCRHelper.ocrCompanyFile( path );
-////               return JSON.toJSONString( companyFile );
-////            }
-////            if (type == 2 ) {
-////                GetFile getFile = OCRHelper.ocrGetFile( path );
-////                return JSON.toJSONString( getFile );
-////            }
-//////        }
 ////
-////        map.put( StatusUtils.statecode, StatusUtils.FAILURE_OCR );
-////        return JSON.toJSONString( map );
+////    /**
+////     * 返回ocr读取的数据
+////     * @param file
+////     * @param type
+////     * @return
+////     * @throws Exception
+////     */
+//////    @RequiresRoles(value = {"admin"} )
+//////    @RequestMapping(value = "/returnOcrInfo/{type}")
+//////    @ResponseBody
+//////    public String returnOcrInfo ( MultipartFile file , @PathVariable int type ) throws Exception {
+//////        String path = UploadUtils.upload(file , 1);
+//////        HashMap<String , Integer > map = new HashMap<>();
+//////        if (path == null ) {
+//////            map.put(StatusUtils.statecode , StatusUtils.IS_NULL );
+//////            return JSON.toJSONString( map );
+//////        }
+////////        int flag = OCRHelper.convertFile(path);
+////////        if( flag == 0 ) {
+//////            //type == 1 表示这是companyFile type == 2 表示这个是GetFile
+//////            if( type == 1) {
+//////               CompanyFile companyFile = OCRHelper.ocrCompanyFile( path );
+//////               return JSON.toJSONString( companyFile );
+//////            }
+//////            if (type == 2 ) {
+//////                GetFile getFile = OCRHelper.ocrGetFile( path );
+//////                return JSON.toJSONString( getFile );
+//////            }
+////////        }
+//////
+//////        map.put( StatusUtils.statecode, StatusUtils.FAILURE_OCR );
+//////        return JSON.toJSONString( map );
+//////    }
+////
+////    /**
+////     * 查看文件借阅超时的接口
+////     * @return
+////     * @throws Exception
+////     */
+////    @RequiresRoles(value = {"admin"} )
+////    @RequestMapping(value = "/selectFileIsPassTime/{type}")
+////    @ResponseBody
+////    public String selectFileIsPassTime(@PathVariable int type ) throws Exception {
+////        HashMap<String,Integer> map = new HashMap<>();
+////       if( type == 1 ) {
+////           List<BorrowCFExtends> bcfs = userService.selectcfIsPassTime();
+////           if( bcfs != null && bcfs.size() > 0 ) {
+////               return JSON.toJSONString( bcfs );
+////           }else {
+////               map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+////               return JSON.toJSONString( map );
+////           }
+////       }else {
+////           List<BorrowGFExtends> bgfs = userService.selectgfIsPassTime();
+////           if( bgfs != null && bgfs.size() > 0 ) {
+////               return JSON.toJSONString( bgfs );
+////           }else {
+////               map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
+////               return JSON.toJSONString( map );
+////           }
+////       }
 ////    }
-//
-//    /**
-//     * 查看文件借阅超时的接口
-//     * @return
-//     * @throws Exception
-//     */
-//    @RequiresRoles(value = {"admin"} )
-//    @RequestMapping(value = "/selectFileIsPassTime/{type}")
-//    @ResponseBody
-//    public String selectFileIsPassTime(@PathVariable int type ) throws Exception {
-//        HashMap<String,Integer> map = new HashMap<>();
-//       if( type == 1 ) {
-//           List<BorrowCFExtends> bcfs = userService.selectcfIsPassTime();
-//           if( bcfs != null && bcfs.size() > 0 ) {
-//               return JSON.toJSONString( bcfs );
-//           }else {
-//               map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
-//               return JSON.toJSONString( map );
-//           }
-//       }else {
-//           List<BorrowGFExtends> bgfs = userService.selectgfIsPassTime();
-//           if( bgfs != null && bgfs.size() > 0 ) {
-//               return JSON.toJSONString( bgfs );
-//           }else {
-//               map.put( StatusUtils.statecode , StatusUtils.FAILURE_FIND );
-//               return JSON.toJSONString( map );
-//           }
-//       }
-//    }
-//
+////
 //    /**
 //     * 预分配接口,将文件的待借阅标记修改为1, 然后将待借阅的信息,uid,wid,fileid ,写入借阅表中 , 可以多选
 //     * @param type

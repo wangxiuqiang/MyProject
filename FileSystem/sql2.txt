@@ -57,7 +57,8 @@ insert into user(uname,uaccount,ucompany,wid,uupdatetime,uphone,unumber,ifAdmin,
 
 create table workPlace (
 wid int primary key auto_increment,
-wname varchar(30) NOT NULL
+wname varchar(30) NOT NULL,
+state int default 1
 );
 
  insert into workPlace(wname) values("办公室");

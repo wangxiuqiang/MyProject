@@ -1,53 +1,53 @@
-//package cn.fm.user.service.serviceImpl;
-//
-//import cn.fm.admin.dao.AdminMapper;
-//import cn.fm.admin.service.AdminService;
-//import cn.fm.pojo.*;
+package cn.fm.user.service.serviceImpl;
+
+import cn.fm.admin.dao.AdminMapper;
+import cn.fm.admin.service.AdminService;
+import cn.fm.pojo.*;
 //import cn.fm.user.dao.UserCompanyFileMapper;
 //import cn.fm.user.dao.UserGetFileMapper;
-//import cn.fm.user.dao.UserMapper;
-//import cn.fm.user.service.UserService;
-//import cn.fm.utils.DateToStringUtils;
-//import cn.fm.utils.PassWordHelper;
-//import cn.fm.utils.StatusUtils;
-//import cn.fm.vo.*;
-//import org.apache.ibatis.annotations.Param;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import java.text.SimpleDateFormat;
-//import java.util.ArrayList;
-//import java.util.Date;
-//import java.util.List;
-//
-//@Service
-//public class UserServiceImpl implements UserService {
-//    @Autowired
-//    UserMapper userMapper;
-//
-//    @Autowired
-//    AdminService adminService;
-//    @Autowired
-//    AdminMapper adminMapper;
+import cn.fm.user.dao.UserMapper;
+import cn.fm.user.service.UserService;
+import cn.fm.utils.DateToStringUtils;
+import cn.fm.utils.PassWordHelper;
+import cn.fm.utils.StatusUtils;
+import cn.fm.vo.*;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Service
+public class UserServiceImpl implements UserService {
+    @Autowired
+    UserMapper userMapper;
+
+    @Autowired
+    AdminService adminService;
+    @Autowired
+    AdminMapper adminMapper;
 //    @Autowired
 //    UserCompanyFileMapper userCompanyFileMapper;
 //    @Autowired
 //    UserGetFileMapper userGetFileMapper;
-//
+
 //    @Override
 //    public int selectState(String code) throws Exception {
 //        return userMapper.selectState( code );
 //    }
-//
-//    /**
-//     * 设置密码
-//     * @param upwd
-//     * @param code
-//     * @return
-//     * @throws Exception
-//     */
-//
-//
+
+    /**
+     * 设置密码
+     * @param upwd
+     * @param code
+     * @return
+     * @throws Exception
+     */
+
+
 //    @Override
 //    public int updateUserpwd(String upwd, String code) throws Exception {
 //        PassWordHelper pwh = new PassWordHelper();
@@ -59,37 +59,37 @@
 //        }
 //
 //    }
-//
-///**
-// * 通过姓名进行查询 信息 ,给下面借文件提供id
-// */
-//    @Override
-//    public List<User> selectUserByName(String name,int wid) throws Exception{
-//        return userMapper.selectUserId(name , wid);
-//    }
-//
-//    /**
-//     * 将日期延长1天
-//     * @return
-//     * @throws Exception
-//     */
-//
-//    public String dateAddToTomorrow() throws Exception {
-//        long time = System.currentTimeMillis();
-//        long timeTomorrow = 24 * 60 * 60 * 1000;
-//        time = time + timeTomorrow;
-//        Date date = new Date();
-//        date.setTime( time );
-//        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-//        return sdf.format( date );
-//
-//    }
-//    /**
-//     * 添加借阅信息,同时在这里修改文件的状态,同时修改待领取字段的状态,只改了cf 没有改 gf
-//     * @param uid,cfid
-//     * @return
-//     * @throws Exception
-//     */
+
+/**
+ * 通过姓名进行查询 信息 ,给下面借文件提供id
+ */
+    @Override
+    public List<User> selectUserByName(String name,int wid) throws Exception{
+        return userMapper.selectUserId(name , wid);
+    }
+
+    /**
+     * 将日期延长1天
+     * @return
+     * @throws Exception
+     */
+
+    public String dateAddToTomorrow() throws Exception {
+        long time = System.currentTimeMillis();
+        long timeTomorrow = 24 * 60 * 60 * 1000;
+        time = time + timeTomorrow;
+        Date date = new Date();
+        date.setTime( time );
+        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
+        return sdf.format( date );
+
+    }
+    /**
+     * 添加借阅信息,同时在这里修改文件的状态,同时修改待领取字段的状态,只改了cf 没有改 gf
+     * @param uid,cfid
+     * @return
+     * @throws Exception
+     */
 //    @Override
 //    public int insertBorrowcfInfo(int uid,int cfid , int wid) throws Exception{
 //
@@ -161,9 +161,9 @@
 ////        }
 //        return  1;
 //    }
-///**
-// *  查询一个单位所有的借阅出去的文件 ,如果flag = 0 表示所有的借阅信息, fflag = 1 表示没有还的,flag = 2表示还了的.
-// */
+/**
+ *  查询一个单位所有的借阅出去的文件 ,如果flag = 0 表示所有的借阅信息, fflag = 1 表示没有还的,flag = 2表示还了的.
+ */
 //    @Override
 //    public List<BorrowCFExtends> selectBorrowcfInfo(int wid,int flag) throws Exception{
 //        if(wid == 0) {
@@ -352,7 +352,7 @@
 //        }
 //
 //    }
-//
+
 //    /**
 //     * 查询一个文件所有的借阅数据
 //     */
@@ -441,14 +441,14 @@
 ////        }
 ////        return userMapper.updateCompanyFileBack(borrow.getFileid()) +userMapper.updatecfBackTime(borrow);
 //    }
-//
-//    /**
-//     * 修改借阅信息的时候,由于是多个人传阅所以要进行 一些要求,要先查出文件的两个字段,比较一下是不是一样,不一样就不是最后一个人,这个文件可以继续借阅,将isborrow改为0,
-//     * 同时将其中的一个字段修改,添加一个用户的id,如果一样就isborrow设为2,结束传阅
-//     * @param fileid
-//     * @return
-//     * @throws Exception
-//     */
+
+    /**
+     * 修改借阅信息的时候,由于是多个人传阅所以要进行 一些要求,要先查出文件的两个字段,比较一下是不是一样,不一样就不是最后一个人,这个文件可以继续借阅,将isborrow改为0,
+     * 同时将其中的一个字段修改,添加一个用户的id,如果一样就isborrow设为2,结束传阅
+     * @param fileid
+     * @return
+     * @throws Exception
+     */
 //    @Override
 //    public int updategfBackTime(int[] fileid , int uid , int wid) throws Exception{
 //        //如果还多个文件, 就先从这些里面查找是不是用文件已经还了,如果没有的话,在进行归还
@@ -494,79 +494,79 @@
 ////        }
 ////        return userMapper.updateGetFileBack(borrow.getFileid()) +userMapper.updategfBackTime(borrow);
 //    }
-//
-//
-//
-//
-//    /**
-//     * 用在录入或修改文件信息的时候,,俩文件
-//     * 查最顶层的分类
-//     */
+
+
+
+
+    /**
+     * 用在录入或修改文件信息的时候,,俩文件
+     * 查最顶层的分类
+     */
+    @Override
+    public List<Classify> selectClassifyBiggest() throws Exception{
+        return userMapper.selectClassifyBiggest();
+    }
+
+
+    /**
+     * 用在录入或修改文件信息的时候,,俩文件
+     * 根据父类id查找子类 信息
+     * @param fatherid
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Classify> selectClassifyByFatherId(int fatherid) throws Exception{
+//        Classify classify = userGetFileMapper.selectClassify(fatherid);
+//        classify.setCyid(0);
+//        classify.setCyname("0");
+//        classify.setCyfatherid(0);
+        List<Classify> classifies = userMapper.selectClassifyByFatherId(fatherid);
+//        classifies.add(classify);
+        return classifies;
+    }
+
+    /***
+     * 根据找到自己的信息 ,包括其中的角色和权限信息
+     */
+    @Override
+    public UserExtend selectMySelf(String uaccount ) throws Exception{
+
+        User user = adminMapper.findUserByUaccount(uaccount);
+        UserExtend userEd = adminService.findWorkerById( user.getUid() );
+        return userEd;
+    }
+
+
+    /**
+     * 根据code 查找用户的录入时间
+     */
 //    @Override
-//    public List<Classify> selectClassifyBiggest() throws Exception{
-//        return userMapper.selectClassifyBiggest();
+//    public String selectUserupdatetime(String code) throws Exception{
+//        return userMapper.selectUserupdatetime(code);
 //    }
-//
-//
-//    /**
-//     * 用在录入或修改文件信息的时候,,俩文件
-//     * 根据父类id查找子类 信息
-//     * @param fatherid
-//     * @return
-//     * @throws Exception
-//     */
-//    @Override
-//    public List<Classify> selectClassifyByFatherId(int fatherid) throws Exception{
-////        Classify classify = userGetFileMapper.selectClassify(fatherid);
-////        classify.setCyid(0);
-////        classify.setCyname("0");
-////        classify.setCyfatherid(0);
-//        List<Classify> classifies = userMapper.selectClassifyByFatherId(fatherid);
-////        classifies.add(classify);
-//        return classifies;
-//    }
-//
-//    /***
-//     * 根据邮箱找到自己的信息 ,包括其中的角色和权限信息
-//     */
-//    @Override
-//    public UserExtend selectMySelf(String uaccount ) throws Exception{
-//
-//        User user = adminMapper.findUserByUaccount(uaccount);
-//        UserExtend userEd = adminService.findWorkerById( user.getUid() );
-//        return userEd;
-//    }
-//
-//
-//    /**
-//     * 根据code 查找用户的录入时间
-//     */
-////    @Override
-////    public String selectUserupdatetime(String code) throws Exception{
-////        return userMapper.selectUserupdatetime(code);
-////    }
-//
-//    /**
-//     * 查看是不是 被借出去了
-//     * @param cfid
-//     * @return
-//     * @throws Exception
-//     */
-//
+
+    /**
+     * 查看是不是 被借出去了
+     * @param cfid
+     * @return
+     * @throws Exception
+     */
+
 //    public int selectcfisBorrow( int cfid) throws Exception{
 //        return userMapper.selectcfisBorrow(cfid);
 //    }
 //    public int selectgfisBorrow(int gfid) throws Exception{
 //        return userMapper.selectgfisBorrow(gfid);
 //    }
-//
-//    /**
-//     * 根据传入的开始时间和终止时间查询 没有归还的文件信息, 范围查询,并通过这里面的用户id和文件id去查询用户和文件信息
-//     * @param starttime
-//     * @param endtime
-//     * @return
-//     * @throws Exception
-//     */
+
+    /**
+     * 根据传入的开始时间和终止时间查询 没有归还的文件信息, 范围查询,并通过这里面的用户id和文件id去查询用户和文件信息
+     * @param starttime
+     * @param endtime
+     * @return
+     * @throws Exception
+     */
 //    @Override
 //    public List<BorrowCFExtends> selectBorrowcfByborrowtime( String starttime , String endtime ) throws Exception {
 //        List<Borrow> list = userMapper.selectBorrowcfByborrowtime(starttime, endtime );
@@ -607,13 +607,13 @@
 //        });
 //        return bgf;
 //    }
-//
-//    /**
-//     * 根据用户部门id查找没有领取的文件
-//     * @param uid
-//     * @return
-//     * @throws Exception
-//     */
+
+    /**
+     * 根据用户部门id查找没有领取的文件
+     * @param uid
+     * @return
+     * @throws Exception
+     */
 //    @Override
 //    public List<CompanyFile> selectcfWaitBorrow(   int uid, int wid  ) throws Exception{
 //        int[] fileids = userMapper.selectcfWaitBorrow(  wid ) ;
@@ -660,12 +660,12 @@
 //        }
 //        return null;
 //    }
-//    /**
-//     * 查找借出的文件,然后进行比较,比较完之后将超时的文件的信息和用户的信息封装在一起输出,
-//     * 可以先进行排序,让一样的文件在一块
-//     * @return
-//     * @throws Exception
-//     */
+    /**
+     * 查找借出的文件,然后进行比较,比较完之后将超时的文件的信息和用户的信息封装在一起输出,
+     * 可以先进行排序,让一样的文件在一块
+     * @return
+     * @throws Exception
+     */
 //    @Override
 //    public List<BorrowCFExtends> selectcfIsPassTime () throws Exception{
 //        //获取了没有归还的文件
@@ -744,11 +744,11 @@
 //        });
 //        return bgf;
 //    }
-//
-//
-//    /**
-//     * 整合下面的四个方法 ,预分配
-//     */
+
+
+    /**
+     * 整合下面的四个方法 ,预分配
+     */
 //    @Override
 //    public int addBorrowInfo( int fileid , int type ,String uid ,String wid ) throws Exception{
 //        int result = 0;
@@ -828,12 +828,12 @@
 //
 //        }
 //    }
-//    /**
-//     * 下面的四个方法是预分配接口调用的
-//     * 更新文件的待借阅标记,默认为0 表示没有被分配, 1表示已经分配
-//     * @return
-//     * @throws Exception
-//     */
+    /**
+     * 下面的四个方法是预分配接口调用的
+     * 更新文件的待借阅标记,默认为0 表示没有被分配, 1表示已经分配
+     * @return
+     * @throws Exception
+     */
 //    @Override
 //    public int updatecfWaitBorrow(int cfid ) throws Exception{
 //        return userMapper.updatecfWaitBorrow(cfid);
@@ -843,13 +843,13 @@
 //        return userMapper.updategfWaitBorrow(gfid);
 //
 //    }
-//
-//    /**
-//     * 预分配的接口实现将预分配的文件信息录入
-//     * @param borrow
-//     * @return
-//     * @throws Exception
-//     */
+
+    /**
+     * 预分配的接口实现将预分配的文件信息录入
+     * @param borrow
+     * @return
+     * @throws Exception
+     */
 //    @Override
 //    public int insertgfWaitBorrowInfo( Borrow borrow ) throws  Exception{
 //        borrow.setGivetime( DateToStringUtils.dataTostring());
@@ -860,46 +860,46 @@
 //        borrow.setGivetime( DateToStringUtils.dataTostring());
 //        return userMapper.insertcfWaitBorrowInfo( borrow );
 //    }
+
+
+    /**
+     * 涉密非涉密 分开查询,
+     */
+
+    //涉密
+//    @Override
+//    public List<BorrowCFExtends> selectLevelCompanyFile() throws Exception{
+//        List<CompanyFile> companyFiles = userCompanyFileMapper.selectLevelCompanyFile();
+//        companyFiles.forEach( n -> {
+//            try {
+//                //根据文件id,获取到该文件的被借阅历史.
+//                List<BorrowCFExtends> borrowCFExtends = selectBorrowcfInfoByFileid( n.getCfid() );
+//                for (BorrowCFExtends borrowCFExtend : borrowCFExtends) {
+//                    if( borrowCFExtend.getUser() != null ) {
+//                        n.setUid( borrowCFExtend.getUser().getUid() );
+//                        n.setUname( borrowCFExtend.getUser().getUname() );
+//                    }
+//                    if( borrowCFExtend.getUserSecond() != null ) {
+//                        n.setSecondUid( borrowCFExtend.getUserSecond().getUid() );
+//                        n.setSecondName( borrowCFExtend.getUserSecond().getUname() );
+//                    }
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+//    }
+//    @Override
+//    public List<BorrowGFExtends> selectLevelGetFile() throws Exception{
 //
+//    }
+//    //非涉密
+//    @Override
+//    public List<BorrowCFExtends> selectNOTLevelCompanyFile() throws Exception{
 //
-//    /**
-//     * 涉密非涉密 分开查询,
-//     */
+//    }
+//    @Override
+//    public List<BorrowGFExtends> selectNOTLevelGetFile() throws Exception{
 //
-//    //涉密
-////    @Override
-////    public List<BorrowCFExtends> selectLevelCompanyFile() throws Exception{
-////        List<CompanyFile> companyFiles = userCompanyFileMapper.selectLevelCompanyFile();
-////        companyFiles.forEach( n -> {
-////            try {
-////                //根据文件id,获取到该文件的被借阅历史.
-////                List<BorrowCFExtends> borrowCFExtends = selectBorrowcfInfoByFileid( n.getCfid() );
-////                for (BorrowCFExtends borrowCFExtend : borrowCFExtends) {
-////                    if( borrowCFExtend.getUser() != null ) {
-////                        n.setUid( borrowCFExtend.getUser().getUid() );
-////                        n.setUname( borrowCFExtend.getUser().getUname() );
-////                    }
-////                    if( borrowCFExtend.getUserSecond() != null ) {
-////                        n.setSecondUid( borrowCFExtend.getUserSecond().getUid() );
-////                        n.setSecondName( borrowCFExtend.getUserSecond().getUname() );
-////                    }
-////                }
-////            } catch (Exception e) {
-////                e.printStackTrace();
-////            }
-////        });
-////    }
-////    @Override
-////    public List<BorrowGFExtends> selectLevelGetFile() throws Exception{
-////
-////    }
-////    //非涉密
-////    @Override
-////    public List<BorrowCFExtends> selectNOTLevelCompanyFile() throws Exception{
-////
-////    }
-////    @Override
-////    public List<BorrowGFExtends> selectNOTLevelGetFile() throws Exception{
-////
-////    }
-//}
+//    }
+}

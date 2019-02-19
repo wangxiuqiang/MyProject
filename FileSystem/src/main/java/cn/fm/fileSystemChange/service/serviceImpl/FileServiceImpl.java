@@ -112,7 +112,7 @@ public class FileServiceImpl implements FileService {
             cfids[0] = companyFile.getCfid();
             fileDao.delBorrow_CompanyFileByCFId(cfids, 1);
         }
-        if (uid != null) {
+        if ( Integer.parseInt( uid ) != 0 && uid != null) {
             int id = Integer.parseInt(uid);
             //根据文件id查看文件信息
             CompanyFile companyFile1 = fileDao.selectCompanyFileByCFId(companyFile.getCfid());
@@ -259,8 +259,12 @@ public class FileServiceImpl implements FileService {
 //        }
         result += fileDao.delCompanyFileById(cfidInt);
         //如果没有借阅信息,根据这个id进行删除也不会出错.query ok 0 rows affected ,
-        result += fileDao.delBorrow_CompanyFileByCFId(cfidInt, 0);
-        if (result >  2) {
+        int result1 = fileDao.delBorrow_CompanyFileByCFId(cfidInt, 0);
+        //测试返回多少,多选情况下
+//        System.out.println( result + "这里删除了3个文件,返回的值为多少 ---------------------------------------");
+        //如果他没有借阅信息，就不会删除借阅信息，也就不会等于2,多选的情况,返回多少
+
+        if (result == 1 && result1 == 1 ) {
             return 1;
         } else {
             return 0;
