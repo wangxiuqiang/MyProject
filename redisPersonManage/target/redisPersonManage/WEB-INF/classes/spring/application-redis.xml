@@ -61,7 +61,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
             <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
         </property>
         <property name="valueSerializer">
-            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+            <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
         </property>
         <property name="hashKeySerializer">
             <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
@@ -70,15 +70,20 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
             <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
         </property>
     </bean>
-    <bean id="redisTemplateSet" class="org.springframework.data.redis.core.RedisTemplate">
-        <property name="connectionFactory" ref="jedisConnectionFactory"/>
-        <property name="keySerializer">
-            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
-        </property>
-        <property name="valueSerializer">
-            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
-        </property>
-    </bean>
+
+    <!--如果使用的是jdk的序列化,必须用jdk进行存入和取出,用别的取出就会报错,反序列化失败
+      同时如果有String的序列化,取出的时候用的是jdk反序列化就会出错.
+      使用jdk进行序列化的时候 ,存在redis里面的是对象的引用,
+    -->
+    <!--<bean id="redisTemplateZSet" class="org.springframework.data.redis.core.RedisTemplate">-->
+        <!--<property name="connectionFactory" ref="jedisConnectionFactory"/>-->
+        <!--<property name="keySerializer">-->
+            <!--<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>-->
+        <!--</property>-->
+        <!--<property name="valueSerializer">-->
+            <!--<bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>-->
+        <!--</property>-->
+    <!--</bean>-->
     <bean id="redisUtilForStringAndList" class="com.test.redis.utils.RedisUtilForStringAndList">
         <property name="redisTemplate" ref="redisTemplate"/>
     </bean>
@@ -87,7 +92,10 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
         <property name="redisTemplate" ref="redisTemplate"/>
     </bean>
     <bean id="redisForSet" class="com.test.redis.utils.RedisForSet">
-        <property name="redisTemplate" ref="redisTemplateSet"/>
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+    <bean id="redisForZset" class="com.test.redis.utils.RedisForZset">
+        <property name="redisTemplate" ref="redisTemplate"/>
     </bean>
     <!--&lt;!&ndash;配置数据源&ndash;&gt;-->
     <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">-->
