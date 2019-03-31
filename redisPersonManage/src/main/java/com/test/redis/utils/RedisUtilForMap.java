@@ -10,6 +10,9 @@ import java.util.Set;
 
 public class RedisUtilForMap {
 
+    /**
+     * String表示键, Object 表示键值对的映射
+     */
     public RedisTemplate< String , Object > redisTemplate;
 
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
