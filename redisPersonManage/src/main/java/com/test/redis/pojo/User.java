@@ -4,7 +4,7 @@ package com.test.redis.pojo;
 public class User {
 
     public String name;
-    public int id;
+    public long id;
     public String phone;
 
     /**
@@ -25,11 +25,11 @@ public class User {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

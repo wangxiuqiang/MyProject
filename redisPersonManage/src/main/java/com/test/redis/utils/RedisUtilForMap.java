@@ -69,7 +69,7 @@ public class RedisUtilForMap {
      * @param key_name
      * @param map
      */
-    public void hashPutAll (String key_name , Map<Object,Object > map ) {
+    public void hashPutAll ( String key_name , Map<Object,Object > map ) {
         try {
             redisTemplate.opsForHash().putAll( key_name , map );
         } catch ( Exception e ) {

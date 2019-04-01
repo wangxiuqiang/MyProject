@@ -61,7 +61,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd
             <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
         </property>
         <property name="valueSerializer">
-            <bean class="org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer"/>
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
         </property>
         <property name="hashKeySerializer">
             <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>

@@ -17,9 +17,9 @@ import java.util.concurrent.TimeUnit;
  * 问题, 列表可能存放 int 的数值, 这里返回的是字符串,可以自己转换为数字.
  */
 public class RedisUtilForStringAndList {
-    /**
-     * 实现私有化的构造器,不允许构建实例,当做静态类方法.
-     */
+//    /**
+//     * 实现私有化的构造器,不允许构建实例,当做静态类方法.
+//     */
 //    private RedisUtilForStringAndList() {}
     public RedisUtilForStringAndList() {}
 
@@ -64,6 +64,20 @@ public class RedisUtilForStringAndList {
             return -1;
         }
         return redisTemplate.getExpire( key );
+    }
+
+    /**
+     * 判断是不是存在这个键
+     * @param key
+     * @return
+     */
+    public boolean hasKey( String key ) {
+        try {
+            return redisTemplate.hasKey( key );
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
