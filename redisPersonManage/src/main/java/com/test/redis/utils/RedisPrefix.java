@@ -14,4 +14,8 @@ public class RedisPrefix {
     public static final String SCORE = "score:";
     //文章的发布时间.
     public static final String TIME = "time:";
+    //文章的分组信息
+    public static final String GROUP = "group:";
+    //分组文章的分数列表
+    public static final String GROUPZSET = "groupzset:";
 }

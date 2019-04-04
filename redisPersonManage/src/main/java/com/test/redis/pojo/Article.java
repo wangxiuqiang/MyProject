@@ -5,11 +5,20 @@ package com.test.redis.pojo;
  */
 public class Article {
 
-    public String title;
-    public long time;
-    public int votes;
-    public String id;
-    public String poster;
+    private String title;
+    private long time;
+    private int votes;
+    private long id;
+    private String poster;
+    private String group;
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
 
     public String getTitle() {
         return title;
@@ -35,11 +44,11 @@ public class Article {
         this.votes = votes;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

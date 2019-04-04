@@ -28,6 +28,6 @@ public class UserServiceImpl implements UserService  {
         map.put( "name" , user.getName() );
         map.put( "phone" ,user.getPhone() );
         redisUtilForMap.hashPutAll( RedisPrefix.USER + userId , map );
-        return false;
+        return true;
     }
 }

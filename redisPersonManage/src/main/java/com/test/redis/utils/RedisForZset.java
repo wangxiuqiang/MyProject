@@ -3,6 +3,8 @@ package com.test.redis.utils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
+
+import java.util.List;
 import java.util.Set;
 
 public class RedisForZset {
@@ -331,4 +333,61 @@ public class RedisForZset {
             return null;
         }
     }
+
+    /**
+     * 两个集合做交集,返回数量
+     * @param key
+     * @param otherKey
+     * @param dest_key
+     * @return
+     */
+    public long  zInterAndStore( String key, String otherKey , String dest_key ) {
+        try {
+            return redisTemplate.opsForZSet().intersectAndStore( key, otherKey, dest_key );
+        } catch (Exception e ) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    /**
+     * 多个集合做交集
+     * @param key
+     * @param otherKey
+     * @param dest_key
+     * @return
+     */
+    public long  zInterAndStore(String key, List<String> otherKey , String dest_key ) {
+        try {
+            return redisTemplate.opsForZSet().intersectAndStore( key, otherKey, dest_key );
+        } catch (Exception e ) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    /**
+     * 集合做并集
+     * @param key
+     * @param otherKey
+     * @param dest_key
+     * @return
+     */
+    public long  zUnionAndStore(String key, String otherKey , String dest_key ) {
+        try {
+            return redisTemplate.opsForZSet().unionAndStore( key, otherKey, dest_key );
+        } catch (Exception e ) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    public long  zUnionAndStore(String key, List<String> otherKey , String dest_key ) {
+        try {
+            return redisTemplate.opsForZSet().unionAndStore( key, otherKey, dest_key );
+        } catch (Exception e ) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
 }
